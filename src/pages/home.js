@@ -1,6 +1,13 @@
+import CounterSection from "../components/homeComponents/counterSection";
+import HeroBanner from "../components/homeComponents/heroBanner";
+import HowItWorks from "../components/homeComponents/howItsWork";
+
 const Home = () => {
-    return(
-        <h1>Home</h1>
+    return(<>
+      <HeroBanner/>
+      <CounterSection/>
+      <HowItWorks/>
+    </>
     )
 }
 

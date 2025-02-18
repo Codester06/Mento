@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+* {
+  font-family: "Nunito", "Helvetica";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navLogo img{
+    height: 40px;
+    width: auto;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 4rem 12.5rem;
+  width: 100%;
+  margin: 0 auto;
+  height: 80px;
+  background:#ffebb4;
+}
+
+
+.navLink {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.navLinks li a {
+  text-decoration: none;
+  color:#85640B;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  border: 2px solid #ffebb4;
+  transition: border 0.3s ease;
+}
+
+.navLinks li a:hover {
+    border: 2px solid #85640B;
+  background-color: #ffebb4;
+}
+
+.navLinks li a.active {
+    border: 2px solid #85640B;
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  margin-left: -17.5rem;
+  justify-items: center;
+  padding-top: 2rem;
+}
+
+.navButtons a {
+    text-decoration: none;
+  }
+
+.navButtons h1 {
+  color: #85640B;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 3px solid #85640B;
+}
+
+.navButtons h1:hover {
+  background-color: #85640B;
+  color: #ffeaaf;
+}
+
+
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navContainer {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .navLink {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .navLinks {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .navLinks li a {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+  }
+
+  .navButtons {
+    margin-top: 1rem;
+  }
+}

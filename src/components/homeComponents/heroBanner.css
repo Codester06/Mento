@@ -1,0 +1,29 @@
+    
+
+.BannerHeading {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically if needed */
+    text-align: center; /* Ensure text is centered */
+    width: 100%; /* Full width */
+    padding: 2rem 1rem; /* Add spacing */
+    background: linear-gradient(to bottom ,#FFEBB4,#E4F8E8);
+  }
+  
+  .BannerHeading h1 {
+
+    font-size: 2.1rem;
+    color: #85640B;
+margin-top: 2.6%;
+margin-bottom: 2%;
+    font-weight: 500;
+  }
+  
+  .BannerHeading h2 {
+    margin: 0.5% 0;
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+  }
+  

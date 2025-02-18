@@ -1,6 +1,8 @@
+
+
 const Other = () => {
     return(
-        <h1>other</h1>
+    <h1>others</h1> 
     )
 }
 
