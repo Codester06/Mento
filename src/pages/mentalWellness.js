@@ -1,6 +1,6 @@
 const MentalWellness = () => {
     return(
-        <h1>PRADEEP KI ....</h1>
+        <h1>Mental Wellness </h1>
     )
 }
 
