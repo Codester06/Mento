@@ -4,6 +4,7 @@ import Contact from "./pages/contact";
 import Other from "./pages/other";
 import Home from "./pages/home";
 import MentalWellness from "./pages/mentalWellness";
+import Footer from "./components/Footer/footerSection";
 function main() {
 
   return (
@@ -14,8 +15,8 @@ function main() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/others" element={<Other />} />
           <Route path="/mental-wellness" element={<MentalWellness />} />
-
         </Routes>
+        <Footer/>
       </Router>
     );
   };
