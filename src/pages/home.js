@@ -5,6 +5,7 @@ import HowItWorks from "../components/homeComponents/howItsWork";
 import ExpertCarousel from "../components/homeComponents/expertCarousel";
 import WhyChooseUs from "../components/homeComponents/whyChooseUs";
 import TestimonialSlider from "../components/homeComponents/testimonial";
+import MentalHealthServices from "../components/homeComponents/helpYouSection";
 
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <HeroBanner/>
       <CounterSection/>
       <HowItWorks/> 
+      <MentalHealthServices/>
       <ExpertCarousel />
       <WhyChooseUs/>
       <TestimonialSlider/>
