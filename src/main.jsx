@@ -15,6 +15,8 @@ function main() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/others" element={<Other />} />
           <Route path="/mental-wellness" element={<MentalWellness />} />
+          <Route path="/mental-wellness" element={<MentalWellness />} />
+
         </Routes>
         <Footer/>
       </Router>
