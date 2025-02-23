@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="navContainer">
@@ -10,28 +12,34 @@ const Navbar = () => {
         <img src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="mentologo" />
       </div>
 
-      <div className="navLink">
+      {/* Hamburger Icon for Mobile */}
+      <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+        ☰
+      </div>
+
+      {/* Navigation Links */}
+      <div className={`navLink ${isOpen ? "open" : ""}`}>
         <ul className="navLinks">
           <li>
-            <Link to="/" className={location.pathname === "/" ? "active" : ""}>Home</Link>
+            <Link to="/" className={location.pathname === "/" ? "active" : ""} onClick={() => setIsOpen(false)}>Home</Link>
           </li>
           <li>
-            <Link to="/mental-wellness" className={location.pathname === "/mental-wellness" ? "active" : ""}>Mental Wellness</Link>
+            <Link to="/mental-wellness" className={location.pathname === "/mental-wellness" ? "active" : ""} onClick={() => setIsOpen(false)}>Mental Wellness</Link>
           </li>
           <li>
-            <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>Contact</Link>
+            <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""} onClick={() => setIsOpen(false)}>Contact</Link>
           </li>
           <li>
-            <Link to="/others" className={location.pathname === "/others" ? "active" : ""}>Blog</Link>
+            <Link to="/others" className={location.pathname === "/others" ? "active" : ""} onClick={() => setIsOpen(false)}>Blog</Link>
           </li>
           <li>
-            <Link to="/about" className={location.pathname === "/about" ? "active" : ""}>About</Link>
+            <Link to="/about" className={location.pathname === "/about" ? "active" : ""} onClick={() => setIsOpen(false)}>About</Link>
           </li>
         </ul>
       </div>
 
       <div className="navButtons">
-        <Link to="/assessment">
+        <Link to="/assessment" onClick={() => setIsOpen(false)}>
           <h1>Take a Free Assessment</h1>
         </Link>
       </div>
@@ -40,3 +48,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+  

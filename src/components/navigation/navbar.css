@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap");
 
 * {
   font-family: "Nunito", "Helvetica";
@@ -7,27 +7,27 @@
   box-sizing: border-box;
 }
 
-.navLogo img{
-    height: 40px;
-    width: auto;
+.navLogo img {
+  height: 40px;
+  width: auto;
 }
 
 .navContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  padding: 4rem 12.5rem;
+  padding:0rem 12.5rem;
   width: 100%;
+  height: 8.5rem;
   margin: 0 auto;
-  height: 80px;
-  background:#ffebb4;
+  background: #ffebb4;
+  position: relative;
 }
-
 
 .navLink {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
 }
 
@@ -39,11 +39,9 @@
   padding: 0;
 }
 
-
-
 .navLinks li a {
   text-decoration: none;
-  color:#85640B;
+  color: #85640B;
   font-size: 1rem;
   font-weight: 500;
   transition: color 0.3s ease;
@@ -54,25 +52,24 @@
 }
 
 .navLinks li a:hover {
-    border: 2px solid #85640B;
+  border: 2px solid #85640B;
   background-color: #ffebb4;
 }
 
 .navLinks li a.active {
-    border: 2px solid #85640B;
+  border: 2px solid #85640B;
 }
 
 .navButtons {
+  margin-left: 50px;
   display: flex;
   align-items: center;
-  margin-left: -17.5rem;
   justify-items: center;
-  padding-top: 2rem;
 }
 
 .navButtons a {
-    text-decoration: none;
-  }
+  text-decoration: none;
+}
 
 .navButtons h1 {
   color: #85640B;
@@ -89,34 +86,68 @@
   color: #ffeaaf;
 }
 
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #85640B;
+  padding: 0.5rem 1rem;
+}
 
-
-/* Media Queries for Responsive Design */
+/* Mobile View */
 @media (max-width: 768px) {
+  .navLinks li a{
+    font-size: 1rem;
+  }
+
+
   .navContainer {
-    flex-direction: column;
-    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
   }
 
+  .navButtons {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
   .navLink {
+    position: absolute;
+    top: 80px;
+    left: 0;
     width: 100%;
-    margin: 1rem 0;
+    background: #ffebb4;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+  }
+
+  .navLink.open {
+    display: flex;
   }
 
   .navLinks {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .navLinks li {
+    width: 100%;
   }
 
   .navLinks li a {
     display: block;
     text-align: center;
-    padding: 0.8rem;
-  }
-
-  .navButtons {
-    margin-top: 1rem;
+    width: 90%;
+    padding: .3rem;
+    border: none;
   }
 }

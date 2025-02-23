@@ -26,7 +26,7 @@ const MentalHealthServices = () => {
     <div className="containerMain">
 
     <div className="HelpContainer">
-      <h1>Expert Care for Your Mental Well-Being</h1>
+      <h1 className="helpYouTitle">Expert Care for Your Mental Well-Being</h1>
       <div className="services-grid">
         {services.map((service) => (
           <div key={service.id} className="service-tag">
