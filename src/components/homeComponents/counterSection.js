@@ -42,7 +42,7 @@ const CounterSection = () => {
       <section className="counter-wrapper">
         <div className="counter-inner">
           <div className="container">
-            <h1>India's Most Trusted Online Service</h1>
+            <h1 className='counterTitle'>India's Most Trusted Online Service</h1>
             <div className="row">
               {counterData.map((item, index) => (
                 <div key={index} className="col-6" style={index === 2 ? {borderBottom: '0px'} : {}}>

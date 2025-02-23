@@ -1,9 +1,11 @@
 .containerMain{
-    background: linear-gradient(to bottom, #CFFAF3, #f3f8e6,#CFFAF3); 
+    background: linear-gradient(to bottom, #ffeaf3c4,#b9e5e8d8); 
+    /* background: linear-gradient(to bottom, #CFFAF3, #f8eee6,#FFEAF3FA); */
 }
 
 .HelpContainer {
     padding: 40px 20px;
+    padding-top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,7 +13,7 @@
 
   h1 {
     color: #333;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     text-align: center;
     margin-bottom: 40px;
     font-weight: 500;

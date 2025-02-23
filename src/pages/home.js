@@ -13,8 +13,8 @@ const Home = () => {
       <HeroBanner/>
       <CounterSection/>
       <HowItWorks/> 
-      <MentalHealthServices/>
       <ExpertCarousel />
+      <MentalHealthServices/>
       <WhyChooseUs/>
       <TestimonialSlider/>
     </>
