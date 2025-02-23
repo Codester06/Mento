@@ -4,7 +4,7 @@ import "./footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container">
+      <div className="containerFooter">
         <div className="top-section">
           <div className="logo">
             <img className="footer_img" src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="Mento Logo" />

@@ -1,19 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, } from 'react';
 import './expertCarousel.css';
 
 const ExpertCarousel = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
+
   const sliderTrackRef = useRef(null);
 
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  useEffect(() => {
-    if (sliderTrackRef.current) {
-      sliderTrackRef.current.style.animationPlayState = isPlaying ? 'running' : 'paused';
-    }
-  }, [isPlaying]);
 
   const experts = [
     {
@@ -122,14 +113,7 @@ const ExpertCarousel = () => {
             </div>
           ))}
         </div>
-        <div className="carousel-controls">
-        <button 
-          className={`control-button ${isPlaying ? 'pause' : 'play'}`} 
-          onClick={togglePlayPause}
-        >
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-      </div>
+
       </div>
 
       

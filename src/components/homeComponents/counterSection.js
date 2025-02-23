@@ -41,7 +41,7 @@ const CounterSection = () => {
     <>
       <section className="counter-wrapper">
         <div className="counter-inner">
-          <div className="container">
+          <div className="containerCounter">
             <h1 className='counterTitle'>India's Most Trusted Online Service</h1>
             <div className="row">
               {counterData.map((item, index) => (
