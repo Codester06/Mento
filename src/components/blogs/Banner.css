@@ -1,0 +1,52 @@
+/* General Banner Styling */
+.banner {
+    position: relative;
+    background: white;
+    text-align: center;
+    padding: 50px 20px;
+    
+    margin: auto;
+  }
+  
+  /* Title Styling */
+  .banner-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a202c;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Subtitle Styling */
+  .banner-subtitle {
+    font-size: 1.2rem;
+    color: #6b7280;
+    margin-top: 10px;
+  }
+  
+  /* Decorative Elements */
+  .decor {
+    position: absolute;
+  }
+  
+  .left,
+  .right {
+    width: 50px;
+    height: 50px;
+    border: 5px solid;
+    border-radius: 50%;
+    border-top-color: transparent;
+  }
+  
+  .left {
+    border-color: #d1fa99;
+    bottom: 30px;
+    left: 20px;
+  }
+  
+  .right {
+    border-color: #fdba74;
+    bottom: 30px;
+    right: 20px;
+  }
+  

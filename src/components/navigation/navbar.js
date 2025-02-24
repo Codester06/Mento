@@ -30,7 +30,7 @@ const Navbar = () => {
             <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""} onClick={() => setIsOpen(false)}>Contact</Link>
           </li>
           <li>
-            <Link to="/others" className={location.pathname === "/others" ? "active" : ""} onClick={() => setIsOpen(false)}>Blog</Link>
+            <Link to="/blogs" className={location.pathname === "/blogs" ? "active" : ""} onClick={() => setIsOpen(false)}>Blog</Link>
           </li>
           <li>
             <Link to="/about" className={location.pathname === "/about" ? "active" : ""} onClick={() => setIsOpen(false)}>About</Link>
@@ -48,4 +48,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-  

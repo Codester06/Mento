@@ -1,0 +1,55 @@
+
+  
+  /* Layout Container */
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  
+  /* Content Wrapper */
+  .content {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  /* Main Section */
+  .main {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    background-color: #ffffff;
+    padding: 30px;
+    padding-top: 0;
+  
+  }
+  
+  .box {
+    background-color: #333;
+    height: 435px;
+    width: auto;
+    border-radius: 8px;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  } 
+  
+  .side-box {
+    background-color: #222;
+    height: 250px;
+    width: 350px;
+    border-radius: 8px;
+  }
+  
+  .side-box.small {
+    height: 200px;
+  }
+  
