@@ -26,7 +26,7 @@ const About = () => {
         <Number/>
         <ContactSection/>
 <<<<<<< HEAD
-        <Carousel/>
+        
     </>
 >>>>>>> Stashed changes
 =======
