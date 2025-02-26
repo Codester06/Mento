@@ -1,6 +1,8 @@
+import ContactForm from "../components/contact/contactFrom";
+
 const Contact = () => {
     return(
-        <h1>contact</h1>
+        <ContactForm/>
     )
 }
 

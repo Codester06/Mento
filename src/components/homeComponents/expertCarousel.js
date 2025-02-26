@@ -1,9 +1,12 @@
-import React, { useRef, } from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import './expertCarousel.css';
 
 const ExpertCarousel = () => {
 
   const sliderTrackRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
 
   const experts = [
@@ -73,20 +76,63 @@ const ExpertCarousel = () => {
   ];
 
   // Double the experts array to allow for endless loop
-  const duplicatedExperts = [...experts, ...experts, ...experts];
+  // Duplicate the list to allow infinite scroll effect
+  const infiniteExperts = [...experts, ...experts];
+
+  useEffect(() => {
+    const slider = sliderTrackRef.current;
+    if (!slider) return;
+
+    const handleScroll = () => {
+      const maxScrollLeft = slider.scrollWidth / 2; // Halfway point
+
+      if (slider.scrollLeft <= -100) {
+        // Instead of stopping, we allow it to go further negative
+        slider.scrollLeft = -100;
+      } else if (slider.scrollLeft >= maxScrollLeft) {
+        slider.scrollLeft = 1;
+      }
+    };
+
+    slider.addEventListener("scroll", handleScroll);
+    return () => slider.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Mouse event handlers for drag scrolling
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX);
+    setScrollLeft(sliderTrackRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX;
+    const delta = x - startX;
+    sliderTrackRef.current.scrollLeft = scrollLeft - delta;
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseLeave = () => setIsDragging(false);
 
   return (
     <div className="expert-carousel">
       <center>
         <h1 className="experts-title">Meet Our Experts</h1>
       </center>
-      
-    
-      
-      <div className="slider-container">
-        <div className="slider-track" ref={sliderTrackRef}>
-          {duplicatedExperts.map((expert, index) => (
-            <div className="slide" key={`${expert.id}-${index}`}>
+
+      <div 
+        className="slider-container"
+        ref={sliderTrackRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="slider-track">
+          {infiniteExperts.map((expert, index) => (
+            <div className="slide" key={index}>
               <div className="card">
                 <div className="card-image">
                   <img src={expert.imageSrc} alt={`${expert.name}`} />
@@ -113,10 +159,7 @@ const ExpertCarousel = () => {
             </div>
           ))}
         </div>
-
       </div>
-
-      
     </div>
   );
 };
