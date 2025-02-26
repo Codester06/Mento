@@ -1,13 +1,11 @@
-import React, { useState,useRef,useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import './expertCarousel.css';
 
-const ExpertCarousel = () => {
-
+const Carousel = () => {
   const sliderTrackRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
-
 
   const experts = [
     {
@@ -42,7 +40,7 @@ const ExpertCarousel = () => {
       name: "Chandan Raj",
       position: "Counselor",
       imageSrc: "https://mento.in/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-10-at-21.44.20_21d439d0.jpg",
-      certifications: "",
+      certifications: "                                                                           ",
       expertise: "Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
       experience: "3-6 Years"
     },
@@ -75,29 +73,6 @@ const ExpertCarousel = () => {
     }
   ];
 
-  // Double the experts array to allow for endless loop
-  // Duplicate the list to allow infinite scroll effect
-  const infiniteExperts = [...experts, ...experts];
-
-  useEffect(() => {
-    const slider = sliderTrackRef.current;
-    if (!slider) return;
-
-    const handleScroll = () => {
-      const maxScrollLeft = slider.scrollWidth / 2; // Halfway point
-
-      if (slider.scrollLeft <= -100) {
-        // Instead of stopping, we allow it to go further negative
-        slider.scrollLeft = -100;
-      } else if (slider.scrollLeft >= maxScrollLeft) {
-        slider.scrollLeft = 1;
-      }
-    };
-
-    slider.addEventListener("scroll", handleScroll);
-    return () => slider.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Mouse event handlers for drag scrolling
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -108,20 +83,53 @@ const ExpertCarousel = () => {
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     e.preventDefault();
+    
+    // Calculate the distance moved
     const x = e.pageX;
     const delta = x - startX;
+    
+    // Apply the scroll - negative delta scrolls right, positive delta scrolls left
     sliderTrackRef.current.scrollLeft = scrollLeft - delta;
   };
 
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => setIsDragging(false);
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  // Touch event handlers for mobile
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setScrollLeft(sliderTrackRef.current.scrollLeft);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    
+    // Calculate the distance moved
+    const x = e.touches[0].clientX;
+    const delta = x - startX;
+    
+    // Apply the scroll
+    sliderTrackRef.current.scrollLeft = scrollLeft - delta;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  const duplicate_experts =[...experts ,...experts,...experts,...experts]
 
   return (
     <div className="expert-carousel">
       <center>
         <h1 className="experts-title">Meet Our Experts</h1>
       </center>
-
+      
       <div 
         className="slider-container"
         ref={sliderTrackRef}
@@ -129,10 +137,13 @@ const ExpertCarousel = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="slider-track">
-          {infiniteExperts.map((expert, index) => (
-            <div className="slide" key={index}>
+          {duplicate_experts.map((expert) => (
+            <div className="slide" key={expert.id}>
               <div className="card">
                 <div className="card-image">
                   <img src={expert.imageSrc} alt={`${expert.name}`} />
@@ -164,4 +175,4 @@ const ExpertCarousel = () => {
   );
 };
 
-export default ExpertCarousel;
+export default Carousel;
