@@ -3,7 +3,7 @@ import "./layout.css"; // Import the CSS file
 
 const BlogLayout=()=> {
   return (
-    <div className="container">
+    <div className="Blog_container">
 
       {/* Main Content */}
       <div className="content">
