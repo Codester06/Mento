@@ -17,11 +17,10 @@
   
   /* Main Section */
   .main {
-    flex: 3;
+    flex: 2;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 35px;
-    padding: 30px;
     padding-top: 0;
   
   }
@@ -35,18 +34,21 @@
   
   /* Sidebar */
   .sidebar {
-    width: 200px;
-    flex: 1;
+    flex: 0;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    padding-right: 50px;
   } 
   
   .side-box {
-    background-color: #222;
-    height: 250px;
-    width: 350px;
+    background-color: white;
+    box-shadow: 0px 4px 12px #3333333c;
+    height: 350px;
+    width: 450px;
     border-radius: 8px;
+
+    margin-right: 50px;
   }
   
   .side-box.small {

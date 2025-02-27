@@ -1,5 +1,6 @@
 import React from "react";
 import "./layout.css"; // Import the CSS file
+import BlogList from "./blogList";
 
 const BlogLayout=()=> {
   return (
@@ -8,11 +9,7 @@ const BlogLayout=()=> {
       {/* Main Content */}
       <div className="content">
         <main className="main">
-       
-        <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
+       <BlogList/>
         </main>
 
         {/* Sidebar */}

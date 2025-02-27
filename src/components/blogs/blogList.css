@@ -1,0 +1,62 @@
+/* BlogList.css */
+.blog-list-container {
+ 
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Inter', Arial, sans-serif;
+  }
+  
+  .blog-list-title {.blog-list {
+  display: grid;
+  width: 100%;
+  flex-direction: row;
+  gap: 30px;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+  .blog-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+    font-size: 32px;
+    font-weight: 700;
+    color: #2D3748;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .blog-list {
+    
+    width: 1000px;
+    flex-direction: row;
+    gap: 30px;
+  }
+  
+  .blog-item {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  /* Responsive layout */
+  @media (min-width: 768px) {
+    .blog-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+
+    
+    .blog-list-title {
+      font-size: 36px;
+    }
+  }

@@ -9,12 +9,12 @@ const Banner = () => {
 
       {/* Heading */}
       <h1 className="banner-title">
-        Driving Growth Through SaaS: The Ultimate Business Companion
+      Wellness, Growth & Healing Insights.
       </h1>
 
       {/* Subheading */}
       <p className="banner-subtitle">
-        Embark on a transformative freelance journey with our dedicated Careers Section
+      MENTO BLOGS
       </p>
 
     </div>
