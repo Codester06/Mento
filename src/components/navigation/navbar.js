@@ -12,11 +12,6 @@ const Navbar = () => {
         <img src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="mentologo" />
       </div>
 
-      {/* Hamburger Icon for Mobile */}
-      <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-        ☰
-      </div>
-
       {/* Navigation Links */}
       <div className={`navLink ${isOpen ? "open" : ""}`}>
         <ul className="navLinks">
@@ -43,6 +38,20 @@ const Navbar = () => {
           <h1>Take a Free Assessment</h1>
         </Link>
       </div>
+
+      <div className="navButtons Phone">
+        <Link to="/assessment" onClick={() => setIsOpen(false)}>
+          <h1>Take Assessment</h1>
+        </Link>
+      </div>
+
+      {/* Animated Hamburger Icon for Mobile */}
+      <div className={`hamburger ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </div>
+
     </nav>
   );
 };
