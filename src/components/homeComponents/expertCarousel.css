@@ -3,6 +3,7 @@
 .expert-carousel {
   max-width: 100%;
   padding: 20px 0;
+  background: linear-gradient(to bottom,#CFFAF3FA, #ffeaf3c4);
 }
 
 .experts-title {
