@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Mento.in
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Mento.in Logo](https://mento.in/logo.png)
 
-## Available Scripts
+Welcome to the official repository of **Mento.in**, India's most trusted online platform for professional counseling and mental health support. Our mission is to provide a safe space for individuals to talk, heal, and grow, ensuring accessible and affordable mental health care for everyone.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [About Mento.in](#about-mentoin)
+- [Services Offered](#services-offered)
+- [How It Works](#how-it-works)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About Mento.in
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+At Mento.in, we are committed to connecting users with licensed mental health professionals who offer personalized support tailored to individual needs. With a track record of over **250 satisfied customers**, more than **1,700 sessions** scheduled, and a team of **30+ experts**, we strive to make a positive impact on mental wellness across India.
 
-### `npm test`
+## Services Offered
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We provide a comprehensive range of counseling services, including:
 
-### `npm run build`
+- **Individual Therapy**: One-on-one sessions focusing on personal growth and mental well-being.
+- **Stress Management**: Strategies and techniques to effectively manage stress.
+- **Relationship Counseling**: Guidance for individuals and couples to navigate relationship challenges.
+- **Child and Adolescent Therapy**: Specialized support for younger individuals facing various issues.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How It Works
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Share Your Needs**: Communicate your concerns, whether they pertain to stress, mental health, or relationships. We'll listen attentively and match you with an expert suited to your situation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Expert Match Made Easy**: Connect with licensed mental health professionals at your convenience. Choose your preferred time without long waiting periods or rigid schedules.
 
-### `npm run eject`
+3. **Confidential, Personalized Support**: Engage in secure video calls or chats for personalized one-on-one support. Receive practical strategies and feel empowered after each session.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To embark on your journey with Mento.in:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Visit our [website](https://mento.in).
+2. Share your specific needs through our platform.
+3. Schedule a session with your matched expert at a time that suits you.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Contributing
 
-## Learn More
+We welcome contributions aimed at enhancing our services and platform. If you're interested in collaborating or providing feedback, please reach out to us via our [Contact Us](https://mento.in) page.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Note: This README offers an overview of Mento.in's services and guidance on getting started. For more comprehensive information, please visit our [official website](https://mento.in).*
