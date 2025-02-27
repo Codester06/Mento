@@ -5,7 +5,7 @@
    
     background:linear-gradient(to bottom ,#d5f7dc,#cdffd7); 
     width: 100%;
-    background-image: url('../../../images/Phone Wallpaper Background.jpeg');
+    background-image: url('../../assets/images/Phone_Wallpaper_Background.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
    
@@ -57,7 +57,7 @@
   }
   
   .rectangle1 {
-    background-image: url('/images/7a804bc6-962a-4f0e-890a-01c49b428e04.jpeg');
+    background-image: url('../../assets/images/7a804bc6-962a-4f0e-890a-01c49b428e04.jpeg');
    background-size: cover;
     position: relative;
     
@@ -72,7 +72,7 @@
     
   }
   .rectangle2 {
-    background-image: url('/images/772fdda8-0bb5-41b5-94a3-e5cc09317cc5.jpeg');
+    background-image: url('../../assets/images/772fdda8-0bb5-41b5-94a3-e5cc09317cc5.jpeg');
     background-size: cover;
     position: relative;
     z-index: 1;
@@ -89,7 +89,7 @@
   
   
   .diamond {
-    background-image: url('/images/d8c2d5cc-be92-43df-93c5-c97714d5bd68.jpeg');
+    background-image: url('../../assets/images/d8c2d5cc-be92-43df-93c5-c97714d5bd68.jpeg');
     background-size: cover;
     z-index: 0;
     position: relative;
