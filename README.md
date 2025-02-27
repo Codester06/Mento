@@ -1,6 +1,6 @@
 # Mento.in
 
-![Mento.in Logo](https://mento.in/logo.png)
+![Mento.in Logo]([https://mento.in/logo.png](https://mento.in/wp-content/uploads/2024/11/text.png))
 
 Welcome to the official repository of **Mento.in**, India's most trusted online platform for professional counseling and mental health support. Our mission is to provide a safe space for individuals to talk, heal, and grow, ensuring accessible and affordable mental health care for everyone.
 
