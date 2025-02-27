@@ -3,6 +3,7 @@ import CounterSection from "../components/homeComponents/counterSection";
 import HeroBanner from "../components/homeComponents/heroBanner";
 import HowItWorks from "../components/homeComponents/howItsWork";
 import ExpertCarousel from "../components/homeComponents/expertCarousel";
+// import Carousel from "../components/about_us/demo";
 import WhyChooseUs from "../components/homeComponents/whyChooseUs";
 import TestimonialSlider from "../components/homeComponents/testimonial";
 import MentalHealthServices from "../components/homeComponents/helpYouSection";
@@ -15,6 +16,7 @@ const Home = () => {
       <CounterSection/>
       <HowItWorks/> 
       <ExpertCarousel />
+      {/* <Carousel/> */}
       <MentalHealthServices/>
       <QuotesText/>
       <WhyChooseUs/>
