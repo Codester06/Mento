@@ -108,7 +108,10 @@
   margin: 0 0 5px;
   font-size: 18px;
 }
-
+.card-link{
+  text-decoration: none;
+  color: #333;
+}
 .card-position {
   color: #666;
   margin: 0 0 10px;
