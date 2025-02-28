@@ -33,12 +33,14 @@ const ContactForm = () => {
     };
   
     return (
+      <div className="ContainerMainFrom">
       <div className="contact-containerFrom">
         {/* Left Section */}
         <div className="contact-infoFrom">
           <div className="contact-header">
             <h2>Let's chat.</h2>
             <h3>Tell us about.</h3>
+            <img className="ContactLogo" src="https://mento.in/wp-content/uploads/2025/01/mentoLogoIcon.png" height="350px" alt=""/>
           </div>
           
           <div className="contact-email">
@@ -93,7 +95,7 @@ const ContactForm = () => {
             </div>
             
             <div className="form-group">
-              <p>Tell us more about your project</p>
+              <p>Tell us more..</p>
               <textarea
                 name="message"
                 value={formData.message}
@@ -109,6 +111,7 @@ const ContactForm = () => {
             </button>
           </form>
         </div>
+      </div>
       </div>
     );
   };
