@@ -1,6 +1,6 @@
 import React from "react";
 import './bannercu.css'
-const Banner_cu =()=>{
+const BannerCu =()=>{
     return(
 <div className="cu-container">
     
@@ -12,7 +12,7 @@ const Banner_cu =()=>{
     </div>
    
     
-    <img className="img-container-cu" src="https://cdn.theinnerhour.com/assets/images/contact-us.webp"  draggable="false"/>
+    <img className="img-container-cu" src="https://cdn.theinnerhour.com/assets/images/contact-us.webp"   alt="" draggable="false"/>
     
 </div>
 
@@ -21,4 +21,4 @@ const Banner_cu =()=>{
 
 }
 
-export default Banner_cu ;
+export default BannerCu ;

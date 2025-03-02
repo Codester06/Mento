@@ -1,9 +1,8 @@
 import React from 'react';
-import { useEffect, useState, useRef } from "react";
+
 import image1 from '../../assets/images/11.png'
 import image2 from '../../assets/images/12.png'
 import image3 from '../../assets/images/expertesInfo.png'
-import arrow from '../../assets/images/arrow-down-green-2.png'
 import './HowItWorks.css'; // Assuming you'll keep the same CSS file
 const HowItWorks = () => {
   const steps = [
