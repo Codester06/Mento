@@ -29,7 +29,7 @@ const MentalHealthServices = () => {
       <h1 className="helpYouTitle">Expert Care for Your Mental Well-Being</h1>
       <div className="services-grid">
         {services.map((service) => (
-          <div key={service.id} className="service-tag">
+          <div key={service.id} className="button56">
             {service.name}
           </div>
         ))}
