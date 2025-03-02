@@ -1,81 +1,107 @@
-
-.blockquote {
-    padding: 0;
-    
-    position: relative;
-    height:7rem;
-    background-color: rgb(56, 209, 201);
-}
-
-.startQ{
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"><path d="M59.42 145.99c-6.53-13.08-4.9-33.08 3.95-46.09 8.91-13.1 20.96-21.74 45.06-21.74l.04-12.57c-31.43-.07-56.69 12.39-71.16 40.3-14.86 28.66-14.8 65.61-14.8 96.7 0 34.14 27.68 61.82 61.82 61.82s61.82-27.68 61.82-61.82c-.01-44.78-46.15-74.48-86.73-56.6zm161.36 0c-6.53-13.08-4.9-33.08 3.95-46.09 8.91-13.1 20.96-21.74 45.06-21.74l.04-12.57c-31.43-.07-56.69 12.39-71.16 40.3-14.86 28.66-14.8 65.61-14.8 96.7 0 34.14 27.68 61.82 61.82 61.82s61.82-27.68 61.82-61.82c-.01-44.78-46.15-74.48-86.73-56.6z" fill="gray"></path></svg>');
-    background-repeat: no-repeat;
-
-    background-size: cover;
-    
-    
-    width: 50px;
-    height: 50px;
-    margin-left: 20%;
- 
-}
-.closeQ{
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"><path d="M59.42 145.99c-6.53-13.08-4.9-33.08 3.95-46.09 8.91-13.1 20.96-21.74 45.06-21.74l.04-12.57c-31.43-.07-56.69 12.39-71.16 40.3-14.86 28.66-14.8 65.61-14.8 96.7 0 34.14 27.68 61.82 61.82 61.82s61.82-27.68 61.82-61.82c-.01-44.78-46.15-74.48-86.73-56.6zm161.36 0c-6.53-13.08-4.9-33.08 3.95-46.09 8.91-13.1 20.96-21.74 45.06-21.74l.04-12.57c-31.43-.07-56.69 12.39-71.16 40.3-14.86 28.66-14.8 65.61-14.8 96.7 0 34.14 27.68 61.82 61.82 61.82s61.82-27.68 61.82-61.82c-.01-44.78-46.15-74.48-86.73-56.6z" fill="gray"></path></svg>');
-    background-repeat: no-repeat;
-    
-    background-size: cover;
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-    
-    width: 50px;
-    
-    height: 50px;
-}
-
-.displatQ{
-    display: flex;   gap: 1rem;
-    flex-direction: row;
-}
-.blockquote p {
-   
-    padding-top: 2rem;
-    font-family: "Delius";
-    font-size: 35px;
-    font-weight: 700px;
-    text-align: center;
-}
-
-blockquote p::before {
-    /* content: "\f509";  */
-    font-family:'Delius';
-   display: inline-block;
-   padding-right: 6px;
-   vertical-align: middle;
-   margin: 0;
-  font-size: 180px;
- }
-
-/* .blockquote:before {
-  position: absolute;
-  font-family: 'FontAwesome';
-  top: 0;
+/* Container for all quote cards */
+.quote-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6rem;
+    justify-content: center;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: linear-gradient(to bottom,#b9e5e8d8,#b9e5e8d8);
+  }
   
-  content:"\f10d";
-  font-size: 200px;
-  color: rgba(0,0,0,0.1);
-   
-} */
+  /* Base styling for each quote card */
+  .quote-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 
-.blockquote::after {
-    content: "";
-    top: 20px;
-    left: 50%;
-    margin-left: -100px;
+    position: relative;
+    width: 416px;
+    height: 269px;
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(41, 33, 33);
+    box-sizing: border-box;
+  }
+  
+  /* Color variations */
+  .orange {
+    background-color: #da9c56;
+  }
+  
+  .yellow {
+    background-color: #5fc358;
+  }
+  
+  .teal {
+    background-color: #6dbfd3;
+  }
+  
+  /* Quote marks styling */
+  .quote-marks {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  .opening {
     position: absolute;
-    height: 3px;
-    width: 100px;
-}
+    top: 30px;
+    left: 30px;
+  }
+  
+  .closing {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+  }
+  
+  /* Quote heading styling */
+  .quote-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 20px;
+    position: relative;
+  }
+  
+  /* Special styling for the yellow card's heading with lines */
+  .yellow .quote-heading {
+    padding: 0 15px;
+  }
+  
+  .yellow .quote-heading::before,
+  .yellow .quote-heading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background-color: white;
+  }
+  
+  .yellow .quote-heading::before {
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+  .yellow .quote-heading::after {
+    right: 50%;
+    margin-right: -60px;
+  }
+  
+  /* Quote text styling */
+  .quote-text {
+    font-family: 'Delius';
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-align: justify;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    text-align: left;
+  }
+  
+ 

@@ -11,15 +11,8 @@ const IntroBox = () =>{
             
             <h1>About Mento</h1>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy
-              text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into electronic
-              typesetting, remaining essentially unchanged. It was popularised in
-              the 1960s with the release of Letraset sheets containing Lorem
-              Ipsum passages, and more recently with desktop publishing
-              software like Aldus PageMaker including versions of Lorem Ipsum.
+            At Mento, we are dedicated to providing professional counseling and emotional support to individuals seeking to enhance their mental well-being. Our team comprises certified counselors and mental health professionals committed to offering personalized care through online mental health services.
+
             </p>
           </div>
           <div className="shapes-column">

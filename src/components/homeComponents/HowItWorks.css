@@ -1,183 +1,161 @@
-.hiw-container {
 
-     /* Added max-width */
-    width: 100%; 
-
-    padding: 0 20px;    /* Added padding for better spacing */
-    background-image: linear-gradient(to bottom, #f8eee6, #cffaf3);
+@import url('https://fonts.googleapis.com/css2?family=Delius&family=Delius+Unicase:wght@400;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rouge+Script&display=swap');
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+.container-hiw{
+    margin-top: 0;
+    
+    background: linear-gradient(to bottom ,#f8eee6,#CFFAF3FA );
 }
 
-.hiw-main-wrapper {
-    max-width: 1200px; 
-    margin: 0 auto;
-    padding: 20px;
+
+
+.heading-xl {
+
+    letter-spacing: -.02em;
+    -webkit-font-smoothing: antialiased;
+    color: #252625;
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.5rem;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    line-height: 3.5rem;
+   margin-left: 39%;
 }
 
-
-
-  .hiw-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 30px;
+.heading-lg{
+    width: 41rem;
+    font-size: 2.3rem;
+    margin-left: 21.5rem;
     font-weight: 600;
-    color: #222;
-  }
-  
-  .hiw-step {
-    display: flex;
+
+    
+
+}
+
+
+.center {
+    text-align: center;
+}
+
+.step-container {
+    grid-column-gap: 24px;
+    grid-template-columns: 690px auto;
     align-items: center;
-    margin-bottom: 40px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards;
-    gap: 20px;
-  }
-  
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .hiw-step-image {
-    flex: 1;
-    padding: 10px;
-  }
-  
-  .hiw-step-image img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-    border: 3px solid #a48888;
-    transition: transform 0.3s ease;
-  }
-  
-  .hiw-step-image img:hover {
-    transform: scale(1.05);
-  }
-  
-  .hiw-step-content {
-    flex: 1;
-    padding: 10px;
-  }
-  
-  .hiw-step-title {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #222;
-  }
-  
-  .hiw-step-description {
-    font-size: 1.1rem;
-    color: #444;
-    line-height: 1.6;
-  }
-  
-  .hiw-arrow-container {
     display: flex;
+  
+  
+    flex-direction: row;
+   
+
+}
+
+.text-container-hiw{
+    display: flex;
+    width: 100%;
+    margin-right: 19rem;
+   
+    height: 41rem;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
-    height: 40px;
-    position: relative;
-  }
+    transform: translateY(20px);
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+.text-container-hiw.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description-hiw{
+   
+    height: 15rem;
+    justify-items: center;
+    align-items: center;
+    width: 450px;
+    margin-left: 3rem;
+    font-family: 'Delius';
+    height: 300px;
+    margin: 0 2rem;
+    padding: 2rem;
+    color: #374151;
+    
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.paragraph-piw{
+    font-size: 1.2rem;
+    padding-left: 1.5rem;
+    font-weight: 300;
+    color: #374151;
+    font-family: 'Delius';
+    line-height: 1.625;
+    width: 45rem;
+    margin-left: 23rem;
+    text-align: justify;
+   
+}
+
+
+.hiw-arrow-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  height: 40px;
+  position: relative;
+}
+
+.hiw-arrow-wrapper {
+  position: relative;
+  animation: bounceArrow 2s infinite ease-in-out;
+}
+
+.hiw-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid #666;
+  border-bottom: 3px solid #666;
+  transform: rotate(45deg);
+  position: relative;
+  z-index: 2;
+}
+
+.hiw-arrow-shadow {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid rgba(102, 102, 102, 0.3);
+  border-bottom: 3px solid rgba(102, 102, 102, 0.3);
+  transform: rotate(45deg);
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+  animation: shadowFade 2s infinite ease-in-out;
+}
+
+
+.img-hiw1{
+  margin-top: 5rem;
+  width: 100%;
+      max-width: 420px;
+   border-radius: 1rem;
   
-  .hiw-arrow-wrapper {
-    position: relative;
-    animation: bounceArrow 2s infinite ease-in-out;
-  }
-  
-  .hiw-arrow {
-    width: 20px;
-    height: 20px;
-    border-right: 3px solid #666;
-    border-bottom: 3px solid #666;
-    transform: rotate(45deg);
-    position: relative;
-    z-index: 2;
-  }
-  
-  .hiw-arrow-shadow {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-right: 3px solid rgba(102, 102, 102, 0.3);
-    border-bottom: 3px solid rgba(102, 102, 102, 0.3);
-    transform: rotate(45deg);
-    top: 5px;
-    left: 5px;
-    z-index: 1;
-    animation: shadowFade 2s infinite ease-in-out;
-  }
-  
-  @keyframes bounceArrow {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(10px);
-    }
-  }
-  
-  @keyframes shadowFade {
-    0%, 100% {
-      opacity: 0.3;
-      transform: rotate(45deg) scale(1);
-    }
-    50% {
-      opacity: 0.1;
-      transform: rotate(45deg) scale(0.9);
-    }
-  }
-  
-  /* Mobile Styles */
-  @media (max-width: 768px) {
-    .hiw-container {
-      padding: 10px;
-    }
-  
-    .hiw-main-wrapper {
-      padding: 15px;
-    }
-  
-    .hiw-step {
-      flex-direction: column;
-      text-align: center;
-      margin-bottom: 40px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-    }
-  
-    .hiw-step-image img {
-      max-width: 250px;
-    }
-  
-    .hiw-title {
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-    }
-  
-    .hiw-step-title {
-      font-size: 1.3rem;
-      margin: 12px 0;
-    }
-  
-    .hiw-step-description {
-      font-size: 0.9rem;
-      line-height: 1.4;
-      padding: 0 8px;
-      margin-bottom: 10px;
-    }
-  
-    .hiw-arrow {
-      border-width: 2px;
-    }
-  
-    .hiw-arrow-shadow {
-      border-width: 2px;
-    }
-  }
-  
+   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    width: 50%;
+    
+}
+
+.img-hiw1:hover{
+  transform: scale(1.05);
+}

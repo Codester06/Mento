@@ -191,6 +191,41 @@
   }
 }
 
+.svg-left-ex{
+  width: 40px;
+  position: relative;
+  bottom: 14rem;
+  left: 1rem;
+  
+  transform: scaleX(-1);
+}
+.svg-right-ex{
+  width: 40px;
+  position: relative;
+  bottom: 14rem;
+  left: 1rem;
+
+  
+}
+
+
+.ex-right{
+  position: absolute;
+  z-index: 99;
+  width: 5rem;
+  height: 39%;
+
+}
+.ex-left{
+  
+  z-index: 99;
+  position: absolute;
+  width: 5rem;
+  height: 39%;
+  left: 95%;
+}
+
+
 /* Enhanced Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   .experts-title {
