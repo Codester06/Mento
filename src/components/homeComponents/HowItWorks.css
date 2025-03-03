@@ -1,5 +1,5 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Delius&family=Delius+Unicase:wght@400;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rouge+Script&display=swap');
+
 h2 {
     display: block;
     font-size: 1.5em;
@@ -10,152 +10,216 @@ h2 {
     font-weight: bold;
     unicode-bidi: isolate;
 }
-.container-hiw{
+
+.container-hiw {
     margin-top: 0;
-    
-    background: linear-gradient(to bottom ,#f8eee6,#CFFAF3FA );
+    background: linear-gradient(to bottom, #f8eee6, #CFFAF3FA);
+    padding: 2rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-
-
 .heading-xl {
-
     letter-spacing: -.02em;
     -webkit-font-smoothing: antialiased;
     color: #252625;
     font-family: 'Nunito', sans-serif;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-style: normal;
     font-weight: 400;
-    margin: 0;
-    line-height: 3.5rem;
-   margin-left: 39%;
+    margin: 0 auto 2rem;
+    line-height: 1.2;
+    text-align: center;
 }
 
-.heading-lg{
-    width: 41rem;
-    font-size: 2.3rem;
-    margin-left: 21.5rem;
+.heading-lg {
+    font-size: 1.8rem;
     font-weight: 600;
-
-    
-
+    width: 100%;
+    margin: 0 0 1rem;
+    text-align: center;
 }
-
 
 .center {
     text-align: center;
 }
 
 .step-container {
-    grid-column-gap: 24px;
-    grid-template-columns: 690px auto;
-    align-items: center;
     display: flex;
-  
-  
-    flex-direction: row;
-   
-
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10rem;
+    margin-top: 10rem;
+    width: 100%;
 }
 
-.text-container-hiw{
+.text-container-hiw {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    margin-right: 19rem;
-   
-    height: 41rem;
     align-items: center;
     justify-content: center;
     transform: translateY(20px);
     transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    padding: 1rem;
+    box-sizing: border-box;
 }
+
 .text-container-hiw.animate {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.description-hiw{
-   
-    height: 15rem;
-    justify-items: center;
-    align-items: center;
-    width: 450px;
-    margin-left: 3rem;
+.description-hiw {
+    width: 100%;
     font-family: 'Delius';
-    height: 300px;
-    margin: 0 2rem;
-    padding: 2rem;
+    padding: 1rem;
     color: #374151;
-    
-    margin-left: 1rem;
-    margin-bottom: 1rem;
     text-transform: capitalize;
+    box-sizing: border-box;
 }
 
-.paragraph-piw{
-    font-size: 1.2rem;
-    padding-left: 1.5rem;
+.paragraph-piw {
+    font-size: 1rem;
     font-weight: 300;
     color: #374151;
     font-family: 'Delius';
     line-height: 1.625;
-    width: 45rem;
-    margin-left: 23rem;
-    text-align: justify;
-   
+    width: 100%;
+    text-align: center;
+    margin: 0;
 }
 
-
 .hiw-arrow-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  height: 40px;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    height: 40px;
+    position: relative;
 }
 
 .hiw-arrow-wrapper {
-  position: relative;
-  animation: bounceArrow 2s infinite ease-in-out;
+    position: relative;
+    animation: bounceArrow 2s infinite ease-in-out;
 }
 
 .hiw-arrow {
-  width: 20px;
-  height: 20px;
-  border-right: 3px solid #666;
-  border-bottom: 3px solid #666;
-  transform: rotate(45deg);
-  position: relative;
-  z-index: 2;
+    width: 20px;
+    height: 20px;
+    border-right: 3px solid #666;
+    border-bottom: 3px solid #666;
+    transform: rotate(45deg);
+    position: relative;
+    z-index: 2;
 }
 
 .hiw-arrow-shadow {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-right: 3px solid rgba(102, 102, 102, 0.3);
-  border-bottom: 3px solid rgba(102, 102, 102, 0.3);
-  transform: rotate(45deg);
-  top: 5px;
-  left: 5px;
-  z-index: 1;
-  animation: shadowFade 2s infinite ease-in-out;
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-right: 3px solid rgba(102, 102, 102, 0.3);
+    border-bottom: 3px solid rgba(102, 102, 102, 0.3);
+    transform: rotate(45deg);
+    top: 5px;
+    left: 5px;
+    z-index: 1;
+    animation: shadowFade 2s infinite ease-in-out;
 }
 
+.img-hiw1 {
+    width: 80%;
+    max-width: 320px;
+    border-radius: 1rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
 
-.img-hiw1{
-  margin-top: 5rem;
-  width: 100%;
-      max-width: 420px;
-   border-radius: 1rem;
-  
-   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    width: 50%;
+.img-hiw1:hover {
+    transform: scale(1.05);
+}
+
+/* Add the bounce animation */
+@keyframes bounceArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+@keyframes shadowFade {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.1; }
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (min-width: 768px) {
+    .container-hiw {
+        padding: 3rem 2rem;
+    }
     
+    .heading-xl {
+        font-size: 3rem;
+    }
+    
+    .heading-lg {
+        font-size: 2rem;
+    }
+    
+    .paragraph-piw {
+        font-size: 1.1rem;
+        max-width: 600px;
+    }
+    
+    .img-hiw1 {
+        max-width: 380px;
+    }
 }
 
-.img-hiw1:hover{
-  transform: scale(1.05);
+@media screen and (min-width: 1024px) {
+    .step-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .text-container-hiw {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1200px;
+    }
+    
+    .heading-xl {
+        font-size: 3.5rem;
+    }
+    
+    .heading-lg {
+        font-size: 2.2rem;
+        text-align: left;
+    }
+    
+    .description-hiw {
+        width: 50%;
+        padding: 0 1.5rem;
+    }
+    
+    .paragraph-piw {
+        text-align: left;
+        padding: 0;
+    }
+    
+    .img-hiw1 {
+        width: 40%;
+        max-width: 420px;
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container-hiw {
+        padding: 4rem;
+    }
+    
+    .text-container-hiw {
+        max-width: 1400px;
+    }
 }

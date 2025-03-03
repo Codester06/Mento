@@ -38,8 +38,10 @@ const ContactForm = () => {
         {/* Left Section */}
         <div className="contact-infoFrom">
           <div className="contact-header">
+            <div className="Contact-header-title">
             <h2>Let's chat.</h2>
             <h3>Tell us about.</h3>
+            </div>
             <img className="ContactLogo" src="https://mento.in/wp-content/uploads/2025/01/mentoLogoIcon.png" height="350px" alt=""/>
           </div>
           

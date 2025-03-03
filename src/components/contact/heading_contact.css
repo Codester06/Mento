@@ -1,89 +1,104 @@
-
-  .above-header-cu {
+.above-header-cu {
     width: 100%;
-    background-color: red
-    ;
-    
-    height: 200px;}
-.header{
+    background-color: red;
+    height: 200px;
+    position: relative; /* Add this */
+}
+
+.header {
     text-align: center;
     margin-bottom: 32px;
-    position: relative;
-    bottom: 30px;
-    left: 40px;
-    z-index: 9999;
-  }
-  
-  .title {
+    position: relative; /* Changed from absolute */
+    z-index: 2;
+    padding: 0 15px;
+    width: 100%;
+}
+
+/* Desktop positioning */
+@media (min-width: 768px) {
+    .header {
+        position: relative;
+        bottom: 30px;
+        left: 40px;
+    }
+}
+
+.title {
     font-size: 26px;
     font-weight: 500;
     color: #101113;
-   
-  }
-  
-  .highlight {
+}
+
+.highlight {
     color: #f8b704;
-  }
-  
-  .contact-grid {
-   
+}
+
+/* Added a container to help control positioning */
+.contact-container {
+    position: relative;
+    width: 100%;
+    margin-top: 50px; /* Space after header */
+    padding-bottom: 50px; /* Space after contact grid */
+}
+
+.contact-grid {
     width: 80%;
-    height: 300px;
+    height: auto; /* Changed from fixed height */
+    min-height: 300px;
     border-radius: 16px;
     box-shadow: rgba(76, 76, 76, 0.08) 0px 8px 16px 8px;
     background-color: rgb(255, 255, 255);
-    margin: -7.5rem auto 0px;
-    z-index: 5;
+    margin: 0 auto; /* Changed from negative margin */
+    z-index: 1;
     position: relative;
     padding: 4.5rem;
     display: flex;
     gap: 9rem;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+/* Desktop positioning for contact-grid */
+@media (min-width: 768px) {
     .contact-grid {
-      grid-template-columns: repeat(3, 1fr);
+        margin-top: -7.5rem;
+        height: 300px;
     }
-  }
-  
-  .contact-item {
+}
+
+.contact-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-  
-  .icon-container {
-   
+}
+
+.icon-container {
     border-radius: 6px;
     padding: 8px;
     margin-bottom: 10px;
-  }
-  
-  .icon {
+}
+
+.icon {
     height: 48px;
     width: 48px;
     color: #287219;
-  }
-  
-  .contact-heading {
+}
+
+.contact-heading {
     font-size: 0.9rem;
     font-weight: 700;
     line-height: 16px;
     letter-spacing: 0.16rem;
     text-transform: uppercase;
-    color:#55a78f;
+    color: #55a78f;
     text-align: center;
     margin: 0px;
     padding: 0px;
-    text-decoration: underline;
     text-underline-offset: 2px;
     cursor: pointer;
     margin-bottom: 10px;
-  }
-  
-  .contact-primary {
-    
+}
+
+.contact-primary {
     font-size: 1rem;
     line-height: 24px;
     opacity: 1;
@@ -92,9 +107,71 @@
     text-align: center;
     margin: 0px;
     padding: 0px;
-  }
-  
-  .contact-secondary {
+}
+
+.contact-secondary {
     color: #6b7280;
     font-size: 14px;
-  }
+}
+
+/* Mobile responsive styles - Only apply to phone screens */
+@media (max-width: 767px) {
+    .above-header-cu {
+        height: 150px;
+    }
+    
+    .header {
+        position: static; /* Completely remove positioning */
+        margin: 20px auto; /* Center and add space */
+        padding: 0 15px;
+    }
+    
+    .title {
+       display: none;
+    }
+    
+    .contact-container {
+        margin-top: 20px;
+    }
+    
+    .contact-grid {
+        width: 90%;
+        height: auto;
+        min-height: auto; /* Allow it to collapse to content */
+        margin: 20px auto; /* Positive margin */
+        padding: 2rem;
+        flex-direction: column;
+        gap: 3rem;
+        position: static; /* Remove positioning */
+    }
+    
+    .contact-item {
+        width: 100%;
+    }
+    
+    .contact-heading {
+        font-size: 0.85rem;
+    }
+    
+    .contact-primary {
+        font-size: 0.95rem;
+    }
+    
+    .contact-secondary {
+        font-size: 13px;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .contact-grid {
+        gap: 4rem;
+        padding: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .contact-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

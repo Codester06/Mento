@@ -10,15 +10,9 @@ const BannerCu =()=>{
     <h4 color="#FFFFFF" >Do you have any concerns or questions you would like to address? Our client care team is happy to help you.</h4>
 
     </div>
-   
-    
     <img className="img-container-cu" src="https://cdn.theinnerhour.com/assets/images/contact-us.webp"   alt="" draggable="false"/>
-    
 </div>
-
     );
-
-
 }
 
 export default BannerCu ;

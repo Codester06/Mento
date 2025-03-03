@@ -1,167 +1,252 @@
-/* ArticleCard.css */
+/** ArticleCard.css **/
 .article-card {
-    width: 100%;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    font-family: 'Inter', Arial, sans-serif;
-    margin-bottom: 20px;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  font-family: 'Inter', Arial, sans-serif;
+  margin-bottom: 20px;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-image {
+  position: relative;
+  text-align: center;
+  padding: 30px;
+  background-color: white;
+}
+
+.article-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.article-image-title {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.article-image-title h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 5px 0;
+  color: #2D3748;
+  letter-spacing: 0.5px;
+}
+
+.highlighted-text {
+  color: #3182CE;
+}
+
+.article-details {
+  padding: 30px;
+}
+
+.article-tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tag-blue {
+  background-color: #EBF4FF;
+  color: #3182CE;
+}
+
+.tag-light-blue {
+  background-color: #E6F0FB;
+  color: #4299E1;
+}
+
+.tag-pink {
+  background-color: #FEE7EF;
+  color: #F56565;
+}
+
+.tag-green {
+  background-color: #E6F6EC;
+  color: #38A169;
+}
+
+.tag-purple {
+  background-color: #EDE9FE;
+  color: #6B46C1;
+}
+
+.tag-red {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
+
+.article-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2D3748;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.article-intro {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4A5568;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.article-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4A5568;
+  font-size: 14px;
+}
+
+/** Responsive styles **/
+@media (min-width: 768px) {
+  article-card {
+    width: 50%;
+  
   }
   
-  .article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+
+  .article-content {
+    flex-direction: row;
+  }
+  
+  .article-image {
+    width: 50%;
+  }
+  
+  .article-details {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .article-image-title {
+    bottom: 30px;
+  }
+}
+
+/* Enhanced Mobile Styles */
+@media (max-width: 767px) {
+  .article-card {
+    border-radius: 15px;
+    margin-bottom: 15px;
   }
   
   .article-content {
-    display: flex;
     flex-direction: column;
   }
   
   .article-image {
-    position: relative;
-    text-align: center;
-    padding: 30px;
-    background-color: white;
+    width: 300px;
+    height: 200px;
+    padding: 15px;
   }
   
   .article-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
+    border-radius: 10px;
   }
   
   .article-image-title {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
-    text-align: center;
+    position: relative;
+    bottom: 0;
+    padding: 10px 0;
   }
   
   .article-image-title h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 5px 0;
-    color: #2D3748;
-    letter-spacing: 0.5px;
-  }
-  
-  .highlighted-text {
-    color: #3182CE;
+    font-size: 16px;
   }
   
   .article-details {
-    padding: 30px;
-  }
-  
-  .article-tags {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-  }
-  
-  .tag {
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .tag-blue {
-    background-color: #EBF4FF;
-    color: #3182CE;
-  }
-  
-  .tag-light-blue {
-    background-color: #E6F0FB;
-    color: #4299E1;
-  }
-  
-  .tag-pink {
-    background-color: #FEE7EF;
-    color: #F56565;
-  }
-  
-  .tag-green {
-    background-color: #E6F6EC;
-    color: #38A169;
-  }
-  
-  .tag-purple {
-    background-color: #EDE9FE;
-    color: #6B46C1;
-  }
-  
-  .tag-red {
-    background-color: #FEE2E2;
-    color: #DC2626;
+    width: 100%;
+    padding: 15px;
   }
   
   .article-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #2D3748;
-    margin-bottom: 15px;
-    line-height: 1.2;
+    font-size: 20px;
+    margin-bottom: 10px;
   }
   
   .article-intro {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #4A5568;
-    margin-bottom: 20px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    -webkit-line-clamp: 2;
+  }
+  
+  .article-tags {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .tag {
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 15px;
   }
   
   .article-date {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #4A5568;
-    font-size: 14px;
+    font-size: 12px;
+  }
+}
+
+/* Small phone screens */
+@media (max-width: 375px) {
+  .article-card {
+    border-radius: 12px;
   }
   
-  /* Responsive styles */
-  @media (min-width: 768px) {
-    .article-content {
-      flex-direction: row;
-    }
-    
-    .article-image {
-      width: 50%;
-    }
-    
-    .article-details {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .article-image-title {
-      bottom: 30px;
-    }
+  .article-image {
+    padding: 12px;
   }
   
-  @media (max-width: 767px) {
-    .article-title {
-      font-size: 22px;
-    }
-    
-    .article-image {
-      padding: 20px;
-    }
-    
-    .article-details {
-      padding: 20px;
-    }
+  .article-details {
+    padding: 12px;
   }
+  
+  .article-title {
+    font-size: 18px;
+  }
+  
+  .article-intro {
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+  }
+  
+  .tag {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+}

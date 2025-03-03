@@ -1,27 +1,42 @@
-.banner-container {
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-  
+.banner-container { 
+  position: relative; 
+  width: 100%; 
+  height: auto; 
+} 
+
+.contact-section-container { 
+  position: absolute; 
+  top: 125%; /* Move it halfway over Banner_cu */ 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 100%; /* Adjust as needed */ 
+  border-radius: 10px; 
+  z-index: 10; /* Ensures it's above Banner_cu */ 
+} 
+
+.contact-form-container { 
+  background: linear-gradient(to bottom,#daf8f1,rgba(251, 242, 220, 0.444)); 
+  margin-top: 21rem; /* Adds space so it's not overlapping */ 
+  justify-content: center; 
+  width: 100%; 
+}
+
+/* Mobile-only fixes - keeps desktop view unchanged */
+@media (max-width: 767px) {
   .contact-section-container {
-    position: absolute;
-    top: 140%; /* Move it halfway over Banner_cu */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%; /* Adjust as needed */
-   
-    
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    z-index: 10; /* Ensures it's above Banner_cu */
+      position: static; /* Remove absolute positioning on mobile */
+      transform: none; /* Remove transform */
+      margin-top: 2rem; /* Add some space after banner */
+      left: auto; /* Remove left positioning */
+      top: auto; /* Remove top positioning */
   }
   
   .contact-form-container {
-    background: linear-gradient(to bottom,#daf8f1,rgba(251, 242, 220, 0.444));
-    margin-top: 21rem; /* Adds space so it's not overlapping */
-    display: flex;
-    justify-content: center;
-    width: 100%;
+      margin-top: 2rem; /* Reduce the large margin on mobile */
   }
   
+  /* Add space between components */
+  .banner-container + * {
+      margin-top: 1rem;
+  }
+}

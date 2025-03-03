@@ -1,12 +1,8 @@
-<<<<<<< HEAD
+
 import React, { useRef, useState } from 'react';
 import './expertCarousel.css';
 import { Link } from 'react-router-dom';
-import experts from '../experts/expert';
-=======
-import React, { useRef, useState } from "react";
 import "./expertCarousel.css";
->>>>>>> origin/ozamu
 
 const Carousel = () => {
   const sliderTrackRef = useRef(null);
@@ -14,8 +10,7 @@ const Carousel = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-<<<<<<< HEAD
-=======
+
   const experts = [
     {
       id: 1,
@@ -101,7 +96,7 @@ const Carousel = () => {
     },
   ];
 
->>>>>>> origin/ozamu
+
   // Mouse event handlers for drag scrolling
   const handleMouseDown = (e) => {
     setIsDragging(true);
