@@ -57,6 +57,7 @@
 
 .article-details {
   padding: 30px;
+  padding-top: 10px;
 }
 
 .article-tags {
@@ -132,30 +133,21 @@
 
 /** Responsive styles **/
 @media (min-width: 768px) {
-  article-card {
-    width: 50%;
-  
-  }
-  
-
   .article-content {
     flex-direction: row;
   }
   
   .article-image {
-    width: 50%;
+    width: 100%;
   }
   
   .article-details {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  
-  .article-image-title {
-    bottom: 30px;
-  }
+
 }
 
 /* Enhanced Mobile Styles */
@@ -170,13 +162,15 @@
   }
   
   .article-image {
-    width: 300px;
-    height: 200px;
+    width: 100%; /* Make the image container full width */
+    height: auto; /* Allow height to adjust automatically */
     padding: 15px;
   }
   
   .article-image img {
     border-radius: 10px;
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
   }
   
   .article-image-title {
@@ -187,66 +181,4 @@
   
   .article-image-title h3 {
     font-size: 16px;
-  }
-  
-  .article-details {
-    width: 100%;
-    padding: 15px;
-  }
-  
-  .article-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .article-intro {
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 15px;
-    -webkit-line-clamp: 2;
-  }
-  
-  .article-tags {
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  
-  .tag {
-    padding: 4px 12px;
-    font-size: 12px;
-    border-radius: 15px;
-  }
-  
-  .article-date {
-    font-size: 12px;
-  }
-}
-
-/* Small phone screens */
-@media (max-width: 375px) {
-  .article-card {
-    border-radius: 12px;
-  }
-  
-  .article-image {
-    padding: 12px;
-  }
-  
-  .article-details {
-    padding: 12px;
-  }
-  
-  .article-title {
-    font-size: 18px;
-  }
-  
-  .article-intro {
-    font-size: 13px;
-    -webkit-line-clamp: 2;
-  }
-  
-  .tag {
-    padding: 3px 10px;
-    font-size: 11px;
-  }
-}
+  }}

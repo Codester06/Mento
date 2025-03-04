@@ -3,6 +3,7 @@ import ContactSection from "../components/contact/heading_contact";
 import BannerCu from "../components/contact/bannercu";
 import '../components/contact/contact.css'
 
+
 const Contact = () => {
     return(<>
     <div className="banner-container">

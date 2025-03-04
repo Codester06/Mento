@@ -1,62 +1,93 @@
 /* BlogList.css */
 .blog-list-container {
- 
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: 'Inter', Arial, sans-serif;
-  }
-  
-  .blog-list-title {.blog-list {
-  display: grid;
-  width: 100%;
-  flex-direction: row;
-  gap: 30px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-/* Responsive layout */
+.blog-list-title {
+  font-size: 28px; /* Default for mobile */
+  font-weight: 700;
+  color: #2D3748;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Blog List Styles */
+.blog-list {
+  margin-top: -6px;
+  display: grid;
+  grid-template-columns: 1fr; /* Default for mobile */
+}
+
+/* Blog Item Styles */
+.blog-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px; /* Slight border-radius for aesthetics */
+  padding: 10px; /* Added padding */
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Rounded corners */
+}
+
+.blog-content {
+  padding: 15px;
+}
+
+.blog-title {
+  font-size: 20px;
+  color: #2D3748;
+  margin: 0 0 10px;
+}
+
+.blog-excerpt {
+  font-size: 16px;
+  color: #4A5568;
+  margin: 0 0 15px;
+}
+
+.read-more {
+  font-size: 16px;
+  color: #3182CE;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* Tablet and Desktop Styles */
 @media (min-width: 768px) {
+  .blog-list-container {
+    padding: 0px; /* Increased padding for larger screens */
+  }
+
   .blog-list {
-    grid-template-columns: repeat(2, 1fr);
+    margin-left: 100px; /* Keep left margin for tablet and desktop */
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-list-container {
+    margin-left: 0; /* Remove left margin for mobile */
+  }
+
+  .blog-list {
+    margin-left: 0; /* Ensure no left margin for mobile */
+  }
+  .blog-item {
+ 
+    padding: 20px; /* Added padding */
+    padding-bottom: 0;
+    padding-top: 10px;
   }
 }
 
 @media (min-width: 1024px) {
-  .blog-list {
-    grid-template-columns: repeat(3, 1fr);
+  .blog-list-title {
+    font-size: 32px;
   }
 }
-    font-size: 32px;
-    font-weight: 700;
-    color: #2D3748;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .blog-list {
-    
-    width: 1000px;
-    flex-direction: row;
-    gap: 30px;
-  }
-  
-  .blog-item {
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  /* Responsive layout */
-  @media (min-width: 768px) {
-    .blog-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (min-width: 1024px) {
-
-    
-    .blog-list-title {
-      font-size: 36px;
-    }
-  }

@@ -1,54 +1,101 @@
-import {useState} from "react";
-import './contactFrom.css'
+import { useRef,useState } from "react";
+import "./contactFrom.css";
+import { database } from "../../utils/firebaseConfig";
+import { ref, push } from "firebase/database";
+// import Contact from "../../models/contactSch";
+// import ConnectDB from "../../utils/connectDB";
+
 const ContactForm = () => {
-    const [formData, setFormData] = useState({
-      fullName: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
+  // const formRef = useRef();
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const formData = {
+  //     fullName: formRef.current.fullName.value,
+  //     email: formRef.current.email.value,
+  //     subject: formRef.current.subject.value,
+  //     message: formRef.current.message.value,
+  //   };
+
+  //   try {
+  //     await ConnectDB(); // Connect to MongoDB
+  //     await Contact.create(formData); // Save data
+
+  //     console.log("✅ Form submitted:", formData);
+  //     alert("Message sent successfully!");
+
+  //     // Reset form fields
+  //     formRef.current.reset();
+  //   } catch (error) {
+  //     console.error("❌ Error saving data:", error);
+  //     alert("Failed to save message!");
+  //   }
+  // };
+
+  const formRef = useRef();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = {
+      fullName: formRef.current.fullName.value,
+      email: formRef.current.email.value,
+      subject: formRef.current.subject.value,
+      message: formRef.current.message.value,
     };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log('Form submitted:', formData);
-      // Here you would typically send the data to your backend
-      
-      // Reset form after submission
-      setFormData({
-        fullName: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      
-      alert('Message sent successfully!');
-    };
-  
-    return (
-      <div className="ContainerMainFrom">
+
+    try {
+      // Save data to Firebase
+      await push(ref(database, "contact_forms"), formData);
+
+      console.log("✅ Form submitted:", formData);
+      alert("Message sent successfully!");
+
+      // Reset form fields
+      formRef.current.reset();
+    } catch (error) {
+      console.error("❌ Error saving data:", error);
+      alert("Failed to save message!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="ContainerMainFrom">
       <div className="contact-containerFrom">
         {/* Left Section */}
         <div className="contact-infoFrom">
           <div className="contact-header">
             <div className="Contact-header-title">
-            <h2>Let's chat.</h2>
-            <h3>Tell us about.</h3>
+              <h2>Let's chat.</h2>
+              <h3>Tell us about.</h3>
             </div>
-            <img className="ContactLogo" src="https://mento.in/wp-content/uploads/2025/01/mentoLogoIcon.png" height="350px" alt=""/>
+            <img
+              className="ContactLogo"
+              src="https://mento.in/wp-content/uploads/2025/01/mentoLogoIcon.png"
+              height="350px"
+              alt=""
+            />
           </div>
-          
+
           <div className="contact-email">
             <div className="email-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
               </svg>
             </div>
             <div>
@@ -57,65 +104,38 @@ const ContactForm = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Right Section - Form */}
         <div className="contact-form">
           <h2>Send us a message</h2>
-          
-          <form onSubmit={handleSubmit}>
+
+          <form ref={formRef} onSubmit={handleSubmit}>
             <div className="form-group">
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="Full Name*"
-                required
-              />
+              <input type="text" name="fullName" placeholder="Full Name*" required />
             </div>
-            
+
             <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email Address*"
-                required
-              />
+              <input type="email" name="email" placeholder="Email Address*" required />
             </div>
-            
+
             <div className="form-group">
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="Subject*"
-                required
-              />
+              <input type="text" name="subject" placeholder="Subject*" required />
             </div>
-            
+
             <div className="form-group">
               <p>Tell us more..</p>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Type your message*"
-                rows="6"
-                required
-              ></textarea>
+              <textarea name="message" placeholder="Type your message*" rows="6" required></textarea>
             </div>
-            
-            <button type="submit">
-              Send Message
+
+            <button type="submit" disabled={loading}>
+              {loading ? "Sending..." : "Send Message"}
             </button>
+            
           </form>
         </div>
       </div>
-      </div>
-    );
-  };
-  
-  export default ContactForm;
+    </div>
+  );
+};
+
+export default ContactForm;
