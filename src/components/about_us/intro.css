@@ -2,12 +2,12 @@
 
 .container_intro {
     padding: 1.5rem;
+
    
-    /* background:linear-gradient(to bottom ,#e9f6e6,#cdffd7);  */
+    background:linear-gradient(to bottom ,#e9f6e6,#cdffd7); 
     width: 100%;
-    background-image: url('../../assets/images/Phone_Wallpaper_Background.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
+   
+    z-index: 1111;
    
     height: 52rem;
    
@@ -19,6 +19,18 @@
     display: flex;
     
    
+  }
+  .overlay-intro{
+    position: absolute;
+    top: -100px;
+    width: 100%;
+      overlay: auto;
+      opacity: 0.5;
+      z-index: 1;
+      height: 66.7rem;
+    background-image: url('../../assets/images/Phone_Wallpaper_Background-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   .content-box {
@@ -34,16 +46,23 @@
     max-height: 18rem;
   }
   .content-box h1 {
+    position: relative;
+    bottom: 178px;
+    left: 129px;
     padding: 2rem;
     color: #374151;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    font-family: 'Delius';
+    font-family: 'Times New Roman';
     margin-bottom: 1rem;
   }
   .content-box p {
-    font-size: 1.5rem;
-    padding-left: 1.5rem;
+    position: relative;
+    bottom: 178px;
+    left: 125px;
+    width: 89%;
+    font-size: 1.2rem;
+    padding-left: 2.5rem;
     font-weight: 600;
     color: #374151;
     font-family: 'Delius';
@@ -60,8 +79,10 @@
   }
   
   .rectangle1 {
-    background-image: url('../../assets/images/7a804bc6-962a-4f0e-890a-01c49b428e04.jpeg');
+    background-image: url('../../assets/images/IMG-20250304-WA0004.jpg');
+    aspect-ratio: 16 / 9 ;
    background-size: cover;
+   background-repeat:no-repeat ;
     position: relative;
     
     left: 7rem;
@@ -74,344 +95,45 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
     
   }
-  .rectangle2 {
-    background-image: url('../../assets/images/772fdda8-0bb5-41b5-94a3-e5cc09317cc5.jpeg');
-    background-size: cover;
-    position: relative;
-    z-index: 1;
-    left: 26rem;
-    top: -213px;
 
-    width: 22rem;
-    height: 18rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 0.5rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-
-  }
   
+.rec-upper-left,.rec-bottom-right{
+
+width: 26rem;
+height: 13rem;
+border-radius: 1rem;
+position: relative;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+.square-bottom-left,.square-upper-right{
+width: 19rem;
+height: 10rem;
+border-radius: 1rem;
+position: relative;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+
+}
+.rec-upper-left{
+  top: -3em;
+  left: 36em;
   
-  .diamond {
-    background-image: url('../../assets/images/d8c2d5cc-be92-43df-93c5-c97714d5bd68.jpeg');
-    background-size: cover;
-    z-index: 0;
-    position: relative;
-    left: 424px;
-    top: -135px;
-    height: 15rem;
-    width: 15rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-
-    border: 2px solid #e5e7eb;
-    border-radius: 0.5rem;
-    align-self: center;
-    transform: rotate(45deg);
-  }
-
-
-
-/* Extra Large Desktop Screens */
-@media (max-width: 1600px) {
-  .container_intro {
-    width: 85%;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-  
-  .rectangle1, .rectangle2 {
-    width: 70%;
-    height: 16rem;
-  }
-  
-  .diamond {
-    width: 14rem;
-    height: 14rem;
-  }
 }
 
-/* Large Desktop Screens */
-@media (max-width: 1440px) {
-  .container_intro {
-    width: 90%;
-    max-width: 1300px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-  }
+.square-upper-right{
+  top: -5em;
+    left: 37em;
+}
+.rec-bottom-right{
+  top: 6em;
+  left: 9em;
   
-  .rectangle1, .rectangle2 {
-    width: 65%;
-    height: 15rem;
-  }
-  
-  .diamond {
-    width: 12rem;
-    height: 12rem;
-  }
 }
 
-/* Medium Desktop Screens */
-@media (max-width: 1280px) {
-  .container_intro {
-    width: 90%;
-    max-width: 1100px;
-  }
-  
-  .content-box p {
-    font-size: 1rem;
-  }
-  
-  .rectangle1 {
-    width: 60%;
-    height: 10rem;
-  }
-  
-  .rectangle2 {
-    top: -115px;
-    width: 60%;
-    height: 11rem;
-  }
-  
-  .diamond {
-    width: 9.5rem;
-    height: 9.5rem;
-  }
+.square-bottom-left{
+  top: -15em;
+  left: 15em;
 }
 
-/* Small Desktop Screens */
-@media (max-width: 1140px) {
-  .container_intro {
-    width: 90%;
-    max-width: 1000px;
-  }
-  
-  .content-box {
-    padding: 1.8rem;
-  }
-  
-  .rectangle1, .rectangle2 {
-    width: 58%;
-    height: 11rem;
-  }
-  
-  .diamond {
-    width: 10rem;
-    height: 10rem;
-  }
-}
 
-/* Tablets & Small Desktops */
-@media (max-width: 1024px) {
-  .container_intro {
-    width: 90%;
-    max-width: 900px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-  }
-  
-  .content-box {
-    margin-top: 1rem;
-    padding: 1.5rem;
-  }
-  
-  .content-box p {
-    font-size: 0.9rem;
-  }
-  
-  .rectangle1, .rectangle2 {
-    width: 55%;
-    height: 10rem;
-  }
-  
-  .diamond {
-    width: 9rem;
-    height: 9rem;
-  }
-}
-
-/* Small Tablets & Large Mobile */
-@media (max-width: 900px) {
-  .container_intro {
-    width: 90%;
-    max-width: 800px;
-  }
-  
-  .content-box {
-    padding: 1.2rem;
-  }
-  
-  .content-box h1 {
-    font-size: 1.4rem;
-  }
-  
-  .rectangle1, .rectangle2 {
-    width: 52%;
-    height: 9rem;
-  }
-  
-  .rectangle2 {
-    top: -100px;
-  }
-  
-  .diamond {
-    width: 8rem;
-    height: 8rem;
-    top: -90px;
-  }
-}
-
-/* Tablets */
-@media (max-width: 768px) {
-  .container_intro {
-    width: 90%;
-    max-width: 700px;
-    background-color: rgb(211, 250, 234);
-    margin: 0 auto;
-    margin-bottom: 10px;
-  }
-  
-  .layout {
-    flex-direction: column;
-  }
-  
-  .content-box {
-    flex: 1 1 100%;
-    padding: 1rem;
-    margin-top: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  .content-box p {
-    font-size: 0.9rem;
-    color: black;
-    font-weight: 500;
-  }
-  
-  .shapes-column {
-    display: none;
-  }
-}
-
-/* Small Tablets */
-@media (max-width: 700px) {
-  .container_intro {
-    width: 90%;
-    max-width: 650px;
-  }
-  
-  .content-box h1 {
-    font-size: 1.3rem;
-  }
-}
-
-/* Mobile Landscape */
-@media (max-width: 640px) {
-  .container_intro {
-    width: 90%;
-    max-width: 580px;
-    padding: 1rem;
-  }
-  
-  .content-box {
-    padding: 0.5rem;
-  }
-  
-  .content-box h1 {
-    font-size: 1.25rem;
-  }
-  
-  .content-box p {
-    font-size: 0.85rem;
-  }
-}
-
-/* Mobile Medium */
-@media (max-width: 540px) {
-  .container_intro {
-    width: 92%;
-    max-width: 500px;
-  }
-  
-  .content-box h1 {
-    font-size: 1.2rem;
-  }
-  
-  .content-box p {
-    font-size: 0.82rem;
-  }
-}
-
-/* Mobile Portrait */
-@media (max-width: 480px) {
-  .container_intro {
-    width: 95%;
-    max-width: 450px;
-    padding: 1rem 0.5rem;
-  }
-  
-  .content-box h1 {
-    font-size: 1.15rem;
-  }
-  
-  .content-box p {
-    font-size: 0.8rem;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 400px) {
-  .container_intro {
-    width: 95%;
-    max-width: 370px;
-  }
-  
-  .content-box h1 {
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .content-box p {
-    font-size: 0.78rem;
-    line-height: 1.5;
-  }
-}
-
-/* Extra Small Mobile */
-@media (max-width: 360px) {
-  .container_intro {
-    width: 95%;
-    max-width: 340px;
-    padding: 0.75rem;
-  }
-  
-  .content-box h1 {
-    font-size: 1.05rem;
-  }
-  
-  .content-box p {
-    font-size: 0.75rem;
-  }
-}
-
-/* Tiny Mobile */
-@media (max-width: 320px) {
-  .container_intro {
-    width: 98%;
-    max-width: 310px;
-    padding: 0.5rem;
-  }
-  
-  .content-box {
-    padding: 0.4rem;
-  }
-  
-  .content-box h1 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .content-box p {
-    font-size: 0.7rem;
-    line-height: 1.4;
-  }
-}

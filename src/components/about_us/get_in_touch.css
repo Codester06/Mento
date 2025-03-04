@@ -1,24 +1,27 @@
 
-.contact-container {
-   
+.contact-container-git {
+ 
     width: 100%;
     margin: 0 auto;
-    /* background:linear-gradient(to bottom,#CFFAF3FA,  rgba(251, 242, 220, 0.444)); */
+    background:linear-gradient(to bottom,#CFFAF3FA,  rgba(251, 242, 220, 0.444));
     padding: 60px 20px;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .contact-heading {
+  .contact-heading-gnt {
     font-size: 48px;
+    font-family: 'Times New Roman';
     color: #4a4a4a;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     font-weight: 600;
   }
   
   .contact-options {
+    margin-top: 5em;
     display: flex;
     justify-content: space-around;
+    
     flex-wrap: wrap;
     gap: 30px;
   }

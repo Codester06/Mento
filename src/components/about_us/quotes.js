@@ -3,8 +3,22 @@ import './quotes.css';
 
 
 const Quotes = () => {
-    return(
-        <div className="container_quotes">"If the Grudge is important leave the person if person is important leave the person "</div>
+    return(<>
+    <div className="border-up-1">
+
+    </div>
+
+    <div className="border-up-2"></div>
+    <div className="container_quote">"Taking care of your mental health is an act of self-love."</div>
+    <div className="border-down-1">
+
+    </div>
+
+    <div className="border-down-2"></div>
+    </>
+    
+    
+ 
 
     )
 }

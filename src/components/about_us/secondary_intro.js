@@ -10,9 +10,12 @@ const SecIntroBox = () =>{
 
 
             <div className="sec_shapes-column">
-                <div className="sec_rectangle1"></div>
-                <div className="sec_diamond"></div>
-                <div className="sec_rectangle2"></div>
+                <div className="sec_diamond-1"></div>
+                <div className="sec_diamond-2"></div>
+                <div className="sec_diamond-3"></div>
+                <div className="sec_diamond-4"></div>
+
+
             </div>
 
 

@@ -1,16 +1,18 @@
 
+
+
 .container_sec_intro {
-    padding: 1.5rem;
+    /* padding: 1.5rem; */
    
-    border-radius: 0.75rem;
+  
     width: 100%;
     background:linear-gradient(to bottom ,#d5f0f7,#d5f7ed); 
 
-    max-width: 101rem;
+    
     height: 52rem;
    
-    margin-bottom: 10px;
-    margin-left: 6rem;
+   
+   
 
   }
   
@@ -18,7 +20,8 @@
     display: flex;
     flex-direction: row;
     gap: 6rem;
-    height: 100%;
+    scale: 80%;
+    height: 3%;
     padding-left: 2rem;
    
   }
@@ -38,13 +41,14 @@
     max-height: 18rem;
   }
   .sec_content-box h1 {
+    font-family: 'Times New Roman';
     color: #374151;
     padding: 2rem;
 
     font-size: 3rem;
 
     font-weight: 700;
-    font-family: 'Delius';
+    
     margin-bottom: 1rem;
   }
   .sec_content-box p {
@@ -64,8 +68,10 @@
   }
   
   .sec_rectangle1 {
-    background-image: url('../../assets/images/7a804bc6-962a-4f0e-890a-01c49b428e04.jpeg');
+    background-image: url('../../assets/images/Happy_girl_sitting_and_meditating_among_flowers-removebg-preview.png');
    background-size: cover;
+   background-position: center;
+   z-index: -1;
     position: relative;
     
     left: 4rem;
@@ -74,216 +80,47 @@
     height: 18rem;
    
     border-radius: 0.5rem;
-    z-index: 1;
+
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
     
   }
-  .sec_rectangle2 {
-    background-image: url('../../assets/images/772fdda8-0bb5-41b5-94a3-e5cc09317cc5.jpeg');
-    background-size: cover;
-    position: relative;
-    z-index: 1;
-    left: 402px;
-    top: -104px;
-    width: 22rem;
-    height: 18rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 0.5rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 
-  }
   
-  
-  .sec_diamond {
-    background-image: url('../../assets/images/d8c2d5cc-be92-43df-93c5-c97714d5bd68.jpeg');
-    background-size: cover;
-    z-index: 0;
-    position: relative;
-    left: 26rem;
-    top: -68px;
-    height: 15rem;
+ 
+  .sec_diamond-1 ,.sec_diamond-2, 
+  .sec_diamond-3 ,.sec_diamond-4 {
     width: 15rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-
-    border: 2px solid #e5e7eb;
-    border-radius: 0.5rem;
-    align-self: center;
+    height: 15rem;
     transform: rotate(45deg);
-  }
+    position: relative;
+    border-radius: 1em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+ }
+.sec_diamond-1{
+  top: 7em;
+  left: 17em;
 
+}
+.sec_diamond-2{
+  top: 4em;
+  left: 5em;
+}
+.sec_diamond-3{
+  top: 1em;
+  left: 17em;
+}
+.sec_diamond-4{ 
 
-  @media (max-width: 1440px) {
-    .container_intro {
-        width: 1200px;
-    margin:0 10rem;
-    margin-bottom: 10px;
-    }
-    /* Styles for 1440px and below */
-  }
-/* Large Screens (1280px and below) */
-@media (max-width: 1280px) {
-    .container_intro {
-        width: 1100px;
-        margin:0 10rem;
-        margin-bottom: 10px;
+  top: -26em;
+  left: 29em;
 
-    }
-    .content-box {
-      width: 70%;
-    }
-    .content-box p {
-      font-size: 1rem;
-    }
-    .rectangle1
-     {
-      width: 12rem;
-      height: 10rem;
-    }
-    .rectangle2 {
-        top: -115px;
-      width: 12rem;
-      height: 11rem;
-    }
-    .diamond {
-      width: 9.5rem;
-      height: 9.5rem;
-    }
-  }
-  
-  /* Medium Screens (1240px and below) */
-  @media (max-width: 1024px) {
-    .container_intro{
-        width: 900px;
-        margin:0 7rem;
-        margin-bottom: 10px;
+}
 
-    }
-    .content-box {
-      width: 70%;
-    }
-    .content-box p {
-      font-size: 0.9rem;
-    }
-    .rectangle1
-     {
-      width: 10rem;
-      height: 10rem;
-    }
-    .rectangle2 {
-      width: 10rem;
-      height: 10rem;
-    }
-    .diamond {
-      width: 9rem;
-      height: 9rem;
-    }
-
-    /* Styles for 1024px and below */
-  }
-  @media (max-width: 768px) {
-    .container_intro{
-        width: 600px;
-        background-color: rgb(211, 250, 234);
-        margin:0 5rem;
-        margin-bottom: 10px;
-
-    height: auto;
-
-    }
-    .content-box {
-
-        padding: 10px;
-        margin-top: 10px;
-      width: 70%;
-    }
-    .content-box p {
-      font-size: 0.9rem;
-      color: black;
-      font-weight: 500;
-    }
-    .shapes-column{
-        display: none;
-    }
-    /* Styles for 768px and below */
-  }
-  @media (max-width: 640px) {
-    /* Styles for 640px and below */
-    .container_intro{
-        width: 500px;
-        background-color: rgb(211, 250, 234);
-        margin:0 3.5rem;
-        margin-bottom: 10px;
-        height: auto;
-    }
-    .content-box {
-
-        padding: 10px;
-        margin-top: 10px;
-      width: 70%;
-    }
-    .content-box p {
-      font-size: 0.85rem;
-      color: black;
-      font-weight: 500;
-    }
-    .shapes-column{
-        display: none;
-    }
-  }
-  
-  /* Phones (portrait) */
-  @media (max-width: 480px) {
-    .container_intro{
-        width: 400px;
-        background-color: rgb(211, 250, 234);
-        margin:0 2rem;
-        margin-bottom: 10px;
-        height: auto;
-
-    }
-    .content-box {
-
-        padding: 10px;
-        margin-top: 10px;
-      width: 70%;
-    }
-    .content-box p {
-      font-size: 0.8rem;
-      color: black;
-      font-weight: 500;
-    }
-    .shapes-column{
-        display: none;
-    }
-    /* Styles for 480px and below */
-  }
-  
-  /* Small phones */
-  @media (max-width: 360px) {
-    .container_intro{
-        width: 300px;
-        background-color: rgb(211, 250, 234);
-        margin:0 2rem;
-        margin-bottom: 10px;
-        height: 17rem;
-
-    }
-    .content-box {
-
-        padding: 10px;
-        margin-top: 10px;
-      width: 70%;
-    }
-    .content-box p {
-      font-size: 0.6rem;
-      color: black;
-      font-weight: 300;
-    }
-    .shapes-column{
-        display: none;
-    }
-    /* Styles for 360px and below */
-  }
-  
-  /* Extra small devices */
-  
+.sec_shapes-column{
+  width: 60rem;
+  height: 60rem;
+  position: relative;
+  top: 7em;
+  left: 4em;
+  scale: 1.1;
+}
