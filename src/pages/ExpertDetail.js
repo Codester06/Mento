@@ -15,7 +15,6 @@ function ExpertDetail() {
     <div className="expert-detail-container">
         <div className="ex-detail-container">
       <div className="expert-header">
-        <h1>{expert.name}</h1>
         <div className="expert-title">{expert.position}</div>
       </div>
       
@@ -23,6 +22,7 @@ function ExpertDetail() {
         <div className="expert-image-container">
           <img src={expert.imageSrc} alt={expert.name} className="expert-image" />
           <div className="expert-certifications">
+          <h1>{expert.name}</h1>
             <h3>Certifications</h3>
             <p>{expert.certifications}</p>
           </div>
