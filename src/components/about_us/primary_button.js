@@ -1,6 +1,6 @@
 import React from 'react';
 import './primary_button.css';
-import { Route, useNavigate} from 'react-router-dom';
+import {  useNavigate} from 'react-router-dom';
 const Primarybutton = () => {
     const items = [
       {
