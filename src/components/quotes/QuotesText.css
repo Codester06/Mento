@@ -1,107 +1,124 @@
 /* Container for all quote cards */
 .quote-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6rem;
-    justify-content: center;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 1rem;
-    background: linear-gradient(to bottom,#b9e5e8d8,#b9e5e8d8);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rem;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  background: linear-gradient(to bottom,#b9e5e8d8,#b9e5e8d8);
+}
+
+/* Base styling for each quote card with glassmorphic effect */
+.quote-card {
+  position: relative;
+  width: 416px;
+  height: 269px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgb(41, 33, 33);
+  box-sizing: border-box;
   
-  /* Base styling for each quote card */
+  /* Glassmorphic effect */
+  background: rgba(255, 255, 255, 0.2); /* Slightly transparent white */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.137);
+  
+  /* Ensure text readability */
+  color: rgb(20, 20, 20);
+}
+
+/* Color variations with glassmorphic overlay */
+.orange {
+  background: rgba(218, 156, 86, 0.3);
+}
+
+.yellow {
+  background: rgba(95, 195, 88, 0.3);
+}
+
+.teal {
+  background: rgba(109, 191, 211, 0.3);
+}
+
+/* Quote marks styling */
+.quote-marks {
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.opening {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.closing {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+/* Quote heading styling */
+.quote-heading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  position: relative;
+  color: rgb(30, 30, 30);
+}
+
+/* Special styling for the yellow card's heading with lines */
+.yellow .quote-heading {
+  padding: 0 15px;
+}
+
+.yellow .quote-heading::before,
+.yellow .quote-heading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.yellow .quote-heading::before {
+  left: 50%;
+  margin-left: -60px;
+}
+
+.yellow .quote-heading::after {
+  right: 50%;
+  margin-right: -60px;
+}
+
+/* Quote text styling */
+.quote-text {
+  font-family: 'Delius';
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+  text-align: justify;
+  line-height: 1.5;
+  margin: 0 0 20px;
+  text-align: left;
+  color: rgb(40, 40, 40);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .quote-card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-
-    position: relative;
-    width: 416px;
-    height: 269px;
-
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: rgb(41, 33, 33);
-    box-sizing: border-box;
+      width: 90%;
+      max-width: 416px;
+      margin: 1rem;
   }
-  
-  /* Color variations */
-  .orange {
-    background-color: #da9c56;
-  }
-  
-  .yellow {
-    background-color: #5fc358;
-  }
-  
-  .teal {
-    background-color: #6dbfd3;
-  }
-  
-  /* Quote marks styling */
-  .quote-marks {
-    font-size: 40px;
-    font-weight: bold;
-    line-height: 1;
-  }
-  
-  .opening {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-  }
-  
-  .closing {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-  }
-  
-  /* Quote heading styling */
-  .quote-heading {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 20px;
-    position: relative;
-  }
-  
-  /* Special styling for the yellow card's heading with lines */
-  .yellow .quote-heading {
-    padding: 0 15px;
-  }
-  
-  .yellow .quote-heading::before,
-  .yellow .quote-heading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40px;
-    height: 1px;
-    background-color: white;
-  }
-  
-  .yellow .quote-heading::before {
-    left: 50%;
-    margin-left: -60px;
-  }
-  
-  .yellow .quote-heading::after {
-    right: 50%;
-    margin-right: -60px;
-  }
-  
-  /* Quote text styling */
-  .quote-text {
-    font-family: 'Delius';
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: capitalize;
-    text-align: justify;
-    line-height: 1.5;
-    margin: 0 0 20px;
-    text-align: left;
-  }
-  
- 
+}

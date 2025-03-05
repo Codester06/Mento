@@ -100,19 +100,43 @@
   top: 7em;
   left: 17em;
 
+  background-image: url('/src/assets/images/e82af8bd-4aad-42fc-b393-ea6c3e66dd4c.jpeg');
+  
+ background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .sec_diamond-2{
   top: 4em;
   left: 5em;
+ 
+  background-image: url('/src/assets/images/d8c2d5cc-be92-43df-93c5-c97714d5bd68.jpeg');
+  
+  background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
 }
 .sec_diamond-3{
   top: 1em;
   left: 17em;
+ 
+  background-image: url('/src/assets/images/How\ Monolingual\ Teachers\ Can\ Support\ English\ Language\ Acquisition\ for\ Multilingual\ Learners\ -\ EdSurge\ News.jpeg');
+  
+  background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
 }
 .sec_diamond-4{ 
 
   top: -26em;
   left: 29em;
+
+  background-image: url('/src/assets/images/Premium\ Vector\ _\ Woman\ in\ love\ illustration\ concept.jpeg');
+  
+  background-size:cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   transform: rotate(45deg) scaleX(-1);
 
 }
 

@@ -1,0 +1,159 @@
+# Node.js dependencies  
+node_modules/  
+npm-debug.log*  
+yarn-debug.log*  
+yarn-error.log*  
+pnpm-debug.log*  
+package-lock.json  
+yarn.lock  
+pnpm-lock.yaml  
+# Node.js dependencies  
+node_modules/  
+npm-debug.log*  
+yarn-debug.log*  
+yarn-error.log*  
+pnpm-debug.log*  
+package-lock.json  
+yarn.lock  
+pnpm-lock.yaml  
+
+# Build files  
+dist/  
+build/  
+.env.local  
+.env.development.local  
+.env.test.local  
+.env.production.local 
+
+# Editor and system files  
+.DS_Store  
+.vscode/  
+.idea/  
+*.swp  
+*.swo  
+*.sublime-workspace  
+
+#Sensitive information
+.env 
+
+# Logs  
+logs  
+*.log  
+npm-debug.log*  
+yarn-debug.log*  
+yarn-error.log*  
+pnpm-debug.log*  
+lerna-debug.log*  
+.npm/  
+
+# Coverage reports  
+coverage/  
+*.lcov  
+
+# Next.js files  
+.next/  
+out/  
+
+# MacOS files  
+*.DS_Store  
+
+# Ignore public directory auto-generated files  
+public/static/  
+public/*.cache  
+
+# Testing files  
+jest/  
+cypress/videos/  
+cypress/screenshots/  
+
+# Storybook  
+.storybook-out/  
+storybook-static/  
+
+# Git-related  
+.git/  
+
+# Additional ignores  
+*.tmp  
+*.bak  
+*.orig  
+*.rej  
+*.iml  
+*.vs  
+*.suo  
+*.ntvs*  
+*.nws  
+*.user  
+*.userosscache  
+*.sln.docstates  
+
+# IDE-specific ignores  
+.vscode/settings.json  
+.idea/workspace.xml  
+.idea/tasks.xml  
+.vs/launch.json  
+
+# Operating system-specific ignores  
+Desktop.ini  
+ehthumbs.db  
+Thumbs.db  
+*.lnk  
+*.url  
+*.ini  
+
+# Version control system-specific ignores  
+.svn/  
+.hg/  
+.bzr/
+# Build files  
+dist/  
+build/  
+.env.local  
+.env.development.local  
+.env.test.local  
+.env.production.local  
+
+# Editor and system files  
+.DS_Store  
+.vscode/  
+.idea/  
+*.swp  
+*.swo  
+*.sublime-workspace  
+
+# Logs  
+logs  
+*.log  
+npm-debug.log*  
+yarn-debug.log*  
+yarn-error.log*  
+pnpm-debug.log*  
+lerna-debug.log*  
+.npm/  
+
+# Coverage reports  
+coverage/  
+*.lcov  
+
+# Next.js files  
+.next/  
+out/  
+
+# MacOS files  
+*.DS_Store  
+
+# Ignore public directory auto-generated files  
+public/static/  
+public/*.cache  
+
+# Testing files  
+jest/  
+cypress/videos/  
+cypress/screenshots/  
+
+# Storybook  
+.storybook-out/  
+storybook-static/  
+
+# Git-related  
+.git/

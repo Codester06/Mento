@@ -17,21 +17,6 @@ const BlogCard = ({
       <div className="article-content">
         <div className="article-image">
           <img src={image || "/api/placeholder/600/400"} alt={altText} />
-          {subtitle && (
-            <div className="article-image-title">
-              <h3>
-                {title.split(highlightedWord).map((part, index, array) => (
-                  <React.Fragment key={index}>
-                    {part}
-                    {index < array.length - 1 && (
-                      <span className="highlighted-text">{highlightedWord}</span>
-                    )}
-                  </React.Fragment>
-                ))}
-              </h3>
-              <h3>{subtitle}</h3>
-            </div>
-          )}
         </div>
         
         <div className="article-details">

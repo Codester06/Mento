@@ -8,10 +8,10 @@
     text-align: center;
     font-size: 3rem;
     text-shadow: 2px 2px 20px rgb(27, 25, 25) ;
-    text-shadow: #5f2626;
+    text-shadow: #8277cf;
     background-color:#cdffd7;
 
-    color: #ef0303; /* Text color for better contrast */
+    color:#0c0064; /* Text color for better contrast */
 }
 .border-up-1
 {
@@ -50,3 +50,4 @@
     border : solid black 2px;
 
 }
+

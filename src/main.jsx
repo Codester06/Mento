@@ -7,7 +7,7 @@ import MentalWellness from "./pages/mentalWellness";
 import Footer from "./components/Footer/footerSection";
 import NotFound from "./pages/404"; // Importing the 404 Page Component
 import About from "./pages/about";
-import ContactForm from "./pages/contact";
+// import ContactForm from "./pages/contact";
 import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
 
@@ -19,7 +19,7 @@ function Main() {
         <div className="main-content"> {/* Main content wrapper */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<ContactForm />} />
+            {/* <Route path="/contact" element={<ContactForm />} /> */}
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/about" element={< About/>} />
