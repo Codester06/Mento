@@ -1,37 +1,36 @@
 import React from 'react';
 import './number.css';
-import { Rocket, Calendar, Users, Briefcase } from 'lucide-react';
+import { Rocket, Calendar, Users } from 'lucide-react';
 
 const Number = () => {
   const statsData = [
     {
       icon: Rocket,
-      number: '6m+',
-      description: 'users who have changed their lives and worked on their mental health with the Amaha app'
+      number: '1200+',
+      description: 'Inspiring Journeys of Mental Health and Transformation with Mento',
+
     },
     {
       icon: Calendar,
-      number: '140k+',
-      description: 'sessions taken by our clients with our therapists and psychiatrists'
+      number: '450+',
+      description: 'One-on-One Sessions with Our Dedicated Therapists and Psychiatrists'
     },
     {
       icon: Users,
-      number: '50,000+',
-      description: 'members in the Amaha Community receiving peer support'
+      number: '1000+',
+      description: 'members in the mento Community receiving peer supportOne-on-One Sessions with Our Dedicated Therapists and Psychiatrists'
     },
-    {
-      icon: Briefcase,
-      number: '120+',
-      description: 'partnerships with leading organisations'
-    }
+   
   ];
 
-  return (
+  return (<>
+  <div className='number-bg'>
+
     <div className="stats-container">
-      <h1 className="stats-heading">We've made your mental health our priority</h1>
+      <h1 className="stats-heading">Supporting You, One Thought at a Time</h1>
       
       <p className="stats-subheading">
-        At Amaha, we have <span className="highlight">200+ experts</span> from different backgrounds - therapy, psychiatry, technology, and business - who are all committed to your care.
+        At Mento, we have <span className="highlight-number">50+ dedicated experts</span> from diverse fields—including therapy, psychiatry, technology, and business—united in their commitment to your well-being.
       </p>
       
       <div className="stats-grid">
@@ -47,6 +46,8 @@ const Number = () => {
         })}
       </div>
     </div>
+  </div>
+  </>
   );
 };
 
