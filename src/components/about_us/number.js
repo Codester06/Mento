@@ -1,6 +1,6 @@
 import React from 'react';
 import './number.css';
-import { Rocket, Calendar, Users, Briefcase } from 'lucide-react';
+import { Rocket, Calendar, Users } from 'lucide-react';
 
 const Number = () => {
   const statsData = [

@@ -1,0 +1,110 @@
+/* Global Styles */
+.mental-wellness-page {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #fff3d2 33%, #fff3d2 33%, #DDFFD8 66%, #DDFFD8 66%);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .wellness-banner {
+    background-color: #8dec8d;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 12px;
+  }
+  
+  /* Form Section */
+  .form-section {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+  }
+  
+  .form-container {
+   
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 32px;
+    width: 100%;
+    max-width: 50%;
+    text-align: center;
+    min-height: 400px;
+  }
+  
+  .form-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #1f2937;
+  }
+  
+  /* FAQ Section */
+  .faq-section {
+    max-width: 42rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px 48px;
+  }
+  
+  .faq-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .faq-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .faq-question:hover {
+    background-color: #f9fafb;
+  }
+  
+  .faq-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-icon.rotate {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    padding: 16px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+  }
+  
+  .faq-button-container {
+    text-align: center;
+    margin-top: 24px;
+  }
+  
+  .faq-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+  }
+  
+  .faq-button:hover {
+    background-color: #2563eb;
+  }
