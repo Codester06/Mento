@@ -149,7 +149,7 @@ const Carousel = () => {
   const duplicate_experts = [...experts, ...experts, ...experts, ...experts];
 
   return (
-    <div className="expert-carousel">
+    <div className="expert-carousel" id='experts'>
       <center>
         <h1 className="experts-title">Meet Our Experts</h1>
       </center>

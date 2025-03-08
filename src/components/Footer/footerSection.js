@@ -15,34 +15,31 @@ const Footer = () => {
           <div className="nav-section">
             <h3>Services</h3>
             <ul>
-              <li><a href="/counseling">Online Counseling</a></li>
-              <li><a href="/therapy">Therapy Sessions</a></li>
-              <li><a href="/workshops">Connect to us</a></li>
-              <li><a href="/gift">Gift a Therapy</a></li>
+              <li><a href="/counseling">Home</a></li>
+              <li><a href="/therapy">About us</a></li>
+              <li><a href="/contact">Connect to us</a></li>
+              <li><a href="/mental-wellness">Get a Therapy</a></li>
             </ul>
           </div>
           <div className="nav-section">
             <h3>Resources</h3>
             <ul>
-              <li><a href="/blog">Mental Health Blog</a></li>
-              <li><a href="/articles">Wellness Articles</a></li>
+              <li><a href="/blogs">Blogs</a></li>
               <li><a href="/tools">Self-Help Tools</a></li>
-              <li><a href="/faq">FAQs</a></li>
+              <li><a href="/faqs">FAQs</a></li>
             </ul>
           </div>
           <div className="nav-section">
             <h3>Contact Us</h3>
             <div className="contact-info">
-              <p>Email: contact@mento.com</p>
+              <p>contact@mento.com</p>
             </div>
           </div>
           <div className="nav-section">
-            <h3>About Us</h3>
+            <h3>Others</h3>
             <ul>
               <li><a href="/about">Our Story</a></li>
-              <li><a href="/team">Our Team</a></li>
-              <li><a href="/testimonials">Testimonials</a></li>
-              <li><a href="/careers">Careers</a></li>
+              <li><a href="#experts">Our Team</a></li>
             </ul>
           </div>
         </div>
@@ -52,8 +49,8 @@ const Footer = () => {
             Copyright © 2025 Mento. All rights reserved.
           </div>
           <div className="legal-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Use</a>
+            <a href="/Cookies-Privacy-Policy">Privacy Policy</a>
+            <a href="/terms-conditions">Terms & Conditions</a>
           </div>
         </div>
       </div>

@@ -1,26 +1,16 @@
 import React from "react";
 import './quotes.css';
 
-
 const Quotes = () => {
-    return(<>
-    <div className="border-up-1">
+    return (
+        <div className="quotes-wrapper">
+            <div className="border-up"></div>
+            <div className="container-quote">
+                <p>"Taking care of your mental health is an act of self-love."</p>
+            </div>
+            <div className="border-down"></div>
+        </div>
+    );
+};
 
-    </div>
-
-    <div className="border-up-2"></div>
-    <div className="container_quote">"Taking care of your mental health is an act of self-love."</div>
-    <div className="border-down-1">
-
-    </div>
-
-    <div className="border-down-2"></div>
-    </>
-    
-    
- 
-
-    )
-}
-
-export default Quotes;  
+export default Quotes;
