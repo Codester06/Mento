@@ -12,10 +12,6 @@ import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
 import TermsUsage from "./pages/terms-of-usage";
 import CookiesPolicy from "./pages/cookies-policy";
-<<<<<<< HEAD
-import ToolPage from "./pages/test";
-=======
->>>>>>> db7b726a0ceef9a32f6ca64782afcd3793c13cae
 
 import './index.css';
 import DepressionTest from "./components/assessment/depressionTest";

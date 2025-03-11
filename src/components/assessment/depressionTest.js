@@ -4,18 +4,19 @@ import styles from "./depressionTest.module.css";
 
 const DepressionTest = () => {
 
-   
-
+  
+  
+  
   const [showQues, setShowQues] = useState(true);
-    const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showResult, setShowResult] = useState(false);
-
+  
   const [gaugeValue, setGaugeValue] = useState(0);
   const [resultText, setResultText] = useState("");
- 
+  
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
-
+  
   useEffect(() => {
     const mockQuestions = [
       {
@@ -61,6 +62,7 @@ const DepressionTest = () => {
       {
         id: 6,
         text: "How often have you felt down, depressed, or hopeless?",
+      
         options: [
           { value: 0, text: "Not at all" },
           { value: 1, text: "Several days" },
@@ -98,10 +100,10 @@ const DepressionTest = () => {
     })
 );
 nextQuestion();
-  };
+  // };
 
-  const totalPages = questions.length;
-  const pageNumbersContainer = document.getElementById("pageNumbers");
+  // const totalPages = questions.length;
+  // const pageNumbersContainer = document.getElementById("pageNumbers");
    
 
   const nextQuestion = () => {
@@ -279,5 +281,6 @@ return (
     </>
   );
 };
+}
 
 export default DepressionTest;

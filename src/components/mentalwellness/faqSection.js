@@ -66,11 +66,7 @@ const FAQSectionWN = () => {
           />
         ))}
       </div>
-<<<<<<< HEAD
-      <Link to="/faqs">
-=======
       <Link to="/faq">
->>>>>>> db7b726a0ceef9a32f6ca64782afcd3793c13cae
         <button className="more-faq-btn">More FAQ</button>
       </Link>
     </div>
