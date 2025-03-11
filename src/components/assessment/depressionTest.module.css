@@ -1,0 +1,497 @@
+.questionContainer {
+  position: relative;
+  overflow: auto;
+  min-height: 300px;
+  width: 100%;
+  
+  height: 40rem;
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: height 0.1s ease;
+}
+
+.questionSlide {
+  position: relative;
+  width: 100%;
+  
+  transition: transform 0.9s ease;
+}
+/* MentalWellnessAssessment.module.css */
+
+.questions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100rem;
+  padding-right: 5rem;
+  height: 10rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.questions h3{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  
+}
+
+.questions p{
+  font-family: 'Delius', Times, serif;
+  font-size: 1.5rem;
+  padding-left: 3rem;
+}
+
+
+
+.options {
+  list-style-type: none;
+  font-family: 'Delius', sans-serif;
+}
+
+.optionLabel {
+  margin: 12px auto;
+  padding: 10px;
+  border-radius: 20px;
+  background: #99d6e6;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  width: 80%;
+  max-width: 600px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.optionLabel:hover,
+.optionLabel.selected {
+  background: #59ce7c;
+  color: white;
+  box-shadow: 0px 4px 10px rgba(3, 0, 0, 0.71);
+}
+
+.hidden {
+  display: none;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+ 
+}
+.pagination ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+ 
+}
+.pagination button {
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50px;
+  
+  color: #000008;
+}
+.pagination button:hover {
+  background-color: #99d6e6;
+}
+.pagination .active {
+  background-color:  #0e7a6e;
+  color: rgb(255, 255, 255);
+}
+.pagination .dots {
+  padding: 5px 10px;
+}   
+.title-1 {
+  font-family: "Nunito Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100, "YTLC" 500;
+  font-size: 35px;
+  padding-bottom: 15px;
+}
+
+
+
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #40a45e;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #218838;
+}
+
+button:active {
+  background-color: #1e7e34;
+}
+
+.result {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2b4431;
+  margin-top: 20px;
+}
+
+.scoreRange {
+  margin-top: 30px;
+  padding: 15px;
+  background: #99d6e6;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scoreRange h3 {
+  color: #000000;
+}
+
+.gauge {
+  width: 300px;
+  height: 150px;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+  background: conic-gradient(
+    from 180deg,
+    #22c55e 0deg 72deg,
+    #84cc16 72deg 144deg,
+    #facc15 144deg 216deg,
+    #f97316 216deg 288deg,
+    #ef4444 288deg 360deg
+  );
+  border-radius: 150px 150px 0 0;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background-color: white;
+  padding: 20px;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 auto;
+  width: 300px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.popupContent input[type="text"],
+.popupContent input[type="email"] {
+  display: block;
+  padding: 10px;
+  margin: 15px auto;
+  width: 80%;
+  border: 2px solid #007BFF;
+  border-radius: 20px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f0f8ff;
+  transition: all 0.3s ease;
+}
+
+.popupContent input[type="text"]:focus,
+.popupContent input[type="email"]:focus {
+  border-color: #28a745;
+  background-color: #e8f5e9;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+.gaugeCenter {
+  position: absolute;
+  width: 250px;
+  height: 125px;
+  background: white;
+  top: 12.5px;
+  left: 25px;
+  border-radius: 125px 125px 0 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gaugeNeedle {
+  position: absolute;
+  width: 6px;
+  height: 120px;
+  background: linear-gradient(to bottom, #1e293b, #334155);
+  bottom: 0;
+  left: 147px;
+  transform-origin: bottom center;
+  transform: rotate(-90deg);
+  transition: transform 3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: needleSwing 3s ease-out forwards;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.gaugeNeedle::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at center, #1e293b, #334155);
+  border-radius: 50%;
+  bottom: -10px;
+  left: -8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2.4rem;
+}
+
+.nav a {
+  color: #5c4c1f;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: white;
+}
+
+@keyframes needleSwing {
+  0% {
+    transform: rotate(-90deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(var(--final-angle, -90deg));
+  }
+}
+
+.gaugeValue {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000103;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.gaugeValue.show {
+  opacity: 1;
+}
+
+
+.slideLeftEnter {
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+.slideLeftEnterActive {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slideRightEnter {
+  transform: translateX(-100%);
+  opacity: 1;
+}
+
+.slideRightEnterActive {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slideLeftExitActive {
+  transform: translateX(-100%);
+  opacity: 1;
+}
+
+.slideRightExitActive {
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+.gaugeResult {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.resultText {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #2b4431;
+}
+
+.helpBtn {
+  background-color: #dc3545;
+  margin-top: 20px;
+}
+
+.helpBtn:hover {
+  background-color: #c82333;
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+  .optionLabel {
+    width: 80%;
+    font-size: medium;
+    position: relative;
+    right: 30px;
+    top: 1px;
+    bottom: 30px;
+    text-wrap: wrap;
+  }
+  
+  .question {
+    position: relative;
+    right: 30px;
+    bottom: 10px;
+    font-size: large;
+  }
+  
+  .container {
+    top: 50px;
+  }
+  
+  .questionContainer {
+    max-height: 400px;
+    width: 350px;
+    position: relative;
+    right: 10px;
+  }
+  
+  .buttons {
+    padding: 10px 12px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .optionLabel {
+    width: 70%;
+    text-wrap: wrap;
+    position: relative;
+    right: 35px;
+    top: 1px;
+    font-size: medium;
+  }
+  
+  .question {
+    position: relative;
+    right: 34px;
+  }
+  
+  .questionContainer {
+    size: 80%;
+  }
+  
+  .container {
+    top: 50px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .optionLabel {
+    width: 80%;
+    text-wrap: wrap;
+    position: relative;
+    right: 30px;
+  }
+  
+  .question {
+    position: relative;
+    right: 40px;
+  }
+  
+  .header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav {
+    gap: 1rem;
+  }
+  
+  .imgContainer {
+    margin-top: 2px;
+    height: 100px;
+    width: auto;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .optionLabel {
+    width: 80%;
+    text-wrap: wrap;
+    position: relative;
+    right: 30px;
+  }
+  
+  .question {
+    position: relative;
+    right: 40px;
+  }
+  
+  .questionContainer {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1020px) {
+  .imgContainer {
+    margin-top: 2px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .optionLabel {
+    width: 80%;
+    text-wrap: wrap;
+    position: relative;
+    right: 20px;
+  }
+  
+  .question {
+    position: relative;
+    right: 16px;
+  }
+}

@@ -11,9 +11,7 @@
   width: 100%;
 }
 
-.main-content {
-  flex: 1; /* Expands dynamically to push footer down */
-}
+
 
   
   .containerFooter {

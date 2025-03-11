@@ -10,7 +10,10 @@ import About from "./pages/about";
 import ContactForm from "./pages/contact";
 import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
+import ToolPage from "./pages/test";
 
+import './index.css';
+import DepressionTest from "./components/assessment/depressionTest";
 function Main() {
   return (
     <Router>
@@ -24,6 +27,8 @@ function Main() {
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/about" element={< About/>} />
             <Route path="/faq" element={<Faq/>} />
+            <Route path="/Self-Assessment-Tool" element={<ToolPage/>} />
+            <Route path="/DepressionTest" element={<DepressionTest />} />
             <Route path="/expert/:id" element={<ExpertDetail />} />
             <Route path="*" element={<NotFound />} /> {/* 404 Route */}
           </Routes>

@@ -16,9 +16,11 @@
 
 .contact-form-container { 
   background: linear-gradient(to bottom,#daf8f1,rgba(251, 242, 220, 0.444)); 
-  margin-top: 21rem; /* Adds space so it's not overlapping */ 
+   /* Adds space so it's not overlapping */ 
   justify-content: center; 
   width: 100%; 
+  border: solid black 1px;
+  z-index: 11;
 }
 
 /* Mobile-only fixes - keeps desktop view unchanged */
