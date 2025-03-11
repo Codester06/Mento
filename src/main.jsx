@@ -12,7 +12,10 @@ import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
 import TermsUsage from "./pages/terms-of-usage";
 import CookiesPolicy from "./pages/cookies-policy";
+<<<<<<< HEAD
 import ToolPage from "./pages/test";
+=======
+>>>>>>> db7b726a0ceef9a32f6ca64782afcd3793c13cae
 
 import './index.css';
 import DepressionTest from "./components/assessment/depressionTest";
@@ -28,7 +31,7 @@ function Main() {
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/about" element={< About/>} />
-            <Route path="/faq" element={<Faq/>} />
+            <Route path="/faqs" element={<Faq/>} />
             <Route path="/expert/:id" element={<ExpertDetail />} />
             <Route path="*" element={<NotFound />} /> {/* 404 Route */}
             <Route path="/terms-conditions" element={<TermsUsage/>}/>
