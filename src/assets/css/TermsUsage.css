@@ -1,0 +1,79 @@
+/* Apply the gradient background to the entire page */
+.terms-container {
+    font-family: "Arial", sans-serif;
+    background: linear-gradient(to bottom, #E4F8E8, #ffeaf3b1, #b9e5e883,rgba(251, 242, 220, 0.504));
+    color: #333;
+    padding: 40px 15%;
+    min-height: 100vh;
+  }
+  
+
+  .bannerTerms h1 {
+    font-size: 3rem;
+    color: #444;
+    margin: 0;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Content Styling */
+  .contentTerms {
+    background: rgba(255, 255, 255, 0.474);
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+  }
+  
+  .contentTerms h2 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #b9e5e8;
+    padding-bottom: 5px;
+  }
+  
+  /* Paragraph Styling */
+  .contentTerms p {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: justify;
+  }
+  
+  /* Links */
+  .contentTerms a {
+    color: #008cba;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .contentTerms a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .terms-container {
+      padding: 40px 8%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .terms-container {
+      padding: 30px 5%;
+    }
+  
+    .bannerTerms h1 {
+      font-size: 1.8rem;
+    }
+  
+    .contentTerms h2 {
+      font-size: 1.3rem;
+    }
+  
+    .contentTerms p {
+      font-size: 1rem;
+    }
+  }
+  

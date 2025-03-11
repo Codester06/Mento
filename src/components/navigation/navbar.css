@@ -71,9 +71,9 @@
 .navButtons {
   margin-left: 50px;
   display: flex;
-  z-index: 11;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
+  z-index: 11;
 }
 
 .navButtons a {
@@ -82,18 +82,48 @@
 
 .navButtons h1 {
   color: #85640B;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 50px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   border: 3px solid #85640B;
+  transition: all 0.4s ease-in-out; /* Slightly longer for a smooth effect */
+  background: linear-gradient(135deg, #fffbe6, #ffeb99);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  text-align: center;
+  background-size: 200% 200%; /* Needed for gradient animation */
 }
 
 .navButtons h1:hover {
-  background-color: #85640B;
-  color: #ffeaaf;
+  background: linear-gradient(135deg, #ffeb99, #c1fff65c);
+  color: #5a2e0e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-position: right center; /* Creates smooth color transition */
 }
+
+.navButtons h1:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);.navButtons h1 {
+    color: #85640B;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #85640B;
+    transition: all 0.4s ease-in-out; /* Slightly longer for a smooth effect */
+    background: linear-gradient(135deg, #fffbe6, #ffeb99);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
+    background-size: 200% 200%; /* Needed for gradient animation */
+  }
+
+}
+
 
 /* Hamburger Menu */
 .hamburger {

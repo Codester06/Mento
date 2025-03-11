@@ -95,7 +95,7 @@ const FAQSection = () => {
 
   return (
     <div className='faqMainContainer'>
-    <div className="container">
+    <div className="containerFAQ">
       <div className="faq-container">
         {faqData.map((item, index) => (
           <FAQItem 

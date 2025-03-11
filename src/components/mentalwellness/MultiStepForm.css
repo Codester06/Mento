@@ -1,0 +1,302 @@
+
+/* MultiStepForm.css */
+
+/* Main container styles */
+.multi-step-form-MN {
+    width: 1000px;
+    margin: 0 auto;
+    height: auto;
+       background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Sidebar styles */
+  .sidebar-MN {
+    width: 43%;
+    background-color: #1e40af; /* blue-600 */
+    padding: 32px;
+    position: relative;
+    color: white;
+  }
+  
+  .steps-container-MN {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Step indicator styles */
+  .step-indicator-MN {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .step-number-MN {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .step-indicator-MN.active .step-number-MN {
+    background-color: white;
+    color: #1e40af;
+    border-color: white;
+  }
+  
+  .step-text-MN {
+    margin-left: 12px;
+  }
+  
+  .step-subtitle-MN {
+    font-size: 12px;
+    color: rgba(219, 234, 254, 0.8); /* blue-100 */
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  .step-title-MN {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Decorative circles */
+  .decorative-circles-MN {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 192px;
+    overflow: hidden;
+  }
+  
+  .circle-1-MN {
+    position: absolute;
+    bottom: -64px;
+    left: -64px;
+    width: 192px;
+    height: 192px;
+    border-radius: 50%;
+    background-color: #fdba74; /* orange-300 */
+    opacity: 0.5;
+  }
+  
+  .circle-2-MN {
+    position: absolute;
+    bottom: -32px;
+    right: -32px;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    background-color: #ec4899; /* pink-400 */
+    opacity: 0.5;
+  }
+  
+  /* Form container styles */
+  .form-container-MN {
+    width: 67%;
+    padding: 32px;
+    background: linear-gradient(to bottom, #E4F8E8, #f8eee6bf, #E4F8E8);
+  }
+  
+  form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-content-MN {
+    flex-grow: 1;
+  }
+  
+  /* Form step transition */
+  .form-step-MN {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Form titles */
+  .form-title-MN {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1f2937; /* gray-800 */
+    margin-bottom: 8px;
+  }
+  
+  .form-subtitle-MN {
+    color: #6b7280; /* gray-500 */
+    margin-bottom: 32px;
+  }
+  
+  /* Form fields */
+  .form-field-MN {
+    margin-bottom: 24px;
+  }
+  
+  .form-field-MN label, .form-label-MN {
+    display: block;
+    color: #374151; /* gray-700 */
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .form-field-MN input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+  }
+  
+  .form-field-MN input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* ring-2 ring-blue-400 */
+    border-color: #60a5fa; /* blue-400 */
+  }
+  
+  /* Radio options */
+  .radio-group-MN {
+    display: grid;
+    gap: 12px;
+  }
+  
+  .radio-grid-MN {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .radio-option-MN {
+    padding: 16px;
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+  
+  .radio-option-MN.selected {
+    border-color: #3b82f6; /* blue-500 */
+    background-color: #eff6ff; /* blue-50 */
+  }
+  
+  .radio-circle-MN {
+    height: 20px;
+    width: 20px;
+    margin-right: 12px;
+    border-radius: 50%;
+    border: 1px solid #d1d5db; /* gray-300 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .radio-dot-MN {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: #2563eb; /* blue-600 */
+  }
+  
+  /* Summary box */
+  .summary-box-MN {
+    background-color: #f3f4f6; /* gray-100 */
+    padding: 24px;
+    border-radius: 8px;
+  }
+  
+  .summary-title-MN {
+    font-weight: bold;
+    font-size: 18px;
+    color: #1e3a8a; /* blue-900 */
+    margin-bottom: 16px;
+  }
+  
+  .summary-section-MN {
+    margin-bottom: 16px;
+  }
+  
+  .summary-section-MN p {
+    margin: 8px 0;
+  }
+  
+  .submit-text-MN {
+    margin-top: 24px;
+    padding: 0 24px;
+    text-align: center;
+    color: #6b7280; /* gray-500 */
+  }
+  
+  /* Form buttons */
+  .form-buttons-MN {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+  
+  .back-button-MN {
+    padding: 10px 20px;
+    color: #6b7280; /* gray-500 */
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .back-button-MN:hover {
+    color: #374151; /* gray-700 */
+  }
+  
+  .next-button-MN {
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #1e3a8a; /* blue-900 */
+    color: white;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .next-button-MN:hover {
+    background-color: #1e40af; /* blue-800 */
+  }
+  
+  .confirm-button-MN {
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .confirm-button-MN:hover {
+    background-color: #3b82f6; /* blue-500 */
+  }

@@ -1,14 +1,10 @@
-
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Full viewport height */
-}
+/* Footer Base Styles */
 .footer {
-  background: linear-gradient(to bottom, rgba(251, 242, 220, 0.444), #CFFAF3FA);
-  color: #000000;
-  padding: 20px 40px;
+  background: linear-gradient(to bottom, rgba(251, 242, 220, 0.504), #CFFAF3);
+  color: #333;
+  padding: 50px 5%;
   width: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
 

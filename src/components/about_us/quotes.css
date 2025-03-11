@@ -1,53 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rouge+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap');
 
-.container_quote {
-    font-family: 'Rouge Script', sans-serif;
-    text-transform: capitalize;
-    padding: 2rem ;
-    font-weight: 500;
+.quotes-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.container-quote {
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+    font-size: 36px;
     text-align: center;
-    font-size: 3rem;
-    text-shadow: 2px 2px 20px rgb(27, 25, 25) ;
-    text-shadow: #8277cf;
-    background-color:#cdffd7;
-
-    color:#0c0064; /* Text color for better contrast */
-}
-.border-up-1
-{
-    background-color:#cdffd7 ;
-    position: relative;
-    top: 1rem;
-    width: 49%;
-    left: 51%;
-    border : solid black 2px;
-    border-radius: 1rem;
-}
-.border-up-2{
-    background-color:#cdffd7 ;
-    position: relative;
-    
-    border-radius: 1rem;
-    border : solid black 2px;
-
+    padding: 30px 20px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    background: #cdffd7;
+    animation: fadeIn 1s ease-in-out;
+    width: 100%;
 }
 
-.border-down-1{
-    background-color:#cdffd7 ;
-    position: relative;
-    
-    border : solid black 2px;
-    border-radius: 1rem;
-
+.container-quote p {
+    font-family: "Great Vibes", cursive;
+    font-size: 48px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #26bfd3, #000000, #000c00, #26bfd3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
-.border-down-2{
-    position: relative;
-    border-radius: 1rem;
-    bottom: 1rem;
-    width: 49%;
-       background-color:#cdffd7 ;
-    border : solid black 2px;
-
+.border-up, .border-down {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #32a8a2, #000000, #000c00, #32a8a2);
+    animation: fadeIn 1s ease-in-out;
+    margin: 0;
 }
-

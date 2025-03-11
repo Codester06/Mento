@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../FAQ/FaqSection.css';
+import { Link } from 'react-router-dom';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,8 +55,8 @@ const FAQSectionWN = () => {
   ];
 
   return (
-    <div className='faqMainContainer'>
-    <div className="container">
+    <div className='faqMainContainerWN'>
+    <div className="containerFAQ">
       <div className="faq-container">
         {faqData.map((item, index) => (
           <FAQItem 
@@ -65,6 +66,9 @@ const FAQSectionWN = () => {
           />
         ))}
       </div>
+      <Link to="/faqs">
+        <button className="more-faq-btn">More FAQ</button>
+      </Link>
     </div>
     </div>
   );
