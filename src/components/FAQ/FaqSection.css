@@ -13,7 +13,6 @@
   .faqMainContainer{
     width: 100%;
     background: linear-gradient(to bottom,#fdefdaab,#cffaf3, #E4F8E8,rgba(251, 242, 220, 0.444));
-<<<<<<< HEAD
   }
   
   .faqMainContainerWN{
@@ -21,9 +20,6 @@
     background: linear-gradient(to bottom,#cffaf3c0, #E4F8E8,rgba(251, 242, 220, 0.444));
   }
 
-
-=======
-  }
   
   .faqMainContainerWN{
     width: 100%;
@@ -35,7 +31,6 @@
     text-align: center;
     margin-bottom: 20px;
   }
->>>>>>> 2900f4684310acd85c7e4ccd8b21c9759b6cd5ec
   .faq-container {
 
     border-radius: 8px;

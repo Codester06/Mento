@@ -12,10 +12,7 @@ import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
 import TermsUsage from "./pages/terms-of-usage";
 import CookiesPolicy from "./pages/cookies-policy";
-<<<<<<< HEAD
-=======
 import ToolPage from "./pages/test";
->>>>>>> 2900f4684310acd85c7e4ccd8b21c9759b6cd5ec
 
 import './index.css';
 import DepressionTest from "./components/assessment/depressionTest";
@@ -36,6 +33,7 @@ function Main() {
             <Route path="*" element={<NotFound />} /> {/* 404 Route */}
             <Route path="/terms-conditions" element={<TermsUsage/>}/>
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy/>}/>
+            <Route path="/Self-Assessment-Tool" element={<ToolPage/>}/>
 
           </Routes>
         </div>
