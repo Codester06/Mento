@@ -1,7 +1,15 @@
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
 
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  overflow-y: scroll; /* Ensures scrolling is still possible */
+}
 
-.container_intro {
-    padding: 1.5rem;
+.containerintro {
+  padding: 1.5rem;
 
    
     background:linear-gradient(to bottom ,#e9f6e6,#cdffd7); 
@@ -86,25 +94,29 @@
   
 .rec-upper-left,.rec-bottom-right{
 
-width: 25rem;
+width: 26rem;
 height: 17rem;
 border-radius: 1rem;
+z-index: 11;
+
 position: relative;
 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
 }
-.square-bottom-left,.square-upper-right{
-  width: 22rem;
-  height: 13rem;
+.squarebottomleft,.squareupperright{
+width: 19rem;
+height: 11rem;
 border-radius: 1rem;
+z-index: 11;
+
 position: relative;
 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 
 
 }
 .rec-upper-left{
-  top: -12em;
-  left: 32em;
+  top: -6em;
+  left: 36em;
   z-index: 11;
   background-image: url('/src/assets/images/image3.jpg');
   background-color: #f7ccd4;
@@ -113,13 +125,13 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 
   background-position: center;
   
 
-  
+
 }
 
 
 .square-upper-right{
-  top: -14em;
-  left: 32em;
+  top: -7em;
+  left: 36em;
   z-index: 11;
   background-color: white;
     background-image: url('/src/assets/images/Happy_girl_sitting_and_meditating_among_flowers-removebg-preview.png');
@@ -131,91 +143,25 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 
 
 }
 .rec-bottom-right{
-  top: 0em;
-  left: 5em;
+  top: 6em;
+  left: 9em;
 
-  background-image: url('/src/assets/images/image\ 2.jpg');
-  
- background-size:contain;
- background-position: center;
+background-image: url('/src/assets/images/image\ 2.jpg');
 
-  background-repeat: no-repeat;
-  
-  
+background-size:contain;
+background-position: center;
+
+background-repeat: no-repeat;
+
+
 }
 
 .square-bottom-left{
-  top: -28em;
-    left: 8em;
+  top: -23em;
+  left: 13em;
   background-image: url('/src/assets/images/image1.avif');
   
  background-size:cover;
   background-repeat: no-repeat;
   background-position: center;
-}
-@media (max-width: 350px) {
-  .container_intro {
-      width: 100%;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      padding: 0.5rem;
-      overflow-x: hidden;
-  }
-
-  .layout {
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .overlay-intro {
-      display: none;
-  }
-
-  .content-box {
-      width: 100%;
-      max-width: 100%;
-      padding: 0.5rem;
-      margin-top: 1rem;
-      text-align: center;
-  }
-
-  .content-box h1 {
-      font-size: 1.2rem;
-      position: static;
-      left: 0;
-      text-align: center;
-      margin-bottom: 0.5rem;
-  }
-
-  .content-box p {
-      font-size: 0.9rem;
-      position: static;
-      left: 0;
-      width: 100%;
-      padding: 0.5rem;
-      line-height: 1.4;
-  }
-
-  .shapes-column {
-      width: 100%;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-
- 
-  .rec-upper-left,
-  .rec-bottom-right,
-  .square-bottom-left,
-  .square-upper-right {
-      width: 90%;
-      max-width: 250px;
-      height: auto;
-      margin: 0.5rem 0;
-      position: static;
-      left: 0;
-      top: 0;
-  }
 }
