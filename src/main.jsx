@@ -12,6 +12,7 @@ import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
 import TermsUsage from "./pages/terms-of-usage";
 import CookiesPolicy from "./pages/cookies-policy";
+import Test from "./components/test/demo";
 
 function Main() {
   return (
@@ -30,6 +31,7 @@ function Main() {
             <Route path="*" element={<NotFound />} /> {/* 404 Route */}
             <Route path="/terms-conditions" element={<TermsUsage/>}/>
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy/>}/>
+            <Route path="/test" element={<Test/>}/>
 
           </Routes>
         </div>
