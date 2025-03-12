@@ -34,13 +34,13 @@ const Navbar = () => {
       </div>
 
       <div className="navButtons">
-        <Link to="/assessment" onClick={() => setIsOpen(false)}>
+        <Link to="/Self-Assessment-Tool" onClick={() => setIsOpen(false)}>
           <h1>Take a Free Assessment</h1>
         </Link>
       </div>
 
       <div className="navButtons Phone">
-        <Link to="/assessment" onClick={() => setIsOpen(false)}>
+        <Link to="/Self-Assessment-Tool" onClick={() => setIsOpen(false)}>
           <h1>Take Assessment</h1>
         </Link>
       </div>

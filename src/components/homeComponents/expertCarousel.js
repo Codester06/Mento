@@ -53,8 +53,8 @@ const Carousel = () => {
       position: "Counselor",
       imageSrc:
         "https://mento.in/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-10-at-21.44.20_21d439d0.jpg",
-      certifications:
-        "                                                                           ",
+      // certifications:
+      //   "                                                                           ",
       expertise:
         "Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
       experience: "3-6 Years",

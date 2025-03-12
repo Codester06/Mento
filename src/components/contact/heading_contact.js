@@ -8,8 +8,8 @@ const ContactSection = () => {
         <div className='above-container-cu'>\
             
         </div>
-      <div className="header">
-        <h2 className="title">Have a question? <span className="highlight">Talk to us.</span></h2>
+      <div className="header-con">
+        <h2 className="title-con">Have a question? <span className="highlight">Talk to us.</span></h2>
       </div>
       
       <div className="contact-grid">

@@ -8,26 +8,26 @@ const IndividualForm = () => {
 
   // Form refs
   const formRefs = {
-    name: useRef(''),
-    email: useRef(''),
-    city: useRef(''),
-    contactNo: useRef(''),
-    guardianContactNo: useRef(''),
-    profession: useRef(''),
-    age: useRef(''),
-    supportReason: useRef(''),
-    otherSupportReason: useRef(''),
-    feelingsReason: useRef(''),
-    previousConsultation: useRef(''),
-    preferredLanguage: useRef(''),
-    otherLanguage: useRef(''),
-    sessionDate: useRef(''),
-    sessionTime: useRef(''),
-    counselorGenderPreference: useRef(''),
-    medicalConditions: useRef(''),
-    referralSource: useRef(''),
-    paymentMethod: useRef('')
-  };
+  name: useRef(''),
+  email: useRef(''),
+  city: useRef(''),
+  contactNo: useRef(''),
+  guardianContactNo: useRef(''),
+  profession: useRef(''),
+  age: useRef(''),
+  supportReason: useRef(''),
+  otherSupportReason: useRef(''),
+  feelingsReason: useRef(''),
+  previousConsultation: useRef(''),
+  preferredLanguage: useRef(''),
+  otherLanguage: useRef(''),
+  sessionDate: useRef(''),
+  sessionTime: useRef(''),
+  counselorGenderPreference: useRef(''),
+  medicalConditions: useRef(''),
+  referralSource: useRef(''),
+  paymentMethod: useRef('')
+};
 
   // State to manage form display
   const [formData, setFormData] = useState({
@@ -95,7 +95,7 @@ const IndividualForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // Update the ref value
+    // Update the ref value correctly
     if (formRefs[name]) {
       formRefs[name].current = value;
     }
@@ -246,13 +246,12 @@ const IndividualForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep()) {
-      // Extract all data from refs
+      // Extract all data from refs correctly
       const formRefData = Object.keys(formRefs).reduce((acc, key) => {
         acc[key] = formRefs[key].current;
         return acc;
       }, {});
       
-      // Log the form data to the console
       console.log("Form data submitted:", formRefData);
       
       // Show success alert
@@ -296,9 +295,9 @@ const IndividualForm = () => {
                 <input
                   type="text"
                   name="name"
-                  value={formData.name}
+                  defaultValue={formData.name}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.name.current = e.target.value; }}
+                  ref={formRefs.name}
                   placeholder="e.g. John Smith"
                   className={errors.name ? 'error-input' : ''}
                 />
@@ -310,9 +309,9 @@ const IndividualForm = () => {
                 <input
                   type="email"
                   name="email"
-                  value={formData.email}
+                  defaultValue={formData.email}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.email.current = e.target.value; }}
+                  ref={formRefs.email}
                   placeholder="e.g. johnsmith@example.com"
                   className={errors.email ? 'error-input' : ''}
                 />
@@ -326,9 +325,9 @@ const IndividualForm = () => {
                 <input
                   type="text"
                   name="city"
-                  value={formData.city}
+                  defaultValue={formData.city}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.city.current = e.target.value; }}
+                  ref={formRefs.city}
                   placeholder="e.g. Bangalore"
                   className={errors.city ? 'error-input' : ''}
                 />
@@ -340,9 +339,9 @@ const IndividualForm = () => {
                 <input
                   type="number"
                   name="age"
-                  value={formData.age}
+                  defaultValue={formData.age}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.age.current = e.target.value; }}
+                  ref={formRefs.age}
                   placeholder="e.g. 30"
                   min="1"
                   max="120"
@@ -358,9 +357,9 @@ const IndividualForm = () => {
                 <input
                   type="tel"
                   name="contactNo"
-                  value={formData.contactNo}
+                  defaultValue={formData.contactNo}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.contactNo.current = e.target.value; }}
+                  ref={formRefs.contactNo}
                   placeholder="e.g. +91 9876543210"
                   className={errors.contactNo ? 'error-input' : ''}
                 />
@@ -372,9 +371,9 @@ const IndividualForm = () => {
                 <input
                   type="tel"
                   name="guardianContactNo"
-                  value={formData.guardianContactNo}
+                  defaultValue={formData.guardianContactNo}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.guardianContactNo.current = e.target.value; }}
+                  ref={formRefs.guardianContactNo}
                   placeholder="e.g. +91 9876543210"
                   className={errors.contactNo ? 'error-input' : ''}
                 />
@@ -385,9 +384,9 @@ const IndividualForm = () => {
               <label>Profession <span className="required-field">*</span></label>
               <select
                 name="profession"
-                value={formData.profession}
+                defaultValue={formData.profession}
                 onChange={handleDropdownChange}
-                onBlur={(e) => { formRefs.profession.current = e.target.value; }}
+                ref={formRefs.profession}
                 className={errors.profession ? 'error-input' : ''}
               >
                 <option value="" disabled>Select your profession</option>
@@ -419,10 +418,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN ${formData.supportReason === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('supportReason', option);
-                      formRefs.supportReason.current = option;
-                    }}
+                    onClick={() => handleRadioChange('supportReason', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.supportReason === option && <div className="radio-dot-MN"></div>}
@@ -439,11 +435,11 @@ const IndividualForm = () => {
                 <label>Please specify your reason <span className="required-field">*</span></label>
                 <textarea
                   name="otherSupportReason"
-                  value={formData.otherSupportReason}
+                  defaultValue={formData.otherSupportReason}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.otherSupportReason.current = e.target.value; }}
+                  ref={formRefs.otherSupportReason}
                   placeholder="Please describe your reason for seeking support..."
-                  rows="4"
+                  rows="2"
                   className={errors.otherSupportReason ? 'error-input' : ''}
                 ></textarea>
                 {renderError('otherSupportReason')}
@@ -461,9 +457,9 @@ const IndividualForm = () => {
               <label>What is the reason behind your feelings (if identified)? <span className="required-field">*</span></label>
               <select
                 name="feelingsReason"
-                value={formData.feelingsReason}
+                defaultValue={formData.feelingsReason}
                 onChange={handleDropdownChange}
-                onBlur={(e) => { formRefs.feelingsReason.current = e.target.value; }}
+                ref={formRefs.feelingsReason}
                 className={errors.feelingsReason ? 'error-input' : ''}
               >
                 <option value="" disabled>Select a reason</option>
@@ -481,10 +477,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN ${formData.previousConsultation === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('previousConsultation', option);
-                      formRefs.previousConsultation.current = option;
-                    }}
+                    onClick={() => handleRadioChange('previousConsultation', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.previousConsultation === option && <div className="radio-dot-MN"></div>}
@@ -509,10 +502,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN ${formData.preferredLanguage === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('preferredLanguage', option);
-                      formRefs.preferredLanguage.current = option;
-                    }}
+                    onClick={() => handleRadioChange('preferredLanguage', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.preferredLanguage === option && <div className="radio-dot-MN"></div>}
@@ -530,9 +520,9 @@ const IndividualForm = () => {
                 <input
                   type="text"
                   name="otherLanguage"
-                  value={formData.otherLanguage}
+                  defaultValue={formData.otherLanguage}
                   onChange={handleChange}
-                  onBlur={(e) => { formRefs.otherLanguage.current = e.target.value; }}
+                  ref={formRefs.otherLanguage}
                   placeholder="e.g. Punjabi"
                   className={errors.otherLanguage ? 'error-input' : ''}
                 />
@@ -552,9 +542,9 @@ const IndividualForm = () => {
               <input
                 type="date"
                 name="sessionDate"
-                value={formData.sessionDate}
+                defaultValue={formData.sessionDate}
                 onChange={handleChange}
-                onBlur={(e) => { formRefs.sessionDate.current = e.target.value; }}
+                ref={formRefs.sessionDate}
                 className={errors.sessionDate ? 'error-input' : ''}
               />
               {renderError('sessionDate')}
@@ -573,10 +563,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN ${formData.sessionTime === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('sessionTime', option);
-                      formRefs.sessionTime.current = option;
-                    }}
+                    onClick={() => handleRadioChange('sessionTime', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.sessionTime === option && <div className="radio-dot-MN"></div>}
@@ -602,10 +589,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN OneLineOptions ${formData.counselorGenderPreference === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('counselorGenderPreference', option);
-                      formRefs.counselorGenderPreference.current = option;
-                    }}
+                    onClick={() => handleRadioChange('counselorGenderPreference', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.counselorGenderPreference === option && <div className="radio-dot-MN"></div>}
@@ -624,10 +608,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN ${formData.medicalConditions === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('medicalConditions', option);
-                      formRefs.medicalConditions.current = option;
-                    }}
+                    onClick={() => handleRadioChange('medicalConditions', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.medicalConditions === option && <div className="radio-dot-MN"></div>}
@@ -643,9 +624,9 @@ const IndividualForm = () => {
               <label>How did you hear about our platform? <span className="required-field">*</span></label>
               <select
                 name="referralSource"
-                value={formData.referralSource}
+                defaultValue={formData.referralSource}
                 onChange={handleDropdownChange}
-                onBlur={(e) => { formRefs.referralSource.current = e.target.value; }}
+                ref={formRefs.referralSource}
                 className={errors.referralSource ? 'error-input' : ''}
               >
                 <option value="" disabled>Select an option</option>
@@ -670,10 +651,7 @@ const IndividualForm = () => {
                   <div 
                     key={option}
                     className={`radio-option-MN ${formData.paymentMethod === option ? 'selected' : ''}`}
-                    onClick={() => {
-                      handleRadioChange('paymentMethod', option);
-                      formRefs.paymentMethod.current = option;
-                    }}
+                    onClick={() => handleRadioChange('paymentMethod', option)}
                   >
                     <div className="radio-circle-MN">
                       {formData.paymentMethod === option && <div className="radio-dot-MN"></div>}

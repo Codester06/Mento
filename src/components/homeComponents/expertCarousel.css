@@ -40,9 +40,7 @@
 }
 
 .slide {
- 
-  
-  
+
   flex: 0 0 calc(100% / 6);
   padding: 20px;
   transition: all 0.3s ease;
@@ -50,9 +48,6 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
- 
- 
 }
 
 .card {
@@ -102,7 +97,7 @@
 }
 
 .card-title {
-  font-family: 'Roboto Flex', Times, serif;
+  font-family: 'Nunito', serif;
   font-weight: 500;
   
   margin: 0 0 5px;
@@ -120,9 +115,8 @@
 .card-certifications,
 .card-expertise,
 .card-experience {
- font-family: 'Delius';
- font-size: 12px;
-
+ font-family: 'Nunito';
+ font-size: 16px;
  
   margin: 10px 0;
 }
@@ -130,9 +124,10 @@
 .card-certifications span,
 .card-expertise span,
 .card-experience span {
-  font-weight: 500;
-  font-family: 'Roboto Flex', Times, serif;
-  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Nunito',serif;
+  font-size: 18px;
+
 }
 @keyframes scroll {
   0% {

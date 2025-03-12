@@ -5,13 +5,20 @@
     position: relative; /* Add this */
 }
 
-.header {
+.header-con {
     text-align: center;
     margin-bottom: 32px;
     position: relative; /* Changed from absolute */
     z-index: 2;
-    padding: 0 15px;
+    padding: 0 10px;
     width: 100%;
+    padding-bottom: 1.5rem;
+}
+
+.title-con {
+    font-size: 26px;
+    font-weight: 500;
+    color: #101113;
 }
 
 /* Desktop positioning */

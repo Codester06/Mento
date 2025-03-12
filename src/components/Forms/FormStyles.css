@@ -1,7 +1,7 @@
 /* Mental Wellness Form CSS */
 .multi-step-form-MN {
     display: flex;
-    height: 800px;
+    height: 815px;
     width: 70%;
     margin: 2rem auto;
     background-color: white;
@@ -14,11 +14,11 @@
   /* Sidebar styling */
   .sidebar-MN {
     width: 320px;
-    color: white;
     padding: 2rem 0;
     position: relative;
     overflow: hidden;
     border-radius: 50px;
+    background: linear-gradient(55deg, #fffbe6, #ffeb99c3,#E4F8E8);
   }
   
   .steps-container-MN {
@@ -373,7 +373,7 @@
   .check-icon-MN {
     width: 70px;
     height: 70px;
-    background-color: #4caf50;
+    background-color: #03a108;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -613,4 +613,594 @@ input:focus, select:focus, textarea:focus {
 /* Fix for Step 8 title */
 .step-indicator-MN:nth-child(8) .step-title-MN {
   content: "CONFIRMATION";
+}
+
+
+
+.steps-container-MN {
+  position: relative;
+  z-index: 2;
+  padding: 0 1.5rem;
+}
+
+.step-indicator-MN {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.step-indicator-MN.active {
+  opacity: 1;
+}
+
+.oneLineDetail{
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+.fieldWidthHear{
+  width: 50%;
+}
+
+.fieldWidthPro{
+  width: 35%;
+}
+
+.fieldWidthNo{
+  width: 35%;
+}
+
+.fieldWidthEmail{
+  width: 50%;
+}
+.fieldWidthCity{
+  width: 35%;
+}
+
+.fieldWidthAge{
+  width: 25%;
+}
+.fieldWidthName{
+  width: 35%;
+}
+.step-number-MN {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #edb94d;
+  margin-right: 1rem;
+  font-weight: 600;
+}
+
+.step-indicator-MN.active .step-number-MN {
+  background-color: #edb94d;
+  color: #333;
+  border: none;
+}
+
+.step-text-MN {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-subtitle-MN {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.step-title-MN {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Decorative circles */
+.decorative-circles-MN {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.circle-1-MN, .circle-2-MN {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.circle-1-MN {
+  width: 300px;
+  height: 300px;
+  background-color: #ffd980;
+  bottom: -150px;
+  left: -100px;
+}
+
+.circle-2-MN {
+  width: 200px;
+  height: 200px;
+  background-color: #c9e8cc;
+  bottom: -50px;
+  right: -70px;
+}
+
+/* Form container styling */
+.form-container-MN {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-content-MN {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.form-title-MN {
+  color: #edb94d;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle-MN {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* Form fields styling */
+.form-field-MN {
+  margin-bottom: 1.5rem;
+}
+
+.form-field-MN label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.form-field-MN input, 
+.form-field-MN select, 
+.form-field-MN textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-field-MN input:focus, 
+.form-field-MN select:focus, 
+.form-field-MN textarea:focus {
+  outline: none;
+  border-color: #edb94d;
+  box-shadow: 0 0 0 3px rgba(237, 185, 77, 0.2);
+}
+
+.form-field-MN input::placeholder, 
+.form-field-MN textarea::placeholder {
+  color: #9ca3af;
+}
+
+.form-label-MN {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+/* Radio group styling */
+.radio-group-MN, .radio-grid-MN {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radio-grid-MN {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.radio-option-MN {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-option-MN:hover {
+  border-color: #edb94d;
+}
+
+.radio-option-MN.selected {
+  border-color: #edb94d;
+  background-color: rgba(237, 185, 77, 0.1);
+}
+
+.radio-circle-MN {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+.radio-option-MN.selected .radio-circle-MN {
+  border-color: #edb94d;
+}
+
+.radio-dot-MN {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #edb94d;
+}
+
+/* Button styling */
+.form-buttons-MN {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .1rem;
+  padding-top: .7rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.back-button-MN, 
+.next-button-MN, 
+.confirm-button-MN,
+.dashboard-button-MN {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button-MN {
+  background-color: transparent;
+  color: #6b7280;
+  border: none;
+}
+
+.back-button-MN:hover {
+  color: #4b5563;
+}
+
+.next-button-MN {
+  background: linear-gradient(to right, #ffd980, #c9e8cc);
+  color: #333;
+  border: none;
+  margin-left: auto;
+}
+
+.next-button-MN:hover {
+  background: linear-gradient(to right, #edb94d, #b3dbb7);
+}
+
+.confirm-button-MN, .dashboard-button-MN {
+  background: linear-gradient(to right, #ffd980, #c9e8cc);
+  color: #333;
+  border: none;
+  margin-left: auto;
+  margin-top: 0;
+}
+
+.confirm-button-MN:hover, .dashboard-button-MN:hover {
+  background: linear-gradient(to right, #edb94d, #b3dbb7);
+}
+
+/* Summary and pricing styling */
+.summary-box-MN, .pricing-info-MN {
+  background-color: rgba(255, 217, 128, 0.15);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-title-MN {
+  color: #edb94d;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.summary-section-MN {
+  margin-bottom: 1.5rem;
+}
+
+.summary-section-MN:last-child {
+  margin-bottom: 0;
+}
+
+.summary-section-MN p {
+  margin: 0.5rem 0;
+}
+
+.fee-MN {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #edb94d;
+  margin: 0.5rem 0;
+}
+
+.fee-description-MN {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.note-MN {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Thank you page styling */
+.thank-you-MN {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.check-icon-MN {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #ffd980, #c9e8cc);
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+}
+
+.confirmation-details-MN {
+  background-color: rgba(255, 217, 128, 0.15);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.next-steps-MN {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.next-steps-MN h3 {
+  color: #edb94d;
+  margin-bottom: 1rem;
+}
+
+.next-steps-MN ul {
+  padding-left: 1.5rem;
+}
+
+.next-steps-MN li {
+  margin-bottom: 0.5rem;
+}
+
+.contact-info-MN {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .multi-step-form-MN {
+    flex-direction: column;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  
+  .sidebar-MN {
+    width: 100%;
+    padding: 1.5rem 0;
+  }
+  
+  .steps-container-MN {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 1rem;
+  }
+  
+  .step-indicator-MN {
+    flex-direction: column;
+    margin-right: 1.5rem;
+    margin-bottom: 0;
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .step-number-MN {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .circle-1-MN {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+    left: -50px;
+  }
+  
+  .circle-2-MN {
+    width: 150px;
+    height: 150px;
+    bottom: -50px;
+    right: -50px;
+  }
+  
+  .form-container-MN {
+    padding: 1.5rem;
+  }
+  
+  .radio-grid-MN {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation for step transitions */
+.form-step-MN {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form validation styling */
+.error-message-MN {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+input.error-MN, 
+select.error-MN, 
+textarea.error-MN {
+  border-color: #ef4444;
+}
+
+input.error-MN:focus, 
+select.error-MN:focus, 
+textarea.error-MN:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Calendar styling enhancements */
+input[type="date"] {
+  cursor: pointer;
+}
+
+/* Tooltip styling */
+.tooltip-MN {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+  cursor: help;
+}
+
+.tooltip-icon-MN {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffd980;
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.tooltip-text-MN {
+  visibility: hidden;
+  width: 200px;
+  background-color: #374151;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+.tooltip-text-MN::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #374151 transparent transparent transparent;
+}
+
+.tooltip-MN:hover .tooltip-text-MN {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Progress bar for the form */
+.progress-bar-MN {
+  height: 5px;
+  background-color: #e5e7eb;
+  border-radius: 2.5px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.progress-MN {
+  height: 100%;
+  background: linear-gradient(to right, #ffd980, #c9e8cc);
+  transition: width 0.3s ease;
+}
+
+
+
+/* Error styling */
+.error-message-MN {
+color: #e53935;
+font-size: 0.8rem;
+margin-top: 4px;
+margin-bottom: 0;
+}
+
+.error-input {
+border: 1px solid #e53935 !important;
+background-color: rgba(229, 57, 53, 0.05) !important;
+}
+
+.error-border {
+border: 1px solid #e53935 !important;
+border-radius: 8px;
+padding: 5px;
+}
+
+/* Improved focus styles for form elements */
+input:focus, select:focus, textarea:focus {
+outline: none;
+border-color: #edb94d !important;
+box-shadow: 0 0 0 2px rgba(237, 185, 77, 0.2);
+}
+
+/* Fix for Step 8 title */
+.step-indicator-MN:nth-child(8) .step-title-MN {
+content: "CONFIRMATION";
 }

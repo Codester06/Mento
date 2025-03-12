@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navigation/navbar";
 
 import Blogs from "./pages/blog";
@@ -12,11 +12,13 @@ import Faq from "./pages/faq";
 import ExpertDetail from "./pages/ExpertDetail";
 import TermsUsage from "./pages/terms-of-usage";
 import CookiesPolicy from "./pages/cookies-policy";
-import Test from "./components/test/demo";
+import AssessmentPage from "./pages/tool";
+import './index.css';
+import Test from "./pages/test";
 
 function Main() {
   return (
-    <Router>
+    <BrowserRouter>
       <div id="root">
         <Navbar />
         <div className="main-content"> {/* Main content wrapper */}
@@ -31,13 +33,13 @@ function Main() {
             <Route path="*" element={<NotFound />} /> {/* 404 Route */}
             <Route path="/terms-conditions" element={<TermsUsage/>}/>
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy/>}/>
-            <Route path="/test" element={<Test/>}/>
-
-          </Routes>
+            <Route path="/Self-Assessment-Tool" element={<AssessmentPage/>}/>
+            <Route path="/Depression-Tool" element={<Test/>}/>
+            </Routes>
         </div>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

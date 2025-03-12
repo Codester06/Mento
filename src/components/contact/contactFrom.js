@@ -2,36 +2,8 @@ import { useRef,useState } from "react";
 import "./contactFrom.css";
 import { database } from "../../utils/firebaseConfig";
 import { ref, push } from "firebase/database";
-// import Contact from "../../models/contactSch";
-// import ConnectDB from "../../utils/connectDB";
 
 const ContactForm = () => {
-  // const formRef = useRef();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const formData = {
-  //     fullName: formRef.current.fullName.value,
-  //     email: formRef.current.email.value,
-  //     subject: formRef.current.subject.value,
-  //     message: formRef.current.message.value,
-  //   };
-
-  //   try {
-  //     await ConnectDB(); // Connect to MongoDB
-  //     await Contact.create(formData); // Save data
-
-  //     console.log("✅ Form submitted:", formData);
-  //     alert("Message sent successfully!");
-
-  //     // Reset form fields
-  //     formRef.current.reset();
-  //   } catch (error) {
-  //     console.error("❌ Error saving data:", error);
-  //     alert("Failed to save message!");
-  //   }
-  // };
 
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
