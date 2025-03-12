@@ -62,7 +62,7 @@ const ToolBanner = () => {
             <div className={styles.chipName}>{chip.Name}</div>
             
             <p className={styles.chipDescription}>{chip.description}</p>
-            <button className={styles.shopButton} onClick={() => navigate('/DepressionTest')} >Give Test</button>
+            <button className={styles.shopButton} onClick={() => navigate('/Depression-Tool')} >Give Test</button>
           </div>
         </div>
 
