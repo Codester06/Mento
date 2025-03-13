@@ -7,7 +7,6 @@
   flex-direction: column;
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically if needed */
-  text-align: center;
   }
   
   .faqMainContainer{
@@ -17,7 +16,7 @@
   
   .faqMainContainerWN{
     width: 100%;
-    background: linear-gradient(to bottom,#cffaf3c0, #E4F8E8,rgba(251, 242, 220, 0.444));
+    background: linear-gradient(to bottom,#f8e4e4ab, #E4F8E8,rgb(255, 250, 236));
   }
   .faqTitle {
     font-size: 2.5rem;

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navigation/navbar";
 
 import Blogs from "./pages/blog";
@@ -15,9 +15,10 @@ import CookiesPolicy from "./pages/cookies-policy";
 import AssessmentPage from "./pages/tool";
 import './index.css';
 import Test from "./pages/test";
+
 function Main() {
   return (
-    <Router>
+    <BrowserRouter>
       <div id="root">
         <Navbar />
         <div className="main-content"> {/* Main content wrapper */}
@@ -34,12 +35,11 @@ function Main() {
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy/>}/>
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage/>}/>
             <Route path="/Depression-Tool" element={<Test/>}/>
-
             </Routes>
         </div>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

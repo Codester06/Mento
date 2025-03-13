@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './depressionTest.module.css';
 
-const Depression_Test = () => {
+const DepressionTest = () => {
   const quizData = [
     {
       question: "How often do you feel sad?",
@@ -592,4 +592,4 @@ const Depression_Test = () => {
   );
 };
 
-export default Depression_Test;
+export default DepressionTest;

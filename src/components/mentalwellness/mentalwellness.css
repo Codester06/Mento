@@ -1,13 +1,11 @@
-/* Global Styles */
 .mental-wellness-page {
-    height: 80vh;
-    background: linear-gradient(to bottom, #E4F8E8, #f8eee6,#cffaf3c0);
-    display: flex;
-    flex-direction: column;
-  }
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap');
+  min-height: 100vh;
+  background: linear-gradient(to top, #ffcfcfda, #E4F8E8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
- 
 .wellness-banner {
   text-align: center;
   padding: 20px;
@@ -16,12 +14,14 @@
   border-radius: 12px;
   letter-spacing: 1px;
   animation: fadeIn 1s ease-in-out;
+  width: 100%;
+
 }
 
 .wellness-banner p {
   font-family: "Great Vibes", cursive;
   font-size: 36px;
-  background: linear-gradient(90deg,#32a8a2, #000000, #000c00, #32a8a2);
+  background: linear-gradient(90deg, #32a8a2, #000000, #000c00, #32a8a2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -37,6 +37,7 @@
     transform: translateY(0);
   }
 }
+
     
   
   /* Form Section */
@@ -65,13 +66,23 @@
     font-weight: bold;
     color: #1f2937;
   }
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 
-
-
-.faqSectionWN{
- background:#cffaf3c0; 
 }
 
-.faqSectionWN h1{
+.individual-form {
+  width: 100%;
+  margin-bottom: 20px; /* Space between form and FAQ */
+}
+
+.faqSectionWN {
+  width: 100%;
+}
+
+.faqSectionWN h1 {
   text-align: center;
 }

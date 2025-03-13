@@ -58,6 +58,7 @@ const FAQSectionWN = () => {
     <div className='faqMainContainerWN'>
     <div className="containerFAQ">
       <div className="faq-container">
+        <center><h3>Frequently Asked Questions</h3></center>
         {faqData.map((item, index) => (
           <FAQItem 
             key={index} 
