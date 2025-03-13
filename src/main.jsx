@@ -15,6 +15,8 @@ import CookiesPolicy from "./pages/cookies-policy";
 import AssessmentPage from "./pages/tool";
 import './index.css';
 import Test from "./pages/test";
+import AdminPanel from "./adminPages/Response";
+import ConsultationDetails from "./adminPages/detailsResponse";
 
 function Main() {
   return (
@@ -35,6 +37,15 @@ function Main() {
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy/>}/>
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage/>}/>
             <Route path="/Depression-Tool" element={<Test/>}/>
+            <Route path="/admin/responses" element={<AdminPanel/>}/>
+  
+          <Route 
+            path="/admin/responses/:id" 
+            element={
+                <ConsultationDetails />
+            } 
+          />
+            
             </Routes>
         </div>
         <Footer />

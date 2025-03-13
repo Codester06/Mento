@@ -1,35 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './FormStyles.css';
+import { database } from "../../utils/firebaseConfig";
+import { ref, push } from "firebase/database";
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 8;
   const [errors, setErrors] = useState({});
-
-  // Form refs
-  const formRefs = {
-  name: useRef(''),
-  email: useRef(''),
-  city: useRef(''),
-  contactNo: useRef(''),
-  guardianContactNo: useRef(''),
-  profession: useRef(''),
-  age: useRef(''),
-  supportReason: useRef(''),
-  otherSupportReason: useRef(''),
-  feelingsReason: useRef(''),
-  previousConsultation: useRef(''),
-  preferredLanguage: useRef(''),
-  otherLanguage: useRef(''),
-  sessionDate: useRef(''),
-  sessionTime: useRef(''),
-  counselorGenderPreference: useRef(''),
-  medicalConditions: useRef(''),
-  referralSource: useRef(''),
-  paymentMethod: useRef('')
-};
-
-  // State to manage form display
+  // Create useState for form data instead of useRef to trigger re-renders
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -91,20 +69,15 @@ const IndividualForm = () => {
     'Other'
   ];
 
-  // Handle form field changes - still using state for UI updates
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // Update the ref value correctly
-    if (formRefs[name]) {
-      formRefs[name].current = value;
-    }
-    
-    // Also update state for UI reactivity
-    setFormData(prevData => ({
-      ...prevData,
+    // Update state for form data
+    setFormData({
+      ...formData,
       [name]: value
-    }));
+    });
     
     // Clear error for this field when user types
     if (errors[name]) {
@@ -116,16 +89,11 @@ const IndividualForm = () => {
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
     
-    // Update the ref value
-    if (formRefs[name]) {
-      formRefs[name].current = value;
-    }
-    
-    // Also update state for UI reactivity
-    setFormData(prevData => ({
-      ...prevData,
+    // Update state for form data
+    setFormData({
+      ...formData,
       [name]: value
-    }));
+    });
     
     // Clear error for this field when user selects
     if (errors[name]) {
@@ -135,16 +103,11 @@ const IndividualForm = () => {
 
   // Handle radio selection changes
   const handleRadioChange = (name, value) => {
-    // Update the ref value
-    if (formRefs[name]) {
-      formRefs[name].current = value;
-    }
-    
-    // Also update state for UI reactivity
-    setFormData(prevData => ({
-      ...prevData,
+    // Update state for form data
+    setFormData({
+      ...formData,
       [name]: value
-    }));
+    });
     
     // Clear error for this field when user selects
     if (errors[name]) {
@@ -158,14 +121,14 @@ const IndividualForm = () => {
     
     // Step 1 validation
     if (currentStep === 1) {
-      if (!formData.name.trim()) newErrors.name = "Name is required";
-      if (!formData.email.trim()) {
+      if (!formData.name || !formData.name.trim()) newErrors.name = "Name is required";
+      if (!formData.email || !formData.email.trim()) {
         newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
         newErrors.email = "Email is invalid";
       }
-      if (!formData.city.trim()) newErrors.city = "City is required";
-      if (!formData.contactNo.trim()) newErrors.contactNo = "Contact number is required";
+      if (!formData.city || !formData.city.trim()) newErrors.city = "City is required";
+      if (!formData.contactNo || !formData.contactNo.trim()) newErrors.contactNo = "Contact number is required";
       if (!formData.age) newErrors.age = "Age is required";
       if (!formData.profession) newErrors.profession = "Profession is required";
     }
@@ -174,7 +137,7 @@ const IndividualForm = () => {
     else if (currentStep === 2) {
       if (!formData.supportReason) {
         newErrors.supportReason = "Please select a reason";
-      } else if (formData.supportReason === 'Other' && !formData.otherSupportReason.trim()) {
+      } else if (formData.supportReason === 'Other' && (!formData.otherSupportReason || !formData.otherSupportReason.trim())) {
         newErrors.otherSupportReason = "Please specify your reason";
       }
     }
@@ -189,7 +152,7 @@ const IndividualForm = () => {
     else if (currentStep === 4) {
       if (!formData.preferredLanguage) {
         newErrors.preferredLanguage = "Please select a language";
-      } else if (formData.preferredLanguage === 'Other' && !formData.otherLanguage.trim()) {
+      } else if (formData.preferredLanguage === 'Other' && (!formData.otherLanguage || !formData.otherLanguage.trim())) {
         newErrors.otherLanguage = "Please specify your language";
       }
     }
@@ -222,7 +185,6 @@ const IndividualForm = () => {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         // Scroll to top of form when changing steps
-        document.querySelector('.form-container-MN').scrollTop = 0;
       }
     } else {
       // Scroll to the first error field
@@ -238,24 +200,30 @@ const IndividualForm = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
       // Scroll to top of form when changing steps
-      document.querySelector('.form-container-MN').scrollTop = 0;
     }
   };
 
   // Submit form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (validateStep()) {
-      // Extract all data from refs correctly
-      const formRefData = Object.keys(formRefs).reduce((acc, key) => {
-        acc[key] = formRefs[key].current;
-        return acc;
-      }, {});
-      
-      console.log("Form data submitted:", formRefData);
-      
-      // Show success alert
-      alert('Form submitted successfully! Your mental wellness consultation has been scheduled.');
+      try {
+        // Use the formData directly for submission to Firebase
+        await push(ref(database, "mental_wellness_consultations"), formData);
+        
+        console.log("Form data submitted:", formData);
+        
+        // Show success alert
+        alert('Form submitted successfully! Your mental wellness consultation has been scheduled.');
+        
+        // Optionally reset the form here if needed
+        // formRef.current.reset();
+        
+      } catch (error) {
+        console.error("Error saving consultation data:", error);
+        alert("Failed to schedule your consultation. Please try again.");
+      }
     }
   };
 
@@ -295,9 +263,8 @@ const IndividualForm = () => {
                 <input
                   type="text"
                   name="name"
-                  defaultValue={formData.name}
+                  value={formData.name}
                   onChange={handleChange}
-                  ref={formRefs.name}
                   placeholder="e.g. John Smith"
                   className={errors.name ? 'error-input' : ''}
                 />
@@ -309,9 +276,8 @@ const IndividualForm = () => {
                 <input
                   type="email"
                   name="email"
-                  defaultValue={formData.email}
+                  value={formData.email}
                   onChange={handleChange}
-                  ref={formRefs.email}
                   placeholder="e.g. johnsmith@example.com"
                   className={errors.email ? 'error-input' : ''}
                 />
@@ -325,9 +291,8 @@ const IndividualForm = () => {
                 <input
                   type="text"
                   name="city"
-                  defaultValue={formData.city}
+                  value={formData.city}
                   onChange={handleChange}
-                  ref={formRefs.city}
                   placeholder="e.g. Bangalore"
                   className={errors.city ? 'error-input' : ''}
                 />
@@ -339,9 +304,8 @@ const IndividualForm = () => {
                 <input
                   type="number"
                   name="age"
-                  defaultValue={formData.age}
+                  value={formData.age}
                   onChange={handleChange}
-                  ref={formRefs.age}
                   placeholder="e.g. 30"
                   min="1"
                   max="120"
@@ -357,9 +321,8 @@ const IndividualForm = () => {
                 <input
                   type="tel"
                   name="contactNo"
-                  defaultValue={formData.contactNo}
+                  value={formData.contactNo}
                   onChange={handleChange}
-                  ref={formRefs.contactNo}
                   placeholder="e.g. +91 9876543210"
                   className={errors.contactNo ? 'error-input' : ''}
                 />
@@ -371,9 +334,8 @@ const IndividualForm = () => {
                 <input
                   type="tel"
                   name="guardianContactNo"
-                  defaultValue={formData.guardianContactNo}
+                  value={formData.guardianContactNo}
                   onChange={handleChange}
-                  ref={formRefs.guardianContactNo}
                   placeholder="e.g. +91 9876543210"
                   className={errors.contactNo ? 'error-input' : ''}
                 />
@@ -384,9 +346,8 @@ const IndividualForm = () => {
               <label>Profession <span className="required-field">*</span></label>
               <select
                 name="profession"
-                defaultValue={formData.profession}
+                value={formData.profession}
                 onChange={handleDropdownChange}
-                ref={formRefs.profession}
                 className={errors.profession ? 'error-input' : ''}
               >
                 <option value="" disabled>Select your profession</option>
@@ -435,9 +396,8 @@ const IndividualForm = () => {
                 <label>Please specify your reason <span className="required-field">*</span></label>
                 <textarea
                   name="otherSupportReason"
-                  defaultValue={formData.otherSupportReason}
+                  value={formData.otherSupportReason}
                   onChange={handleChange}
-                  ref={formRefs.otherSupportReason}
                   placeholder="Please describe your reason for seeking support..."
                   rows="2"
                   className={errors.otherSupportReason ? 'error-input' : ''}
@@ -457,9 +417,8 @@ const IndividualForm = () => {
               <label>What is the reason behind your feelings (if identified)? <span className="required-field">*</span></label>
               <select
                 name="feelingsReason"
-                defaultValue={formData.feelingsReason}
+                value={formData.feelingsReason}
                 onChange={handleDropdownChange}
-                ref={formRefs.feelingsReason}
                 className={errors.feelingsReason ? 'error-input' : ''}
               >
                 <option value="" disabled>Select a reason</option>
@@ -520,9 +479,8 @@ const IndividualForm = () => {
                 <input
                   type="text"
                   name="otherLanguage"
-                  defaultValue={formData.otherLanguage}
+                  value={formData.otherLanguage}
                   onChange={handleChange}
-                  ref={formRefs.otherLanguage}
                   placeholder="e.g. Punjabi"
                   className={errors.otherLanguage ? 'error-input' : ''}
                 />
@@ -542,9 +500,8 @@ const IndividualForm = () => {
               <input
                 type="date"
                 name="sessionDate"
-                defaultValue={formData.sessionDate}
+                value={formData.sessionDate}
                 onChange={handleChange}
-                ref={formRefs.sessionDate}
                 className={errors.sessionDate ? 'error-input' : ''}
               />
               {renderError('sessionDate')}
@@ -624,9 +581,8 @@ const IndividualForm = () => {
               <label>How did you hear about our platform? <span className="required-field">*</span></label>
               <select
                 name="referralSource"
-                defaultValue={formData.referralSource}
+                value={formData.referralSource}
                 onChange={handleDropdownChange}
-                ref={formRefs.referralSource}
                 className={errors.referralSource ? 'error-input' : ''}
               >
                 <option value="" disabled>Select an option</option>
@@ -810,10 +766,10 @@ const IndividualForm = () => {
             ) : (
               <button
                 type="button"
-                onClick={() => window.location.href = '/dashboard'}
+                onClick={() => window.location.href = '/'}
                 className="dashboard-button-MN"
               >
-                Go to Dashboard
+                Go to Home
               </button>
             )}
           </div>
