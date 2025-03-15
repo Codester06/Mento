@@ -53,19 +53,20 @@ const Primarybutton = () => {
     const navigate = useNavigate();
  
     return (
-        <div className="container_primary">
-          {items.map((item) => (
-            <div key={item.id} className="Buttons" onClick={()=>navigate(item.route)}>
-                          
-                          
-              <div className='svg_background'>{item.icon}</div>
-                     
-
-              <h1 className="title_primary">{item.name}</h1>
-              <p className="description_primary">{item.description}</p>
-            </div>
-          ))}
+      <div className="container_primary">
+      <div className="glass-bubble-1"></div>
+      <div className="glass-bubble-2"></div>
+      
+      {items.map((item) => (
+        <div key={item.id} className="Buttons" onClick={() => navigate(item.route)}>
+          <div className='svg_background'>
+            {item.icon}
+          </div>
+          <h1 className="title_primary">{item.name}</h1>
+          <p className="description_primary">{item.description}</p>
         </div>
+      ))}
+    </div>
       )
 }
 

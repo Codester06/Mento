@@ -1,63 +1,126 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ref, onValue } from 'firebase/database';
+import { database } from '../../utils/firebaseConfig' // Adjust path as needed
 import BlogCard from './blogCard';
 import './blogList.css';
 
 const BlogList = () => {
-  // Sample blog data - this could come from an API or props
-  const blogPosts = [
-    {
-      id: 1,
-      image: "https://images.unsplash.com/photo-1720734020504-8b5557750735?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      altText: "Legal Tech Illustration with dollar sign",
-      title: "ADOPTING LEGAL TECH FOR ENTERPRISES",
-      subtitle: "A COMPREHENSIVE GUIDE",
-      highlightedWord: "ENTERPRISES",
-      tags: [
-        { text: "Articles", color: "blue" },
-        { text: "Enterprise", color: "light-blue" },
-        { text: "Guides", color: "pink" }
-      ],
-      intro: "Introduction to Legal Technology In today's fast-paced business environment, enterprises face an increasing number of legal challenges that...",
-      date: "September 13, 2024"
-    },
-    {
-      id: 2,
-      image: "https://images.unsplash.com/photo-1720734020504-8b5557750735?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      altText: "AI in Healthcare illustration",
-      title: "AI SOLUTIONS FOR HEALTHCARE",
-      subtitle: "IMPROVING PATIENT OUTCOMES",
-      highlightedWord: "HEALTHCARE",
-      tags: [
-        { text: "Technology", color: "blue" },
-        { text: "Healthcare", color: "green" },
-        { text: "AI", color: "purple" }
-      ],
-      intro: "Artificial Intelligence is revolutionizing the healthcare industry by enabling more accurate diagnoses, personalized treatments, and...",
-      date: "September 10, 2024"
-    },
-    {
-      id: 3,
-      image: "https://images.unsplash.com/photo-1720734020504-8b5557750735?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      altText: "Cybersecurity illustration",
-      title: "MODERN CYBERSECURITY PRACTICES",
-      subtitle: "PROTECTING YOUR BUSINESS",
-      highlightedWord: "CYBERSECURITY",
-      tags: [
-        { text: "Security", color: "red" },
-        { text: "Business", color: "light-blue" },
-        { text: "Technology", color: "blue" }
-      ],
-      intro: "In an age of increasing digital threats, businesses must adopt robust cybersecurity measures to protect sensitive data and maintain...",
-      date: "September 5, 2024"
-    }
-  ];
+  const navigate = useNavigate();
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Handle click on a blog post
-  const handleArticleClick = (id) => {
-    console.log(`Navigating to article ${id}`);
-    // In a real app, you would use router navigation here
-    // Example: navigate(`/blog/${id}`);
+  useEffect(() => {
+    // Reference to the blog_posts node in Firebase Realtime Database
+    const blogPostsRef = ref(database, 'blog_posts');
+    
+    // Set up a listener for changes to the blog posts
+    const unsubscribe = onValue(blogPostsRef, (snapshot) => {
+      try {
+        const data = snapshot.val();
+        if (data) {
+          // Convert the object to an array and sort by date (newest first)
+          const postsArray = Object.entries(data).map(([id, post]) => ({
+            id,
+            ...post,
+            // Format the data to match the BlogCard component's expected props
+            altText: post.title,
+            highlightedWord: post.title.split(' ').pop(), // Highlight the last word in the title
+            tags: [
+              // Convert category to a tag
+              { text: post.category || 'Uncategorized', color: getCategoryColor(post.category) },
+              // Add a date-based tag
+              { text: getMonthName(new Date(post.createdAt)), color: 'light-blue' }
+            ],
+            intro: post.content.substring(0, 150) + '...',  // Create a short intro from content
+            date: new Date(post.createdAt).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            image: post.featuredImage || 'https://via.placeholder.com/800x400?text=No+Image+Available'
+          })).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          
+          setBlogPosts(postsArray);
+        } else {
+          setBlogPosts([]);
+        }
+        setLoading(false);
+      } catch (err) {
+        console.error('Error processing blog posts:', err);
+        setError('Failed to load blog posts. Please try again later.');
+        setLoading(false);
+      }
+    }, (err) => {
+      console.error('Error fetching blog posts:', err);
+      setError('Failed to load blog posts. Please try again later.');
+      setLoading(false);
+    });
+    
+    // Clean up the listener when component unmounts
+    return () => unsubscribe();
+  }, []);
+
+  // Helper function to get a color based on category
+  const getCategoryColor = (category) => {
+    if (!category) return 'blue';
+    
+    const categoryColors = {
+      'Technology': 'blue',
+      'Business': 'light-blue',
+      'Healthcare': 'green',
+      'Security': 'red',
+      'AI': 'purple',
+      'Article': 'pink'
+    };
+    
+    // Default to blue if no matching category
+    return categoryColors[category] || 'blue';
   };
+  
+  // Helper function to get month name
+  const getMonthName = (date) => {
+    return date.toLocaleString('en-US', { month: 'short' });
+  };
+
+  // Handle click on a blog post - now redirects to blog detail page
+  const handleArticleClick = (id) => {
+    navigate(`/blog/${id}`);
+  };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="blog-list-container">
+        <div className="blog-loading">
+          <p>Loading blog posts...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="blog-list-container">
+        <div className="blog-error">
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Empty state
+  if (blogPosts.length === 0) {
+    return (
+      <div className="blog-list-container">
+        <div className="blog-empty">
+          <p>No blog posts available at the moment.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="blog-list-container">
@@ -67,7 +130,8 @@ const BlogList = () => {
             <BlogCard 
               image={post.image}
               altText={post.altText}
-              title={post.title}
+              title={post.title.toUpperCase()} // Match the uppercase style from the example
+              subtitle={post.category ? post.category.toUpperCase() : ""}
               highlightedWord={post.highlightedWord}
               tags={post.tags}
               intro={post.intro}

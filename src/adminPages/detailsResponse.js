@@ -69,7 +69,7 @@ const ConsultationDetails = () => {
           <div className="info-grid">
             <div className="info-item">
               <label>Full Name</label>
-              <div className="info-value">{consultation.fullName}</div>
+              <div className="info-value">{consultation.name}</div>
             </div>
             <div className="info-item">
               <label>Email</label>

@@ -1,131 +1,176 @@
-
 .number-bg{
   width: 100%;
   height: auto;
   padding: 3em;
-  background:linear-gradient(to bottom,#dbf6ed, #CFFAF3FA );
+  position: relative;
+  background: linear-gradient(to bottom, #fffbe6, #fff7d5c3, #CFFAF3FA);
+  overflow: hidden;
 }
 
+/** Decorative circles **/
+.decorative-circles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.circle-1, .circle-2 ,.circle-3{
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.circle-1 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(to bottom, #ffd980, #CFFAF3FA);
+  bottom: -90px;
+  left: -120px;
+}
+
+
+.circle-2 {
+  width: 700px;
+  height: 700px;
+
+  background: linear-gradient(to bottom, rgba(255, 218, 116, 0.994), #CFFAF3FA);
+  bottom: -150px;
+  right: -200px;
+}
+
+.circle-3 {
+  width: 1000px;
+  height: 900px;
+  background: linear-gradient(to top, #72ff686e, #ffffff99);
+  bottom: 420px;
+  left: -70px;
+}
+
+
 .stats-container {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    background-color: rgb(185, 249, 252);
-    max-width: 125rem;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
-    border-radius: 1.5em;
-
-  }
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
+  max-width: 125rem;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 1.5em;
+  position: relative;
+  z-index: 1;
+}
   
+.stats-heading {
+  font-size: 48px;
+  font-family: 'Times New Roman';
+  color: #4a4a4a;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+  
+.stats-subheading {
+  font-size: 18px;
+  font-family: 'Delius';
+  color: #4a4a4a;
+  max-width: 900px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
+}
+  
+.highlight-number {
+  color: #021152;
+  font-weight: 700;
+}
+  
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+  
+.stat-card {
+  padding: 20px 15px;
+  border-right: 1px solid #e0e0e0;
+}
+  
+.stat-card:last-child {
+  border-right: none;
+}
+  
+.stat-icon {
+  color: #338a66;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+  
+.stat-number {
+  font-size: 32px;
+  color: #666633;
+  margin: 15px 0;
+  font-weight: 600;
+}
+  
+.stat-description {
+  color: #4a4a4a;
+  font-size: 16px;
+  font-family: 'Delius';
+  text-transform: capitalize;
+  text-align: center;
+  line-height: 1.2;
+}
+
+@media (max-width: 325px) {
+  .number-bg {
+    padding: 1em;
+    width: 100%;
+  }
+
+  .stats-container {
+    padding: 20px 10px;
+    border-radius: 1em;
+  }
+
   .stats-heading {
-    font-size: 48px;
-    font-family: 'Times New Roman';
-    color: #4a4a4a;
-    margin-bottom: 20px;
-    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
-  
+
   .stats-subheading {
-    font-size: 18px;
-    font-family: 'Delius';
-    color: #4a4a4a;
-    max-width: 900px;
-    margin: 0 auto 60px;
-    line-height: 1.6;
+    font-size: 14px;
+    margin: 0 auto 30px;
+    line-height: 1.4;
   }
-  
-  .highlight-number {
-    color: #021152;
-    font-weight: 700;
-  }
-  
+
   .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
-  
+
   .stat-card {
-    padding: 20px 15px;
-    border-right: 1px solid #e0e0e0;
-  }
-  
-  .stat-card:last-child {
+    padding: 10px;
     border-right: none;
+    border-bottom: 1px solid #e0e0e0;
   }
-  
+
+  .stat-card:last-child {
+    border-bottom: none;
+  }
+
   .stat-icon {
-    color: #338a66;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 15px;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
   }
-  
+
   .stat-number {
-    font-size: 32px;
-    color: #666633;
-    margin: 15px 0;
-    font-weight: 600;
+    font-size: 22px;
+    margin: 10px 0;
   }
-  
+
   .stat-description {
-    color: #4a4a4a;
-    font-size: 16px;
-    font-family: 'Delius';
-    text-transform: capitalize;
-    text-align: center ;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 1.1;
   }
-  @media (max-width: 325px) {
-    .number-bg {
-        padding: 1em;
-        width: 100%;
-    }
-
-    .stats-container {
-        padding: 20px 10px;
-        border-radius: 1em;
-    }
-
-    .stats-heading {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .stats-subheading {
-        font-size: 14px;
-        margin: 0 auto 30px;
-        line-height: 1.4;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .stat-card {
-        padding: 10px;
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    .stat-card:last-child {
-        border-bottom: none;
-    }
-
-    .stat-icon {
-        width: 30px;
-        height: 30px;
-        margin-bottom: 10px;
-    }
-
-    .stat-number {
-        font-size: 22px;
-        margin: 10px 0;
-    }
-
-    .stat-description {
-        font-size: 14px;
-        line-height: 1.1;
-    }
 }

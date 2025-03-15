@@ -2,18 +2,9 @@
 
 
 .container_sec_intro {
-    /* padding: 1.5rem; */
-   
-  
     width: 100%;
-    background:linear-gradient(to bottom ,#d5f0f7,#d5f7ed); 
-
-    
+    background:linear-gradient(to bottom ,#e2f9ff,#c8f1fb,#fffbe6); 
     height: 52rem;
-   
-   
-   
-
   }
   
   .sec_layout {
