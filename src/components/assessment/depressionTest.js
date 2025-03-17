@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useMemo,memo} from 'react';
 import styles from './depressionTest.module.css';
 
 const DepressionTest = () => {
@@ -245,10 +245,7 @@ const DepressionTest = () => {
   };
 
   // Calculate score percentage
-  const scorePercentage = () => {
-    const score = calculateScore();
-    return (score / maxPossibleScore) * 100;
-  };
+  
 
   useEffect(() => {
     if (showResult) {
@@ -359,11 +356,16 @@ const DepressionTest = () => {
   };
 
   // Circular progress component
-  const CircularProgress = ({ percentage }) => {
+  const CircularProgress = memo(({ percentage }) => {
     const radius = 70;
     const circumference = 2 * Math.PI * radius;
-    const offset = animateProgress ? circumference - (percentage / 100) * circumference : circumference;
-    
+    const offset = useMemo(() => {
+      return animateProgress 
+        ? circumference - (percentage / 100) * circumference 
+        : circumference;
+  }, [percentage, animateProgress]);
+
+
     // Determine color based on percentage
     const getColorClass = () => {
       const score = calculateScore();
@@ -403,12 +405,18 @@ const DepressionTest = () => {
         </div>
       </div>
     );
-  };
+  });
 
   return (
+
     <div className={styles.wellnessQuiz}>
       {!showResult ? (
         <div className={styles.quizContainer}>
+            <div className="decorative-circles-MN">
+          <div className="circle-1-MN"></div>
+          <div className="circle-2-MN"></div>
+        </div>
+      
           <div className={styles.quizHeader}>
             <h1 className={styles.quizTitle}>Depression Self Assessment</h1>
             <p className={styles.questionCounter}>
@@ -495,41 +503,19 @@ const DepressionTest = () => {
           
           {/* Blurred section with email capture form */}
           <div className={styles.detailedResults}>
-            <div className={formSubmitted ? styles.reportContent : `${styles.reportContent} ${styles.blurred}`}>
-              <h3 className={styles.reportTitle}>Your Detailed Analysis</h3>
-              
-              <div className={styles.reportSection}>
-                <h4 className={styles.sectionTitle}>Understanding Your Score</h4>
-                <p className={styles.sectionText}>The Beck Depression Inventory (BDI) is a widely used tool that helps assess the intensity of depression. Here's what your score might indicate:</p>
-                <ul className={styles.sectionList}>
-                  <li>0-10: Minimal depression</li>
-                  <li>11-16: Mild mood disturbance</li>
-                  <li>17-30: Moderate depression</li>
-                  <li>31-63: Severe depression</li>
-                </ul>
-              </div>
-              
-              <div className={styles.reportSection}>
-                <h4 className={styles.sectionTitle}>Next Steps</h4>
-                <p className={styles.sectionText}>Based on your responses, here are some recommendations:</p>
-                <ul className={styles.sectionList}>
-                  <li>Consider scheduling an appointment with a mental health professional for a thorough evaluation</li>
-                  <li>Practice self-care activities like regular exercise, adequate sleep, and healthy eating</li>
-                  <li>Consider mindfulness or meditation practices to help manage stress</li>
-                </ul>
-              </div>
-              
-              <div className={styles.reportSection}>
-                <h4 className={styles.sectionTitle}>Resources</h4>
-                <p className={styles.sectionText}>Here are some resources that may be helpful:</p>
-                <ul className={styles.sectionList}>
-                  <li>National Suicide Prevention Lifeline: 988 or 1-800-273-8255 (24/7)</li>
-                  <li>Crisis Text Line: Text HOME to 741741 (24/7)</li>
-                  <li>Find a therapist: PsychologyToday.com/us/therapists</li>
-                </ul>
-              </div>
-            </div>
             
+               <div className={styles.thankyouMN}>
+              <div className={styles.checkiconMN}>✓</div>
+              <h2 className={styles.formtitleMN}>Thank You!</h2>
+              <p className="form-subtitle-MN">Your Mental wellness is precious to us.</p>
+              <p className="form-subtitle-MN">Your Detailed Report Has Been Successfully Send To Your Provided Mail.</p>
+
+              
+              
+              
+              
+              
+            </div>
             {/* Overlay form */}
             {!formSubmitted && (
               <div className={styles.formOverlay}>
@@ -589,6 +575,7 @@ const DepressionTest = () => {
         </div>
       )}
     </div>
+ 
   );
 };
 

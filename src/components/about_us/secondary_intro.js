@@ -4,7 +4,10 @@ import React from "react";
 
 
 const SecIntroBox = () =>{
-    return (
+    return (<>
+    
+        <div className="overlaysec"></div>
+
         <div className="container_sec_intro">
         <div className="sec_layout">
 
@@ -30,6 +33,7 @@ const SecIntroBox = () =>{
         
         </div>
       </div>
+    </>
     )
 
 }

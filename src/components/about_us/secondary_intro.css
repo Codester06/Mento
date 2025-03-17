@@ -25,6 +25,18 @@
     padding-left: 2rem;
    
   }
+  .overlaysec{
+    position: absolute;
+    top:89rem;
+    width: 100%;
+      overlay: auto;
+      opacity: 0.5;
+      height: 55.7rem;
+     
+    background-image: url('../../assets/images/our_story.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
   
   .sec_content-box {
    
