@@ -622,3 +622,14 @@ input:focus, select:focus, textarea:focus {
 .step-indicator-MN:nth-child(8) .step-title-MN {
   content: "CONFIRMATION";
 }
+
+.terms-text-MN{
+  display: flex;
+
+  align-items: flex-start;
+}
+
+.terms-text-MN :first-child {
+  margin-top: 10px;
+  width: 150px;
+}

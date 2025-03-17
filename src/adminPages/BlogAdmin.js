@@ -86,7 +86,7 @@ const AdminBlog = () => {
         featuredImage: imageUrl,
         category: category || 'Uncategorized',
         createdAt: new Date().toISOString(),
-        author: 'Admin' // Replace with actual author or get from auth context
+        author: 'Mento' // Replace with actual author or get from auth context
       };
       
       // Save blog post

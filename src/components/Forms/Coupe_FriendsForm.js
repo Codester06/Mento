@@ -3,28 +3,28 @@ import "./FormStyles.css";
 import { database } from "../../utils/firebaseConfig";
 import { ref, push } from "firebase/database";
 
-const IndividualForm = () => {
+const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 8;
+  const totalSteps = 6;
   const [errors, setErrors] = useState({});
-  // Create useState for form data instead of useRef to trigger re-renders
   const [formData, setFormData] = useState({
     name: "",
+    partnerName: "",
     email: "",
     city: "",
     contactNo: "",
-    guardianContactNo: "",
     profession: "",
-    age: "",
-    supportReason: "",
-    otherSupportReason: "",
-    feelingsReason: "",
-    previousConsultation: "",
+    partnerProfession: "",
+    relationshipStatus: "",
+    otherRelationshipStatus: "",
+    primaryConcern: "",
+    therapyGoals: [],
+    otherTherapyGoal: "",
+    previousTherapy: "",
     preferredLanguage: "",
     otherLanguage: "",
     sessionDate: "",
     sessionTime: "",
-    counselorGenderPreference: "",
     medicalConditions: "",
     referralSource: "",
     paymentMethod: "",
@@ -42,31 +42,41 @@ const IndividualForm = () => {
     "Other",
   ];
 
-  // Feelings reason options
-  const feelingsReasonOptions = [
-    "Work-related stress",
-    "Family issues",
-    "Academic pressure",
-    "Financial concerns",
-    "Health issues",
-    "Personal loss",
-    "Relationship difficulties",
-    "Identity/self-esteem issues",
-    "Past trauma",
+  // Relationship status options
+  const relationshipStatusOptions = ["Married", "Engaged", "Dating", "Other"];
+
+  // Primary concern options
+  const primaryConcernOptions = [
+    "Communication issues",
+    "Trust issues",
+    "Infidelity",
+    "Parenting conflicts",
+    "Financial conflicts",
+    "Intimacy problems",
+    "Different life goals",
+    "Recurring arguments",
     "Other",
   ];
 
-  // Social media platforms for referral
+  // Therapy goals options
+  const therapyGoalsOptions = [
+    "Improve communication",
+    "Rebuild trust",
+    "Resolve conflicts effectively",
+    "Strengthen emotional connection",
+    "Other",
+  ];
+
+  // Referral source options
   const referralOptions = [
-    "Instagram",
-    "Facebook",
-    "Twitter",
+    "Referred by someone",
     "LinkedIn",
-    "YouTube",
-    "Friend/Family",
-    "Healthcare provider",
-    "Search engine",
-    "Advertisement",
+    "Instagram ad",
+    "Facebook ad",
+    "Instagram post/reel",
+    "Facebook post",
+    "Word of mouth",
+    "Google search",
     "Other",
   ];
 
@@ -74,13 +84,11 @@ const IndividualForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Update state for form data
     setFormData({
       ...formData,
       [name]: value,
     });
 
-    // Clear error for this field when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
@@ -90,13 +98,11 @@ const IndividualForm = () => {
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
 
-    // Update state for form data
     setFormData({
       ...formData,
       [name]: value,
     });
 
-    // Clear error for this field when user selects
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
@@ -104,18 +110,38 @@ const IndividualForm = () => {
 
   // Handle radio selection changes
   const handleRadioChange = (name, value) => {
-    // Update state for form data
     setFormData({
       ...formData,
       [name]: value,
     });
 
-    // Clear error for this field when user selects
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
 
+  // Handle checkbox selection changes
+  const handleCheckboxChange = (name, value) => {
+    const currentValues = [...formData[name]];
+    const valueIndex = currentValues.indexOf(value);
+
+    if (valueIndex === -1) {
+      // Add value if not present
+      currentValues.push(value);
+    } else {
+      // Remove value if already present
+      currentValues.splice(valueIndex, 1);
+    }
+
+    setFormData({
+      ...formData,
+      [name]: currentValues,
+    });
+
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: null }));
+    }
+  };
   // Validate current step
   const validateStep = () => {
     const newErrors = {};
@@ -123,7 +149,9 @@ const IndividualForm = () => {
     // Step 1 validation
     if (currentStep === 1) {
       if (!formData.name || !formData.name.trim())
-        newErrors.name = "Name is required";
+        newErrors.name = "Your name is required";
+      if (!formData.partnerName || !formData.partnerName.trim())
+        newErrors.partnerName = "Partner's name is required";
       if (!formData.email || !formData.email.trim()) {
         newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -133,64 +161,68 @@ const IndividualForm = () => {
         newErrors.city = "City is required";
       if (!formData.contactNo || !formData.contactNo.trim())
         newErrors.contactNo = "Contact number is required";
-      if (!formData.age) newErrors.age = "Age is required";
-      if (!formData.profession) newErrors.profession = "Profession is required";
+      if (!formData.profession)
+        newErrors.profession = "Your profession is required";
+      if (!formData.partnerProfession)
+        newErrors.partnerProfession = "Partner's profession is required";
+      if (!formData.relationshipStatus) {
+        newErrors.relationshipStatus = "Relationship status is required";
+      } else if (
+        formData.relationshipStatus === "Other" &&
+        (!formData.otherRelationshipStatus ||
+          !formData.otherRelationshipStatus.trim())
+      ) {
+        newErrors.otherRelationshipStatus =
+          "Please specify your relationship status";
+      }
     }
 
     // Step 2 validation
     else if (currentStep === 2) {
-      if (!formData.supportReason) {
-        newErrors.supportReason = "Please select a reason";
+      if (!formData.primaryConcern)
+        newErrors.primaryConcern = "Primary concern is required";
+      if (formData.therapyGoals.length === 0) {
+        newErrors.therapyGoals = "At least one therapy goal is required";
       } else if (
-        formData.supportReason === "Other" &&
-        (!formData.otherSupportReason || !formData.otherSupportReason.trim())
+        formData.therapyGoals.includes("Other") &&
+        (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
       ) {
-        newErrors.otherSupportReason = "Please specify your reason";
+        newErrors.otherTherapyGoal = "Please specify your therapy goal";
       }
     }
 
     // Step 3 validation
     else if (currentStep === 3) {
-      if (!formData.feelingsReason)
-        newErrors.feelingsReason = "Please select a reason";
-      if (!formData.previousConsultation)
-        newErrors.previousConsultation = "Please select an option";
-    }
-
-    // Step 4 validation
-    else if (currentStep === 4) {
+      if (!formData.previousTherapy)
+        newErrors.previousTherapy = "Please select an option";
       if (!formData.preferredLanguage) {
-        newErrors.preferredLanguage = "Please select a language";
+        newErrors.preferredLanguage = "Preferred language is required";
       } else if (
         formData.preferredLanguage === "Other" &&
         (!formData.otherLanguage || !formData.otherLanguage.trim())
       ) {
-        newErrors.otherLanguage = "Please specify your language";
+        newErrors.otherLanguage = "Please specify your preferred language";
       }
+    }
+
+    // Step 4 validation
+    else if (currentStep === 4) {
+      if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
+      if (!formData.sessionTime)
+        newErrors.sessionTime = "Session time is required";
+      if (!formData.medicalConditions)
+        newErrors.medicalConditions = "Please select an option";
+      if (!formData.referralSource)
+        newErrors.referralSource = "Referral source is required";
     }
 
     // Step 5 validation
     else if (currentStep === 5) {
-      if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
-      if (!formData.sessionTime) newErrors.sessionTime = "Please select a time";
-    }
+      if (!formData.termsAgreed)
+        newErrors.termsAgreed = "You must agree to the terms and conditions";
 
-    // Step 6 validation
-    else if (currentStep === 6) {
-      if (!formData.counselorGenderPreference)
-        newErrors.counselorGenderPreference = "Please select an option";
-      if (!formData.medicalConditions)
-        newErrors.medicalConditions = "Please select an option";
-      if (!formData.referralSource)
-        newErrors.referralSource = "Please select an option";
-    }
-
-    // Step 7 validation
-    else if (currentStep === 7) {
-      if (!formData.paymentMethod) newErrors.paymentMethod = "Payment method is required";
       if (!formData.paymentMethod)
-
-        newErrors.paymentMethod = "Please select a payment method";
+        newErrors.paymentMethod = "Payment method is required";
     }
 
     setErrors(newErrors);
@@ -202,7 +234,6 @@ const IndividualForm = () => {
     if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
-        // Scroll to top of form when changing steps
       }
     } else {
       // Scroll to the first error field
@@ -217,7 +248,6 @@ const IndividualForm = () => {
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-      // Scroll to top of form when changing steps
     }
   };
 
@@ -227,21 +257,17 @@ const IndividualForm = () => {
 
     if (validateStep()) {
       try {
-        // Use the formData directly for submission to Firebase
-        await push(ref(database, "mental_wellness_consultations"), formData);
+        await push(ref(database, "couples_therapy_sessions"), formData);
 
         console.log("Form data submitted:", formData);
 
         // Show success alert
         alert(
-          "Form submitted successfully! Your mental wellness consultation has been scheduled."
+          "Form submitted successfully! Your couples therapy session has been scheduled."
         );
-
-        // Optionally reset the form here if needed
-        // formRef.current.reset();
       } catch (error) {
-        console.error("Error saving consultation data:", error);
-        alert("Failed to schedule your consultation. Please try again.");
+        console.error("Error saving therapy session data:", error);
+        alert("Failed to schedule your session. Please try again.");
       }
     }
   };
@@ -271,41 +297,56 @@ const IndividualForm = () => {
       case 1:
         return (
           <div className="form-step-MN form-step-1-MN">
-            <h2 className="form-title-MN">Personal Information</h2>
+            <h2 className="form-title-MN">Couple Information</h2>
             <p className="form-subtitle-MN">
-              Please provide your personal details for the consultation.
+              Please provide details about you and your partner.
             </p>
 
             <div className="oneLineDetail">
               <div className="form-field-MN fieldWidthName">
                 <label>
-                  Full Name <span className="required-field">*</span>
+                  Your Name <span className="required-field">*</span>
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="e.g. John Smith"
+                  placeholder="Enter your name"
                   className={errors.name ? "error-input" : ""}
                 />
                 {renderError("name")}
               </div>
 
-              <div className="form-field-MN fieldWidthEmail">
+              <div className="form-field-MN fieldWidthName">
                 <label>
-                  Email Address <span className="required-field">*</span>
+                  Partner's Name <span className="required-field">*</span>
                 </label>
                 <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  name="partnerName"
+                  value={formData.partnerName}
                   onChange={handleChange}
-                  placeholder="e.g. johnsmith@example.com"
-                  className={errors.email ? "error-input" : ""}
+                  placeholder="Enter your partner's name"
+                  className={errors.partnerName ? "error-input" : ""}
                 />
-                {renderError("email")}
+                {renderError("partnerName")}
               </div>
+            </div>
+
+            <div className="form-field-MN fieldWidthEmail">
+              <label>
+                Email Address <span className="required-field">*</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email address"
+                className={errors.email ? "error-input" : ""}
+              />
+              {renderError("email")}
             </div>
 
             <div className="oneLineDetail">
@@ -318,31 +359,12 @@ const IndividualForm = () => {
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  placeholder="e.g. Bangalore"
+                  placeholder="Enter your city"
                   className={errors.city ? "error-input" : ""}
                 />
                 {renderError("city")}
               </div>
 
-              <div className="form-field-MN fieldWidthAge">
-                <label>
-                  Age <span className="required-field">*</span>
-                </label>
-                <input
-                  type="number"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleChange}
-                  placeholder="e.g. 30"
-                  min="1"
-                  max="120"
-                  className={errors.age ? "error-input" : ""}
-                />
-                {renderError("age")}
-              </div>
-            </div>
-
-            <div className="oneLineDetail">
               <div className="form-field-MN fieldWidthNo">
                 <label>
                   Contact Number <span className="required-field">*</span>
@@ -352,84 +374,156 @@ const IndividualForm = () => {
                   name="contactNo"
                   value={formData.contactNo}
                   onChange={handleChange}
-                  placeholder="e.g. +91 9876543210"
+                  placeholder="Enter your contact number"
                   className={errors.contactNo ? "error-input" : ""}
                 />
                 {renderError("contactNo")}
               </div>
+            </div>
 
-              <div className="form-field-MN fieldWidthNo">
+            <div className="oneLineDetail">
+              <div className="form-field-MN fieldWidthPro">
                 <label>
-                  Guardian's Contact Number{" "}
-                  <span className="required-field">*</span>
+                  Your Profession <span className="required-field">*</span>
                 </label>
-                <input
-                  type="tel"
-                  name="guardianContactNo"
-                  value={formData.guardianContactNo}
-                  onChange={handleChange}
-                  placeholder="e.g. +91 9876543210"
-                  className={errors.contactNo ? "error-input" : ""}
-                />
+                <select
+                  name="profession"
+                  value={formData.profession}
+                  onChange={handleDropdownChange}
+                  className={errors.profession ? "error-input" : ""}
+                >
+                  <option value="" disabled>
+                    Select your profession
+                  </option>
+                  {professionOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                {renderError("profession")}
+              </div>
+
+              <div className="form-field-MN fieldWidthPro">
+                <label>
+                  Partner's Profession <span className="required-field">*</span>
+                </label>
+                <select
+                  name="partnerProfession"
+                  value={formData.partnerProfession}
+                  onChange={handleDropdownChange}
+                  className={errors.partnerProfession ? "error-input" : ""}
+                >
+                  <option value="" disabled>
+                    Select partner's profession
+                  </option>
+                  {professionOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                {renderError("partnerProfession")}
               </div>
             </div>
 
-            <div className="form-field-MN fieldWidthPro">
+            <div className="oneLineDetail">
+              <div className="form-field-MN fieldWidthNo">
+                <label>
+                  Relationship Status <span className="required-field">*</span>
+                </label>
+                <select
+                  name="relationshipStatus"
+                  value={formData.relationshipStatus}
+                  onChange={handleDropdownChange}
+                  className={errors.relationshipStatus ? "error-input" : ""}
+                >
+                  <option value="" disabled>
+                    Select your relationship status
+                  </option>
+                  {relationshipStatusOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                {renderError("relationshipStatus")}
+              </div>
+
+              {formData.relationshipStatus === "Other" && (
+                <div className="form-field-MN">
+                  <label>
+                    Please specify your relationship status{" "}
+                    <span className="required-field">*</span>
+                  </label>
+                  <textarea
+                    name="otherRelationshipStatus"
+                    value={formData.otherRelationshipStatus}
+                    onChange={handleChange}
+                    placeholder="Describe your relationship status"
+                    rows="1"
+                    className={
+                      errors.otherRelationshipStatus ? "error-input" : ""
+                    }
+                  ></textarea>
+                  {renderError("otherRelationshipStatus")}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      // Step 2: Therapy Goals
+      case 2:
+        return (
+          <div className="form-step-MN form-step-2-MN">
+            <h2 className="form-title-MN">Therapy Goals</h2>
+            <p className="form-subtitle-MN">
+              Tell us about your concerns and goals for therapy.
+            </p>
+
+            <div className="form-field-MN">
               <label>
-                Profession <span className="required-field">*</span>
+                Primary Concern / Reason for Therapy{" "}
+                <span className="required-field">*</span>
               </label>
               <select
-                name="profession"
-                value={formData.profession}
+                name="primaryConcern"
+                value={formData.primaryConcern}
                 onChange={handleDropdownChange}
-                className={errors.profession ? "error-input" : ""}
+                className={errors.primaryConcern ? "error-input" : ""}
               >
                 <option value="" disabled>
-                  Select your profession
+                  Select your primary concern
                 </option>
-                {professionOptions.map((option) => (
+                {primaryConcernOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>
                 ))}
               </select>
-              {renderError("profession")}
+              {renderError("primaryConcern")}
             </div>
-          </div>
-        );
-      case 2:
-        return (
-          <div className="form-step-MN form-step-2-MN">
-            <h2 className="form-title-MN">Support Reason</h2>
-            <p className="form-subtitle-MN">
-              What is the main reason you're seeking mental wellness support?{" "}
-              <span className="required-field">*</span>
-            </p>
 
             <div className="form-field-MN">
+              <p className="form-label-MN">
+                What are your therapy goals as a couple?{" "}
+                <span className="required-field">*</span>
+              </p>
               <div
                 className={`radio-group-MNI ${
-                  errors.supportReason ? "error-border" : ""
+                  errors.therapyGoals ? "error-border" : ""
                 }`}
               >
-                {[
-                  "Stress and anxiety",
-                  "Depression",
-                  "Relationship issues",
-                  "Work-life balance",
-                  "Grief and loss",
-                  "Trauma/PTSD",
-                  "Other",
-                ].map((option) => (
+                {therapyGoalsOptions.map((option) => (
                   <div
                     key={option}
                     className={`radio-option-MN ${
-                      formData.supportReason === option ? "selected" : ""
+                      formData.therapyGoals.includes(option) ? "selected" : ""
                     }`}
-                    onClick={() => handleRadioChange("supportReason", option)}
+                    onClick={() => handleCheckboxChange("therapyGoals", option)}
                   >
                     <div className="radio-circle-MN">
-                      {formData.supportReason === option && (
+                      {formData.therapyGoals.includes(option) && (
                         <div className="radio-dot-MN"></div>
                       )}
                     </div>
@@ -437,81 +531,57 @@ const IndividualForm = () => {
                   </div>
                 ))}
               </div>
-              {renderError("supportReason")}
+              {renderError("therapyGoals")}
             </div>
-
-            {formData.supportReason === "Other" && (
+            {formData.therapyGoals?.includes("Other") && (
               <div className="form-field-MN">
                 <label>
-                  Please specify your reason{" "}
+                  Please specify your therapy goal{" "}
                   <span className="required-field">*</span>
                 </label>
                 <textarea
-                  name="otherSupportReason"
-                  value={formData.otherSupportReason}
+                  name="otherTherapyGoal"
+                  value={formData.otherTherapyGoal}
                   onChange={handleChange}
-                  placeholder="Please describe your reason for seeking support..."
-                  rows="2"
-                  className={errors.otherSupportReason ? "error-input" : ""}
+                  placeholder="Describe your therapy goal"
+                  rows="1"
+                  className={errors.otherTherapyGoal ? "error-input" : ""}
                 ></textarea>
-                {renderError("otherSupportReason")}
+                {renderError("otherTherapyGoal")}
               </div>
             )}
           </div>
         );
+
+      // Step 3: Previous Therapy & Language Preference
       case 3:
         return (
           <div className="form-step-MN form-step-3-MN">
             <h2 className="form-title-MN">Additional Information</h2>
             <p className="form-subtitle-MN">
-              Please provide more details about your situation.
+              Please provide more details about your therapy preferences.
             </p>
 
             <div className="form-field-MN">
-              <label>
-                What is the reason behind your feelings (if identified)?{" "}
-                <span className="required-field">*</span>
-              </label>
-              <select
-                name="feelingsReason"
-                value={formData.feelingsReason}
-                onChange={handleDropdownChange}
-                className={errors.feelingsReason ? "error-input" : ""}
-              >
-                <option value="" disabled>
-                  Select a reason
-                </option>
-                {feelingsReasonOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              {renderError("feelingsReason")}
-            </div>
-
-            <div className="form-field-MN">
               <p className="form-label-MN">
-                Have you previously consulted with a mental health professional?{" "}
+                Have you attended couple therapy before?{" "}
                 <span className="required-field">*</span>
               </p>
               <div
                 className={`radio-group-MNI ${
-                  errors.previousConsultation ? "error-border" : ""
+                  errors.previousTherapy ? "error-border" : ""
                 }`}
               >
                 {["Yes", "No"].map((option) => (
                   <div
                     key={option}
                     className={`radio-option-MN ${
-                      formData.previousConsultation === option ? "selected" : ""
+                      formData.previousTherapy === option ? "selected" : ""
                     }`}
-                    onClick={() =>
-                      handleRadioChange("previousConsultation", option)
-                    }
+                    onClick={() => handleRadioChange("previousTherapy", option)}
                   >
                     <div className="radio-circle-MN">
-                      {formData.previousConsultation === option && (
+                      {formData.previousTherapy === option && (
                         <div className="radio-dot-MN"></div>
                       )}
                     </div>
@@ -519,35 +589,20 @@ const IndividualForm = () => {
                   </div>
                 ))}
               </div>
-              {renderError("previousConsultation")}
+              {renderError("previousTherapy")}
             </div>
-          </div>
-        );
-      case 4:
-        return (
-          <div className="form-step-MN form-step-4-MN">
-            <h2 className="form-title-MN">Language Preference</h2>
-            <p className="form-subtitle-MN">
-              Select your preferred language for the session.{" "}
-              <span className="required-field">*</span>
-            </p>
 
             <div className="form-field-MN">
+              <p className="form-label-MN">
+                Preferred language for the session{" "}
+                <span className="required-field">*</span>
+              </p>
               <div
                 className={`radio-group-MNI ${
                   errors.preferredLanguage ? "error-border" : ""
                 }`}
               >
-                {[
-                  "English",
-                  "Hindi",
-                  "Kannada",
-                  "Tamil",
-                  "Telugu",
-                  "Bengali",
-                  "Marathi",
-                  "Other",
-                ].map((option) => (
+                {["English", "Hindi", "Other"].map((option) => (
                   <div
                     key={option}
                     className={`radio-option-MN ${
@@ -580,7 +635,7 @@ const IndividualForm = () => {
                   name="otherLanguage"
                   value={formData.otherLanguage}
                   onChange={handleChange}
-                  placeholder="e.g. Punjabi"
+                  placeholder="Enter your preferred language"
                   className={errors.otherLanguage ? "error-input" : ""}
                 />
                 {renderError("otherLanguage")}
@@ -588,10 +643,12 @@ const IndividualForm = () => {
             )}
           </div>
         );
-      case 5:
+
+      // Step 4: Session Time & Additional Info
+      case 4:
         return (
-          <div className="form-step-MN form-step-5-MN">
-            <h2 className="form-title-MN">Session Scheduling</h2>
+          <div className="form-step-MN form-step-4-MN">
+            <h2 className="form-title-MN">Session Information</h2>
             <p className="form-subtitle-MN">
               Select your preferred date and time for the session.
             </p>
@@ -611,96 +668,50 @@ const IndividualForm = () => {
               {renderError("sessionDate")}
             </div>
 
-            <div className="form-field-MN">
-              <p className="form-label-MN">
-                Timings for session: <span className="required-field">*</span>
-              </p>
-              <div
-                className={`radio-group-MNI ${
-                  errors.sessionTime ? "error-border" : ""
-                }`}
-              >
-                {[
-                  "9 AM to 12 PM",
-                  "12 PM to 3 PM",
-                  "3 PM to 6 PM",
-                  "6 PM to 9 PM",
-                  "9 PM to 12 AM",
-                ].map((option) => (
-                  <div
-                    key={option}
-                    className={`radio-option-MN ${
-                      formData.sessionTime === option ? "selected" : ""
-                    }`}
-                    onClick={() => handleRadioChange("sessionTime", option)}
-                  >
-                    <div className="radio-circle-MN">
-                      {formData.sessionTime === option && (
-                        <div className="radio-dot-MN"></div>
-                      )}
-                    </div>
-                    <span>{option}</span>
-                  </div>
-                ))}
-              </div>
-              {renderError("sessionTime")}
-            </div>
-          </div>
-        );
-      case 6:
-        return (
-          <div className="form-step-MN form-step-6-MN">
-            <h2 className="form-title-MN">Additional Preferences</h2>
             <p className="form-subtitle-MN">
-              Tell us more about your preferences for the consultation.
+              Let us know about your availability and other details.
             </p>
 
             <div className="form-field-MN">
               <p className="form-label-MN">
-                Do you have a preference for the gender of the counselor?{" "}
+                When are you both available for the session?{" "}
                 <span className="required-field">*</span>
               </p>
               <div
-                className={`radio-group-MNIM ${
-                  errors.counselorGenderPreference ? "error-border" : ""
+                className={`dropdown-container-MN ${
+                  errors.sessionTime ? "error-border" : ""
                 }`}
               >
-                {["Male", "Female", "No preference"].map((option) => (
-                  <div
-                    key={option}
-                    className={`radio-option-MN OneLineOptions ${
-                      formData.counselorGenderPreference === option
-                        ? "selected"
-                        : ""
-                    }`}
-                    onClick={() =>
-                      handleRadioChange("counselorGenderPreference", option)
-                    }
-                  >
-                    <div className="radio-circle-MN">
-                      {formData.counselorGenderPreference === option && (
-                        <div className="radio-dot-MN"></div>
-                      )}
-                    </div>
-                    <span>{option}</span>
-                  </div>
-                ))}
+                <select
+                  className="dropdown-select-MN"
+                  name="sessionTime"
+                  value={formData.sessionTime || ""}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Select a time
+                  </option>
+                  <option value="9 AM to 12 PM">9 AM to 12 PM</option>
+                  <option value="12 PM to 3 PM">12 PM to 3 PM</option>
+                  <option value="3 PM to 6 PM">3 PM to 6 PM</option>
+                  <option value="6 PM to 9 PM">6 PM to 9 PM</option>
+                  <option value="9 PM to 12 AM">9 PM to 12 AM</option>
+                </select>
               </div>
-              {renderError("counselorGenderPreference")}
+              {renderError("sessionTime")}
             </div>
 
             <div className="form-field-MN">
-              <p className="form-label-MN">
-                Are you currently experiencing any medical conditions or taking
-                medications for mental health?{" "}
-                <span className="required-field">*</span>
+              <p className="form-label-MN ">
+                Do either of you have any medical conditions that may affect the
+                session? <span className="required-field">*</span>
               </p>
               <div
-                className={`radio-group-MNIM  ${
+                className={` oneLineDetail ${
                   errors.medicalConditions ? "error-border" : ""
                 }`}
               >
-                {["Yes", "No", "Prefer not to say"].map((option) => (
+                {["Yes", "No"].map((option) => (
                   <div
                     key={option}
                     className={`radio-option-MN ${
@@ -722,9 +733,9 @@ const IndividualForm = () => {
               {renderError("medicalConditions")}
             </div>
 
-            <div className="form-field-MN fieldWidthHear">
+            <div className="form-field-MN fieldWidthPro">
               <label>
-                How did you hear about our platform?{" "}
+                How did you hear about us?{" "}
                 <span className="required-field">*</span>
               </label>
               <select
@@ -746,9 +757,11 @@ const IndividualForm = () => {
             </div>
           </div>
         );
-      case 7:
+
+      // Step 5: Payment Information
+      case 5:
         return (
-          <div className="form-step-MN form-step-7-MN">
+          <div className="form-step-MN form-step-5-MN">
             <h2 className="form-title-MN">Payment Information</h2>
             <p className="form-subtitle-MN">
               Select your preferred payment method.
@@ -786,16 +799,15 @@ const IndividualForm = () => {
 
             <div className="pricing-info-MN">
               <h3>Consultation Fee</h3>
-              <p className="fee-MN">₹999.00</p>
+              <p className="fee-MN">₹1499.00</p>
               <p className="fee-description-MN">
-                One-hour online consultation session
+                One-hour online couples therapy session
               </p>
               <p className="note-MN">
                 * Additional sessions may be recommended based on initial
                 consultation
               </p>
             </div>
-
             <div className="form-field-MN terms-container-MN">
               <label className="terms-label-MN">
                 <span className="terms-text-MN">
@@ -818,15 +830,16 @@ const IndividualForm = () => {
             </div>
           </div>
         );
-      case 8:
+
+      // Step 6: Thank You / Confirmation
+      case 6:
         return (
-          <div className="form-step-MN form-step-8-MN">
+          <div className="form-step-MN form-step-6-MN">
             <div className="thank-you-MN">
               <div className="check-icon-MN">✓</div>
               <h2 className="form-title-MN">Thank You!</h2>
               <p className="form-subtitle-MN">
-                Your mental wellness consultation has been scheduled
-                successfully.
+                Your couples therapy session has been scheduled successfully.
               </p>
 
               <div className="confirmation-details-MN">
@@ -840,7 +853,7 @@ const IndividualForm = () => {
                   <strong>{formData.sessionTime}</strong>
                 </p>
                 <p>
-                  One of our counselors will contact you 24 hours before your
+                  One of our therapists will contact you 24 hours before your
                   scheduled session to confirm.
                 </p>
               </div>
@@ -850,13 +863,17 @@ const IndividualForm = () => {
                 <ul>
                   <li>Check your email for confirmation details</li>
                   <li>
-                    Complete the pre-consultation questionnaire (if applicable)
+                    Complete the pre-session questionnaire (if applicable)
                   </li>
                   <li>
                     Ensure you have a quiet, private space for your session
                   </li>
                   <li>
                     Test your device's camera and microphone before the session
+                  </li>
+                  <li>
+                    Have a short discussion with your partner before the session
+                    about your shared goals
                   </li>
                 </ul>
               </div>
@@ -867,7 +884,7 @@ const IndividualForm = () => {
                   contact us at:
                 </p>
                 <p>
-                  <strong>support@mentalwellness.com</strong> or call{" "}
+                  <strong>couples@therapysupport.com</strong> or call{" "}
                   <strong>+91 800-123-4567</strong>
                 </p>
               </div>
@@ -887,13 +904,13 @@ const IndividualForm = () => {
           <StepIndicator
             number="1"
             subtitle="Step 1"
-            title="PERSONAL INFO"
+            title="COUPLE INFO"
             active={currentStep === 1}
           />
           <StepIndicator
             number="2"
             subtitle="Step 2"
-            title="SUPPORT REASON"
+            title="THERAPY GOALS"
             active={currentStep === 2}
           />
           <StepIndicator
@@ -905,49 +922,34 @@ const IndividualForm = () => {
           <StepIndicator
             number="4"
             subtitle="Step 4"
-            title="LANGUAGE"
+            title="SESSION DETAILS"
             active={currentStep === 4}
           />
           <StepIndicator
             number="5"
             subtitle="Step 5"
-            title="SCHEDULING"
+            title="PAYMENT"
             active={currentStep === 5}
           />
           <StepIndicator
             number="6"
             subtitle="Step 6"
-            title="PREFERENCES"
+            title="CONFIRMATION"
             active={currentStep === 6}
           />
-          <StepIndicator
-            number="7"
-            subtitle="Step 7"
-            title="PAYMENT"
-            active={currentStep === 7}
-          />
-          <StepIndicator
-            number="8"
-            subtitle="Step 8"
-            title="CONFIRMATION"
-            active={currentStep === 8}
-          />
         </div>
-
         {/* Decorative circles */}
         <div className="decorative-circles-MN">
           <div className="circle-1-MN"></div>
           <div className="circle-2-MN"></div>
         </div>
       </div>
-
       {/* Right content area */}
       <div className="form-container-MN">
         <form onSubmit={handleSubmit}>
           <div className="form-content-MN">{renderStep()}</div>
-
           <div className="form-buttons-MN">
-            {currentStep > 1 && currentStep < 8 && (
+            {currentStep > 1 && currentStep < 6 && (
               <button
                 type="button"
                 onClick={prevStep}
@@ -956,7 +958,7 @@ const IndividualForm = () => {
                 Go Back
               </button>
             )}
-            {currentStep < 7 ? (
+            {currentStep < 5 ? (
               <button
                 type="button"
                 onClick={nextStep}
@@ -964,7 +966,7 @@ const IndividualForm = () => {
               >
                 Next Step
               </button>
-            ) : currentStep === 7 ? (
+            ) : currentStep === 5 ? (
               <button
                 type="button"
                 onClick={(e) => {
@@ -993,4 +995,4 @@ const IndividualForm = () => {
   );
 };
 
-export default IndividualForm;
+export default CouplesTherapyForm;
