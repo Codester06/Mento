@@ -17,6 +17,8 @@ import './index.css';
 import Test from "./pages/test";
 import AdminPanel from "./adminPages/Response";
 import ConsultationDetails from "./adminPages/detailsResponse";
+import AdminBlog from "./adminPages/BlogAdmin";
+import BlogDetail from "./components/blogs/blogDetail";
 
 function Main() {
   return (
@@ -38,6 +40,8 @@ function Main() {
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage/>}/>
             <Route path="/Depression-Tool" element={<Test/>}/>
             <Route path="/admin/responses" element={<AdminPanel/>}/>
+            <Route path="/admin/blog" element={<AdminBlog/>}/>
+            <Route path="/blog/:id" element={<BlogDetail />} />
   
           <Route 
             path="/admin/responses/:id" 

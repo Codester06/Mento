@@ -65,7 +65,7 @@ const AdminPanel = () => {
           {consultations.map((consultation) => (
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
-                <h3 className="client-name">{consultation.fullName}</h3>
+                <h3 className="client-name">{consultation.name}</h3>
                 <p className="client-email">{consultation.email}</p>
               </div>
               <div className="card-actions">
