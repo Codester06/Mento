@@ -128,3 +128,28 @@
     text-align: center;
   }
 }
+
+
+/* Add this to your footer.css file */
+
+.logout-button {
+  background: none;
+  border: none;
+  color: #070707; /* Match your footer link color */
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+}
+
+.logout-button:hover {
+  color: rgb(255, 0, 0); /* Match your footer link hover color */
+  text-decoration: underline;
+}
+
+.user-info {
+  margin: 5px 0;
+  color: #000000;
+  font-style: italic;
+}

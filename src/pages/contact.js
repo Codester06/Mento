@@ -1,7 +1,7 @@
 import ContactForm from "../components/contact/contactFrom";
 import ContactSection from "../components/contact/heading_contact";
 import BannerCu from "../components/contact/bannercu";
-import '../pages/contact.css'
+import'../components/contact/PageContact.css'
 
 
 const Contact = () => {

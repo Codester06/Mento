@@ -1,6 +1,6 @@
 import DepressionTest from "../components/assessment/depressionTest"
-import './test.css'
-const Test =()=>{
+import './SelfTest.css'
+const DepressionTestPage =()=>{
     return (
         <>
         <div className="DP">
@@ -11,4 +11,4 @@ const Test =()=>{
     )
 }
 
-export default Test;
+export default DepressionTestPage;

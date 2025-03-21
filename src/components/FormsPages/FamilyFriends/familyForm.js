@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './FormStyles.css';
-import { database } from "../../utils/firebaseConfig";
+import "../FormStyles.css";
+
+import { database } from "../../../utils/firebaseConfig";
 import { ref, push } from "firebase/database";
 
 const FamilyTherapyForm = () => {

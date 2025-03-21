@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue, remove } from 'firebase/database';
-import { database } from '../utils/firebaseConfig'; // Adjust path as needed
+import { database } from '../../utils/firebaseConfig'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
 import './AdminPanel.css'; // We'll create this CSS file next
 
-const AdminPanel = () => {
+const CouplePanel = () => {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Reference to the consultations in Firebase
-    const consultationsRef = ref(database, 'mental_wellness_consultations');
+    const consultationsRef = ref(database, 'couples_therapy_sessions');
     
     // Set up the listener for data changes
     const unsubscribe = onValue(consultationsRef, (snapshot) => {
@@ -34,13 +34,13 @@ const AdminPanel = () => {
   }, []);
 
   const handleView = (id) => {
-    navigate(`/admin/responses/${id}`);
+    navigate(`/admin/responses/couple-responses/${id}`);
   };
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this consultation?')) {
       try {
-        const consultationRef = ref(database, `mental_wellness_consultations/${id}`);
+        const consultationRef = ref(database, `couples_therapy_sessions/${id}`);
         await remove(consultationRef);
         // No need to update state manually as the onValue listener will handle it
       } catch (error) {
@@ -56,7 +56,7 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-container">
-      <h1 className="admin-title">Mental Wellness Consultations Admin Panel</h1>
+      <h1 className="admin-title">Couple Consultations Admin Panel</h1>
       
       {consultations.length === 0 ? (
         <p className="no-data">No consultations found.</p>
@@ -90,4 +90,4 @@ const AdminPanel = () => {
   );
 };
 
-export default AdminPanel;
+export default CouplePanel;

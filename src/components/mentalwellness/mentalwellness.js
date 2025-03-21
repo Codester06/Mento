@@ -1,6 +1,6 @@
 import "./mentalwellness.css";
 import FAQSectionWN from "./faqSection";
-import IndividualForm from "../Forms/IndividualForm";
+import IndividualForm from "../FormsPages/Individual/IndividualForm";
 
 const MentalWellnessComponent = ({ children }) => {
   return (
