@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
-import { database } from '../utils/firebaseConfig';
+import { database } from '../../../utils/firebaseConfig';
 import './ConsultationDetails.css';
 
-const ConsultationDetails = () => {
+const IndividualDetails = () => {
   const { id } = useParams();
   const [consultation, setConsultation] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ const ConsultationDetails = () => {
   }, [id]);
 
   const handleBack = () => {
-    navigate('/admin/responses');
+    navigate('/admin/responses/individual-responses');
   };
 
   if (loading) {
@@ -143,4 +143,4 @@ const ConsultationDetails = () => {
   );
 };
 
-export default ConsultationDetails;
+export default IndividualDetails;

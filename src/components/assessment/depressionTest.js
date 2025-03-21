@@ -406,11 +406,30 @@ const DepressionTest = () => {
   };
 
   return (
+    <>
+  <div class={styles.assessmentBanner}>
+  <div className={[styles.bannerDecoration, styles.decoration1].join(" ")}></div>
+  <div className={[styles.bannerDecoration, styles.decoration2].join(" ")}></div>
+  
+  <div class={styles.bannerContent}>
+    <div class={styles.bannerHeader}>
+      <h1 class={styles.SelfBannerTitle}>Depression Self Assessment</h1>
+      <p class={styles.SelfBannerTitle}>A confidential screening tool to help evaluate your mental wellbeing</p>
+    </div>
+    
+    <div class={styles.bannerInfo}>
+      <p class={styles.bannerDisclaimer}>
+        This assessment is based on the Beck Depression Inventory (BDI).
+        It is not a diagnostic tool, but can help identify symptoms that
+        may warrant professional attention.
+      </p>
+    </div>
+  </div>
+</div>
     <div className={styles.wellnessQuiz}>
       {!showResult ? (
         <div className={styles.quizContainer}>
           <div className={styles.quizHeader}>
-            <h1 className={styles.quizTitle}>Depression Self Assessment</h1>
             <p className={styles.questionCounter}>
               Question {currentQuestion + 1} of {quizData.length}
             </p>
@@ -457,10 +476,10 @@ const DepressionTest = () => {
             ) : (
               <button
                 onClick={handleNextQuestion}
-                className={styles.buttonNext}
-                disabled={answers[currentQuestion] === null}
+                className={styles.buttonPrevious}
+                // disabled={answers[currentQuestion] === null}
               >
-                Continue
+                Skip
               </button>
             )}
           </div>
@@ -473,7 +492,7 @@ const DepressionTest = () => {
           <div className={styles.resultsContent}>
             {/* Left side: Circular progress */}
             <div className={styles.resultsProgress}>
-              <CircularProgress percentage={(calculateScore() / maxPossibleScore) * 100} />
+            <CircularProgress percentage={scorePercentage()} />
             </div>
             
             {/* Right side: Score interpretation */}
@@ -589,7 +608,10 @@ const DepressionTest = () => {
         </div>
       )}
     </div>
+
+    </>
   );
+  
 };
 
 export default DepressionTest;

@@ -9,11 +9,15 @@
   
   /* Title Styling */
   .banner-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #1a202c;
-    max-width: 800px;
-    margin: 0 auto;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #444;
+    font-family: "Great Vibes", cursive;
+    background: linear-gradient(90deg, #32a8a2, #000000, #000c00, #32a8a2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: fadeIn 1s ease-in-out;
   }
   
   /* Subtitle Styling */
@@ -21,6 +25,18 @@
     font-size: 1.2rem;
     color: #6b7280;
     margin-top: 10px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   /* Decorative Elements */
