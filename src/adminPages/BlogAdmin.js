@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ref, push, set, onValue, remove } from 'firebase/database';
 import { database } from '../utils/firebaseConfig'; // Adjust path as needed
 import './AdminBlog.css';
+import { useNavigate } from 'react-router-dom';
 
 const AdminBlog = () => {
   // State for blog post form
@@ -11,6 +12,7 @@ const AdminBlog = () => {
   const [imagePreview, setImagePreview] = useState('');
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate =  useNavigate()
   
   // State for blog posts list
   const [blogPosts, setBlogPosts] = useState([]);
@@ -190,8 +192,14 @@ const AdminBlog = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate('/admin/admin-dashboard');
+  };
+
   return (
     <div className="admin-blog-container">
+      <button onClick={handleBack} className="back-btn">← Back to Dashboard</button>
+      
       <h1 className="admin-blog-title">Blog Administration</h1>
       
       <div className="admin-blog-layout">

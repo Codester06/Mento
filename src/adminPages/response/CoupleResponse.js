@@ -4,6 +4,8 @@ import { database } from '../../utils/firebaseConfig'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
 import './AdminPanel.css'; // We'll create this CSS file next
 
+
+
 const CouplePanel = () => {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,8 +56,14 @@ const CouplePanel = () => {
     return <div className="loading-container">Loading consultations...</div>;
   }
 
+  const handleBack = () => {
+    navigate('/admin/admin-dashboard');
+  };
+  
+
   return (
     <div className="admin-container">
+       <button onClick={handleBack} className="back-btn">← Back to Dashboard</button>
       <h1 className="admin-title">Couple Consultations Admin Panel</h1>
       
       {consultations.length === 0 ? (

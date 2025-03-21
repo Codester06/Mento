@@ -54,9 +54,14 @@ const FriendsFamilyPanel = () => {
   if (loading) {
     return <div className="loading-container">Loading consultations...</div>;
   }
+  const handleBack = () => {
+    navigate('/admin/admin-dashboard');
+  };
 
   return (
     <div className="admin-container">
+       <button onClick={handleBack} className="back-btn">← Back to Dashboard</button>
+
       <h1 className="admin-title">Family friends Consultations Admin Panel</h1>
       
       {consultations.length === 0 ? (

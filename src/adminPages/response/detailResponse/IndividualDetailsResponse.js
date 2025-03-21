@@ -34,14 +34,14 @@ const IndividualDetails = () => {
   };
 
   if (loading) {
-    return <div className="loading-container">Loading consultation details...</div>;
+    return <div className="loading-container">Loading individual consultation details...</div>;
   }
 
   if (!consultation) {
     return (
       <div className="details-container">
         <div className="not-found">
-          <h2>Consultation Not Found</h2>
+          <h2>Individual Consultation Not Found</h2>
           <p>The consultation you're looking for doesn't exist or has been deleted.</p>
           <button onClick={handleBack} className="back-btn">Back to List</button>
         </div>
@@ -56,11 +56,18 @@ const IndividualDetails = () => {
     return isNaN(date.getTime()) ? dateString : date.toLocaleDateString();
   };
 
+  // Helper function to format array data
+  const formatArrayData = (array) => {
+    if (!array) return '';
+    if (typeof array === 'string') return array;
+    return array.join(', ');
+  };
+
   return (
     <div className="details-container">
       <div className="details-header">
-        <button onClick={handleBack} className="back-btn">← Back to List</button>
-        <h1 className="details-title">Consultation Details</h1>
+        <button onClick={handleBack} className="back-btn">← Back to Individual Consultations</button>
+        <h1 className="details-title">Individual Consultation Details</h1>
       </div>
 
       <div className="details-card">
@@ -81,29 +88,103 @@ const IndividualDetails = () => {
                 <div className="info-value">{consultation.phone}</div>
               </div>
             )}
+            {consultation.age && (
+              <div className="info-item">
+                <label>Age</label>
+                <div className="info-value">{consultation.age}</div>
+              </div>
+            )}
+            {consultation.gender && (
+              <div className="info-item">
+                <label>Gender</label>
+                <div className="info-value">{consultation.gender}</div>
+              </div>
+            )}
+            {consultation.city && (
+              <div className="info-item">
+                <label>City</label>
+                <div className="info-value">{consultation.city}</div>
+              </div>
+            )}
+            {consultation.profession && (
+              <div className="info-item">
+                <label>Profession</label>
+                <div className="info-value">{consultation.profession}</div>
+              </div>
+            )}
           </div>
         </div>
 
-        {(consultation.subject || consultation.preferredDate || consultation.preferredTime) && (
+        {consultation.therapyGoals && (
           <div className="details-section">
-            <h2 className="section-title">Consultation Details</h2>
+            <h2 className="section-title">Therapy Goals</h2>
             <div className="info-grid">
-              {consultation.subject && (
+              <div className="info-item">
+                <label>Therapy Goals</label>
+                <div className="info-value">{formatArrayData(consultation.therapyGoals)}</div>
+              </div>
+              {consultation.otherTherapyGoal && (
                 <div className="info-item">
-                  <label>Subject</label>
-                  <div className="info-value">{consultation.subject}</div>
+                  <label>Other Therapy Goal</label>
+                  <div className="info-value">{consultation.otherTherapyGoal}</div>
                 </div>
               )}
-              {consultation.preferredDate && (
+              {consultation.previousTherapy && (
                 <div className="info-item">
-                  <label>Preferred Date</label>
-                  <div className="info-value">{formatDate(consultation.preferredDate)}</div>
+                  <label>Previous Therapy Experience</label>
+                  <div className="info-value">{consultation.previousTherapy}</div>
                 </div>
               )}
-              {consultation.preferredTime && (
+            </div>
+          </div>
+        )}
+
+        {(consultation.preferredLanguage || consultation.medicalConditions) && (
+          <div className="details-section">
+            <h2 className="section-title">Session Preferences</h2>
+            <div className="info-grid">
+              {consultation.preferredLanguage && (
                 <div className="info-item">
-                  <label>Preferred Time</label>
-                  <div className="info-value">{consultation.preferredTime}</div>
+                  <label>Preferred Language</label>
+                  <div className="info-value">{consultation.preferredLanguage}</div>
+                </div>
+              )}
+              {consultation.otherLanguage && (
+                <div className="info-item">
+                  <label>Other Language</label>
+                  <div className="info-value">{consultation.otherLanguage}</div>
+                </div>
+              )}
+              {consultation.medicalConditions && (
+                <div className="info-item">
+                  <label>Medical Conditions</label>
+                  <div className="info-value">{consultation.medicalConditions}</div>
+                </div>
+              )}
+              {consultation.referralSource && (
+                <div className="info-item">
+                  <label>Referral Source</label>
+                  <div className="info-value">{consultation.referralSource}</div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {(consultation.paymentMethod || consultation.termsAgreed) && (
+          <div className="details-section">
+            <h2 className="section-title">Payment Information</h2>
+            <div className="info-grid">
+              {consultation.paymentMethod && (
+                <div className="info-item">
+                  <label>Payment Method</label>
+                  <div className="info-value">{consultation.paymentMethod}</div>
+                </div>
+              )}
+              {consultation.termsAgreed !== undefined && (
+                <div className="info-item">
+                  <label>Terms Agreed</label>
+                  <div className="info-value">{consultation.termsAgreed ? "Yes" : "No"}</div>
                 </div>
               )}
             </div>
@@ -122,13 +203,35 @@ const IndividualDetails = () => {
           <div className="info-grid">
             {Object.entries(consultation).map(([key, value]) => {
               // Skip already displayed fields and id
-              if (['id', 'fullName', 'email', 'phone', 'subject', 'message', 'preferredDate', 'preferredTime'].includes(key)) {
+              if ([
+                'id', 'name', 'email', 'phone', 'age', 'gender', 'city', 'profession',
+                'subject', 'primaryConcern', 'otherPrimaryConcern', 'preferredDate', 'preferredTime', 
+                'consultationType', 'urgency', 'therapyGoals', 'otherTherapyGoal', 'previousTherapy',
+                'preferredLanguage', 'otherLanguage', 'medicalConditions', 'referralSource',
+                'paymentMethod', 'termsAgreed', 'message'
+              ].includes(key)) {
                 return null;
               }
+              
+              // Skip empty values
+              if (value === null || value === undefined || value === '') {
+                return null;
+              }
+              
+              // Format the display value based on type
+              let displayValue = value;
+              if (typeof value === 'boolean') {
+                displayValue = value ? 'Yes' : 'No';
+              } else if (Array.isArray(value)) {
+                displayValue = formatArrayData(value);
+              } else if (typeof value === 'object') {
+                displayValue = JSON.stringify(value);
+              }
+              
               return (
                 <div key={key} className="info-item">
                   <label>{key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</label>
-                  <div className="info-value">{typeof value === 'string' ? value : JSON.stringify(value)}</div>
+                  <div className="info-value">{displayValue}</div>
                 </div>
               );
             })}
@@ -136,7 +239,14 @@ const IndividualDetails = () => {
         </div>
 
         <div className="details-footer">
-          <div className="submission-id">Submission ID: {consultation.id}</div>
+          <div className="submission-info">
+            <div className="submission-id">Submission ID: {consultation.id}</div>
+            {consultation.submittedAt && (
+              <div className="submission-date">
+                Submitted: {formatDate(consultation.submittedAt)}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
