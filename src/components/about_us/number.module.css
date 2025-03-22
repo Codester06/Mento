@@ -1,4 +1,4 @@
-.number-bg{
+.numberBg {
   width: 100%;
   height: auto;
   padding: 3em;
@@ -8,7 +8,7 @@
 }
 
 /** Decorative circles **/
-.decorative-circles {
+/* .decorativeCircles {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -17,40 +17,37 @@
   z-index: 0;
 }
 
-.circle-1, .circle-2 ,.circle-3{
+.circle1, .circle2, .circle3 {
   position: absolute;
   border-radius: 50%;
   opacity: 0.4;
 }
 
-.circle-1 {
+.circle1 {
   width: 500px;
   height: 500px;
   background: linear-gradient(to bottom, #ffd980, #CFFAF3FA);
   bottom: -90px;
   left: -120px;
 }
-
-
-.circle-2 {
+ 
+.circle2 {
   width: 700px;
   height: 700px;
-
   background: linear-gradient(to bottom, rgba(255, 218, 116, 0.994), #CFFAF3FA);
   bottom: -150px;
   right: -200px;
 }
 
-.circle-3 {
+.circle3 {
   width: 1000px;
   height: 900px;
   background: linear-gradient(to top, #72ff686e, #ffffff99);
   bottom: 420px;
   left: -70px;
-}
-
-
-.stats-container {
+} */
+ 
+.statsContainer {
   /* box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
   max-width: 125rem;
   margin: 0 auto;
@@ -61,7 +58,7 @@
   z-index: 1;
 }
   
-.stats-heading {
+.statsHeading {
   font-size: 48px;
   font-family: 'Times New Roman';
   color: #4a4a4a;
@@ -69,7 +66,7 @@
   font-weight: 600;
 }
   
-.stats-subheading {
+.statsSubheading {
   font-size: 18px;
   font-family: 'Delius';
   color: #4a4a4a;
@@ -78,41 +75,41 @@
   line-height: 1.6;
 }
   
-.highlight-number {
+.highlightNumber {
   color: #021152;
   font-weight: 700;
 }
   
-.stats-grid {
+.statsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
   
-.stat-card {
+.statCard {
   padding: 20px 15px;
-  border-right: 1px solid #e0e0e0;
+  /* border-right: 1px solid #e0e0e0; */
 }
   
-.stat-card:last-child {
+.statCard:last-child {
   border-right: none;
 }
   
-.stat-icon {
+.statIcon {
   color: #338a66;
   width: 40px;
   height: 40px;
   margin-bottom: 15px;
 }
   
-.stat-number {
+.statNumber {
   font-size: 32px;
   color: #666633;
   margin: 15px 0;
   font-weight: 600;
 }
   
-.stat-description {
+.statDescription {
   color: #4a4a4a;
   font-size: 16px;
   font-family: 'Delius';
@@ -121,55 +118,130 @@
   line-height: 1.2;
 }
 
+/* Tablet styles */
+@media (max-width: 768px) {
+  .numberBg {
+    padding: 0.5rem;
+    height: 22rem;
+  
+  }
+  
+  .statsContainer {
+    scale: 0.8;
+    padding: 15px 15px;
+    margin-top: 0;
+ 
+  }
+  
+  .statsHeading {
+    font-size: 36px;
+  }
+  
+  .statsSubheading {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .statsGrid {
+    gap: 20px;
+  }
+  .statCard{
+   
+    scale: 0.8;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .numberBg {
+    padding-top: 0;
+    padding: 0.5rem;
+    height: 55rem;
+  
+  }
+  .statsContainer{
+    padding-top: 0;
+  }
+
+
+}
+
+
+/* Small tablet / Large mobile styles */
+@media (max-width: 600px) {
+  .numberBg {
+    padding: 1.5em;
+  }
+  
+  .statsHeading {
+    font-size: 30px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statCard {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .statCard:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Mobile styles */
 @media (max-width: 325px) {
-  .number-bg {
+  .numberBg {
     padding: 1em;
     width: 100%;
   }
-
-  .stats-container {
+  
+  .statsContainer {
     padding: 20px 10px;
     border-radius: 1em;
   }
-
-  .stats-heading {
+  
+  .statsHeading {
     font-size: 24px;
     margin-bottom: 10px;
   }
-
-  .stats-subheading {
+  
+  .statsSubheading {
     font-size: 14px;
     margin: 0 auto 30px;
     line-height: 1.4;
   }
-
-  .stats-grid {
+  
+  .statsGrid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-
-  .stat-card {
+  
+  .statCard {
     padding: 10px;
     border-right: none;
     border-bottom: 1px solid #e0e0e0;
   }
-
-  .stat-card:last-child {
+  
+  .statCard:last-child {
     border-bottom: none;
   }
-
-  .stat-icon {
+  
+  .statIcon {
     width: 30px;
     height: 30px;
     margin-bottom: 10px;
   }
-
-  .stat-number {
+  
+  .statNumber {
     font-size: 22px;
     margin: 10px 0;
   }
-
-  .stat-description {
+  
+  .statDescription {
     font-size: 14px;
     line-height: 1.1;
   }

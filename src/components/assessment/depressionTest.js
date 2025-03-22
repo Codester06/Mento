@@ -245,7 +245,10 @@ const DepressionTest = () => {
   };
 
   // Calculate score percentage
-  
+  const scorePercentage = () => {
+    const score = calculateScore();
+    return (score / maxPossibleScore) * 100;
+  };
 
   useEffect(() => {
     if (showResult) {

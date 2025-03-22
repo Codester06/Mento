@@ -155,17 +155,6 @@ background: transparent;
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .chipsContainer {
-    flex-wrap: wrap;
-    height: auto;
-  }
-  
-  .chipCard {
-    width: 22rem;
-  }
-}
 
 @media (max-width: 768px) {
   .paragraph18 {
@@ -176,14 +165,27 @@ background: transparent;
     gap: 2rem;
     transform: scale(0.9);
   }
+  .chipImageContainer img{
+    height: 12rem;
+  }
   
+      .chipInfo{
+        gap: 0;
+      }
+      .chipName{
+        font-size: 1.4rem;
+      }
+      .chipDescription{
+        font-size: 90%;
+        text-transform: capitalize;
+      }
   .chipCard {
     width: 90%;
     max-width: 24rem;
   }
   
   .chipImageContainer {
-    height: 20rem;
+    height: 15rem;
   }
 }
 
@@ -193,7 +195,10 @@ background: transparent;
   }
   
   .chipsContainer {
-    transform: scale(1);
+   display: flex;
+   flex-direction: column;
+   max-height:51rem ;
+   margin-bottom: 5rem;
   }
   
   .chipCard {
@@ -211,5 +216,17 @@ background: transparent;
   .shopButton {
     width: 90%;
     padding: 10px 0;
+  }
+.chipsContainer{
+  height: 100rem;
+  scale: 0.8;
+  margin-top: 10rem;
+}
+  .chipDescription{
+
+  }
+  .chipCard{
+    overflow:visible;
+    flex-direction: row;
   }
 }
