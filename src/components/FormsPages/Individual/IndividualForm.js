@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
-import { database } from "../../../utils/firebaseConfig";
-import { ref, push } from "firebase/database";
+// import { database } from "../../../utils/firebaseConfig";
+// import { ref, push } from "firebase/database";
+import { postData } from '../../../utils/awsService';
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -222,29 +223,73 @@ const IndividualForm = () => {
   };
 
   // Submit form
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (validateStep()) {
+  //     try {
+  //       // Use the formData directly for submission to Firebase
+  //       await push(ref(database, "mental_wellness_consultations"), formData);
+
+  //       console.log("Form data submitted:", formData);
+
+  //       // Show success alert
+  //       alert(
+  //         "Form submitted successfully! Your mental wellness consultation has been scheduled."
+  //       );
+
+  //       // Optionally reset the form here if needed
+  //       // formRef.current.reset();
+  //     } catch (error) {
+  //       console.error("Error saving consultation data:", error);
+  //       alert("Failed to schedule your consultation. Please try again.");
+  //     }
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (validateStep()) {
-      try {
-        // Use the formData directly for submission to Firebase
-        await push(ref(database, "mental_wellness_consultations"), formData);
-
-        console.log("Form data submitted:", formData);
-
-        // Show success alert
-        alert(
-          "Form submitted successfully! Your mental wellness consultation has been scheduled."
-        );
-
-        // Optionally reset the form here if needed
-        // formRef.current.reset();
-      } catch (error) {
-        console.error("Error saving consultation data:", error);
-        alert("Failed to schedule your consultation. Please try again.");
-      }
+        try {
+            // Add timestamp to the form data
+            const dataToSubmit = {
+                ...formData,
+                submittedAt: new Date().toISOString()
+            };
+            
+            console.log("Submitting form data:", dataToSubmit);
+            
+            // Use postData to submit the form data
+            const response = await postData('/individual', dataToSubmit);
+            
+            console.log("Form data submitted successfully:", response);
+            
+            // Show success alert
+            alert(
+                "Form submitted successfully! Your mental wellness consultation has been scheduled."
+            );
+            
+            // Move to confirmation step after successful submission
+            nextStep();
+        } catch (error) {
+            console.error("Error saving consultation data:", error);
+            
+            // Show more detailed error message
+            let errorMessage = "Failed to schedule your consultation. ";
+            
+            // Check different error response formats (axios vs custom error)
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage += error.response.data.message;
+            } else if (error.message) {
+                errorMessage += error.message;
+            } else {
+                errorMessage += "Please try again later.";
+            }
+            
+            alert(errorMessage);
+        }
     }
-  };
+};
 
   // Step indicator component
   const StepIndicator = ({ number, title, subtitle, active }) => (

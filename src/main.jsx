@@ -27,8 +27,8 @@ import IndividualDetails from "./adminPages/response/detailResponse/IndividualDe
 import CouplePanel from "./adminPages/response/CoupleResponse";
 import IndividualPanel from "./adminPages/response/IndividualResponse";
 import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
-import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse copy";
-import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse copy 2";
+import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
+import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
 
 // Protected route component
 const ProtectedRoute = ({ element, requiredRole = null }) => {

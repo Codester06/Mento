@@ -1,0 +1,109 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    background-image: linear-gradient(to bottom, #E4F8E8,#ffcfcf98, rgba(251, 242, 220, 0.504));
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  
+  .not-found-content {
+    max-width: 600px;
+    padding: 3rem;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 8px 42px rgba(72, 72, 72, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .not-found-title {
+    font-size: 4rem;
+    color: #35353567;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .not-found-subtitle {
+    font-size: 1.5rem;
+    color: #35353567;
+
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .not-found-message {
+    color: #35353567;
+
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .not-found-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+  
+  .not-found-button {
+    background: linear-gradient(135deg, #fffbe6, #ffeb99);
+
+    color: #85640B;
+
+    border: 2px solid #85640B;
+
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  .not-found-button:hover {
+    background: linear-gradient(135deg, #ffeb99, #c1fff65c);
+    color: #85640B;
+
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* For smaller screens */
+  @media (max-width: 768px) {
+    .not-found-title {
+      font-size: 3rem;
+    }
+    
+    .not-found-subtitle {
+      font-size: 1.25rem;
+    }
+    
+    .not-found-content {
+      padding: 2rem;
+    }
+  }
