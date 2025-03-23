@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import "../FormStyles.css";
 
-import { database } from "../../../utils/firebaseConfig";
-import { ref, push } from "firebase/database";
+// import { database } from "../../../utils/firebaseConfig";
+// import { ref, push } from "firebase/database";
+import { postData } from '../../../utils/awsService';
 
 const FamilyTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -212,11 +213,14 @@ const FamilyTherapyForm = () => {
     
     if (validateStep()) {
       try {
-        await push(ref(database, "family_therapy_sessions"), formData);
+        // await push(ref(database, "family_therapy_sessions"), formData);
         
         console.log("Form data submitted:", formData);
-        
+        const response = await postData('/family_friend', formData);
+        console.log("Form data submitted:", response);
         // Show success alert and proceed to thank you page
+        const response1 = await postData('/family_friend', "hello");
+
         nextStep();
         
       } catch (error) {

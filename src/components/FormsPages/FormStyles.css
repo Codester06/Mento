@@ -646,7 +646,7 @@ input:focus, select:focus, textarea:focus {
   .multi-step-form-MN {
     flex-direction: column;
     margin: 0;
-    height: 675px;
+    height: 805px;
     border-radius: 0;
     width: 30rem;
     font-size: 60%;
@@ -727,7 +727,9 @@ input:focus, select:focus, textarea:focus {
     grid-template-columns: 1fr;
   }
 }
-
+.radio-group-MNIM{
+  flex-direction: column;
+}
 
 
   
