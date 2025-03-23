@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
-import { database } from "../../../utils/firebaseConfig";
-import { ref, push } from "firebase/database";
+// import { database } from "../../../utils/firebaseConfig";
+// import { ref, push } from "firebase/database";
+import { postData } from '../../../utils/awsService';
 
 const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -257,10 +258,11 @@ const CouplesTherapyForm = () => {
 
     if (validateStep()) {
       try {
-        await push(ref(database, "couples_therapy_sessions"), formData);
+        // await push(ref(database, "couples_therapy_sessions"), formData);
 
         console.log("Form data submitted:", formData);
-
+        const response = await postData('/couple', formData);
+        console.log("Form data submitted:", response);
         // Show success alert
         alert(
           "Form submitted successfully! Your couples therapy session has been scheduled."
