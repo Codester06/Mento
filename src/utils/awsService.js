@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Replace with your actual API Gateway URL
-const API_BASE_URL = 'https://7lmnv739zf.execute-api.ap-south-1.amazonaws.com/dev';
-const API_KEY ='EMbpvxB6TW52c5xfilrOzGVtQSOgOkxVi8lhmbd0';
+const API_BASE_URL = process.env.REACT_APP_AWS_API_BASE;
+const API_KEY =process.env.REACT_APP_AWS_BASE_API_KEY;
 
 // Function to send a GET request (fetch all items or a specific one by ID)
 const getData = async (endpoint, id = '') => {
