@@ -219,7 +219,6 @@ const FamilyTherapyForm = () => {
         const response = await postData('/family_friend', formData);
         console.log("Form data submitted:", response);
         // Show success alert and proceed to thank you page
-        const response1 = await postData('/family_friend', "hello");
 
         nextStep();
         
