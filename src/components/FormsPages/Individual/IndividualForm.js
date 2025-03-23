@@ -4,6 +4,8 @@ import "../FormStyles.css";
 // import { ref, push } from "firebase/database";
 import { postData } from '../../../utils/awsService';
 
+
+
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 8;

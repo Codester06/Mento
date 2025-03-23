@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // Replace with your actual API Gateway URL
-const API_BASE_URL = '';
+const API_BASE_URL = 'https://7lmnv739zf.execute-api.ap-south-1.amazonaws.com/dev';
+const API_KEY ='EMbpvxB6TW52c5xfilrOzGVtQSOgOkxVi8lhmbd0';
 
 // Function to send a GET request (fetch all items or a specific one by ID)
 const getData = async (endpoint, id = '') => {
@@ -21,8 +22,7 @@ const postData = async (endpoint, data) => {
         const response = await axios.post(`${API_BASE_URL}${endpoint}`, data, {
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*', // This is not necessary in request
-                'Access-Control-Allow-Credentials': true // Recommend configurate on server-side
+                'x-api-key': API_KEY
             }
         });
         console.log('POST Response:', response.data);
