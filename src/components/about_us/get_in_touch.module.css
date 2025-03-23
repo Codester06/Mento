@@ -1,0 +1,176 @@
+.contactContainer {
+  width: 100%;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #CFFAF3FA, rgba(251, 242, 220, 0.444));
+  padding: 60px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contactHeading {
+  font-size: 48px;
+  font-family: 'Times New Roman';
+  color: #4a4a4a;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.contactOptions {
+  margin-top: 5em;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.contactOption {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.contactIcon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.puzzleIcon {
+  composes: contactIcon;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' stroke-width='2'%3E%3Cpath d='M30,30 L50,30 L50,20 C50,15 55,15 60,20 C65,15 70,15 70,20 L70,30 L90,30 L90,50 L100,50 C105,50 105,55 100,60 C105,65 105,70 100,70 L90,70 L90,90 L70,90 L70,100 C70,105 65,105 60,100 C55,105 50,105 50,100 L50,90 L30,90 L30,70 L20,70 C15,70 15,65 20,60 C15,55 15,50 20,50 L30,50 L30,30 Z' fill='none' stroke='%23666633' /%3E%3Cpath d='M30,30 L50,30 L50,50 L30,50 Z' fill='none' stroke='%23e67e5a' stroke-width='3' /%3E%3C/svg%3E");
+}
+
+.handshakeIcon {
+  composes: contactIcon;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,40 C25,35 30,35 35,40 L50,55 C55,50 60,50 65,55 L80,40 C85,35 90,35 95,40 L80,60 C75,65 65,65 60,60 L50,70 C45,75 35,75 30,70 L15,55 C10,50 10,45 15,40 L20,40 Z' fill='none' stroke='%23666633' stroke-width='2' /%3E%3Cpath d='M35,40 L50,55' stroke='%23e67e5a' stroke-width='3' stroke-linecap='round' /%3E%3Cpath d='M65,55 L80,40' stroke='%23e67e5a' stroke-width='3' stroke-linecap='round' /%3E%3C/svg%3E");
+}
+
+.questionIcon {
+  composes: contactIcon;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30,30 C30,15 50,10 60,20 C70,30 65,45 55,50 C50,52 48,55 48,60 L48,65' fill='none' stroke='%23666633' stroke-width='2' /%3E%3Ccircle cx='48' cy='75' r='3' fill='%23666633' /%3E%3Crect x='20' y='20' width='40' height='30' rx='10' ry='10' fill='none' stroke='%23e67e5a' stroke-width='2' /%3E%3Ctext x='32' y='40' font-size='20' fill='%23e67e5a' font-family='Arial'>?</text>%3C/svg%3E");
+}
+
+.contactTitle {
+  font-size: 18px;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.contactLink {
+  color: #212303;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #e67e5a;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.contactLink:hover {
+  color: #d86a45;
+  border-color: #d86a45;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .contactHeading {
+    font-size: 40px;
+  }
+  
+  .contactOptions {
+    margin-top: 3em;
+    gap: 20px;
+  }
+  
+  .contactOption {
+    min-width: 200px;
+    padding: 15px;
+  }
+  
+  .contactIcon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .contactTitle {
+    font-size: 16px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .contactContainer {
+    padding: 40px 15px;
+  }
+  
+  .contactHeading {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+  
+  .contactOptions {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 3em;
+    gap: 17px;
+
+  }
+  
+  .contactOption {
+  
+    width: 20rem;
+    height: 14rem;
+   padding-top: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .contactIcon {
+    width: 60px;
+    height: 60px;
+    margin-right: 2rem;
+    scale: 0.7;
+    
+    margin-bottom: 20px;
+  }
+  
+  .contactTitle {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .contactLink {
+    padding: 8px 15px;
+    border: 1px solid #e67e5a;
+    border-radius: 20px;
+    scale: 0.7;
+    transition: all 0.3s ease;
+  }
+  
+  .contactLink:hover {
+    background-color: #e67e5a;
+    color: white;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .contactHeading {
+    font-size: 28px;
+  }
+  
+  .contactOptions {
+    gap: 20px;
+  }
+}

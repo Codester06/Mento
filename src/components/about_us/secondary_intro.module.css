@@ -1,0 +1,307 @@
+/* secondary_intro.module.css */
+
+.container_sec_intro {
+  width: 100%;
+  background: linear-gradient(to bottom, #e2f9ff, #c8f1fb, #fffbe6);
+  height: 52rem;
+}
+
+.sec_layout {
+  display: flex;
+  flex-direction: row;
+  gap: 6rem;
+  scale: 80%;
+  height: 3%;
+  padding-left: 2rem;
+}
+
+.overlaysec {
+  position: absolute;
+  top: 89rem;
+  width: 100%;
+  opacity: 0.5;
+  height: 55.7rem;
+  background-image: url('../../assets/images/our_story.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sec_content_box {
+  flex-grow: 1;
+  width: 50%;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  padding-top: 2.5rem;
+  text-align: justify;
+  margin-top: 12rem;
+  max-width: 46rem;
+  border-radius: 0.5rem;
+  max-height: 18rem;
+}
+
+.sec_content_box h1 {
+  font-family: 'Times New Roman';
+  color: #374151;
+  padding: 2rem;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.sec_content_box p {
+  font-size: 1.5rem;
+  padding-left: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'Delius';
+  line-height: 1.625;
+}
+
+.sec_shapes_column {
+  width: 60rem;
+  height: 60rem;
+  position: relative;
+  top: 7em;
+  left: 4em;
+  scale: 1.1;
+}
+
+.sec_rectangle1 {
+  background-image: url('../../assets/images/Happy_girl_sitting_and_meditating_among_flowers-removebg-preview.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  position: relative;
+  left: 4rem;
+  top: 181px;
+  width: 23rem;
+  height: 18rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.sec_diamond_1,
+.sec_diamond_2,
+.sec_diamond_3,
+.sec_diamond_4 {
+  width: 15rem;
+  height: 15rem;
+  transform: rotate(45deg);
+  position: relative;
+  border-radius: 1em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.sec_diamond_1 {
+  top: 7em;
+  left: 17em;
+  background-image: url('/src/assets/images/e82af8bd-4aad-42fc-b393-ea6c3e66dd4c.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.sec_diamond_2 {
+  top: 4em;
+  left: 5em;
+  background-image: url('/src/assets/images/d8c2d5cc-be92-43df-93c5-c97714d5bd68.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.sec_diamond_3 {
+  top: 1em;
+  left: 17em;
+  background-image: url('/src/assets/images/How\ Monolingual\ Teachers\ Can\ Support\ English\ Language\ Acquisition\ for\ Multilingual\ Learners\ -\ EdSurge\ News.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.sec_diamond_4 {
+  top: -26em;
+  left: 29em;
+  background-image: url('/src/assets/images/Premium\ Vector\ _\ Woman\ in\ love\ illustration\ concept.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(45deg) scaleX(-1);
+}
+
+@media (max-width: 768px) {
+  .sec_diamond_1,
+  .sec_diamond_2,
+  .sec_diamond_3,
+  .sec_diamond_4 {
+    width: 8rem;
+    
+    height: 8rem;
+    
+  }
+
+  .sec_diamond_1{
+    top: 2rem;
+    left: 1rem;
+
+  }
+  .sec_diamond_2{
+    top: 0rem;
+    left: 7rem;
+
+  }
+  .sec_diamond_3{
+    top: -8rem;
+    left: -5rem;
+
+  }
+.sec_diamond_4{
+  top: -10rem;
+  left: 1rem;
+
+}
+.container_sec_intro{
+  max-height:35rem ;
+  margin-top: 0rem;
+}
+
+  .overlaysec{
+    opacity: 0.6;
+    top: 62.8rem;
+        height: 35rem;
+       
+  }
+  .sec_content_box{
+    margin-top: 5rem;
+   height: 10rem;
+
+  }
+  .sec_layout{
+    /* border: 1px solid red; */
+    height: 50rem;
+    width: 50rem;
+  
+    position: static;
+  }
+  
+  .sec_content_box p {
+    margin: 0;
+    width: 33rem;
+    /* border: solid 1px red; */
+    scale: 0.8;
+    position: relative;
+    top: -5rem;
+        left: -9rem;
+
+    font-size: 1.5rem;
+    
+
+  }
+  .sec_content_box h1 {
+    margin: 0;
+    width: 27rem;
+    /* border: solid 1px red; */
+    scale: 0.8;
+   
+    position: relative;
+    top: -4rem;
+        
+        left: -2rem;
+
+  }
+  .sec_shapes_column{
+    /* border: solid red 1px ; */
+    height: 50rem;
+    top: 4em;
+    left: 2em;
+  }
+}
+
+
+@media (max-width: 480px) { .sec_diamond_1,
+  .sec_diamond_2,
+  .sec_diamond_3,
+  .sec_diamond_4 {
+    width: 6rem;
+    
+    height: 6rem;
+    
+  }
+
+  .sec_diamond_1{
+    top: -2rem;
+        left: 1rem;
+
+  }
+  .sec_diamond_2{
+    top: -3rem;
+    left: 6rem;
+
+  }
+  .sec_diamond_3{
+    top: -9rem;
+    left: -4rem;
+
+  }
+.sec_diamond_4{
+  top: -10rem;
+  left: 1rem;
+
+}
+.container_sec_intro{
+  max-height:23rem ;
+  margin-top: 0rem;
+}
+
+  .overlaysec{
+    opacity: 0.6;
+    top: 93.8rem;
+        height: 22rem;
+       
+  }
+  .sec_content_box{
+    margin-top: 5rem;
+   height: 10rem;
+
+  }
+  .sec_layout{
+    /* border: 1px solid red; */
+    height: 50rem;
+    width: 10rem;
+  
+  
+  }
+  
+  .sec_content_box p {
+    margin-top: 1rem;
+    position: static;
+    margin-left: 0;
+    padding-right: 0;
+    width: 16rem;
+    position: relative;
+    top: -12rem;
+    left: 1rem;
+    font-size: 12px;
+    
+
+  }
+  .sec_content_box h1 {
+    width: 24rem;
+    font-size: 2.6rem;
+    top: -11rem;
+    left: 1rem;
+    
+    margin-bottom: 1rem;
+    padding-right: 0;
+    position: relative;
+
+  }
+  .sec_shapes_column{
+    /* border: solid red 1px ; */
+    height: 50rem;
+    top: 2em;
+    left: 2em;
+    scale: 1;
+  }
+  
+}

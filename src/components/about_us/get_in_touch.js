@@ -1,5 +1,5 @@
 import React from 'react';
-import './get_in_touch.css';
+import styles from './get_in_touch.module.css'
 
 const ContactSection = () => {
   const contactOptions = [
@@ -74,23 +74,24 @@ const ContactSection = () => {
     }
   ];
 
-  return (<>
-   
-    <div className="contact-container-git">
-      <h1 className="contact-heading-gnt">Get in touch with us</h1>
-      
-      <div className="contact-options">
-        {contactOptions.map((option, index) => (
-          <div className="contact-option" key={index}>
-            <div className='contact-icon'> {option.icon}</div>
-            <h2 className="contact-title">{option.title}</h2>
-            <a href={option.linkUrl} className="contact-link">{option.actionText}</a>
-          </div>
-        ))}
+  return (
+    <>
+      <div className={styles.contactContainer}>
+        <h1 className={styles.contactHeading}>Get in touch with us</h1>
+        
+        <div className={styles.contactOptions}>
+          {contactOptions.map((option, index) => (
+            <div className={styles.contactOption} key={index}>
+              <div className={option.iconClass ? styles[option.iconClass] : styles.contactIcon}>
+                {option.icon}
+              </div>
+              <h2 className={styles.contactTitle}>{option.title}</h2>
+              <a href={option.linkUrl} className={styles.contactLink}>{option.actionText}</a>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-
-  </>
+    </>
   );
 };
 

@@ -67,7 +67,7 @@ const FAQSectionWN = () => {
           />
         ))}
       </div>
-      <Link to="/faq">
+      <Link to="/faqs">
         <button className="more-faq-btn">More FAQ</button>
       </Link>
     </div>

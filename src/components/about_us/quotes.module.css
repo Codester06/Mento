@@ -1,0 +1,84 @@
+/* quotes.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap');
+
+.quotesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.containerQuote {
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+  font-size: 36px;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  background: #cdffd7;
+  animation: fadeIn 1s ease-in-out;
+  width: 100%;
+ 
+
+  margin: 0 auto;
+}
+
+.containerQuote p {
+  font-family: "Great Vibes", cursive;
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #26bfd3, #000000, #000c00, #26bfd3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.borderUp, .borderDown {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #32a8a2, #000000, #000c00, #32a8a2);
+  animation: fadeIn 1s ease-in-out;
+  margin: 0;
+  
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+  .containerQuote {
+    font-size: 28px;
+    padding: 25px 15px;
+    opacity: 0.5;
+  }
+  
+  .containerQuote p {
+    font-size: 36px;
+  }
+  
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 480px) {
+  .containerQuote {
+    font-size: 22px;
+    padding: 20px 10px;
+  }
+  
+  .containerQuote p {
+    font-size: 28px;
+  }
+  
+  .borderUp, .borderDown {
+    height: 2px;
+  }
+}

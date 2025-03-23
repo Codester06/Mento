@@ -1,14 +1,14 @@
 import React from "react";
-import './quotes.css';
+import styles from './quotes.module.css';
 
 const Quotes = () => {
     return (
-        <div className="quotes-wrapper">
-            <div className="border-up"></div>
-            <div className="container-quote">
+        <div className={styles.quotesWrapper}>
+            <div className={styles.borderUp}></div>
+            <div className={styles.containerQuote}>
                 <p>"Taking care of your mental health is an act of self-love."</p>
             </div>
-            <div className="border-down"></div>
+            <div className={styles.borderDown}></div>
         </div>
     );
 };

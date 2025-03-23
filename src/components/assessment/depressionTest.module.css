@@ -1,16 +1,16 @@
 /* Main container styles */
 .wellnessQuiz {
   user-select: none;
-  -webkit-user-select:none ;
- 
+  -webkit-user-select: none;
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;  padding: 32px;
-  background-color: white;
+  padding: 32px;
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid #b2f5ea;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05),
+              0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(178, 245, 234, 0.6);
 }
 
 /* Quiz header styles */
@@ -20,28 +20,34 @@
 }
 
 .quizTitle {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.75rem;
+  font-weight: 600;
   color: #285e61;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #32a8a2, #2c7a7b, #285e61, #32a8a2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .questionCounter {
   font-size: 1.2rem;
   color: #319795;
   margin-bottom: 16px;
+  font-weight: 500;
 }
 
 .progressBarContainer {
   width: 100%;
-  background-color: #e6fffa;
+  background: linear-gradient(to right, #e6fffa, #e6fffa);
   height: 8px;
   border-radius: 9999px;
   overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .progressBar {
-  background-color: #38b26f;
+  background: linear-gradient(to right, #38b26f, #32a8a2);
   height: 100%;
   border-radius: 9999px;
   transition: width 0.5s ease;
@@ -53,44 +59,74 @@
 }
 
 .questionText {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: #4a5568;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   text-align: center;
+  line-height: 1.6;
 }
 
 .optionsContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   margin-bottom: 32px;
 }
 
+.checkiconMN {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #32da42,aliceblue);
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+}
+.formtitleMN {
+  color: #4ad758;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.formsubtitleMN {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+
 .option {
-    
-  padding: 16px;
+  padding: 18px;
   margin-bottom: 12px;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid #b2f5ea;
-
-  background-color:aliceblue;
+  border: 1px solid rgba(178, 245, 234, 0.8);
+  background: linear-gradient(135deg, #f8f9fa, #e6fffa);
+  position: relative;
+  overflow: hidden;
 }
 
 .option:hover {
-  background-color:green;
+  background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .option.selected {
-  background-color: #e6fffa;
+  background: linear-gradient(135deg, #4fd1c467, #E4F8E8);
   border-color: #4fd1c5;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .option span {
   color: #4a5568;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 
 /* Navigation buttons */
@@ -100,37 +136,53 @@
   margin-top: 24px;
 }
 
-.buttonPrevious, .buttonNext, .resetButton, .formButton {
-  padding: 10px 20px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+.buttonPrevious,
+.buttonNext,
+.resetButton,
+.formButton {
+  padding: 12px 24px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .buttonPrevious {
-  background-color: white;
+  background: linear-gradient(to right, #ffffff, #f8f9fa);
   color: #319795;
   border: 1px solid #b2f5ea;
 }
 
 .buttonPrevious:hover {
-  background-color: #e6fffa;
+  background: linear-gradient(to right, #f8f9fa, #e6fffa);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .buttonPrevious.disabled {
-  background-color: #f7fafc;
+  background: linear-gradient(to right, #f7fafc, #f7fafc);
   color: #cbd5e0;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-.buttonNext, .resetButton, .formButton {
-  background-color: #38b2ac;
-  color: white;
+.buttonNext,
+.resetButton,
+.formButton {
+  background: linear-gradient(to right, #ffd980, #c9e8cc);
+  color: #285e61;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.buttonNext:hover, .resetButton:hover, .formButton:hover {
-  background-color: #2c7a7b;
+.buttonNext:hover,
+.resetButton:hover,
+.formButton:hover {
+  background: linear-gradient(to right, #ffd066, #b5e0b9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* Results styles */
@@ -139,15 +191,21 @@
 }
 
 .resultsTitle {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #285e61;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #32a8a2, #2c7a7b, #285e61, #32a8a2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .resultsSubtitle {
   color: #4a5568;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
 .resultsContent {
@@ -161,8 +219,9 @@
   .resultsContent {
     flex-direction: row;
   }
-  
-  .resultsProgress, .resultsInterpretation {
+
+  .resultsProgress,
+  .resultsInterpretation {
     width: 50%;
   }
 }
@@ -176,21 +235,23 @@
 
 .resultsInterpretation {
   text-align: left;
-  background-color: #e6fffa;
-  padding: 24px;
+  background: linear-gradient(135deg, #ffebb4, #E4F8E8);
+  padding: 28px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .interpretationTitle {
   font-size: 1.25rem;
-  font-weight: 500;
-  margin-bottom: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
-.excellent, .good {
+.excellent,
+.good {
   color: #285e61;
 }
 
@@ -205,11 +266,13 @@
 .interpretationDescription {
   color: #4a5568;
   margin-bottom: 16px;
+  line-height: 1.6;
 }
 
 .scoreDetails {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: #718096;
+  line-height: 1.5;
 }
 
 /* Circular progress styles */
@@ -223,6 +286,7 @@
 .progressSvg {
   width: 100%;
   height: 100%;
+  transform: rotate(-90deg);
 }
 
 .progressBackground {
@@ -235,6 +299,7 @@
   fill: none;
   stroke-width: 12;
   stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease-out;
 }
 
 .excellentColor {
@@ -267,27 +332,30 @@
 }
 
 .percentage {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .scoreLabel {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: #718096;
 }
 
 /* Detailed results section */
 .detailedResults {
-  margin-top: 32px;
-  margin-bottom: 32px;
+  margin-top: 36px;
+  margin-bottom: 36px;
   position: relative;
   overflow: hidden;
+  height: 37rem;
   border-radius: 12px;
-  border: 1px solid #b2f5ea;
+  border: 1px solid rgba(178, 245, 234, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .reportContent {
-  padding: 24px;
+  padding: 28px;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
 }
 
 .reportContent.blurred {
@@ -295,67 +363,80 @@
 }
 
 .reportTitle {
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #285e61;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
 .reportSection {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   text-align: left;
 }
 
 .sectionTitle {
-  font-weight: 500;
+  font-weight: 600;
   color: #319795;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .sectionText {
   color: #4a5568;
+  line-height: 1.6;
 }
 
 .sectionList {
   list-style-type: disc;
-  padding-left: 20px;
-  margin-top: 8px;
+  padding-left: 24px;
+  margin-top: 12px;
   color: #4a5568;
+  line-height: 1.6;
+}
+
+.sectionList li {
+  margin-bottom: 8px;
 }
 
 /* Form overlay styles */
 .formOverlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.97);
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(5px);
 }
 
 .formContainer {
   width: 100%;
   max-width: 500px;
-  padding: 24px;
+  padding: 32px;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .formTitle {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #285e61;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .formSubtitle {
   color: #4a5568;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  text-align: center;
+  line-height: 1.6;
 }
 
 .emailForm {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .formField {
@@ -364,88 +445,49 @@
 }
 
 .formLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: #4a5568;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   text-align: left;
 }
 
 .formInput {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid #b2f5ea;
   border-radius: 8px;
   outline: none;
   transition: all 0.3s ease;
+  background-color: #f8f9fa;
 }
 
 .formInput:focus {
   border-color: #4fd1c5;
-  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+  box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.2);
+  background-color: #ffffff;
 }
 
 .formButton {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 8px;
 }
 
 .privacyNote {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #718096;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 20px;
+  line-height: 1.5;
 }
 
 /* Reset quiz button */
 .resetButton {
-  padding: 12px 24px;
-}
-
-@media (max-width: 480px) {
-  .resultsSubtitle {
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .resultsProgress {
-    margin-bottom: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .resultsInterpretation {
-    padding: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .interpretationTitle {
-    font-size: 1.125rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .circularProgress {
-    width: 150px;
-    height: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .progressBackground {
-    stroke-width: 10;
-  }
-}
-
-@media (max-width: 480px) {
-  .progressCircle {
-    stroke-width: 10;
-  }
+  padding: 14px 28px;
 }
 
 .progressCircle.animate {
@@ -458,91 +500,151 @@
   }
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .wellnessQuiz {
+    padding: 24px;
+  }
+  
+  .quizTitle {
+    font-size: 1.5rem;
+  }
+  
+  .resultsProgress {
+    margin-bottom: 24px;
+  }
+  
+  .resultsInterpretation {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 480px) {
+  .wellnessQuiz {
+    padding: 16px;
+  }
+  
+  .quizTitle {
+    font-size: 1.3rem;
+  }
+  
+  .questionText {
+    font-size: 1.1rem;
+  }
+  
+  .resultsTitle {
+    font-size: 1.3rem;
+  }
+  
+  .resultsSubtitle {
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+  
+  .option {
+    padding: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circularProgress {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .progressBackground {
+    stroke-width: 10;
+  }
+  
+  .progressCircle {
+    stroke-width: 10;
+  }
+  
   @keyframes counter {
     0% {
       stroke-dashoffset: 330; /* Adjusted for smaller radius */
     }
   }
-}
-
-@media (max-width: 480px) {
+  
   .percentage {
     font-size: 1.5rem;
   }
-}
-
-@media (max-width: 480px) {
+  
   .scoreLabel {
     font-size: 0.75rem;
   }
-}
-
-@media (max-width: 480px) {
+  
   .detailedResults {
     margin-top: 24px;
     margin-bottom: 24px;
   }
-}
-
-@media (max-width: 480px) {
+  
   .reportContent {
     padding: 16px;
   }
-}
-
-@media (max-width: 480px) {
+  
   .reportTitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
-}
-
-@media (max-width: 480px) {
+  
   .reportSection {
     margin-bottom: 16px;
   }
-}
-
-@media (max-width: 480px) {
+  
   .sectionList {
     padding-left: 16px;
   }
-}
-
-@media (max-width: 480px) {
+  
   .formContainer {
-    padding: 16px;
+    padding: 20px;
   }
-}
-
-@media (max-width: 480px) {
+  
   .formTitle {
-    font-size: 1.125rem;
+    font-size: 1.2rem;
   }
-}
-
-@media (max-width: 480px) {
+  
   .formSubtitle {
     margin-bottom: 16px;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .emailForm {
+    gap: 16px;
+  }
+  
+  .formInput {
+    padding: 12px;
+  }
+  
+  .resetButton,
+  .buttonNext,
+  .buttonPrevious,
+  .formButton {
+    padding: 12px 20px;
+    min-height: 44px;
   }
 }
 
-@media (max-width: 480px) {
-  .emailForm {
+/* Fix for very small screens */
+@media (max-width: 360px) {
+  .wellnessQuiz {
+    padding: 12px 8px;
+  }
+
+  .resultsInterpretation {
+    padding: 12px;
+  }
+
+  .navigationButtons {
+    flex-direction: column;
     gap: 12px;
   }
-}
 
-@media (max-width: 480px) {
-  .formInput {
-    padding: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .resetButton {
-    padding: 10px 20px;
+  .buttonPrevious,
+  .buttonNext {
+    width: 100%;
   }
 }
 
@@ -552,50 +654,148 @@
     padding-top: 16px;
     padding-bottom: 16px;
   }
-  
+
   .quizHeader {
     margin-bottom: 16px;
   }
-  
+
   .optionsContainer {
     margin-bottom: 20px;
   }
-  
+
   .questionContainer {
     margin-bottom: 16px;
   }
 }
 
-/* Add better touch target sizes for mobile */
-@media (max-width: 480px) {
-  .option {
-    min-height: 44px; /* Minimum height for better touch targets */
-    display: flex;
+
+/* Depression Assessment Banner Styles */
+.assessmentBanner {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 24px auto;
+  padding: 32px;
+  background: linear-gradient(135deg, #32a8a2, #2c7a7b, #285e61, #32a8a2);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08),
+              0 4px 12px rgba(0, 0, 0, 0.1);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(178, 245, 234, 0.4);
+}
+
+.bannerContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.bannerHeader {
+  margin-bottom: 12px;
+}
+
+.bannerTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.bannerSubtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.bannerInfo {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  margin-top: 8px;
+}
+
+.bannerDisclaimer {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* Decorative Elements */
+.bannerDecoration {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.decoration1 {
+  width: 150px;
+  height: 150px;
+  top: -30px;
+  right: -30px;
+}
+
+.decoration2 {
+  width: 100px;
+  height: 100px;
+  bottom: -20px;
+  left: 20%;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .bannerContent {
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
   }
   
-  .buttonPrevious, .buttonNext, .resetButton, .formButton {
-    min-height: 44px; /* Minimum height for better touch targets */
+  .bannerHeader {
+    width: 60%;
+    margin-bottom: 0;
+  }
+  
+  .bannerInfo {
+    width: 35%;
+    margin-top: 0;
   }
 }
 
-/* Fix for very small screens */
-@media (max-width: 360px) {
-  .wellnessQuiz {
-    padding: 12px 8px;
+@media (max-width: 767px) {
+  .assessmentBanner {
+    padding: 24px;
   }
   
-  .resultsInterpretation {
+  .bannerTitle {
+    font-size: 1.75rem;
+  }
+  
+  .bannerBubtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .assessmentBanner {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .bannerTitle {
+    font-size: 1.5rem;
+  }
+  
+  .bannerInfo {
     padding: 12px;
   }
   
-  .navigationButtons {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .buttonPrevious, .buttonNext {
-    width: 100%;
+  .bannerDisclaimer {
+    font-size: 0.8rem;
   }
 }

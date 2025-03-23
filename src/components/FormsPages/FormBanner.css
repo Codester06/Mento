@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap');
+
+
+/* Forms Banner Container */
+.Forms-banner-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0;
+    text-align: center;
+}
+
+
+
+/* Forms Content */
+.Forms-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Forms Heading */
+.Forms-heading {
+    font-size: 56px;
+    font-weight: 500;
+    color: #444;
+    font-family: "Great Vibes", cursive;
+    background: linear-gradient(90deg, #32a8a2, #000000, #000c00, #32a8a2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: fadeIn 1s ease-in-out;
+
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .Forms-heading {
+        font-size: 28px;
+    }
+    .Forms-curve-bottom {
+        height: 100px;
+        bottom: -70px;
+    }
+    .Forms-curve-bottom {
+        left: 0;
+        background-color: #CFFAF3FA;
+        border-radius: 30% 30% 0 0;
+    }
+}
+
+
+
+.form-banner-quote {
+    text-align: center;
+    padding: 20px;
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    animation: fadeIn 1s ease-in-out;
+    width: 100%;
+  
+  }
+  
+  .form-banner-quote p {
+    font-family: "Great Vibes", cursive;
+    font-size: 25px;
+    background: linear-gradient(90deg, #32a8a2, #000000, #000c00, #32a8a2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+.therapyFrom-container{
+    min-height: 100vh;
+    background: linear-gradient(to top,rgba(251, 242, 220, 0.504) ,#ffcfcfaa, #E4F8E8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
