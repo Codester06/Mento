@@ -1,7 +1,8 @@
 import { useRef,useState } from "react";
 import "./contactFrom.css";
-import { database } from "../../utils/firebaseConfig";
-import { ref, push } from "firebase/database";
+// import { database } from "../../utils/firebaseConfig";
+// import { ref, push } from "firebase/database";
+import { postData } from "../../utils/awsService";
 
 const ContactForm = () => {
 
@@ -21,8 +22,9 @@ const ContactForm = () => {
 
     try {
       // Save data to Firebase
-      await push(ref(database, "contact_forms"), formData);
-
+      // await push(ref(database, "contact_forms"), formData);
+      const response = await postData('/contact_form', formData);
+      console.log("Form data submitted:", response);
       console.log("✅ Form submitted:", formData);
       alert("Message sent successfully!");
 
