@@ -29,7 +29,7 @@ import IndividualPanel from "./adminPages/response/IndividualResponse";
 import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
 import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
 import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
-import DemoForm from "./components/test/demo";
+import DataFetcher from "./components/test/demo";
 // Protected route component
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,7 +84,7 @@ function Main() {
           {" "}
           {/* Main content wrapper */}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<DataFetcher />} />
             <Route path="/contact" element={<ContactForm />} />
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/about" element={<About />} />
