@@ -1,37 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { ref, onValue, remove } from 'firebase/database';
-import { database } from '../../utils/firebaseConfig'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
-import './AdminPanel.css'; // We'll create this CSS file next
+import { getData, deleteData } from '../../utils/awsService';
+import './AdminPanel.css';
 
 const IndividualPanel = () => {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Reference to the consultations in Firebase
-    const consultationsRef = ref(database, 'mental_wellness_consultations');
-    
-    // Set up the listener for data changes
-    const unsubscribe = onValue(consultationsRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        // Convert the object of objects to an array with IDs
-        const consultationsList = Object.entries(data).map(([id, values]) => ({
-          id,
-          ...values
-        }));
-        setConsultations(consultationsList);
-      } else {
+    const fetchConsultations = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const responseData = await getData('/individual');
+        console.log('Full Raw Response:', responseData);
+
+        // Robust data extraction logic
+        let consultationData = [];
+
+        // Check different possible response structures
+        if (responseData) {
+          if (Array.isArray(responseData)) {
+            // If response is directly an array
+            consultationData = responseData;
+          } else if (responseData.data && Array.isArray(responseData.data)) {
+            // If response has a 'data' property that is an array
+            consultationData = responseData.data;
+          } else if (responseData.results && Array.isArray(responseData.results)) {
+            // If response has a 'results' property that is an array
+            consultationData = responseData.results;
+          } else if (typeof responseData === 'object') {
+            // If response is an object, try to convert it to an array
+            consultationData = Object.values(responseData).filter(Array.isArray)[0] || [];
+          }
+        }
+
+        console.log('Processed Consultation Data:', consultationData);
+
+        // Ensure consultationData is an array
+        setConsultations(Array.isArray(consultationData) ? consultationData : []);
+      } catch (error) {
+        console.error('Error in fetching consultations:', error);
+        setError(error.message || 'Failed to fetch consultations');
         setConsultations([]);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    });
+    };
+
+    fetchConsultations();
     
-    // Clean up the listener when component unmounts
-    return () => unsubscribe();
+    const intervalId = setInterval(fetchConsultations, 30000);
+    
+    return () => clearInterval(intervalId);
   }, []);
+
+  if (loading) {
+    return <div className="loading-container">Loading consultations...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>Error: {error}</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    );
+  }
 
   const handleView = (id) => {
     navigate(`/admin/responses/individual-responses/${id}`);
@@ -40,9 +78,11 @@ const IndividualPanel = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this consultation?')) {
       try {
-        const consultationRef = ref(database, `mental_wellness_consultations/${id}`);
-        await remove(consultationRef);
-        // No need to update state manually as the onValue listener will handle it
+        await deleteData('mental_wellness_consultations', id);
+        
+        setConsultations(prevConsultations => 
+          prevConsultations.filter(consultation => consultation.id !== id)
+        );
       } catch (error) {
         console.error('Error deleting consultation:', error);
         alert('Failed to delete consultation.');
@@ -50,9 +90,6 @@ const IndividualPanel = () => {
     }
   };
 
-  if (loading) {
-    return <div className="loading-container">Loading consultations...</div>;
-  }
   const handleBack = () => {
     navigate('/admin/admin-dashboard');
   };
@@ -64,21 +101,31 @@ const IndividualPanel = () => {
       <h1 className="admin-title">Individual Consultations Admin Panel</h1>
       
       {consultations.length === 0 ? (
-        <p className="no-data">No consultations found.</p>
+        <div className="no-data-container">
+          <p className="no-data">No consultations found.</p>
+          <button onClick={() => window.location.reload()} className="retry-btn">
+            Reload Data
+          </button>
+        </div>
       ) : (
         <div className="consultations-grid">
           {consultations.map((consultation) => (
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
-                <h3 className="client-name">{consultation.name}</h3>
-                <p className="client-email">{consultation.email}</p>
+                <h3 className="client-name">{consultation.name || 'Unknown Name'}</h3>
+                <p className="client-email">{consultation.email || 'No Email'}</p>
+              </div>
+              <div className="card-content">
+                <p>Age: {consultation.age || 'N/A'}</p>
+                <p>City: {consultation.city || 'N/A'}</p>
+                <p>Support Reason: {consultation.supportReason || 'Not Specified'}</p>
               </div>
               <div className="card-actions">
                 <button 
                   onClick={() => handleView(consultation.id)}
                   className="view-btn"
                 >
-                  View
+                  View Details
                 </button>
                 <button 
                   onClick={() => handleDelete(consultation.id)}
