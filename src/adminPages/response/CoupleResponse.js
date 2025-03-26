@@ -1,38 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { ref, onValue, remove } from 'firebase/database';
-import { database } from '../../utils/firebaseConfig'; // Adjust path as needed
-import { useNavigate } from 'react-router-dom';
-import './AdminPanel.css'; // We'll create this CSS file next
-
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getData, deleteData } from "../../utils/awsService";
+import "./AdminPanel.css";
 
 const CouplePanel = () => {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Reference to the consultations in Firebase
-    const consultationsRef = ref(database, 'couples_therapy_sessions');
-    
-    // Set up the listener for data changes
-    const unsubscribe = onValue(consultationsRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        // Convert the object of objects to an array with IDs
-        const consultationsList = Object.entries(data).map(([id, values]) => ({
-          id,
-          ...values
+    const fetchConsultations = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const responseData = await getData("/couple");
+        // console.log('Full Raw Response:', responseData);
+
+        // Extract consultation data
+        let consultationData = responseData.data["data"];
+        // console.log('Processed Consultation Data:', consultationData);
+
+        // Transform data to extract specific fields
+        const processedConsultations = consultationData.map((consultation) => ({
+          // Separate extraction of key fields
+          id: consultation.id || null,
+          name: consultation.name || "Unknown",
+          age: consultation.age || "N/A",
+
+          // Optional: Include other relevant fields if needed
+          email: consultation.email || "",
+          supportReason: consultation.supportReason || "",
+          city: consultation.city || "",
         }));
-        setConsultations(consultationsList);
-      } else {
+
+        setConsultations(processedConsultations);
+      } catch (error) {
+        console.error("Error in fetching consultations:", error);
+        setError(error.message || "Failed to fetch consultations");
         setConsultations([]);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    });
-    
-    // Clean up the listener when component unmounts
-    return () => unsubscribe();
+    };
+
+    fetchConsultations();
+    const intervalId = setInterval(fetchConsultations, 30000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const handleView = (id) => {
@@ -40,14 +56,16 @@ const CouplePanel = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this consultation?')) {
+    if (window.confirm("Are you sure you want to delete this consultation?")) {
       try {
-        const consultationRef = ref(database, `couples_therapy_sessions/${id}`);
-        await remove(consultationRef);
-        // No need to update state manually as the onValue listener will handle it
+        await deleteData("mental_wellness_consultations", id);
+
+        setConsultations((prevConsultations) =>
+          prevConsultations.filter((consultation) => consultation.id !== id)
+        );
       } catch (error) {
-        console.error('Error deleting consultation:', error);
-        alert('Failed to delete consultation.');
+        console.error("Error deleting consultation:", error);
+        alert("Failed to delete consultation.");
       }
     }
   };
@@ -56,34 +74,55 @@ const CouplePanel = () => {
     return <div className="loading-container">Loading consultations...</div>;
   }
 
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>Error: {error}</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    );
+  }
   const handleBack = () => {
-    navigate('/admin/admin-dashboard');
+    navigate("/admin/admin-dashboard");
   };
-  
 
   return (
     <div className="admin-container">
-       <button onClick={handleBack} className="back-btn">← Back to Dashboard</button>
-      <h1 className="admin-title">Couple Consultations Admin Panel</h1>
-      
+      <button onClick={handleBack} className="back-btn">
+        ← Back to Dashboard
+      </button>
+
+      <h1 className="admin-title">Couples Consultations Admin Panel</h1>
+
       {consultations.length === 0 ? (
-        <p className="no-data">No consultations found.</p>
+        <div className="no-data-container">
+          <p className="no-data">No consultations found.</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="retry-btn"
+          >
+            Reload Data
+          </button>
+        </div>
       ) : (
         <div className="consultations-grid">
           {consultations.map((consultation) => (
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
                 <h3 className="client-name">{consultation.name}</h3>
-                <p className="client-email">{consultation.email}</p>
+              </div>
+              <div className="card-content">
+                <p>Email: {consultation.email}</p>
+                <p>City: {consultation.city}</p>
               </div>
               <div className="card-actions">
-                <button 
+                <button
                   onClick={() => handleView(consultation.id)}
                   className="view-btn"
                 >
-                  View
+                  View Details
                 </button>
-                <button 
+                <button
                   onClick={() => handleDelete(consultation.id)}
                   className="delete-btn"
                 >

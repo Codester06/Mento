@@ -139,6 +139,26 @@ const Dashboard = () => {
           </div>
         </div>
       </section>
+
+      <section className="dashboard-section">
+        <h2 className="section-title">Contact us </h2>
+        <div className="cards-container">
+          <div className="card full-width">
+            <div className="card-header">
+              <div className="card-icon"></div>
+              <h3 className="card-title">Contact Management</h3>
+            </div>
+            <div className="card-footer">
+              <Link 
+                to="/admin/responses/contact-form-responses" 
+                className="view-button"
+              >
+                View
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

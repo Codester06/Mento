@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getData, deleteData } from '../../utils/awsService';
-import './AdminPanel.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getData, deleteData } from "../../utils/awsService";
+import "./AdminPanel.css";
 
 const IndividualPanel = () => {
   const [consultations, setConsultations] = useState([]);
@@ -15,30 +15,30 @@ const IndividualPanel = () => {
         setLoading(true);
         setError(null);
 
-        const responseData = await getData('/individual');
-        console.log('Full Raw Response:', responseData);
+        const responseData = await getData("/individual");
+        // console.log('Full Raw Response:', responseData);
 
         // Extract consultation data
-        let consultationData = responseData.data['data'];
-        console.log('Processed Consultation Data:', consultationData);
+        let consultationData = responseData.data["data"];
+        // console.log('Processed Consultation Data:', consultationData);
 
         // Transform data to extract specific fields
-        const processedConsultations = consultationData.map(consultation => ({
+        const processedConsultations = consultationData.map((consultation) => ({
           // Separate extraction of key fields
           id: consultation.id || null,
-          name: consultation.name || 'Unknown',
-          age: consultation.age || 'N/A',
-          
+          name: consultation.name || "Unknown",
+          age: consultation.age || "N/A",
+
           // Optional: Include other relevant fields if needed
-          email: consultation.email || '',
-          supportReason: consultation.supportReason || '',
-          city: consultation.city || ''
+          email: consultation.email || "",
+          supportReason: consultation.supportReason || "",
+          city: consultation.city || "",
         }));
 
         setConsultations(processedConsultations);
       } catch (error) {
-        console.error('Error in fetching consultations:', error);
-        setError(error.message || 'Failed to fetch consultations');
+        console.error("Error in fetching consultations:", error);
+        setError(error.message || "Failed to fetch consultations");
         setConsultations([]);
       } finally {
         setLoading(false);
@@ -47,11 +47,10 @@ const IndividualPanel = () => {
 
     fetchConsultations();
     const intervalId = setInterval(fetchConsultations, 30000);
-    
+
     return () => clearInterval(intervalId);
   }, []);
 
-  // Render methods remain the same
   if (loading) {
     return <div className="loading-container">Loading consultations...</div>;
   }
@@ -70,34 +69,39 @@ const IndividualPanel = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this consultation?')) {
+    if (window.confirm("Are you sure you want to delete this consultation?")) {
       try {
-        await deleteData('mental_wellness_consultations', id);
-        
-        setConsultations(prevConsultations => 
-          prevConsultations.filter(consultation => consultation.id !== id)
+        await deleteData("/individual", id);
+
+        setConsultations((prevConsultations) =>
+          prevConsultations.filter((consultation) => consultation.id !== id)
         );
       } catch (error) {
-        console.error('Error deleting consultation:', error);
-        alert('Failed to delete consultation.');
+        console.error("Error deleting consultation:", error);
+        alert("Failed to delete consultation.");
       }
     }
   };
 
   const handleBack = () => {
-    navigate('/admin/admin-dashboard');
+    navigate("/admin/admin-dashboard");
   };
 
   return (
     <div className="admin-container">
-      <button onClick={handleBack} className="back-btn">← Back to Dashboard</button>
+      <button onClick={handleBack} className="back-btn">
+        ← Back to Dashboard
+      </button>
 
       <h1 className="admin-title">Individual Consultations Admin Panel</h1>
-      
+
       {consultations.length === 0 ? (
         <div className="no-data-container">
           <p className="no-data">No consultations found.</p>
-          <button onClick={() => window.location.reload()} className="retry-btn">
+          <button
+            onClick={() => window.location.reload()}
+            className="retry-btn"
+          >
             Reload Data
           </button>
         </div>
@@ -109,17 +113,18 @@ const IndividualPanel = () => {
                 <h3 className="client-name">{consultation.name}</h3>
               </div>
               <div className="card-content">
-                <p>ID: {consultation.id}</p>
                 <p>Age: {consultation.age}</p>
+                <p>Email: {consultation.email}</p>
+                <p>City: {consultation.city}</p>
               </div>
               <div className="card-actions">
-                <button 
+                <button
                   onClick={() => handleView(consultation.id)}
                   className="view-btn"
                 >
                   View Details
                 </button>
-                <button 
+                <button
                   onClick={() => handleDelete(consultation.id)}
                   className="delete-btn"
                 >

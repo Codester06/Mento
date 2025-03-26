@@ -23,7 +23,7 @@ const getData = async (endpoint, id = '') => {
             }
         });
         // Log the response data
-        console.log('GET Response:', response.data);
+        // console.log('GET Response:', response.data);
         
         // Set data and update loading state
         data = response.data;
@@ -36,7 +36,7 @@ const getData = async (endpoint, id = '') => {
         loading = false;
 
         // Log the error
-        console.error('Error in GET request:', error);
+        // console.error('Error in GET request:', error);
 
         return { data, loading, error };
     }
@@ -52,7 +52,7 @@ const postData = async (endpoint, data) => {
                 'x-api-key': API_KEY
             }
         });
-        console.log('POST Response:', response.data);
+        // console.log('POST Response:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error in POST request:', error.response ? error.response.data : error.message);
@@ -65,7 +65,7 @@ const updateData = async (endpoint, id, data) => {
         const response = await axios.put(`${API_BASE_URL}${endpoint}/${id}`, data, {
             headers: { 'Content-Type': 'application/json' }
         });
-        console.log('PUT Response:', response.data);
+        // console.log('PUT Response:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error in PUT request:', error.response ? error.response.data : error.message);
@@ -75,7 +75,7 @@ const updateData = async (endpoint, id, data) => {
 // Function to send a DELETE request (delete an item by ID)
 const deleteData = async (endpoint, id) => {
     try {
-        const url = `${API_BASE_URL}${endpoint}`;
+        const url =` ${API_BASE_URL}${endpoint};`
         const response = await axios.delete(url, {
              params:{
                 id
@@ -95,6 +95,7 @@ const deleteData = async (endpoint, id) => {
         throw error;
     }
 };
+
 
 
 
