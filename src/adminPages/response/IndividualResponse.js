@@ -18,30 +18,24 @@ const IndividualPanel = () => {
         const responseData = await getData('/individual');
         console.log('Full Raw Response:', responseData);
 
-        // Robust data extraction logic
-        let consultationData = [];
-
-        // Check different possible response structures
-        if (responseData) {
-          if (Array.isArray(responseData)) {
-            // If response is directly an array
-            consultationData = responseData;
-          } else if (responseData.data && Array.isArray(responseData.data)) {
-            // If response has a 'data' property that is an array
-            consultationData = responseData.data;
-          } else if (responseData.results && Array.isArray(responseData.results)) {
-            // If response has a 'results' property that is an array
-            consultationData = responseData.results;
-          } else if (typeof responseData === 'object') {
-            // If response is an object, try to convert it to an array
-            consultationData = Object.values(responseData).filter(Array.isArray)[0] || [];
-          }
-        }
-
+        // Extract consultation data
+        let consultationData = responseData.data['data'];
         console.log('Processed Consultation Data:', consultationData);
 
-        // Ensure consultationData is an array
-        setConsultations(Array.isArray(consultationData) ? consultationData : []);
+        // Transform data to extract specific fields
+        const processedConsultations = consultationData.map(consultation => ({
+          // Separate extraction of key fields
+          id: consultation.id || null,
+          name: consultation.name || 'Unknown',
+          age: consultation.age || 'N/A',
+          
+          // Optional: Include other relevant fields if needed
+          email: consultation.email || '',
+          supportReason: consultation.supportReason || '',
+          city: consultation.city || ''
+        }));
+
+        setConsultations(processedConsultations);
       } catch (error) {
         console.error('Error in fetching consultations:', error);
         setError(error.message || 'Failed to fetch consultations');
@@ -52,12 +46,12 @@ const IndividualPanel = () => {
     };
 
     fetchConsultations();
-    
     const intervalId = setInterval(fetchConsultations, 30000);
     
     return () => clearInterval(intervalId);
   }, []);
 
+  // Render methods remain the same
   if (loading) {
     return <div className="loading-container">Loading consultations...</div>;
   }
@@ -112,13 +106,11 @@ const IndividualPanel = () => {
           {consultations.map((consultation) => (
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
-                <h3 className="client-name">{consultation.name || 'Unknown Name'}</h3>
-                <p className="client-email">{consultation.email || 'No Email'}</p>
+                <h3 className="client-name">{consultation.name}</h3>
               </div>
               <div className="card-content">
-                <p>Age: {consultation.age || 'N/A'}</p>
-                <p>City: {consultation.city || 'N/A'}</p>
-                <p>Support Reason: {consultation.supportReason || 'Not Specified'}</p>
+                <p>ID: {consultation.id}</p>
+                <p>Age: {consultation.age}</p>
               </div>
               <div className="card-actions">
                 <button 

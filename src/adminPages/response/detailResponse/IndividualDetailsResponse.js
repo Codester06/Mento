@@ -3,31 +3,86 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../../../utils/firebaseConfig';
 import './ConsultationDetails.css';
-
+import { getData } from '../../../utils/awsService';
 const IndividualDetails = () => {
   const { id } = useParams();
-  const [consultation, setConsultation] = useState(null);
+  const [consultation, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!id) return;
+    // const fetchConsultations = async () => {
+    //      try {
+    //        setLoading(true);
+    //        setError(null);
+   
+    //        const responseData = await getData('/individual');
+    //        console.log('Full Raw Response:', responseData);
+   
+    //        // Extract consultation data
+    //        let consultationData = responseData.data['0'];
+    //        console.log('Processed Consultation Data:', consultationData);
+   
+    //        // Transform data to extract specific fields
+    //        const processedConsultations = consultationData.map(consultation => ({
+    //          // Separate extraction of key fields
+    //          id: consultation.id || null,
+    //          name: consultation.name || 'Unknown',
+    //          age: consultation.age || 'N/A',
+             
+    //          // Optional: Include other relevant fields if needed
+    //          email: consultation.email || '',
+    //          supportReason: consultation.supportReason || '',
+    //          city: consultation.city || ''
+    //        }));
+   
+    //        setConsultations(processedConsultations);
+    //      } catch (error) {
+    //        console.error('Error in fetching consultations:', error);
+    //        setError(error.message || 'Failed to fetch consultations');
+    //        setConsultations([]);
+    //      } finally {
+    //        setLoading(false);
+    //      }
+    //    };
+      //  fetchConsultations();
+      const fetchConsultations = async () => {
+        try {
+          const responseData = await getData('/individual');
+      
+          // Check if data exists
+          if (responseData && responseData.data && responseData.data['0']) {
+            const consultation = responseData.data['0'];
+      
+            // Separate logging for each field
+            console.log('ID:', consultation.id);
+            console.log('Name:', consultation.name);
+            console.log('Age:', consultation.age);
+            console.log('Email:', consultation.email);
+            console.log('Support Reason:', consultation.supportReason);
+            console.log('City:', consultation.city);
+      
+            // Optional: If you want to see all fields dynamically
+            Object.keys(consultation).forEach(key => {
+              console.log(`${key}:`, consultation[key]);
+            });
+          } else {
+            console.log('No consultation data found');
+          }
+        } catch (error) {
+          console.error('Error in fetching consultations:', error);
+        }
+      };
+    const intervalId = setInterval(fetchConsultations, 30000);
+    
+    return () => clearInterval(intervalId);
+   
+   
+  }, []);
+    
 
-    const consultationRef = ref(database, `mental_wellness_consultations/${id}`);
-    
-    const unsubscribe = onValue(consultationRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setConsultation({ id, ...data });
-      } else {
-        // Consultation not found
-        setConsultation(null);
-      }
-      setLoading(false);
-    });
-    
-    return () => unsubscribe();
-  }, [id]);
 
   const handleBack = () => {
     navigate('/admin/responses/individual-responses');
