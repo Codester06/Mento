@@ -65,16 +65,16 @@ const Footer = () => {
   };
 
   // Check if a route is allowed for the current user
-  const isRouteAllowed = (route) => {
-    return allowedRoutes.some(allowedRoute => {
-      // Handle route parameters like :id
-      if (allowedRoute.includes(':')) {
-        const baseAllowedRoute = allowedRoute.split('/:')[0];
-        return route.startsWith(baseAllowedRoute);
-      }
-      return allowedRoute === route;
-    });
-  };
+  // const isRouteAllowed = (route) => {
+  //   return allowedRoutes.some(allowedRoute => {
+  //     // Handle route parameters like :id
+  //     if (allowedRoute.includes(':')) {
+  //       const baseAllowedRoute = allowedRoute.split('/:')[0];
+  //       return route.startsWith(baseAllowedRoute);
+  //     }
+  //     return allowedRoute === route;
+  //   });
+  // };
 
   return (
     <footer className="footer">
@@ -118,12 +118,13 @@ const Footer = () => {
               {/* Admin links based on user role and permissions */}
               {isLoggedIn && (
                 <>
-                  {isRouteAllowed("/admin/admin-dashboard") && (
+                  {/* {isRouteAllowed("/admin/admin-dashboard") && (
                     <li><a href="/admin/admin-dashboard">Admin Dashboard</a></li>
                   )}
                   {isRouteAllowed("/admin/blog-management") && (
-                    <li><a href="/admin/blog">Manage Blogs</a></li>
-                  )}
+                    <li><a href="/admin/blog-management">Manage Blogs</a></li>
+                  )} */}
+                   <li><a href="/admin/admin-dashboard">Admin Dashboard</a></li>
                   <li className="user-info">
                     <span>Logged in as: {username} ({userRole})</span>
                   </li>
