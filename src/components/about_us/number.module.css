@@ -7,45 +7,6 @@
   overflow: hidden;
 }
 
-/** Decorative circles **/
-/* .decorativeCircles {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.circle1, .circle2, .circle3 {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.4;
-}
-
-.circle1 {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(to bottom, #ffd980, #CFFAF3FA);
-  bottom: -90px;
-  left: -120px;
-}
- 
-.circle2 {
-  width: 700px;
-  height: 700px;
-  background: linear-gradient(to bottom, rgba(255, 218, 116, 0.994), #CFFAF3FA);
-  bottom: -150px;
-  right: -200px;
-}
-
-.circle3 {
-  width: 1000px;
-  height: 900px;
-  background: linear-gradient(to top, #72ff686e, #ffffff99);
-  bottom: 420px;
-  left: -70px;
-} */
  
 .statsContainer {
   /* box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */

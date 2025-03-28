@@ -179,82 +179,93 @@
   line-height: 1.6;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Tablet Responsive Styles */
+@media (max-width: 1024px) {
   .container_primary {
-    flex-direction: row;
-    height: auto;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
- 
-  .svgBackground{
-    scale: 0.9;
 
-  }
-  
   .buttons {
-    width: 50%;
-    height: auto;
-    flex-direction: column;
-    min-height: 16rem;
-    margin-bottom: 1rem;
-  }
-  
-  .title_primary {
-    font-size: 1.4rem;
-  }
-  .description_primary{
-    font-size: 0.9rem;
-  }
-  
-  .glassBubble1 {
-    scale: 0.5;
-  }
-  
-  .glassBubble2 {
-    scale: 0.5;
+    width: 27rem;
+    height: 17rem;
   }
 }
 
-
-@media (max-width: 480px) {  
-  
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
   .container_primary {
-    flex-direction: column;
-    height: 60rem;
+    flex-wrap: wrap;
+    height: auto;
     padding: 1.5rem 1rem;
-
+    justify-content: center;
+    gap: 1.5rem;
   }
  
-  .svgBackground{
-    scale: 0.9;
-    margin-left: 2rem;
-    
+  .svgBackground {
+    scale: 0.8;
+    margin: 1.5rem;
   }
-
   
   .buttons {
-    width: 80%;
+    width: 45%;
     height: auto;
+    min-height: 14rem;
+    margin-bottom: 1rem;
+  }
+  
+  .title_primary {
+    font-size: 1.6rem;
+    padding-left: 1.5rem;
+  }
+
+  .description_primary {
+    font-size: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+  }
+  
+  .glassBubble1, 
+  .glassBubble2 {
+    scale: 0.4;
+  }
+}
+
+/* Small Mobile Responsive Styles */
+@media (max-width: 480px) {  
+  .container_primary {
     flex-direction: column;
-    min-height: 16rem;
+    height: auto;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+ 
+  .svgBackground {
+    scale: 0.9;
+    margin: 1rem;
+  }
+  
+  .buttons {
+    width: 90%;
+    max-width: 350px;
+    height: auto;
+    min-height: 12rem;
     margin-bottom: 1rem;
   }
   
   .title_primary {
     font-size: 1.4rem;
-    margin-left: 4rem;
+    padding-left: 1.5rem;
+  }
 
-  }
-  .description_primary{
+  .description_primary {
     font-size: 0.9rem;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
   }
   
-  .glassBubble1 {
-    scale: 0.5;
-  }
-  
+  .glassBubble1, 
   .glassBubble2 {
-    scale: 0.5;
+    scale: 0.3;
   }
 }

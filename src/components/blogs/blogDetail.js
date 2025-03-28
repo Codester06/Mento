@@ -1,160 +1,163 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ref, onValue } from 'firebase/database';
-import { database } from '../../utils/firebaseConfig'; // Adjust path as needed
-import './BlogDetail.css'; // You'll need to create this CSS file
+import { getDataBS } from '../../utils/awsService';
+import './BlogDetail.css';
 
 const BlogDetail = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    
-    const [post, setPost] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [relatedPosts, setRelatedPosts] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
   
-    // Move fetchRelatedPosts to useCallback to memoize it
-    const fetchRelatedPosts = useCallback((category) => {
-      const blogPostsRef = ref(database, 'blog_posts');
-      
-      onValue(blogPostsRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          // Get posts with the same category, excluding the current post
-          const relatedPostsArray = Object.entries(data)
-            .filter(([postId, post]) => postId !== id && post.category === category)
-            .map(([postId, post]) => ({
-              id: postId,
+  const [post, setPost] = useState(null);
+  const [relatedPosts, setRelatedPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchBlogPostAndRelated = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch all blog posts
+        const responseData = await getDataBS('/blog');
+        const allPosts = responseData.data['data'];
+
+        // Find the specific blog post by ID
+        const blogPostData = allPosts.find(post => post.id === id);
+
+        if (blogPostData) {
+          // Format the post data
+          const formattedPost = {
+            ...blogPostData,
+            formattedDate: new Date(blogPostData.createdAt).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
+          };
+
+          setPost(formattedPost);
+
+          // Find related posts
+          const relatedPostsArray = allPosts
+            .filter(post => 
+              post.id !== id && 
+              post.category === blogPostData.category
+            )
+            .map(post => ({
+              id: post.id,
               title: post.title,
               featuredImage: post.featuredImage,
               createdAt: post.createdAt
             }))
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .slice(0, 3); // Limit to 3 related posts
-            
+            .slice(0, 3);
+
           setRelatedPosts(relatedPostsArray);
+        } else {
+          setError("Blog post not found");
         }
-      });
-    }, [id]); // Include 'id' as a dependency since it's used inside
-  
-    useEffect(() => {
-      // Reference to the specific blog post in Firebase
-      const postRef = ref(database, `blog_posts/${id}`);
-      
-      const unsubscribe = onValue(postRef, (snapshot) => {
-        try {
-          const data = snapshot.val();
-          if (data) {
-            setPost({
-              id,
-              ...data,
-              // Format date for display
-              formattedDate: new Date(data.createdAt).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })
-              // No longer splitting content by paragraphs since we're using HTML
-            });
-            
-            // After loading the main post, fetch related posts
-            fetchRelatedPosts(data.category);
-          } else {
-            setError("Blog post not found");
-          }
-          setLoading(false);
-        } catch (err) {
-          console.error('Error fetching blog post:', err);
-          setError('Failed to load blog post. Please try again later.');
-          setLoading(false);
-        }
-      }, (err) => {
-        console.error('Error fetching blog post:', err);
-        setError('Failed to load blog post. Please try again later.');
+      } catch (error) {
+        console.error('Error fetching blog post details:', error);
+        setError(error.message || "Failed to fetch blog post details");
+      } finally {
         setLoading(false);
-      });
-      
-      return () => unsubscribe();
-    }, [id, fetchRelatedPosts]); // Include fetchRelatedPosts as a dependency
-  
-    // Function to safely render HTML content
-    const renderContent = (htmlContent) => {
-      return { __html: htmlContent };
+      }
     };
 
-    // Navigate back to blog list
-    const handleBackClick = () => {
-      navigate('/blogs');
-    };
-  
-    // Navigate to a related post
-    const handleRelatedPostClick = (postId) => {
-      navigate(`/blog/${postId}`);
-      // Scroll to top when navigating to a new post
-      window.scrollTo(0, 0);
-    };
-  
-    // Loading state
-    if (loading) {
-      return (
-        <div className="blog-detail-container">
-          <div className="blog-detail-loading">
-            <p>Loading blog post...</p>
-          </div>
-        </div>
-      );
-    }
-  
-    // Error state
-    if (error) {
-      return (
-        <div className="blog-detail-container">
-          <div className="blog-detail-error">
-            <p>{error}</p>
-            <button className="back-button" onClick={handleBackClick}>
-              Back to Blog
-            </button>
-          </div>
-        </div>
-      );
-    }
-  
+    fetchBlogPostAndRelated();
+  }, [id]);
+
+  const handleBack = () => {
+    navigate('/blogs');
+  };
+
+  const handleRelatedPostClick = (postId) => {
+    navigate(`/blog/${postId}`);
+    window.scrollTo(0, 0);
+  };
+
+  if (loading) {
     return (
-      <div className="blog-detail-container">
-        {/* Back button */}
-        <div className="blog-detail-navigation">
-          <button className="back-button" onClick={handleBackClick}>
-            ← Back to Blog
+      <div className="details-container">
+        <div className="loading-container">
+          <p>Loading blog post details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="details-container">
+        <div className="not-found">
+          <h2>Error</h2>
+          <p>{error}</p>
+          <button onClick={handleBack} className="back-btn">
+            Back to Blog
           </button>
         </div>
-        
-        {/* Blog post header */}
-        <header className="blog-detail-header">
-          <h1 className="blog-detail-title">{post.title}</h1>
-          <div className="blog-detail-meta">
-            <span className="blog-detail-category">{post.category || 'Uncategorized'}</span>
-            <span className="blog-detail-date">{post.formattedDate}</span>
-            <span className="blog-detail-author">By {post.author || 'Admin'}</span>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="details-container">
+        <div className="not-found">
+          <h2>Blog Post Not Found</h2>
+          <p>The blog post you're looking for doesn't exist or has been deleted.</p>
+          <button onClick={handleBack} className="back-btn">
+            Back to Blog
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="details-BlogContainer">
+      <div className="details-header">
+        <button onClick={handleBack} className="back-btn">
+          ← Back to Blog
+        </button>
+        <h1 className="details-titleBlog">{post.title}</h1>
+      </div>
+
+      <div className="details-cardBlog">
+        <div className="details-sectionBlog">
+          <div className="blog-meta-info">
+            <div className="info-grid">
+              <div className="info-item">
+                <label>Category</label>
+                <div className="info-value">{post.category || 'Uncategorized'}</div>
+              </div>
+              <div className="info-item">
+                <label>Date</label>
+                <div className="info-value">{post.formattedDate}</div>
+              </div>
+              <div className="info-item">
+                <label>Author</label>
+                <div className="info-value">{post.author || 'Admin'}</div>
+              </div>
+            </div>
           </div>
-        </header>
-        
-        {/* Featured image */}
-        {post.featuredImage && (
-          <div className="blog-detail-image">
-            <img src={post.featuredImage} alt={post.title} />
-          </div>
-        )}
-        
-        {/* Blog content - Using dangerouslySetInnerHTML to render HTML content */}
-        <article 
-          className="blog-detail-content"
-          dangerouslySetInnerHTML={renderContent(post.content)}
-        />
-        
-        {/* Related posts */}
+
+          {post.featuredImage && (
+            <div className="featured-image">
+              <img src={post.featuredImage} alt={post.title} />
+            </div>
+          )}
+
+          <div 
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </div>
+
         {relatedPosts.length > 0 && (
-          <div className="related-posts-section">
-            <h3 className="related-posts-title">Related Articles</h3>
+          <div className="details-section">
+            <h2 className="section-title">Related Articles</h2>
             <div className="related-posts-grid">
               {relatedPosts.map(relatedPost => (
                 <div 
@@ -174,7 +177,8 @@ const BlogDetail = () => {
           </div>
         )}
       </div>
-    );
-  };
-  
-  export default BlogDetail;
+    </div>
+  );
+};
+
+export default BlogDetail;

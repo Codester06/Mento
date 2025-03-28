@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ref, push, set, onValue, remove } from 'firebase/database';
+import { ref,  remove } from 'firebase/database';
 import { database } from '../utils/firebaseConfig'; // Adjust path as needed
 import './AdminBlog.css';
 import { useNavigate } from 'react-router-dom';
+import { postDataBS,getDataBS } from '../utils/awsService';
 
 const AdminBlog = () => {
   // State for blog post form
@@ -13,6 +14,7 @@ const AdminBlog = () => {
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate =  useNavigate()
+  const [refreshPosts, setRefreshPosts] = useState(0);
   
   // State for blog posts list
   const [blogPosts, setBlogPosts] = useState([]);
@@ -23,26 +25,36 @@ const AdminBlog = () => {
 
   // Load existing blog posts
   useEffect(() => {
-    const blogPostsRef = ref(database, 'blog_posts');
-    
-    const unsubscribe = onValue(blogPostsRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        // Convert the object to an array and sort by date (newest first)
-        const postsArray = Object.entries(data).map(([id, post]) => ({
-          id,
-          ...post
+    const fetchBlogPosts = async () => {
+      try {
+        setPostsLoading(true);
+  
+        const responseData = await getDataBS('/blog');
+  
+        // Extract blog posts data
+        let blogPostsData = responseData.data['data'];
+  
+        // Transform data to extract and normalize specific fields
+        const processedBlogPosts = blogPostsData.map(post => ({
+          id: post.id || null,
+          title: post.title || 'Untitled',
+          content: post.content || '',
+          author: post.author || 'Unknown',
+          createdAt: post.createdAt || new Date().toISOString(),
+          category: post.category || 'Uncategorized',
+          featuredImage: post.featuredImage || ''
         })).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        
-        setBlogPosts(postsArray);
-      } else {
+  
+        setBlogPosts(processedBlogPosts);
+      } catch (error) {
         setBlogPosts([]);
+      } finally {
+        setPostsLoading(false);
       }
-      setPostsLoading(false);
-    });
-    
-    return () => unsubscribe();
-  }, []);
+    };
+  
+    fetchBlogPosts();
+  }, [refreshPosts]);
 
   // Handle image URL change and preview
   const handleImageUrlChange = (e) => {
@@ -64,45 +76,61 @@ const AdminBlog = () => {
     setCategory('');
   };
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (!title.trim() || !content.trim()) {
       alert('Please fill in all required fields.');
       return;
     }
-
+  
     setLoading(true);
     
     try {
-      // Create a new post reference
-      const newPostRef = push(ref(database, 'blog_posts'));
-      
-      // Format the content with proper headings and paragraphs
       const formattedContent = formatContent(content);
       
-      // Prepare post data
       const postData = {
         title,
         content: formattedContent,
         featuredImage: imageUrl,
         category: category || 'Uncategorized',
         createdAt: new Date().toISOString(),
-        author: 'Mento' // Replace with actual author or get from auth context
+        author: 'Mento',
+        submittedAt: new Date().toISOString()
       };
       
-      // Save blog post
-      await set(newPostRef, postData);
+      const response = await postDataBS('/blog', postData);
+      
+      console.log("Blog post created successfully:", response);
+      
       alert('Blog post created successfully!');
+      
+      // Trigger a refresh of blog posts
+      setRefreshPosts(prev => prev + 1);
+      
+      // Reset form after successful submission
       resetForm();
     } catch (error) {
       console.error('Error creating blog post:', error);
-      alert('Failed to create blog post.');
+      
+      let errorMessage = "Failed to create blog post. ";
+      
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage += error.response.data.message;
+      } else if (error.message) {
+        errorMessage += error.message;
+      } else {
+        errorMessage += "Please try again later.";
+      }
+      
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
   };
-  
+
+
   // Helper function to format content with headings and paragraphs
   const formatContent = (text) => {
     // Split the content by lines
@@ -352,8 +380,8 @@ const AdminBlog = () => {
                     </div>
                     <div className="post-excerpt" 
                          dangerouslySetInnerHTML={renderContentPreview(
-                           post.content.length > 200 
-                             ? post.content.substring(0, 200) + '...' 
+                           post.content.length >50 
+                             ? post.content.substring(0, 50) + '...' 
                              : post.content
                          )} 
                     />

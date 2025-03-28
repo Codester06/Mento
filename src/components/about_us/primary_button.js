@@ -46,7 +46,7 @@ const PrimaryButton = () => {
           </g>
         </svg>
       ),
-      route: '/self-assessment'
+      route: '/self-assessment-tool'
     },
   ];
   

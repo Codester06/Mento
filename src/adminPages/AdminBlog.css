@@ -211,7 +211,7 @@
   
   .post-thumbnail {
     width: 120px;
-    height: 90px;
+    height: auto;
     flex-shrink: 0;
     background-color: #eee;
     display: flex;

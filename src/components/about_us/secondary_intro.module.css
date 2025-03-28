@@ -46,7 +46,6 @@
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-
 }
 
 .sec_content_box p {
@@ -130,180 +129,135 @@
   transform: rotate(45deg) scaleX(-1);
 }
 
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
+  .container_sec_intro {
+    max-height: 40rem;
+    margin-top: 0;
+    overflow: hidden;
+  }
+
+  .overlaysec {
+    opacity: 0.6;
+    top: 70rem;
+    height: 35rem;
+  }
+
+  .sec_layout {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    padding: 0;
+    gap: 2rem;
+  }
+
+  .sec_shapes_column {
+ 
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    position: relative;
+    top: 0;
+    left: 0;
+    scale: 0.9;
+  }
+
   .sec_diamond_1,
   .sec_diamond_2,
   .sec_diamond_3,
   .sec_diamond_4 {
     width: 8rem;
-    
     height: 8rem;
-    
   }
 
-  .sec_diamond_1{
+  .sec_diamond_1 {
     top: 2rem;
-    left: 1rem;
-
-  }
-  .sec_diamond_2{
-    top: 0rem;
-    left: 7rem;
-
-  }
-  .sec_diamond_3{
-    top: -8rem;
-    left: -5rem;
-
-  }
-.sec_diamond_4{
-  top: -10rem;
-  left: 1rem;
-
-}
-.container_sec_intro{
-  max-height:35rem ;
-  margin-top: 0rem;
-}
-
-  .overlaysec{
-    opacity: 0.6;
-    top: 62.8rem;
-        height: 35rem;
-       
-  }
-  .sec_content_box{
-    margin-top: 5rem;
-   height: 10rem;
-
-  }
-  .sec_layout{
-    /* border: 1px solid red; */
-    height: 50rem;
-    width: 50rem;
-  
-    position: static;
-  }
-  
-  .sec_content_box p {
-    margin: 0;
-    width: 33rem;
-    /* border: solid 1px red; */
-    scale: 0.8;
-    position: relative;
-    top: -5rem;
-        left: -9rem;
-
-    font-size: 1.5rem;
-    
-
-  }
-  .sec_content_box h1 {
-    margin: 0;
-    width: 27rem;
-    /* border: solid 1px red; */
-    scale: 0.8;
-   
-    position: relative;
-    top: -4rem;
-        
-        left: -2rem;
-
-  }
-  .sec_shapes_column{
-    /* border: solid red 1px ; */
-    height: 50rem;
-    top: 4em;
-    left: 2em;
-  }
-}
-
-
-@media (max-width: 480px) { .sec_diamond_1,
-  .sec_diamond_2,
-  .sec_diamond_3,
-  .sec_diamond_4 {
-    width: 6rem;
-    
-    height: 6rem;
-    
-  }
-
-  .sec_diamond_1{
-    top: -2rem;
-        left: 1rem;
-
-  }
-  .sec_diamond_2{
-    top: -3rem;
-    left: 6rem;
-
-  }
-  .sec_diamond_3{
-    top: -9rem;
     left: -4rem;
-
   }
-.sec_diamond_4{
-  top: -10rem;
-  left: 1rem;
 
-}
-.container_sec_intro{
-  max-height:23rem ;
-  margin-top: 0rem;
-}
+  .sec_diamond_2 {
+    top: -2rem;
+    left: 4rem;
+  }
 
-  .overlaysec{
-    opacity: 0.6;
-    top: 93.8rem;
-        height: 22rem;
-       
+  .sec_diamond_3 {
+    top: 6rem;
+    left: -4rem;
   }
-  .sec_content_box{
-    margin-top: 5rem;
-   height: 10rem;
 
+  .sec_diamond_4 {
+    top: 2rem;
+    left: 4rem;
   }
-  .sec_layout{
-    /* border: 1px solid red; */
-    height: 50rem;
-    width: 10rem;
-  
-  
-  }
-  
-  .sec_content_box p {
-    margin-top: 1rem;
-    position: static;
-    margin-left: 0;
-    padding-right: 0;
-    width: 16rem;
-    position: relative;
-    top: -12rem;
-    left: 1rem;
-    font-size: 12px;
-    
 
+  .sec_content_box {
+    width: 100%;
+    margin-top: -6rem;
+    padding: 1rem;
+    text-align: center;
   }
+
   .sec_content_box h1 {
-    width: 24rem;
-    font-size: 2.6rem;
-    top: -11rem;
-    width: 17rem;
-    left: 1rem;
-    
+    font-size: 2.5rem;
     margin-bottom: 1rem;
-    padding-right: 0;
-    position: relative;
+    text-align: center;
+    width: 100%;
+    position: static;
+    left: 0;
+  }
 
+  .sec_content_box p {
+    font-size: 1.4rem;
+    width: 100%;
+    margin: 0;
+    position: static;
+    text-align: center;
+    padding: 0 1rem;
   }
-  .sec_shapes_column{
-    /* border: solid red 1px ; */
+}
+
+@media (max-width: 480px) {
+  .container_sec_intro {
+    max-height: 35rem;
+  }
+
+  .overlaysec {
+    top: 85rem;
+    background-image: none;
     height: 50rem;
-    top: 2em;
-    left: 2em;
-    scale: 1;
   }
-  
+
+  .sec_shapes_column {
+    scale: 0.8;
+  }
+
+  .sec_diamond_1 {
+    top: 2rem;
+    left: 5.5rem;
+  }
+
+  .sec_diamond_2 {
+    top: -4rem;
+    left: 4rem;
+  }
+
+  .sec_diamond_3 {
+    top: 8rem;
+    left: -4.1rem;
+  }
+
+  .sec_diamond_4 {
+    top: 2rem;
+    left: -5.5rem;
+  }
+
+  .sec_content_box h1 {
+    font-size: 2.2rem;
+  }
+
+  .sec_content_box p {
+    font-size: 1.2rem;
+  }
 }

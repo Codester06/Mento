@@ -21,6 +21,7 @@
 
 .layout {
   display: flex;
+  position: relative;
 }
 
 .overlayIntro {
@@ -136,8 +137,7 @@
   background-position: center;
 }
 
-
-/* Media Queries */
+/* Tablet Styles */
 @media (max-width: 1024px) {
   .contentBox {
     margin-top: 8rem;
@@ -151,179 +151,116 @@
   }
 }
 
+/* Mobile Styles */
 @media (max-width: 768px) {
   .containerIntro {
-    height: 28rem;
+    height: auto;
     padding: 1rem;
-  }
-  
-  .shapesColumn{
-    height: 25rem;
   }
   
   .layout {
     flex-direction: column;
+    align-items: center;
   }
-  .overlayIntro{
-    height: 42.7rem;
+  
+  .overlayIntro {
+    height: auto;
+    position: absolute;
+    top: 0;
     z-index: 1;
   }
   
   .contentBox {
-   
-    margin-top: 0;
+    margin-top: 2rem;
     padding-top: 0;
     position: relative;
-    left: 22rem;
-    top: 3rem;
-
-    
-   
-    padding-right: 0;
-    max-width: 54%;
-    
-  }
-  .shapesColumn{
-    position: relative;
-    left: 0rem;
-    top: 0rem;
-
-  }
-  .squareBottomLeft,.squareUpperRight{
-    display: none;
+    left: 0;
+    top: 0;
+    max-width: 90%;
+    text-align: center;
   }
   
-  .contentBox h1{
-    display: inline;
+  .contentBox h1 {
+    position: static;
     font-size: 2rem;
     margin-bottom: 1rem;
-    padding-right: 0;
-    position: static;
+    left: 0;
+    bottom: 0;
+    text-align: center;
   }
   
-  
   .contentBox p {
-    margin-top: 1rem;
     position: static;
-    margin-left: 0;
-    padding-right: 0;
-    width: 94%;
+    width: 100%;
     font-size: 1rem;
+    left: 0;
+    bottom: 0;
+    text-align: center;
   }
   
   .shapesColumn {
-    order: 2;
-    grid-template-areas:
-      "upperLeft upperRight"
-      "bottomLeft bottomRight";
-    min-height: 400px;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
   }
-  .recBottomRight ,.recUpperLeft{
-    width: 12rem;
-  height: 8rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  }
-  .recUpperLeft{
-    top: -11rem;
-    left: 9rem;
-  }
-  .recBottomRight{
-    top: -12rem;
-    left: 1.5rem;
-  }
- 
   
+  .recUpperLeft,
+  .recBottomRight {
+    width: 12rem;
+    height: 8rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+  
+  .recUpperLeft {
+    top: 0;
+    left: 0;
+  }
+  
+  .recBottomRight {
+    top: 0;
+    left: 0;
+  }
+  
+  .squareBottomLeft,
+  .squareUpperRight {
+    display: none;
+  }
 }
 
+/* Small Mobile Styles */
 @media (max-width: 480px) {
   .containerIntro {
-    height: 18rem;
-    padding: 1rem;
-  }
-  
-  .shapesColumn{
-    height: 25rem;
-  }
-  
-  .layout {
-   padding: 0;
-   margin: 0;
-
-  }
-  .overlayIntro{
-    height: 32.7rem;
-    z-index: 1;
+    height: auto;
+    padding: 0.5rem;
   }
   
   .contentBox {
-    
-    /* border: solid 1px red; */
-    margin-top: 0;
-    padding-top: 0;
+    scale: 0.9;
+    max-width: 95%;
     margin-top: 1rem;
-    position: relative;
-    scale: 0.8;
-    left: 12rem;
-    top: -5rem;
-
-    
-   
-    padding-right: 0;
-    max-width: 54%;
-    
-  }
-  .shapesColumn{
-    position: relative;
-    left: 0rem;
-    top: 0rem;
-    
-  }
-  .squareBottomLeft,.squareUpperRight{
-    display: none;
   }
   
-  .contentBox h1{
-    display: inline;
+  .contentBox h1 {
     font-size: 1.6rem;
-    top: 2rem;
-    left: 3rem;
-    margin-bottom: 1rem;
-    padding-right: 0;
-    position: relative;
   }
-  
   
   .contentBox p {
-    margin-top: 1rem;
-    position: static;
-    margin-left: 0;
-    padding-right: 0;
-    width:111%;
-    position: relative;
-    top: 3rem;
-    left: 0rem;
-    font-size: 12px;
+    font-size: 0.9rem;
+    width: 100%;
   }
   
   .shapesColumn {
-    order: 2;
-    grid-template-areas:
-      "upperLeft upperRight"
-      "bottomLeft bottomRight";
-    min-height: 400px;
+    margin-top: 1rem;
   }
-  .recBottomRight ,.recUpperLeft{
-    width: 12rem;
-  height: 7rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  }
-  .recUpperLeft{
-    top: -12rem;
-    left: 0rem;
-  }
-  .recBottomRight{
-   display: none;
-  }
- 
   
+  .recUpperLeft,
+  .recBottomRight {
+    width: 10rem;
+    height: 6rem;
+  }
 }
