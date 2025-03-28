@@ -10,7 +10,7 @@ const Dashboard = () => {
         <h2 className="section-title">Email Responses</h2>
         <div className="cards-container">
           {/* Individual Responses Card */}
-          <div className="card">
+          <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">📧</div>
               <h3 className="card-title">Individual Responses</h3>
@@ -27,7 +27,7 @@ const Dashboard = () => {
           </div>
 
           {/* Friends and Family Card */}
-          <div className="card">
+          <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">👨‍👩‍👧‍👦</div>
               <h3 className="card-title">Friends & Family</h3>
@@ -44,7 +44,7 @@ const Dashboard = () => {
           </div>
 
           {/* Couple Responses Card */}
-          <div className="card">
+          <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">❤️</div>
               <h3 className="card-title">Couple Responses</h3>
@@ -88,7 +88,7 @@ const Dashboard = () => {
         <h2 className="section-title">Self Assessment</h2>
         <div className="cards-container">
           {/* Depression Test Card */}
-          <div className="card">
+          <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">🧠</div>
               <h3 className="card-title">Depression Test</h3>
@@ -105,7 +105,7 @@ const Dashboard = () => {
           </div>
 
           {/* Anxiety Test Card */}
-          <div className="card">
+          <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">😰</div>
               <h3 className="card-title">Anxiety Test</h3>
@@ -122,7 +122,7 @@ const Dashboard = () => {
           </div>
 
           {/* General Test Card */}
-          <div className="card">
+          <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">📊</div>
               <h3 className="card-title">General Test</h3>

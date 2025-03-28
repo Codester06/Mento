@@ -1,6 +1,7 @@
 .containerMain{
     background: linear-gradient(to bottom, #ffeaf3c4,#b9e5e8d8); 
     /* background: linear-gradient(to bottom, #CFFAF3, #f8eee6,#FFEAF3FA); */
+    padding-top: 5rem;
 }
 
 .HelpContainer {
@@ -13,10 +14,11 @@
 
   .helpYouTitle {
     color: #333;
-    font-size: 1.8rem;
+
     text-align: center;
-    margin-bottom: 40px;
-    font-weight: 700;
+    margin-bottom: 60px;
+    font-size: 2.3em;
+  font-weight: 500;
   }
 
   .services-grid {
@@ -163,7 +165,7 @@ button:hover .icon-3 {
 
   .get-started-btn {
     text-decoration: none;
-    margin-top: 40px;
+    margin-top: 60px;
     background-color: #ffffff33;
     color: rgb(0, 0, 0);
     padding: 16px 32px;
@@ -192,8 +194,8 @@ button:hover .icon-3 {
 
 
   @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
+    .helpYouTitle {
+      font-size: 1.6rem;
     }
 
     .services-grid {
@@ -203,6 +205,14 @@ button:hover .icon-3 {
     .service-tag {
       padding: 10px 20px;
       font-size: 0.9rem;
+    }
+
+    .button56{
+      font-size: 14px;
+    }
+
+    .get-started-btn{
+      font-size: 1rem;
     }
   }
 

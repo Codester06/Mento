@@ -40,11 +40,10 @@
 }
 
 .sec_content_box h1 {
-  font-family: 'Times New Roman';
   color: #374151;
   padding: 2rem;
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 1rem;
 }
 
@@ -53,7 +52,7 @@
   padding-left: 1.5rem;
   font-weight: 600;
   color: #374151;
-  font-family: 'Delius';
+
   line-height: 1.625;
 }
 

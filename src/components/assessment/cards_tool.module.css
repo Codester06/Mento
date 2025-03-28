@@ -155,78 +155,95 @@ background: transparent;
   transform: translateY(-2px);
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .paragraph18 {
-    font-size: 4em;
+    font-size: 2.5em;
+    text-align: center;
   }
   
   .chipsContainer {
+    display: flex;
+    flex-direction: column;
+    height: auto;
     gap: 2rem;
-    transform: scale(0.9);
-  }
-  .chipImageContainer img{
-    height: 12rem;
+    padding: 1rem;
+    margin: 0;
+    transform: scale(1);
   }
   
-      .chipInfo{
-        gap: 0;
-      }
-      .chipName{
-        font-size: 1.4rem;
-      }
-      .chipDescription{
-        font-size: 90%;
-        text-transform: capitalize;
-      }
   .chipCard {
-    width: 90%;
-    max-width: 24rem;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    overflow: visible;
+    margin-bottom: 1rem;
   }
   
   .chipImageContainer {
-    height: 15rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .paragraph18 {
-    font-size: 3em;
+    height: 250px;
+    width: 100%;
+    padding: 10px;
   }
   
-  .chipsContainer {
-   display: flex;
-   flex-direction: column;
-   max-height:51rem ;
-   margin-bottom: 5rem;
-  }
-  
-  .chipCard {
-    width: 95%;
+  .chipImageContainer img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
   }
   
   .chipInfo {
     padding: 1rem;
+    text-align: center;
   }
   
   .chipName {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .chipDescription {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+    margin: 0.5rem 0;
   }
   
   .shopButton {
     width: 90%;
+    margin: 1rem auto;
     padding: 10px 0;
+    font-size: 1rem;
   }
-.chipsContainer{
-  height: 100rem;
-  scale: 0.8;
-  margin-top: 10rem;
 }
-  .chipDescription{
 
+@media (max-width: 768px) {
+  .paragraph18 {
+    scale: 1.25;
   }
-  .chipCard{
-    overflow:visible;
-    flex-direction: row;
+  
+  .chipsContainer {
+    gap: 1.5rem;
+    transform: scale(0.95);
+    height: auto;
+  }
+  
+  .chipCard {
+    width: 95%;
+    max-width: 95%;
+  }
+  
+  .chipImageContainer {
+    height: 200px;
+  }
+  
+  .chipInfo {
+    gap: 0.5rem;
+  }
+  
+  .chipName {
+    font-size: 1.3rem;
+  }
+  
+  .chipDescription {
+    font-size: 0.9rem;
   }
 }

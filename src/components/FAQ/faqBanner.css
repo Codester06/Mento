@@ -37,4 +37,12 @@
         background-color: #CFFAF3FA;
         border-radius: 30% 30% 0 0;
     }
+
+    .faq-answer{
+        font-size: 14px;
+    }
+    .faq-question {
+        font-size: 16px;
+        padding: 18px;
+    }
 }

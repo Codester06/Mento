@@ -19,7 +19,6 @@
    /* Adds space so it's not overlapping */ 
   justify-content: center; 
   width: 100%; 
-  border: solid black 1px;
   z-index: 11;
 }
 

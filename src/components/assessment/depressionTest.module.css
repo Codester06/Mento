@@ -522,6 +522,7 @@
 @media (max-width: 480px) {
   .wellnessQuiz {
     padding: 16px;
+    border-radius: 0;
   }
   
   .quizTitle {
@@ -784,7 +785,8 @@
 @media (max-width: 480px) {
   .assessmentBanner {
     padding: 20px;
-    margin-bottom: 16px;
+    margin-bottom: -10px;
+    border-radius: 0;
   }
   
   .bannerTitle {

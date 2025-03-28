@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius&family=Delius+Unicase:wght@400;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rouge+Script&display=swap');
 
 h2 {
     display: block;
     font-size: 1.5em;
-    
     font-weight: bold;
     unicode-bidi: isolate;
 }
@@ -80,7 +78,6 @@ h2 {
     font-size: 1rem;
     font-weight: 300;
     color: #374151;
-    font-family: 'Delius';
     line-height: 1.625;
     width: 100%;
     text-align: center;
@@ -137,7 +134,7 @@ h2 {
     transform: scale(1.05);
 }
 
-/* Add the bounce animation */
+/* Animations */
 @keyframes bounceArrow {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(10px); }
@@ -148,7 +145,68 @@ h2 {
     50% { opacity: 0.1; }
 }
 
-/* Media Queries for Responsive Design */
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+
+    .step-container {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+       
+    }
+
+    .text-container-hiw {
+        background: rgba(255, 255, 255, 0.348);
+        border-radius: 1rem;
+        padding: 1rem;
+        margin: 0 1rem;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .heading-xl {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .heading-lg {
+        font-size: 1.5rem;
+    }
+
+    .paragraph-piw {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        max-width: 100%;
+    }
+
+    .img-hiw1 {
+        width: 100%;
+        max-width: 380px;
+        margin-top: 10px;
+    }
+
+    .hiw-arrow-container {
+        margin: 0.5rem 0;
+        height: 30px;
+    }
+
+    .hiw-arrow {
+        width: 15px;
+        height: 15px;
+        border-right: 2px solid #666;
+        border-bottom: 2px solid #666;
+    }
+
+    .hiw-arrow-shadow {
+        width: 15px;
+        height: 15px;
+        border-right: 2px solid rgba(102, 102, 102, 0.3);
+        border-bottom: 2px solid rgba(102, 102, 102, 0.3);
+    }
+}
+
+/* Tablet Styles */
 @media screen and (min-width: 768px) {
     .container-hiw {
         padding: 3rem 2rem;
@@ -172,6 +230,7 @@ h2 {
     }
 }
 
+/* Desktop Styles */
 @media screen and (min-width: 1024px) {
     .step-container {
         flex-direction: row;
@@ -182,11 +241,12 @@ h2 {
     .text-container-hiw {
         flex-direction: row;
         justify-content: space-between;
-        max-width: 1200px;
+        max-width: 1000px;
     }
     
     .heading-xl {
-        font-size: 3.5rem;
+        font-size: 2.8rem;
+        font-weight: 500;
     }
     
     .heading-lg {
@@ -206,11 +266,12 @@ h2 {
     
     .img-hiw1 {
         width: 40%;
-        max-width: 420px;
+        max-width: 48%;
         margin-bottom: 0;
     }
 }
 
+/* Large Desktop Styles */
 @media screen and (min-width: 1440px) {
     .container-hiw {
         padding: 4rem;

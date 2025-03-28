@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../FAQ/FaqSection.css';
+import './mentalwellness.css'
 import { Link } from 'react-router-dom';
 
 const FAQItem = ({ question, answer }) => {
@@ -58,7 +59,7 @@ const FAQSectionWN = () => {
     <div className='faqMainContainerWN'>
     <div className="containerFAQ">
       <div className="faq-container">
-        <center><h3>Frequently Asked Questions</h3></center>
+        <center><h3 className='faqHeadingWN'>Frequently Asked Questions</h3></center>
         {faqData.map((item, index) => (
           <FAQItem 
             key={index} 

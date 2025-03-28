@@ -27,3 +27,19 @@ margin-bottom: 2%;
     font-weight: 500;
   }
   
+
+  @media screen and (max-width: 768px) {
+    .BannerHeading {
+      padding: 0.2rem 1rem;
+      padding-bottom: 2rem;
+    }
+
+    .BannerHeading h1 {
+      font-size: 1.25rem;
+    }
+  
+    .BannerHeading h2 {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+    }
+  }

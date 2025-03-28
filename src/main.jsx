@@ -81,7 +81,7 @@ function Main() {
     <BrowserRouter>
       <div id="root">
         <Navbar />
-        <div className="main-contentAdmin">
+        <div className="main-content">
           {" "}
           {/* Main content wrapper */}
           <Routes>

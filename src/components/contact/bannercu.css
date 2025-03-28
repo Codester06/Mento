@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rouge+Script&display=swap');
 
 
 /* Contact Us Container */
@@ -46,7 +45,6 @@
     
 /* Heading Styles */
 .text-container-cu h1 {
-    font-family: 'Times New Roman', sans-serif;
     padding: 1rem 0;
     font-size: 1.8rem;
     font-weight: 500;
@@ -56,7 +54,6 @@
 }
 
 .text-container-cu h4 {
-    font-family: 'Delius', sans-serif;
     padding: 0;
     margin: 0.5rem 0 1.5rem 0;
     font-size: 1.1rem;
@@ -110,3 +107,127 @@
     background-color: #f0f0f0;
     transform: translateY(-2px);
 }
+
+
+@media (max-width: 480px) {
+    .cu-container {
+      flex-direction: column;
+      padding: 1rem;
+      align-items: center;
+    }
+  
+    .text-container-cu {
+      width: 100%;
+      margin-left: 0;
+      text-align: center;
+      order: 1;
+    }
+  
+    .text-container-cu h1 {
+      font-size: 1.5rem;
+    }
+  
+    .text-container-cu h4 {
+      width: 100%;
+      font-size: 1rem;
+    }
+  
+    .img-container-cu {
+      margin-right: 0;
+      order: 2;
+      width: 100%;
+      max-height: 200px;
+      justify-content: center;
+    }
+  
+    .back-banner {
+      width: 80%;
+      height: 200px;
+      margin-right: 0;
+      scale: 1;
+      background-size: contain;
+      background-position: center;
+    }
+  
+    .contact-form {
+      width: 100%;
+    }
+  
+    .form-group {
+      margin-bottom: 0.75rem;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      align-self: stretch;
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 768px) {
+    .cu-container {
+      flex-direction: column;
+      padding: 1.5rem;
+      align-items: center;
+    }
+  
+    .text-container-cu {
+      width: 100%;
+      margin-left: 0;
+      text-align: center;
+      order: 1;
+    }
+  
+    .img-container-cu {
+      margin-right: 0;
+      order: 2;
+      width: 100%;
+      max-height: 250px;
+      justify-content: center;
+    }
+  
+    .back-banner {
+      width: 60%;
+      height: 250px;
+      margin-right: 0;
+      scale: 1.1;
+      background-size: contain;
+      background-position: center;
+    }
+  
+    .text-container-cu h1 {
+      font-size: 1.6rem;
+    }
+  
+    .text-container-cu h4 {
+      width: 100%;
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 769px) {
+    .cu-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .text-container-cu {
+      margin-left: 0;
+      order: 1;
+    }
+  
+    .img-container-cu {
+      width: 50%;
+      margin-right: 0;
+      order: 2;
+      justify-content: flex-end;
+    }
+  
+    .back-banner {
+      width: 100%;
+      height: 180px;
+      margin-right: 0;
+      scale: 1;
+      background-size: contain;
+      background-position: center;
+    }
+  }

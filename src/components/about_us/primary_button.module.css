@@ -1,7 +1,6 @@
 /* primary_button.module.css */
 
 .container_primary {
-  font-family: 'Delius', sans-serif;
   display: flex;
   flex-direction: row;
   background: linear-gradient(135deg, #cdffd7, #d5f0f7);
@@ -158,7 +157,7 @@
 }
 
 .title_primary {
-  font-family: 'Times New Roman', serif;
+
   padding-left: 2rem;
   padding-top: 1rem;
   font-size: 2.5rem;
@@ -169,7 +168,6 @@
 }
 
 .description_primary {
-  font-family: 'Delius', sans-serif;
   padding-left: 2rem;
   padding-right: 1.5rem;
   padding-top: 2rem;

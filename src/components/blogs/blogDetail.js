@@ -116,6 +116,9 @@ const BlogDetail = () => {
   }
 
   return (
+    <div className="BlogMain-content">
+
+
     <div className="details-BlogContainer">
       <div className="details-header">
         <button onClick={handleBack} className="back-btn">
@@ -128,17 +131,17 @@ const BlogDetail = () => {
         <div className="details-sectionBlog">
           <div className="blog-meta-info">
             <div className="info-grid">
-              <div className="info-item">
+              <div className="info-itemBlog ">
                 <label>Category</label>
-                <div className="info-value">{post.category || 'Uncategorized'}</div>
+                <div className="info-valueBlog">{post.category || 'Uncategorized'}</div>
               </div>
-              <div className="info-item">
+              <div className="info-itemBlog ">
                 <label>Date</label>
-                <div className="info-value">{post.formattedDate}</div>
+                <div className="info-valueBlog">{post.formattedDate}</div>
               </div>
-              <div className="info-item">
+              <div className="info-itemBlog ">
                 <label>Author</label>
-                <div className="info-value">{post.author || 'Admin'}</div>
+                <div className="info-valueBlog">{post.author || 'Admin'}</div>
               </div>
             </div>
           </div>
@@ -177,6 +180,7 @@ const BlogDetail = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

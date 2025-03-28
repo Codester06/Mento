@@ -65,3 +65,9 @@
     right: 20px;
   }
   
+
+  @media (max-width: 768px) {
+    .banner-title {
+      font-size: 2rem;
+    }
+  }

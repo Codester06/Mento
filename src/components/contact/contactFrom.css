@@ -276,6 +276,7 @@
 @media (max-width: 480px) {
   .ContainerMainFrom {
     padding: 20px 10px;
+    margin-top: 0;
   }
   
   .contact-infoFrom, 

@@ -226,7 +226,7 @@
   display: flex;
   gap: 0.75rem;
   flex-direction: row;
-  }
+}
 
 .radio-grid-MN {
   display: grid;
@@ -425,7 +425,6 @@
   border-top: 1px solid #e5e7eb;
 }
 
-
 /* Animation for step transitions */
 .form-step-MN {
   animation: fadeIn 0.5s ease;
@@ -570,7 +569,6 @@ input:focus, select:focus, textarea:focus {
 
 .terms-text-MN{
   display: flex;
-  
   align-items: flex-start;
 }
 
@@ -579,16 +577,20 @@ input:focus, select:focus, textarea:focus {
   width: 150px;
 }
 
-/* Responsive styling */
+.radio-group-MNIM {
+  flex-direction: column;
+}
+
+/* Tablet Responsive Styles */
 @media (max-width: 768px) {
   .multi-step-form-MN {
     flex-direction: row;
     margin: 0;
-    height: 1000xpx;
+    height: 1000px;
     border-radius: 0;
     width: 43rem;
     font-size: 80%;
-    border-radius:50px;
+    border-radius: 50px;
   }
   
   .sidebar-MN {
@@ -601,14 +603,11 @@ input:focus, select:focus, textarea:focus {
     overflow-x: auto;
     flex-direction: column;
     padding: 14px 0px;
-    
   }
   
   .step-indicator-MN {
     flex-direction: column;
-    
     margin-bottom: 0;
-   
     text-align: center;
   }
   
@@ -638,98 +637,137 @@ input:focus, select:focus, textarea:focus {
   .radio-grid-MN {
     grid-template-columns: 1fr;
   }
-  .step-title-MN  , .step-subtitle-MN{
-   font-size: 13px;
+  
+  .step-title-MN, .step-subtitle-MN {
+    font-size: 13px;
   }
 }
+
+/* Mobile Responsive Styles */
 @media (max-width: 480px) {
   .multi-step-form-MN {
     flex-direction: column;
+    width: 100%;
+    height: auto;
     margin: 0;
-    height: 805px;
-    border-radius: 0;
-    width: 30rem;
-    font-size: 60%;
-    scale: 0.8;
-    border-radius:46px;
-    
+    border-radius:0;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 8px;
   }
   
   .sidebar-MN {
     width: 100%;
-
-    padding: 1rem 0;
+    padding: .6rem;
+    border-radius: 0;
   }
 
   .steps-container-MN {
     display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-   
-    justify-content: center;
     flex-direction: row;
-    
-  }
-  .step-title-MN  , .step-subtitle-MN{
-    display: none;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem;
   }
   
   .step-indicator-MN {
-    flex-direction: row;
-    
-    margin-bottom: 0;
-   
-    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
   }
   
   .step-number-MN {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0.3rem;
   }
   
-  .circle-1-MN {
-    width: 200px;
-    height: 200px;
-    bottom: -100px;
-    left: -50px;
-  }
-  
-  .circle-2-MN {
-    width: 150px;
-    height: 150px;
-    bottom: -50px;
-    right: -50px;
+  .step-title-MN, 
+  .step-subtitle-MN {
+    text-align: center;
+    font-size: 10px;
+    display: none;
   }
   
   .form-container-MN {
-    padding: 1.5rem;
+    padding: 1rem;
   }
-  .form-title-MN{
-    font-size: 1.5rem;
+  
+  .form-title-MN {
+    font-size: 1.3rem;
+    text-align: center;
   }
+  
+  .form-subtitle-MN {
+    text-align: center;
+    font-size: 0.7rem;
+  }
+  
   .form-field-MN {
-    font-size: 10px;
-    padding-left: 0.2rem;
-    
+    margin-bottom: 1rem;
   }
+  
   .form-field-MN input,
-  .form-field-MN select {
-    font-size: 11px;
-   padding: 0.5rem;
-
+  .form-field-MN select,
+  .form-field-MN textarea {
+    font-size: 14px;
+    padding: 0.6rem;
   }
-  .oneLineDetail{
-    gap: 3rem;
-   
+  
+  .oneLineDetail {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .fieldWidthHear,
+  .fieldWidthPro,
+  .fieldWidthNo,
+  .fieldWidthEmail,
+  .fieldWidthCity,
+  .fieldWidthAge,
+  .fieldWidthName {
+    width: 100%;
   }
   
   .radio-grid-MN {
     grid-template-columns: 1fr;
   }
-}
-.radio-group-MNIM{
-  flex-direction: column;
-}
-
-
   
+  .form-buttons-MN {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .back-button-MN,
+  .next-button-MN,
+  .confirm-button-MN,
+  .dashboard-button-MN {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .decorative-circles-MN {
+    display: none;
+  }
+  
+  .summary-box-MN,
+  .pricing-info-MN,
+  .confirmation-details-MN {
+    padding: 1rem;
+  }
+  
+  .thank-you-MN {
+    padding: 1rem;
+  }
+  
+  .next-steps-MN {
+    margin: 1rem 0;
+  }
+  
+  .form-content-MN {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}

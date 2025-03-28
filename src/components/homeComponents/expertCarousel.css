@@ -4,10 +4,13 @@
   max-width: 100%;
   padding: 20px 0;
   background: linear-gradient(to bottom,#CFFAF3FA, #ffeaf3c4);
+  margin-top: -8rem;
 }
 
 .experts-title {
-  margin-bottom: 20px;
+  font-size: 2.5em;
+  font-weight: 500;
+  margin-bottom: 50px;
   color: #333;
 }
 
@@ -225,6 +228,10 @@
 
 /* Enhanced Mobile Responsiveness */
 @media screen and (max-width: 768px) {
+  .expert-carousel{
+    margin-top: 0;
+    padding-bottom: 3rem;
+  }
   .experts-title {
     font-size: 1.8em;
   }
@@ -249,8 +256,8 @@
   .card {
     padding: 10px;
     flex-direction: column;
-    width: 280px;
-    height: 518px;
+    width: 290px;
+    height: 557px;
     margin: 0 auto;
   }
 
