@@ -1,40 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ref, onValue } from 'firebase/database';
-import { database } from '../../../utils/firebaseConfig';
-import './ConsultationDetails.css';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getData } from "../../../utils/awsService";
+import "./ConsultationDetails.css";
 
 const CoupleDetails = () => {
   const { id } = useParams();
   const [consultation, setConsultation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!id) return;
+    const fetchConsultationDetails = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    const consultationRef = ref(database, `couples_therapy_sessions/${id}`);
-    
-    const unsubscribe = onValue(consultationRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setConsultation({ id, ...data });
-      } else {
-        // Consultation not found
-        setConsultation(null);
+        const responseData = await getData("/couple");
+        // console.log('Full Raw Response:', responseData);
+
+        // Find the specific consultation by ID
+        const consultationData = responseData.data["data"].find(
+          (consultation) => consultation.id === id
+        );
+
+        // console.log('Specific Consultation Data:', consultationData);
+
+        if (consultationData) {
+          setConsultation(consultationData);
+        } else {
+          setError("Consultation not found");
+        }
+      } catch (error) {
+        console.error("Error in fetching consultation details:", error);
+        setError(error.message || "Failed to fetch consultation details");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    });
-    
-    return () => unsubscribe();
+    };
+
+    fetchConsultationDetails();
   }, [id]);
 
   const handleBack = () => {
-    navigate('/admin/responses/couple-responses');
+    navigate("/admin/responses/couple-responses");
   };
 
   if (loading) {
-    return <div className="loading-container">Loading consultation details...</div>;
+    return (
+      <div className="loading-container">Loading consultation details...</div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="details-container">
+        <div className="not-found">
+          <h2>Error</h2>
+          <p>{error}</p>
+          <button onClick={handleBack} className="back-btn">
+            Back to List
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (!consultation) {
@@ -42,8 +72,13 @@ const CoupleDetails = () => {
       <div className="details-container">
         <div className="not-found">
           <h2>Consultation Not Found</h2>
-          <p>The consultation you're looking for doesn't exist or has been deleted.</p>
-          <button onClick={handleBack} className="back-btn">Back to List</button>
+          <p>
+            The consultation you're looking for doesn't exist or has been
+            deleted.
+          </p>
+          <button onClick={handleBack} className="back-btn">
+            Back to List
+          </button>
         </div>
       </div>
     );
@@ -51,7 +86,7 @@ const CoupleDetails = () => {
 
   // Format the consultation data for display
   const formatDate = (dateString) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     const date = new Date(dateString);
     return isNaN(date.getTime()) ? dateString : date.toLocaleDateString();
   };
@@ -59,7 +94,9 @@ const CoupleDetails = () => {
   return (
     <div className="details-container">
       <div className="details-header">
-        <button onClick={handleBack} className="back-btn">← Back to List</button>
+        <button onClick={handleBack} className="back-btn">
+          ← Back to List
+        </button>
         <h1 className="details-title">Couples Therapy Consultation Details</h1>
       </div>
 
@@ -99,9 +136,9 @@ const CoupleDetails = () => {
               <label>Relationship Status</label>
               <div className="info-value">
                 {consultation.relationshipStatus}
-                {consultation.relationshipStatus === "Other" && consultation.otherRelationshipStatus && 
-                  ` (${consultation.otherRelationshipStatus})`
-                }
+                {consultation.relationshipStatus === "Other" &&
+                  consultation.otherRelationshipStatus &&
+                  ` (${consultation.otherRelationshipStatus})`}
               </div>
             </div>
           </div>
@@ -117,12 +154,12 @@ const CoupleDetails = () => {
             <div className="info-item">
               <label>Therapy Goals</label>
               <div className="info-value">
-                {Array.isArray(consultation.therapyGoals) 
-                  ? consultation.therapyGoals.join(', ')
+                {Array.isArray(consultation.therapyGoals)
+                  ? consultation.therapyGoals.join(", ")
                   : consultation.therapyGoals}
-                {consultation.therapyGoals?.includes("Other") && consultation.otherTherapyGoal && 
-                  ` (Other: ${consultation.otherTherapyGoal})`
-                }
+                {consultation.therapyGoals?.includes("Other") &&
+                  consultation.otherTherapyGoal &&
+                  ` (Other: ${consultation.otherTherapyGoal})`}
               </div>
             </div>
           </div>
@@ -139,9 +176,9 @@ const CoupleDetails = () => {
               <label>Preferred Language</label>
               <div className="info-value">
                 {consultation.preferredLanguage}
-                {consultation.preferredLanguage === "Other" && consultation.otherLanguage && 
-                  ` (${consultation.otherLanguage})`
-                }
+                {consultation.preferredLanguage === "Other" &&
+                  consultation.otherLanguage &&
+                  ` (${consultation.otherLanguage})`}
               </div>
             </div>
             <div className="info-item">
@@ -160,7 +197,9 @@ const CoupleDetails = () => {
           <div className="info-grid">
             <div className="info-item">
               <label>Session Date</label>
-              <div className="info-value">{formatDate(consultation.sessionDate)}</div>
+              <div className="info-value">
+                {formatDate(consultation.sessionDate)}
+              </div>
             </div>
             <div className="info-item">
               <label>Session Time</label>
@@ -172,7 +211,9 @@ const CoupleDetails = () => {
             </div>
             <div className="info-item">
               <label>Terms Agreed</label>
-              <div className="info-value">{consultation.termsAgreed ? "Yes" : "No"}</div>
+              <div className="info-value">
+                {consultation.termsAgreed ? "Yes" : "No"}
+              </div>
             </div>
           </div>
         </div>

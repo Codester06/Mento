@@ -259,7 +259,7 @@ const IndividualForm = () => {
                 submittedAt: new Date().toISOString()
             };
             
-            console.log("Submitting form data:", dataToSubmit);
+            // console.log("Submitting form data:", dataToSubmit);
             
             // Use postData to submit the form data
             const response = await postData('/individual', dataToSubmit);

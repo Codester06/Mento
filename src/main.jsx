@@ -29,6 +29,8 @@ import IndividualPanel from "./adminPages/response/IndividualResponse";
 import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
 import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
 import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
+import ContactFormDetails from "./adminPages/response/detailResponse/contactPanelDetails"
+import ContactFormPanel from "./adminPages/response/ContactPanel";
 // Protected route component
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -140,7 +142,16 @@ function Main() {
               path="/admin/responses/family-friends-responses"
               element={<ProtectedRoute element={<FriendsFamilyPanel />} />}
             />
+            <Route
+            path="/admin/responses/contact-form-responses"
+            element={<ProtectedRoute element={<ContactFormPanel />} />}
+          />
+          <Route
+            path="/admin/responses/contact-form-responses/:id"
+            element={<ProtectedRoute element={<ContactFormDetails />} />}
+          />
           </Routes>
+          
         </div>
         <Footer />
       </div>

@@ -1,40 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ref, onValue } from 'firebase/database';
-import { database } from '../../../utils/firebaseConfig';
-import './ConsultationDetails.css';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getData } from "../../../utils/awsService";
+import "./ConsultationDetails.css";
 
 const FamilyFriendsDetails = () => {
   const { id } = useParams();
   const [consultation, setConsultation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!id) return;
+    const fetchConsultationDetails = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    const consultationRef = ref(database, `family_therapy_sessions/${id}`);
-    
-    const unsubscribe = onValue(consultationRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setConsultation({ id, ...data });
-      } else {
-        // Consultation not found
-        setConsultation(null);
+        const responseData = await getData("/family_friend");
+        // console.log('Full Raw Response:', responseData);
+
+        // Find the specific consultation by ID
+        const consultationData = responseData.data["data"].find(
+          (consultation) => consultation.id === id
+        );
+
+        // console.log('Specific Consultation Data:', consultationData);
+
+        if (consultationData) {
+          setConsultation(consultationData);
+        } else {
+          setError("Consultation not found");
+        }
+      } catch (error) {
+        // console.error('Error in fetching consultation details:', error);
+        setError(error.message || "Failed to fetch consultation details");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    });
-    
-    return () => unsubscribe();
+    };
+
+    fetchConsultationDetails();
   }, [id]);
 
   const handleBack = () => {
-    navigate('/admin/responses/family-friends-responses');
+    navigate("/admin/responses/family-friends-responses");
   };
 
   if (loading) {
-    return <div className="loading-container">Loading consultation details...</div>;
+    return (
+      <div className="loading-container">Loading consultation details...</div>
+    );
   }
 
   if (!consultation) {
@@ -42,8 +57,27 @@ const FamilyFriendsDetails = () => {
       <div className="details-container">
         <div className="not-found">
           <h2>Consultation Not Found</h2>
-          <p>The consultation you're looking for doesn't exist or has been deleted.</p>
-          <button onClick={handleBack} className="back-btn">Back to List</button>
+          <p>
+            The consultation you're looking for doesn't exist or has been
+            deleted.
+          </p>
+          <button onClick={handleBack} className="back-btn">
+            Back to List
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="details-container">
+        <div className="not-found">
+          <h2>Error</h2>
+          <p>{error}</p>
+          <button onClick={handleBack} className="back-btn">
+            Back to List
+          </button>
         </div>
       </div>
     );
@@ -51,22 +85,24 @@ const FamilyFriendsDetails = () => {
 
   // Format the consultation data for display
   const formatDate = (dateString) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     const date = new Date(dateString);
     return isNaN(date.getTime()) ? dateString : date.toLocaleDateString();
   };
 
   // Helper function to format array data
   const formatArrayData = (array) => {
-    if (!array) return '';
-    if (typeof array === 'string') return array;
-    return array.join(', ');
+    if (!array) return "";
+    if (typeof array === "string") return array;
+    return array.join(", ");
   };
 
   return (
     <div className="details-container">
       <div className="details-header">
-        <button onClick={handleBack} className="back-btn">← Back to List</button>
+        <button onClick={handleBack} className="back-btn">
+          ← Back to List
+        </button>
         <h1 className="details-title">Family Therapy Session Details</h1>
       </div>
 
@@ -105,7 +141,9 @@ const FamilyFriendsDetails = () => {
             {consultation.otherRelationshipType && (
               <div className="info-item">
                 <label>Other Relationship Type</label>
-                <div className="info-value">{consultation.otherRelationshipType}</div>
+                <div className="info-value">
+                  {consultation.otherRelationshipType}
+                </div>
               </div>
             )}
           </div>
@@ -121,17 +159,23 @@ const FamilyFriendsDetails = () => {
             {consultation.otherPrimaryConcern && (
               <div className="info-item">
                 <label>Other Primary Concern</label>
-                <div className="info-value">{consultation.otherPrimaryConcern}</div>
+                <div className="info-value">
+                  {consultation.otherPrimaryConcern}
+                </div>
               </div>
             )}
             <div className="info-item">
               <label>Therapy Goals</label>
-              <div className="info-value">{formatArrayData(consultation.therapyGoals)}</div>
+              <div className="info-value">
+                {formatArrayData(consultation.therapyGoals)}
+              </div>
             </div>
             {consultation.otherTherapyGoal && (
               <div className="info-item">
                 <label>Other Therapy Goal</label>
-                <div className="info-value">{consultation.otherTherapyGoal}</div>
+                <div className="info-value">
+                  {consultation.otherTherapyGoal}
+                </div>
               </div>
             )}
             <div className="info-item">
@@ -146,7 +190,9 @@ const FamilyFriendsDetails = () => {
           <div className="info-grid">
             <div className="info-item">
               <label>Session Date</label>
-              <div className="info-value">{formatDate(consultation.sessionDate)}</div>
+              <div className="info-value">
+                {formatDate(consultation.sessionDate)}
+              </div>
             </div>
             <div className="info-item">
               <label>Session Time</label>
@@ -182,7 +228,9 @@ const FamilyFriendsDetails = () => {
             </div>
             <div className="info-item">
               <label>Terms Agreed</label>
-              <div className="info-value">{consultation.termsAgreed ? "Yes" : "No"}</div>
+              <div className="info-value">
+                {consultation.termsAgreed ? "Yes" : "No"}
+              </div>
             </div>
           </div>
         </div>

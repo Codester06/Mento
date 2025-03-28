@@ -35,7 +35,7 @@ const MentalHealthServices = () => {
         ))}
       </div>
 
-      <Link to="/get-started" className="get-started-btn">
+      <Link to="/Self-Assessment-Tool" className="get-started-btn">
           Get Started !
         </Link>
         
