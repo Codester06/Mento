@@ -118,7 +118,7 @@ const IndividualPanel = () => {
                   className="view-btn"
                 >
                   View Details
-                </button>
+                  </button>
                 <button 
                   onClick={() => handleDelete(consultation.id)}
                   className="delete-btn"

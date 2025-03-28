@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Configuration
-const API_BASE_URL = process.env.REACT_APP_AWS_API_BASE || 'https://api.example.com';
+const API_BASE_URL = process.env.REACT_APP_AWS_API_BASE;
 const API_KEY = process.env.REACT_APP_AWS_BASE_API_KEY;
 
 const DataFetcher = () => {
@@ -61,8 +61,8 @@ const DataFetcher = () => {
 
     // Fetch data on component mount
     useEffect(() => {
-        // fetchData('/individual');
-        deleteData('/individual',"5c45a27b-b17d-4404-a7a5-7328d31af962").then(()=>console.log('sucess')).catch(error=>(error));
+        // fetchData('/depressiontest');
+        deleteData('/individual',"0f42ad35-8615-4867-a641-fd171a0943av").then(()=>console.log('sucess')).catch(error=>(error));
 
     }, []);
 
@@ -84,3 +84,4 @@ const DataFetcher = () => {
 
 export default DataFetcher;
 
+add 
