@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import "../FormStyles.css";
 
 // import { database } from "../../../utils/firebaseConfig";
@@ -9,6 +9,8 @@ const FamilyTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
   const [errors, setErrors] = useState({});
+  const [autoNextEnabled, setAutoNextEnabled] = useState(true);
+  
   const [formData, setFormData] = useState({
     name: '',
     participantsNames: '',
@@ -185,17 +187,29 @@ const FamilyTherapyForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+ useEffect(() => {
+    // Only trigger auto-next for steps 1 to 6 (step 7 requires manual submission)
+    if (currentStep < 5 && autoNextEnabled && validateStep()) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 300); // Small delay for better UX
+
+      return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
+    }
+  }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
+
   // Move to next step
   const nextStep = () => {
     if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
+        setAutoNextEnabled(true); // Enable auto-next when moving to the next step
       }
     } else {
       // Scroll to the first error field
-      const firstErrorField = document.querySelector('.error-message-MN');
+      const firstErrorField = document.querySelector(".error-message-MN");
       if (firstErrorField) {
-        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     }
   };
@@ -204,6 +218,7 @@ const FamilyTherapyForm = () => {
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      setAutoNextEnabled(false); // Disable auto-next when going back
     }
   };
 
@@ -765,11 +780,17 @@ const FamilyTherapyForm = () => {
               </button>
             ) : currentStep === 4 ? (
               <button
-                type="submit"
-                className="confirm-button-MN"
-              >
-                Confirm & Pay
-              </button>
+              type="button"
+              onClick={(e) => {
+                handleSubmit(e); // Call handleSubmit first
+                if (Object.keys(errors).length === 0) {
+                  nextStep(); // Only proceed to next step if validation passes
+                }
+              }}
+              className="confirm-button-MN"
+            >
+              Confirm & Pay
+            </button>
             ) : (
               <button
                 type="button"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./footer.css";
 
 const Footer = () => {
@@ -81,10 +81,11 @@ const Footer = () => {
       <div className="containerFooter">
         <div className="top-section">
           <div className="logo">
-            <img className="footer_img" src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="Mento Logo" />
+            <Link to="/"> 
+            <img className="footer_img" src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="Mento Logo" /></Link>
           </div>
         </div>
-
+    
         <div className="nav-links">
           <div className="nav-section">
             <h3>Services</h3>

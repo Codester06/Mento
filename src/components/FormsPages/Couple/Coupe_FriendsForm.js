@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 // import { database } from "../../../utils/firebaseConfig";
 // import { ref, push } from "firebase/database";
-import { postData } from '../../../utils/awsService';
+import { postData } from "../../../utils/awsService";
 
 const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 6;
   const [errors, setErrors] = useState({});
+  const [autoNextEnabled, setAutoNextEnabled] = useState(true);
+
   const [formData, setFormData] = useState({
     name: "",
     partnerName: "",
@@ -229,12 +231,24 @@ const CouplesTherapyForm = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  // Auto-next functionality using useEffect
+  useEffect(() => {
+    // Only trigger auto-next for steps 1 to 6 (step 7 requires manual submission)
+    if (currentStep < 7 && autoNextEnabled && validateStep()) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 300); // Small delay for better UX
+
+      return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
+    }
+  }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
 
   // Move to next step
   const nextStep = () => {
     if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
+        setAutoNextEnabled(true); // Enable auto-next when moving to the next step
       }
     } else {
       // Scroll to the first error field
@@ -249,6 +263,7 @@ const CouplesTherapyForm = () => {
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      setAutoNextEnabled(false); // Disable auto-next when going back
     }
   };
 
@@ -261,7 +276,7 @@ const CouplesTherapyForm = () => {
         // await push(ref(database, "couples_therapy_sessions"), formData);
 
         console.log("Form data submitted:", formData);
-        const response = await postData('/couple', formData);
+        const response = await postData("/couple", formData);
         console.log("Form data submitted:", response);
         // Show success alert
         alert(

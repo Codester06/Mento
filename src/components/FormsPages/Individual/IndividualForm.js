@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 // import { database } from "../../../utils/firebaseConfig";
 // import { ref, push } from "firebase/database";
@@ -10,6 +10,7 @@ const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 8;
   const [errors, setErrors] = useState({});
+  const [autoNextEnabled, setAutoNextEnabled] = useState(true);
   // Create useState for form data instead of useRef to trigger re-renders
   const [formData, setFormData] = useState({
     name: "",
@@ -200,12 +201,24 @@ const IndividualForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  //Auto-next functionality using useEffect
+  useEffect(() => {
+    // Only trigger auto-next for steps 1 to 6 (step 7 requires manual submission)
+    if (currentStep < 7 && autoNextEnabled && validateStep()) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 300); // Small delay for better UX
+
+      return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
+    }
+  }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
+
   // Move to next step
   const nextStep = () => {
     if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
-        // Scroll to top of form when changing steps
+        setAutoNextEnabled(true); // Enable auto-next when moving to the next step
       }
     } else {
       // Scroll to the first error field
@@ -220,34 +233,9 @@ const IndividualForm = () => {
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-      // Scroll to top of form when changing steps
+      setAutoNextEnabled(false); // Disable auto-next when going back
     }
   };
-
-  // Submit form
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (validateStep()) {
-  //     try {
-  //       // Use the formData directly for submission to Firebase
-  //       await push(ref(database, "mental_wellness_consultations"), formData);
-
-  //       console.log("Form data submitted:", formData);
-
-  //       // Show success alert
-  //       alert(
-  //         "Form submitted successfully! Your mental wellness consultation has been scheduled."
-  //       );
-
-  //       // Optionally reset the form here if needed
-  //       // formRef.current.reset();
-  //     } catch (error) {
-  //       console.error("Error saving consultation data:", error);
-  //       alert("Failed to schedule your consultation. Please try again.");
-  //     }
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -989,7 +977,7 @@ const IndividualForm = () => {
       </div>
 
       {/* Right content area */}
-      <div className="form-container-MN">
+     <div className="form-container-MN">
         <form onSubmit={handleSubmit}>
           <div className="form-content-MN">{renderStep()}</div>
 
