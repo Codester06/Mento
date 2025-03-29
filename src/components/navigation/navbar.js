@@ -9,7 +9,8 @@ const Navbar = () => {
   return (
     <nav className="navContainer">
       <div className="navLogo">
-        <img src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="mentologo" />
+        <Link to="/">
+        <img src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="mentologo" /></Link>
       </div>
 
       {/* Navigation Links */}

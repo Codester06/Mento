@@ -1,6 +1,5 @@
 import React from 'react';
 import "./helpYouSection.css"
-
 import { Link } from 'react-router-dom';
 
 const MentalHealthServices = () => {
@@ -19,29 +18,24 @@ const MentalHealthServices = () => {
     { id: 12, name: 'Sexual Issues' }
   ];
 
-
   return (
-
-
     <div className="containerMain">
-
-    <div className="HelpContainer">
-      <h1 className="helpYouTitle">Expert Care for Your Mental Well-Being</h1>
-      <div className="services-grid">
-        {services.map((service) => (
-          <div key={service.id} className="button56">
-            {service.name}
-          </div>
-        ))}
-      </div>
-
-      <Link to="/Self-Assessment-Tool" className="get-started-btn">
+      <div className="HelpContainer">
+        <h1 className="helpYouTitle">Expert Care for Your Mental Well-Being</h1>
+        <p className="services-subheading">Our services</p>
+        <div className="services-list-container">
+          <ul className="services-list">
+            {services.map((service) => (
+              <li key={service.id} className="service-item">
+ <div className="service-name" style={{textAlign: 'center', width: '100%'}}>{service.name}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Link to="/individual_therapy" className="get-started-btn">
           Get Started !
         </Link>
-        
-     
-     
-    </div>
+      </div>
     </div>
   );
 };

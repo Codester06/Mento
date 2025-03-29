@@ -209,21 +209,10 @@
   
   .recUpperLeft,
   .recBottomRight {
-    width: 12rem;
-    height: 8rem;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    display: none;
   }
-  
-  .recUpperLeft {
-    top: 0;
-    left: 0;
-  }
-  
-  .recBottomRight {
-    top: 0;
-    left: 0;
-  }
-  
+ 
+
   .squareBottomLeft,
   .squareUpperRight {
     display: none;

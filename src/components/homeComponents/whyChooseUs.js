@@ -38,26 +38,29 @@ const WhyChooseUs = () => {
     const nextSlide = useCallback(() => {
       setCurrentSlide((prev) => (prev + 1) % features.length);
     }, [features.length]);
-  
+    
     useEffect(() => {
-      const interval = setInterval(nextSlide, 3000);
-  
+      let interval = setInterval(nextSlide, 3000);
+    
       const handleVisibilityChange = () => {
         if (document.hidden) {
           clearInterval(interval);
         } else {
-          setInterval(nextSlide, 3000);
+          // Clear any existing interval first
+          clearInterval(interval);
+          // Then create a new one
+          interval = setInterval(nextSlide, 3000);
         }
       };
-  
+    
       document.addEventListener('visibilitychange', handleVisibilityChange);
-  
+    
       return () => {
         clearInterval(interval);
         document.removeEventListener('visibilitychange', handleVisibilityChange);
       };
     }, [nextSlide]);
-  
+    
     return (
       <>
         <div className="why_card">

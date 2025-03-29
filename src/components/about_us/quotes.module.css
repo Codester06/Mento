@@ -51,20 +51,19 @@
 }
 
 /* Responsive styles for phones */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .containerQuote {
-    font-size: 22px;
     padding: 15px 10px;
     margin: 0 auto;
   }
 
   .containerQuote p {
-    font-size: 28px;
+    font-size: 26px;
     line-height: 1.2;
   }
 
   .borderUp, .borderDown {
-    height: 2px;
+    height: 1px;
     margin: 0 auto;
   }
 }

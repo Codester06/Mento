@@ -6,7 +6,7 @@ import ExpertCarousel from "../components/homeComponents/expertCarousel";
 import WhyChooseUs from "../components/homeComponents/whyChooseUs";
 import TestimonialSlider from "../components/homeComponents/testimonial";
 import MentalHealthServices from "../components/homeComponents/helpYouSection";
-import QuoteCards from "../components/quotes/quotesText";
+// import QuoteCards from "../components/quotes/quotesText";
 
 
 
@@ -17,7 +17,7 @@ const Home = () => {
       <HowItWorks/> 
       <ExpertCarousel />
       <MentalHealthServices/>
-      <QuoteCards/>
+      {/* <QuoteCards/> */}
       <WhyChooseUs/>
       <TestimonialSlider/>
     </>

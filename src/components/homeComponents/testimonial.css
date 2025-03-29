@@ -1,124 +1,137 @@
-
-  .mento-cardContainer{
-    background: linear-gradient(to bottom,#CFFAF3FA,rgba(251, 242, 220, 0.444));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.mento-cardContainer{
+  background: linear-gradient(to bottom,#CFFAF3FA,rgba(251, 242, 220, 0.444));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mento-testimonials-card {
+  max-width: 70%;
+  border-radius: 20px;
+  padding: 40px 20px;
+  position: relative;
+}
+.mento-testimonials-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 40px;
+}
+.mento-testimonials-slidercontainer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0 50px;
+}
+.mento-testimonials-sliderwrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+.mento-testimonials-sliderslide {
+  min-width: 100%;
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+  text-align: center;
+  padding: 20px;
+}
+.mento-testimonials-sliderslide.active {
+  opacity: 1;
+}
+.mento-testimonials-slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(196, 194, 194, 0.2);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.mento-testimonials-slider-nav:hover {
+  background: rgba(196, 194, 194, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+.mento-testimonials-slider-nav.prev {
+  left: 0;
+  top: 60px;
+}
+.mento-testimonials-slider-nav.next {
+  right: 0;
+  top: 60px;
+}
+.mento-testimonials-sliderdots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.mento-testimonials-sliderdot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.mento-testimonials-sliderdot.active {
+  background: #2563eb;
+}
+.mento-testimonials-feature-description {
+  color: #1c1d20;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.mento-testimonials-feature-title {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 15px;
+}
+@media (max-width: 768px) {
   .mento-testimonials-card {
-    max-width: 70%;
-    border-radius: 20px;
-    padding: 40px 20px;
-    position: relative;
+    max-width: 90%;
+    padding: 20px 10px;
   }
-
   .mento-testimonials-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #2d3748;
-    margin-bottom: 40px;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
   }
-
-  .mento-testimonials-slidercontainer {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding: 0 50px;
-  }
-
-  .mento-testimonials-sliderwrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .mento-testimonials-sliderslide {
-    min-width: 100%;
-    opacity: 0.7;
-    transition: opacity 0.3s ease-in-out;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .mento-testimonials-sliderslide.active {
-    opacity: 1;
-  }
-
-  .mento-testimonials-slider-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    background: rgba(196, 194, 194, 0.2);
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    z-index: 10;
-  }
-
-  .mento-testimonials-slider-nav:hover {
-    background: rgba(196, 194, 194, 0.4);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .mento-testimonials-slider-nav.prev {
-    left: 0;
-    top:60px;
-  }
-
-  .mento-testimonials-slider-nav.next {
-    right: 0;
-    top:60px;
-  }
-
-  .mento-testimonials-sliderdots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .mento-testimonials-sliderdot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #cbd5e0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .mento-testimonials-sliderdot.active {
-    background: #2563eb;
-  }
-
   .mento-testimonials-feature-description {
-    color: #1c1d20;
-    line-height: 1.6;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    font-size: 0.88rem;
+    line-height: 1.4;
   }
-
   .mento-testimonials-feature-title {
-    margin-top: 20px;
-    font-weight: 700;
-    font-size: 15px;
+    font-size: 12px;
   }
-
-  @media (max-width: 768px) {
-    .mento-testimonials-title {
-      font-size: 1.8rem;
-    }
-    .mento-testimonials-slider-nav {
-      display: none;
-    }
-    .mento-testimonials-slidercontainer {
-      padding: 0;
-    }
+  .mento-testimonials-slidercontainer {
+    padding: 0 30px;
   }
+  .mento-testimonials-slider-nav {
+    display: flex;
+    width: 26px;
+    height: 26px;
+    top: 50%;
+    background: rgba(196, 194, 194, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .mento-testimonials-slider-nav.prev {
+    left: 5px;
+    top: 90%;
+  }
+  .mento-testimonials-slider-nav.next {
+    right: 5px;
+    top: 90%;
+  }
+  .mento-testimonials-sliderdot {
+    width: 6px;
+    height: 6px;
+  }
+}
