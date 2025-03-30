@@ -9,6 +9,7 @@ const CouplesTherapyForm = () => {
   const totalSteps = 6;
   const [errors, setErrors] = useState({});
   const [autoNextEnabled, setAutoNextEnabled] = useState(true);
+  const [stepsAttempted, setStepsAttempted] = useState({});
 
   const [formData, setFormData] = useState({
     name: "",
@@ -232,23 +233,88 @@ const CouplesTherapyForm = () => {
     return Object.keys(newErrors).length === 0;
   };
   // Auto-next functionality using useEffect
-  useEffect(() => {
-    // Only trigger auto-next for steps 1 to 6 (step 7 requires manual submission)
-    if (currentStep < 7 && autoNextEnabled && validateStep()) {
-      const timer = setTimeout(() => {
-        setCurrentStep((prev) => prev + 1);
-      }, 300); // Small delay for better UX
-
-      return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
+  // Auto-next functionality using useEffect
+useEffect(() => {
+  // Helper function to check if step is complete without showing errors
+  const isStepComplete = () => {
+    // Logic to check if all required fields for current step are filled
+    // This is similar to validateStep but doesn't set any error messages
+    switch (currentStep) {
+      case 1:
+        if (!formData.name || !formData.name.trim()) return false;
+        if (!formData.partnerName || !formData.partnerName.trim()) return false;
+        if (!formData.email || !formData.email.trim()) return false;
+        if (!/\S+@\S+\.\S+/.test(formData.email)) return false;
+        if (!formData.city || !formData.city.trim()) return false;
+        if (!formData.contactNo || !formData.contactNo.trim()) return false;
+        if (!formData.profession) return false;
+        if (!formData.partnerProfession) return false;
+        if (!formData.relationshipStatus) return false;
+        if (
+          formData.relationshipStatus === "Other" &&
+          (!formData.otherRelationshipStatus || !formData.otherRelationshipStatus.trim())
+        ) return false;
+        return true;
+        
+      case 2:
+        if (!formData.primaryConcern) return false;
+        if (formData.therapyGoals.length === 0) return false;
+        if (
+          formData.therapyGoals.includes("Other") &&
+          (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
+        ) return false;
+        return true;
+        
+      case 3:
+        if (!formData.previousTherapy) return false;
+        if (!formData.preferredLanguage) return false;
+        if (
+          formData.preferredLanguage === "Other" &&
+          (!formData.otherLanguage || !formData.otherLanguage.trim())
+        ) return false;
+        return true;
+        
+      case 4:
+        if (!formData.sessionDate) return false;
+        if (!formData.sessionTime) return false;
+        if (!formData.medicalConditions) return false;
+        if (!formData.referralSource) return false;
+        return true;
+        
+      case 5:
+        if (!formData.paymentMethod) return false;
+        if (!formData.termsAgreed) return false;
+        return true;
+        
+      default:
+        return false;
     }
-  }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
+  };
+  
+  // Only trigger auto-next for steps 1 to 5 when fields are complete
+  // (step 6 is the confirmation page, so no need to auto-advance from there)
+  if (currentStep < 6 && autoNextEnabled && isStepComplete()) {
+    const timer = setTimeout(() => {
+      setCurrentStep((prev) => prev + 1);
+    }, 300); // Small delay for better UX
+    
+    return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
+  }
+}, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes // Trigger when formData, currentStep, or autoNextEnabled changes
 
   // Move to next step
   const nextStep = () => {
+    // Mark current step as attempted
+    setStepsAttempted(prev => ({
+      ...prev,
+      [currentStep]: true
+    }));
+    
+    // Always validate before moving to next step
     if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
-        setAutoNextEnabled(true); // Enable auto-next when moving to the next step
+        setAutoNextEnabled(true);
       }
     } else {
       // Scroll to the first error field

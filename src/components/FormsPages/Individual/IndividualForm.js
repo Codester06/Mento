@@ -11,6 +11,7 @@ const IndividualForm = () => {
   const totalSteps = 8;
   const [errors, setErrors] = useState({});
   const [autoNextEnabled, setAutoNextEnabled] = useState(true);
+  const [stepsAttempted, setStepsAttempted] = useState({});
   // Create useState for form data instead of useRef to trigger re-renders
   const [formData, setFormData] = useState({
     name: "",
@@ -76,20 +77,19 @@ const IndividualForm = () => {
 
   // Handle form field changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
+    const { name, value, type, checked } = e.target;
+  
     // Update state for form data
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     });
-
+  
     // Clear error for this field when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
-
   // Handle dropdown selection changes
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
@@ -121,104 +121,141 @@ const IndividualForm = () => {
   };
 
   // Validate current step
-  const validateStep = () => {
-    const newErrors = {};
+// Modify the validateStep function to validate every time
+const validateStep = () => {
+  // Remove the condition that skips validation on first attempt
+  const newErrors = {};
 
-    // Step 1 validation
-    if (currentStep === 1) {
-      if (!formData.name || !formData.name.trim())
-        newErrors.name = "Name is required";
-      if (!formData.email || !formData.email.trim()) {
-        newErrors.email = "Email is required";
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        newErrors.email = "Email is invalid";
-      }
-      if (!formData.city || !formData.city.trim())
-        newErrors.city = "City is required";
-      if (!formData.contactNo || !formData.contactNo.trim())
-        newErrors.contactNo = "Contact number is required";
-      if (!formData.age) newErrors.age = "Age is required";
-      if (!formData.profession) newErrors.profession = "Profession is required";
+  // Step 1 validation
+  if (currentStep === 1) {
+    if (!formData.name || !formData.name.trim())
+      newErrors.name = "Name is required";
+    if (!formData.email || !formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
     }
+    if (!formData.city || !formData.city.trim())
+      newErrors.city = "City is required";
+    if (!formData.contactNo || !formData.contactNo.trim())
+      newErrors.contactNo = "Contact number is required";
+    if (!formData.age) newErrors.age = "Age is required";
+    if (!formData.profession) newErrors.profession = "Profession is required";
+  }
 
-    // Step 2 validation
-    else if (currentStep === 2) {
-      if (!formData.supportReason) {
-        newErrors.supportReason = "Please select a reason";
-      } else if (
-        formData.supportReason === "Other" &&
-        (!formData.otherSupportReason || !formData.otherSupportReason.trim())
-      ) {
-        newErrors.otherSupportReason = "Please specify your reason";
-      }
+  // Rest of validation logic remains the same
+  // Step 2 validation
+  else if (currentStep === 2) {
+    if (!formData.supportReason) {
+      newErrors.supportReason = "Please select a reason";
+    } else if (
+      formData.supportReason === "Other" &&
+      (!formData.otherSupportReason || !formData.otherSupportReason.trim())
+    ) {
+      newErrors.otherSupportReason = "Please specify your reason";
     }
+  }
 
-    // Step 3 validation
-    else if (currentStep === 3) {
-      if (!formData.feelingsReason)
-        newErrors.feelingsReason = "Please select a reason";
-      if (!formData.previousConsultation)
-        newErrors.previousConsultation = "Please select an option";
+  // Step 3 validation
+  else if (currentStep === 3) {
+    if (!formData.feelingsReason)
+      newErrors.feelingsReason = "Please select a reason";
+    if (!formData.previousConsultation)
+      newErrors.previousConsultation = "Please select an option";
+  }
+
+  // Step 4 validation
+  else if (currentStep === 4) {
+    if (!formData.preferredLanguage) {
+      newErrors.preferredLanguage = "Please select a language";
+    } else if (
+      formData.preferredLanguage === "Other" &&
+      (!formData.otherLanguage || !formData.otherLanguage.trim())
+    ) {
+      newErrors.otherLanguage = "Please specify your language";
     }
+  }
 
-    // Step 4 validation
-    else if (currentStep === 4) {
-      if (!formData.preferredLanguage) {
-        newErrors.preferredLanguage = "Please select a language";
-      } else if (
-        formData.preferredLanguage === "Other" &&
-        (!formData.otherLanguage || !formData.otherLanguage.trim())
-      ) {
-        newErrors.otherLanguage = "Please specify your language";
-      }
-    }
+  // Step 5 validation
+  else if (currentStep === 5) {
+    if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
+    if (!formData.sessionTime) newErrors.sessionTime = "Please select a time";
+  }
 
-    // Step 5 validation
-    else if (currentStep === 5) {
-      if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
-      if (!formData.sessionTime) newErrors.sessionTime = "Please select a time";
-    }
+  // Step 6 validation
+  else if (currentStep === 6) {
+    if (!formData.counselorGenderPreference)
+      newErrors.counselorGenderPreference = "Please select an option";
+    if (!formData.medicalConditions)
+      newErrors.medicalConditions = "Please select an option";
+    if (!formData.referralSource)
+      newErrors.referralSource = "Please select an option";
+  }
 
-    // Step 6 validation
-    else if (currentStep === 6) {
-      if (!formData.counselorGenderPreference)
-        newErrors.counselorGenderPreference = "Please select an option";
-      if (!formData.medicalConditions)
-        newErrors.medicalConditions = "Please select an option";
-      if (!formData.referralSource)
-        newErrors.referralSource = "Please select an option";
-    }
+  // Step 7 validation
+  else if (currentStep === 7) {
+    if (!formData.paymentMethod) newErrors.paymentMethod = "Payment method is required";
+    if (!formData.termsAgreed) newErrors.termsAgreed = "You must agree to the terms";
+  }
 
-    // Step 7 validation
-    else if (currentStep === 7) {
-      if (!formData.paymentMethod) newErrors.paymentMethod = "Payment method is required";
-      if (!formData.paymentMethod)
-
-        newErrors.paymentMethod = "Please select a payment method";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
 
   //Auto-next functionality using useEffect
   useEffect(() => {
-    // Only trigger auto-next for steps 1 to 6 (step 7 requires manual submission)
-    if (currentStep < 7 && autoNextEnabled && validateStep()) {
+    // Helper function to check if step is complete without showing errors
+    const isStepComplete = () => {
+      // Logic to check if all required fields for current step are filled
+      // This is similar to validateStep but doesn't set any error messages
+      switch (currentStep) {
+        case 1:
+          return formData.name && formData.email && /\S+@\S+\.\S+/.test(formData.email) &&
+                 formData.city && formData.contactNo && formData.age && formData.profession;
+        case 2:
+          if (!formData.supportReason) return false;
+          if (formData.supportReason === "Other" && !formData.otherSupportReason) return false;
+          return true;
+        case 3:
+          return formData.feelingsReason && formData.previousConsultation;
+        case 4:
+          if (!formData.preferredLanguage) return false;
+          if (formData.preferredLanguage === "Other" && !formData.otherLanguage) return false;
+          return true;
+        case 5:
+          return formData.sessionDate && formData.sessionTime;
+        case 6:
+          return formData.counselorGenderPreference && formData.medicalConditions && formData.referralSource;
+        case 7:
+          return formData.paymentMethod && formData.termsAgreed;
+        default:
+          return false;
+      }
+    };
+  
+    // Only trigger auto-next for steps 1 to 6 when fields are complete
+    if (currentStep < 7 && autoNextEnabled && isStepComplete()) {
       const timer = setTimeout(() => {
         setCurrentStep((prev) => prev + 1);
       }, 300); // Small delay for better UX
-
+  
       return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
     }
   }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
 
   // Move to next step
   const nextStep = () => {
+    // Mark current step as attempted
+    setStepsAttempted(prev => ({
+      ...prev,
+      [currentStep]: true
+    }));
+    
+    // Always validate before moving to next step
     if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
-        setAutoNextEnabled(true); // Enable auto-next when moving to the next step
+        setAutoNextEnabled(true);
       }
     } else {
       // Scroll to the first error field
