@@ -64,7 +64,7 @@ const ContactFormPanel = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this contact form submission?')) {
       try {
-        await deleteData('contact_form', id);
+        await deleteData('/contact_form', id);
         
         setContactForms(prevContactForms => 
           prevContactForms.filter(contact => contact.id !== id)
