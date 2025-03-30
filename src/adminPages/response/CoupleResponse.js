@@ -58,7 +58,7 @@ const CouplePanel = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this consultation?")) {
       try {
-        await deleteData("mental_wellness_consultations", id);
+        await deleteData("/couple", id);
 
         setConsultations((prevConsultations) =>
           prevConsultations.filter((consultation) => consultation.id !== id)

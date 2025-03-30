@@ -1,9 +1,8 @@
-import { useRef,useState } from "react";
+import { useRef, useState } from "react";
 import "./contactFrom.css";
 import { postData } from "../../utils/awsService";
 
 const ContactForm = () => {
-
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
 
@@ -16,20 +15,39 @@ const ContactForm = () => {
       email: formRef.current.email.value,
       subject: formRef.current.subject.value,
       message: formRef.current.message.value,
+      submittedAt: new Date().toISOString() // Add timestamp to the form data
     };
 
     try {
-      // Save data to Firebase
-      // await push(ref(database, "contact_forms"), formData);
-      await postData('/contact_form', formData);
-
-      alert("Message sent successfully!");
+      // Log the data being submitted (commented out for production)
+      // console.log("Submitting contact form data:", formData);
+      
+      // Post the data to the API
+      const response = await postData('/contact_form', formData);
+      
+      console.log("Contact form submitted successfully:", response);
+      
+      // Show success message
+      alert("Message sent successfully! We'll get back to you soon.");
 
       // Reset form fields
       formRef.current.reset();
     } catch (error) {
-
-      alert("Failed to save message!");
+      console.error("Error submitting contact form:", error);
+      
+      // Create a more detailed error message
+      let errorMessage = "Failed to send message. ";
+      
+      // Check different error response formats
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage += error.response.data.message;
+      } else if (error.message) {
+        errorMessage += error.message;
+      } else {
+        errorMessage += "Please try again later.";
+      }
+      
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -71,7 +89,7 @@ const ContactForm = () => {
             </div>
             <div>
               <p>Mail us at</p>
-              <a href="mailto:contact@tailgrids.com">connectmento@gmail.com</a>
+              <a href="mailto:connectmento@gmail.com">connectmento@gmail.com</a>
             </div>
           </div>
         </div>

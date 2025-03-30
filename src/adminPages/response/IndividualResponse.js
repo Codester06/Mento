@@ -71,8 +71,10 @@ const IndividualPanel = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this consultation?")) {
       try {
+        // This already works with the updated deleteData function
         await deleteData("/individual", id);
-
+  
+        // Update the UI by removing the deleted consultation
         setConsultations((prevConsultations) =>
           prevConsultations.filter((consultation) => consultation.id !== id)
         );

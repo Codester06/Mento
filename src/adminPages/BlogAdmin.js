@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ref,  remove } from 'firebase/database';
-import { database } from '../utils/firebaseConfig'; // Adjust path as needed
 import './AdminBlog.css';
 import { useNavigate } from 'react-router-dom';
-import { postDataBS,getDataBS } from '../utils/awsService';
+import { postDataBS,getDataBS, deleteDataBS } from '../utils/awsService';
 
 const AdminBlog = () => {
   // State for blog post form
@@ -212,14 +210,23 @@ const AdminBlog = () => {
   const handleDeletePost = async (id) => {
     if (window.confirm('Are you sure you want to delete this blog post? This action cannot be undone.')) {
       try {
-        await remove(ref(database, `blog_posts/${id}`));
+        await deleteDataBS("/blog", id);
+        
+        // Refresh the blog posts by incrementing refreshPosts
+        setRefreshPosts(prev => prev + 1);
+        
+        // You can also update the UI immediately if desired
+        setBlogPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+        
+        // Optional: Show success message
+        alert('Blog post deleted successfully');
+        
       } catch (error) {
         console.error('Error deleting post:', error);
         alert('Failed to delete blog post.');
       }
     }
   };
-
   const handleBack = () => {
     navigate('/admin/admin-dashboard');
   };

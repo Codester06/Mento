@@ -355,3 +355,85 @@
   max-width: 100%;
   height: auto;
 }
+
+/* Add this to your existing CSS */
+.scroll-instruction {
+  display: none; /* Hidden by default on desktop */
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.scroll-arrows {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Animated arrows */
+.arrow-left, .arrow-right {
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #666;
+  border-left: 2px solid #666;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.arrow-left {
+  transform: rotate(-45deg);
+  animation: pulseLeft 1.5s infinite;
+}
+
+.arrow-right {
+  transform: rotate(135deg);
+  animation: pulseRight 1.5s infinite;
+}
+
+@keyframes pulseLeft {
+  0% {
+    opacity: 0.5;
+    transform: rotate(-45deg) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(0px);
+  }
+  100% {
+    opacity: 0.5;
+    transform: rotate(-45deg) translateY(0);
+  }
+}
+
+@keyframes pulseRight {
+  0% {
+    opacity: 0.5;
+    transform: rotate(135deg) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(135deg) translateY(0px);
+  }
+  100% {
+    opacity: 0.5;
+    transform: rotate(135deg) translateY(0);
+  }
+}
+
+/* Show it only on mobile devices */
+@media screen and (max-width: 768px) {
+  .scroll-instruction {
+    display: flex;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+}

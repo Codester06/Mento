@@ -77,7 +77,7 @@ const updateData = async (endpoint, id, data) => {
 // Function to send a DELETE request (delete an item by ID)
 const deleteData = async (endpoint, id) => {
     try {
-        const url =` ${API_BASE_URL}${endpoint};`
+        const url = `${API_BASE_URL}${endpoint}`;
         const response = await axios.delete(url, {
              params:{
                 id
@@ -168,7 +168,7 @@ const updateDataBS = async (endpoint, id, data) => {
 // Function to send a DELETE request (delete an item by ID)
 const deleteDataBS = async (endpoint, id) => {
     try {
-        const url =` ${API_BASE_URL_BS}${endpoint};`
+        const url = `${API_BASE_URL_BS}${endpoint}`;
         const response = await axios.delete(url, {
              params:{
                 id
