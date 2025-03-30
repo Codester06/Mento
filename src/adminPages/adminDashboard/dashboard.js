@@ -66,7 +66,7 @@ const Dashboard = () => {
       <section className="dashboard-section">
         <h2 className="section-title">Manage Blogs</h2>
         <div className="cards-container">
-          <div className="card full-width">
+      
             <div className="card-header">
               <div className="card-icon">📝</div>
               <h3 className="card-title">Blog Management</h3>
@@ -79,7 +79,7 @@ const Dashboard = () => {
                 View
               </Link>
             </div>
-          </div>
+         
         </div>
       </section>
 
@@ -143,7 +143,7 @@ const Dashboard = () => {
       <section className="dashboard-section">
         <h2 className="section-title">Contact us </h2>
         <div className="cards-container">
-          <div className="card full-width">
+       
             <div className="card-header">
               <div className="card-icon"></div>
               <h3 className="card-title">Contact Management</h3>
@@ -156,7 +156,7 @@ const Dashboard = () => {
                 View
               </Link>
             </div>
-          </div>
+
         </div>
       </section>
     </div>

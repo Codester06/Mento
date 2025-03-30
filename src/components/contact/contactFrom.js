@@ -23,9 +23,9 @@ const ContactForm = () => {
       // console.log("Submitting contact form data:", formData);
       
       // Post the data to the API
-      const response = await postData('/contact_form', formData);
+       await postData('/contact_form', formData);
       
-      console.log("Contact form submitted successfully:", response);
+      // console.log("Contact form submitted successfully:", response);
       
       // Show success message
       alert("Message sent successfully! We'll get back to you soon.");
