@@ -48,7 +48,7 @@ const ToolBanner = () => {
                   <div className={styles.chipImageContainer}>
                     <img
                       src={chip.image}
-                      alt={`LAY'S® Kettle Cooked ${chip.flavor}`}
+                      alt='loading'
                       className={styles.chipImage}
                     />
                   </div>
