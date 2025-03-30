@@ -30,7 +30,8 @@ import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
 import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
 import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
 import ContactFormDetails from "./adminPages/response/detailResponse/contactPanelDetails"
-import ContactFormPanel from "./adminPages/response/ContactPanel";
+import ContactFormPanel from "./adminPages/response/contactPanel";
+
 // Protected route component
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -61,8 +62,9 @@ const ProtectedRoute = ({ element, requiredRole = null }) => {
     return <div>Loading...</div>;
   }
 
+  // Redirect to 404 if not authenticated instead of showing login
   if (!isAuthenticated) {
-    return <Login />;
+    return <NotFound />;
   }
 
   if (!hasAccess) {
@@ -96,7 +98,7 @@ function Main() {
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy />} />
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage />} />
             <Route path="/Depression-Tool" element={<Test />} />
-            <Route path="/login" element={<Login />} /> {/* Login route */}
+            <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
             {/* blogs */}
             <Route path="/blogs" element={<Blogs />} />
@@ -143,15 +145,14 @@ function Main() {
               element={<ProtectedRoute element={<FriendsFamilyPanel />} />}
             />
             <Route
-            path="/admin/responses/contact-form-responses"
-            element={<ProtectedRoute element={<ContactFormPanel />} />}
-          />
-          <Route
-            path="/admin/responses/contact-form-responses/:id"
-            element={<ProtectedRoute element={<ContactFormDetails />} />}
-          />
+              path="/admin/responses/contact-form-responses"
+              element={<ProtectedRoute element={<ContactFormPanel />} />}
+            />
+            <Route
+              path="/admin/responses/contact-form-responses/:id"
+              element={<ProtectedRoute element={<ContactFormDetails />} />}
+            />
           </Routes>
-          
         </div>
         <Footer />
       </div>

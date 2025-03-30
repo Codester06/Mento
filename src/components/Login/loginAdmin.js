@@ -39,15 +39,7 @@ const loadUsersFromEnv = () => {
       role: process.env.REACT_APP_EDITOR_ROLE || "editor",
       allowedRoutes: process.env.REACT_APP_EDITOR_ROUTES ? 
         process.env.REACT_APP_EDITOR_ROUTES.split(",") : 
-        ["/admin/blog"]
-    },
-    {
-      username: process.env.REACT_APP_SUPPORT_USERNAME || "support",
-      password: process.env.REACT_APP_SUPPORT_PASSWORD || "support123",
-      role: process.env.REACT_APP_SUPPORT_ROLE || "support",
-      allowedRoutes: process.env.REACT_APP_SUPPORT_ROUTES ? 
-        process.env.REACT_APP_SUPPORT_ROUTES.split(",") : 
-        ["/admin/responses", "/admin/responses/:id"]
+        ["/admin/blog-management"]
     }
   ];
   
