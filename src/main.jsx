@@ -30,8 +30,7 @@ import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
 import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
 import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
 import ContactFormDetails from "./adminPages/response/detailResponse/contactPanelDetails"
-import ContactFormPanel from "./adminPages/response/contactPanel";
-
+import ContactFormPanel from "./adminPages/response/ContactPanel";
 // Protected route component
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

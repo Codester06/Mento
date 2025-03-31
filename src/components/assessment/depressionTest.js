@@ -1,5 +1,7 @@
 import React, { useState, useEffect ,useMemo,memo} from 'react';
 import styles from './depressionTest.module.css';
+import { postData } from '../../utils/awsService';
+
 
 const DepressionTest = () => {
   const quizData = [
@@ -235,7 +237,7 @@ const DepressionTest = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [animateProgress, setAnimateProgress] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
-
+  // const [data ,setdata]=useState([])
   // Calculate total possible score
   const maxPossibleScore = 63; // 21 questions, max 3 points each
 
@@ -262,7 +264,7 @@ const DepressionTest = () => {
   // Get interpretation based on score
   const getInterpretation = () => {
     const score = calculateScore();
-    
+    Aws_write_data({score : score})
     if (score <= 10) {
       return {
         title: "Minimal Depression",
@@ -347,10 +349,30 @@ const DepressionTest = () => {
     setFormSubmitted(true);
   };
 
+  const Aws_write_data =   async() => {
+    let submission_data = {}; // Persistent storage
+
+    return (...args) => {
+        args.forEach(arg => {
+            if (typeof arg === "object" && arg !== null) {
+                submission_data = { ...submission_data, ...arg }; // Merge object properties
+            } else {
+                submission_data[arg] = arg; // Store primitive values as key-value pairs
+            }
+        });
+        return submission_data;
+    };
+};
+
   // Function to determine option style based on selection
   const getOptionClass = (option) => {
     const isSelected = answers[currentQuestion] === option.text;
+    const questionsArray = quizData.map(item => item.question);
+
     
+    const  data = questionsArray.map((question, index) => [question, answers[index]]);
+    Aws_write_data(data)
+   
     if (transitioning && isSelected) {
       return `${styles.option} ${styles.selected} ${styles.transitioning}`;
     }
@@ -368,7 +390,7 @@ const DepressionTest = () => {
         : circumference;
   }, [percentage, animateProgress]);
 
-
+  
     // Determine color based on percentage
     const getColorClass = () => {
       const score = calculateScore();

@@ -16,13 +16,15 @@ const ToolBanner = () => {
       image: image1,
       description:
         "Gain insight into your emotions—take our Depression Test and start your journey to clarity.",
+      isAvailable: true
     },
     {
       id: 2,
-      Name: "Anixety Test",
+      Name: "Anxiety Test",
       image: image2,
       description:
         "Discover how focus and energy impact your daily life—take our ADHD Test for deeper insight",
+      isAvailable: false
     },
     {
       id: 3,
@@ -30,6 +32,7 @@ const ToolBanner = () => {
       image: image3,
       description:
         "Unravel the worries within—take our Anxiety Test and understand your stress better.",
+      isAvailable: false
     },
   ];
 
@@ -48,20 +51,34 @@ const ToolBanner = () => {
                   <div className={styles.chipImageContainer}>
                     <img
                       src={chip.image}
-                      alt='loading'
+                      alt={`LAY'S® Kettle Cooked ${chip.flavor}`}
                       className={styles.chipImage}
                     />
+                    {!chip.isAvailable && (
+                      <div className={styles.comingSoonOverlay}>
+                        <span>Coming Soon</span>
+                      </div>
+                    )}
                   </div>
                   <div className={styles.chipInfo}>
                     <div className={styles.chipName}>{chip.Name}</div>
-
+                    
                     <p className={styles.chipDescription}>{chip.description}</p>
-                    <button
-                      className={styles.shopButton}
-                      onClick={() => navigate("/Depression-Tool")}
-                    >
-                      Give Test
-                    </button>
+                    {chip.isAvailable ? (
+                      <button
+                        className={styles.shopButton}
+                        onClick={() => navigate("/Depression-Tool")}
+                      >
+                        Give Test
+                      </button>
+                    ) : (
+                      <button
+                        className={`${styles.shopButton} ${styles.disabledButton}`}
+                        disabled
+                      >
+                        Coming Soon
+                      </button>
+                    )}
                   </div>
                 </div>
               </button>
