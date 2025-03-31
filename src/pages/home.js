@@ -9,7 +9,6 @@ import MentalHealthServices from "../components/homeComponents/helpYouSection";
 // import QuoteCards from "../components/quotes/quotesText";
 
 
-
 const Home = () => {
     return(<>
       <HeroBanner/>

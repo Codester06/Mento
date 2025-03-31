@@ -32,6 +32,7 @@ import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFri
 import ContactFormDetails from "./adminPages/response/detailResponse/contactPanelDetails"
 import ContactFormPanel from "./adminPages/response/ContactPanel";
 // Protected route component
+import EmailForm from "./components/test/demo";
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasAccess, setHasAccess] = useState(false);
@@ -86,7 +87,7 @@ function Main() {
           {" "}
           {/* Main content wrapper */}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home/>} />
             <Route path="/contact" element={<ContactForm />} />
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/about" element={<About />} />
