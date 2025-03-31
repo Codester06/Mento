@@ -30,7 +30,9 @@ import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
 import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
 import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
 import ContactFormDetails from "./adminPages/response/detailResponse/contactPanelDetails"
-import ContactFormPanel from "./adminPages/response/ContactPanel";
+import ContactFormPanel from "./adminPages/response/contactPanel";
+import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
+import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 // Protected route component
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -127,6 +129,10 @@ function Main() {
               path="/admin/responses/couple-responses/:id"
               element={<ProtectedRoute element={<CoupleDetails />} />}
             />
+             <Route
+              path="/admin/responses/depression-test/:id"
+              element={<ProtectedRoute element={<DepressionTestDetails />} />}
+            />
             <Route
               path="/admin/responses/family-friends-responses/:id"
               element={<ProtectedRoute element={<FamilyFriendsDetails />} />}
@@ -138,6 +144,10 @@ function Main() {
             <Route
               path="/admin/responses/couple-responses"
               element={<ProtectedRoute element={<CouplePanel />} />}
+            />
+              <Route
+              path="/admin/responses/depression-test"
+              element={<ProtectedRoute element={<DepressionTestPanel />} />}
             />
             <Route
               path="/admin/responses/family-friends-responses"
