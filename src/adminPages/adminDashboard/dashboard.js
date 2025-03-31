@@ -96,7 +96,7 @@ const Dashboard = () => {
           
             <div className="card-footer">
               <Link 
-                to="/depression-test" 
+                to="/admin/responses/depression-test" 
                 className="view-button"
               >
                 View
