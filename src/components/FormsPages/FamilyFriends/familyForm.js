@@ -280,7 +280,7 @@ const FamilyTherapyForm = () => {
 
     // Only trigger auto-next for steps 1 to 5 when fields are complete
     // Step 6 is the final confirmation screen
-    if (currentStep < 6 && autoNextEnabled && isStepComplete()) {
+    if (currentStep < 5 && autoNextEnabled && isStepComplete()) {
       const timer = setTimeout(() => {
         setCurrentStep((prev) => prev + 1);
       }, 300); // Small delay for better UX

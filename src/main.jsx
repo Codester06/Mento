@@ -30,7 +30,7 @@ import FriendsFamilyPanel from "./adminPages/response/FamilyFriends";
 import CoupleDetails from "./adminPages/response/detailResponse/CoupleDetailsResponse";
 import FamilyFriendsDetails from "./adminPages/response/detailResponse/FamilyFriendsDetailsResponse";
 import ContactFormDetails from "./adminPages/response/detailResponse/contactPanelDetails"
-import ContactFormPanel from "./adminPages/response/ContactPanel"
+import ContactFormPanel from "./adminPages/response/contactPanel"
 import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 // Protected route component
