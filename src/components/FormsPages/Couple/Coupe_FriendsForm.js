@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 import { GenerateEmailHTML , EmailFormat } from "../../mail/mailformat";
-import { gmail_sendEmail } from "../../../utils/mail_service";
+import sendEmailAPI from "../../../utils/mail_service";
 import ReactDOMServer from 'react-dom/server'
 import { postData } from "../../../utils/awsService";
 
@@ -361,7 +361,7 @@ const email_body = GenerateEmailHTML(email_content)
         
   try {
     // Send email using Gmail service
-    const sendEmailResponse = await gmail_sendEmail("send_mail", email_data.email, email_data.subject, email_body);
+    const sendEmailResponse = await sendEmailAPI("send_mail", email_data.email, email_data.subject, email_body);
 
     // Log success or error message based on response
     console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
@@ -378,12 +378,9 @@ const email_body = GenerateEmailHTML(email_content)
 
 
         // Show success alert
-        alert(
-          "Form submitted successfully! Your couples therapy session has been scheduled."
-        );
+      
       } catch (error) {
         console.error("Error saving therapy session data:", error);
-        alert("Failed to schedule your session. Please try again.");
       }
     }
   };

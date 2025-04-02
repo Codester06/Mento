@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-
-// import { database } from "../../../utils/firebaseConfig";
-// import { ref, push } from "firebase/database";
+import ReactDOMServer from 'react-dom/server'
 import { postData } from "../../../utils/awsService";
-// import { gmail_sendEmail } from "../../../utils/mail_service";
-// import { EmailConfirmation, GenerateEmailHTML } from "../../mail/mailformat";
-// import ReactDOMServer from "react-dom/server";
+import { EmailFormat, GenerateEmailHTML } from "../../mail/mailformat";
+import sendEmailAPI from "../../../utils/mail_service";
 const FamilyTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
@@ -330,42 +327,41 @@ const FamilyTherapyForm = () => {
 
         console.log("Form data submitted:", formData);
         const response = await postData("/family_friend", formData);
-        // const email_data = Object.assign(
-        //   {},
-        //   {
-        //     name: formData.name,
-        //     sessionDate: formData.sessionDate,
-        //     sessionTime: formData.sessionTime,
-        //     subject: "Confirmation Mail For Your Session",
-        //     email: formData.email,
-        //   }
-        // );
+        const email_data = Object.assign(
+          {},
+          {
+            name: formData.name,
+            sessionDate: formData.sessionDate,
+            sessionTime: formData.sessionTime,
+            subject: "Confirmation Mail For Your Session",
+            email: formData.email,
+          }
+        );
 
-        // const email_content = ReactDOMServer.renderToStaticMarkup(
-        //   <EmailConfirmation {...email_data} />
-        // );
+        const email_content = ReactDOMServer.renderToStaticMarkup(
+          <EmailFormat {...email_data} />
+        );
 
-        // const email_body = GenerateEmailHTML(email_content);
+        const email_body = GenerateEmailHTML(email_content);
 
-        // try {
-        //   // Send email using Gmail service
-        //   const sendEmailResponse = await gmail_sendEmail(
-        //     "send_mail",
-        //     email_data.email,
-        //     email_data.subject,
-        //     email_body
-        //   );
+        try {
+          // Send email using Gmail service
+          const sendEmailResponse = await sendEmailAPI(
+            "send_mail",
+            email_data.email,
+            email_data.subject,
+            email_body
+          );
 
-          // Log success or error message based on response
-          // console.log(
-          //   sendEmailResponse.success
-          //     ? "✅ Email sent successfully!"
-          //     : `❌ Error: ${sendEmailResponse.error}`
-          // );
-        // } catch (error) {
-        //   // Catch and log any unexpected errors during the email sending process
-        //   console.error("❌ Error sending email:", error.message);
-        // }
+          console.log(
+            sendEmailResponse.success
+              ? "✅ Email sent successfully!"
+              : `❌ Error: ${sendEmailResponse.error}`
+          );
+        } catch (error) {
+          // Catch and log any unexpected errors during the email sending process
+          console.error("❌ Error sending email:", error.message);
+        }
         console.log("Form data submitted:", response);
         // Show success alert and proceed to thank you page
 

@@ -6,7 +6,7 @@ import ReactDOMServer from 'react-dom/server';
 import { postData } from '../../../utils/awsService';
 
 import { EmailFormat, GenerateEmailHTML } from '../../mail/mailformat';
-import { gmail_sendEmail } from "../../../utils/mail_service";
+import sendEmailAPI from "../../../utils/mail_service";
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -315,16 +315,13 @@ const validateStep = () => {
           
     try {
       // Send email using Gmail service
-      const sendEmailResponse = await gmail_sendEmail("send_mail", email_data.email, email_data.subject, email_body);
-      alert(
-        "mail has been send "
-      );
+      const sendEmailResponse = await sendEmailAPI("send_mail", email_data.email, email_data.subject, email_body);
+      
       // Log success or error message based on response
       console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
   } catch (error) {
       // Catch and log any unexpected errors during the email sending process
       console.error("❌ Error sending email:", error.message);
-      alert("mail not sent. Please try again.");
 
   }
            

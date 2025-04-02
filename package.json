@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.777.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -18,6 +19,7 @@
     "lucide-react": "^0.475.0",
     "mongoose": "^8.12.0",
     "nodemailer": "^6.10.0",
+    "path-browserify": "^1.0.1",
     "pg-sdk-node": "https://phonepe.mycloudrepo.io/public/repositories/phonepe-pg-sdk-node/releases/v2/phonepe-pg-sdk-node.tgz",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
