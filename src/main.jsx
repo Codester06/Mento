@@ -34,6 +34,8 @@ import ContactFormPanel from "./adminPages/response/ContactPanel"
 import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 
+import Form from '../src/components/test/demo'
+
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasAccess, setHasAccess] = useState(false);
