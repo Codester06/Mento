@@ -90,7 +90,7 @@ function Main() {
           {" "}
           {/* Main content wrapper */}
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<Form/>} />
             <Route path="/contact" element={<ContactForm />} />
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/about" element={<About />} />

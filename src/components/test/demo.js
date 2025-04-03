@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import sendEmailAPI from '../../utils/mail_service'
-
+import { postDataBS } from '../../utils/awsService';
 
 const Form = () => {
   const [name, setName] = useState('');
@@ -21,7 +20,7 @@ const Form = () => {
 
     try {
       // Call the sendEmail function
-      const response = await sendEmailAPI('send_mail',formData.email,formData.name,formData.message);
+      const response = await postDataBS('/expert_table',formData);
 //    const response = await  sendEmailAPI('send_mail', 'baddeep106@gmail.com', 'Test Subject', '<h1>Hello, this is a test email!</h1>');
 
       if (response.success) {
