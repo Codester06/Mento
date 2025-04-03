@@ -1,101 +1,76 @@
-
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './expertCarousel.css';
 import { Link } from 'react-router-dom';
 import "./expertCarousel.css";
+import { getDataBS } from '../../utils/awsService';
 
 const Carousel = () => {
   const sliderTrackRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [experts, setExperts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Fetch experts from database
+  useEffect(() => {
+    const fetchExperts = async () => {
+      try {
+        setLoading(true);
+        
+        // Using the getDataBS method
+        const responseData = await getDataBS('/expert_table'); // For debugging
+        
+        // Extract experts data - adjusting to match the expected structure
+        // This checks for both possible data structures
+        if (responseData && responseData.data) {
+          let expertData;
+          
+          // Check if data is nested under "data" key (like in IndividualResponse.js)
+          if (responseData.data.data && Array.isArray(responseData.data.data)) {
+            expertData = responseData.data.data;
+          } 
+          // Check if data is directly under the "data" key
+          else if (Array.isArray(responseData.data)) {
+            expertData = responseData.data;
+          }
+          else {
+            throw new Error('Unexpected data format');
+          }
+          
+          // Transform and normalize data
+          const processedExperts = expertData.map(item => {
+            // Check if expert data is nested under "expert" key or directly in the item
+            const expert = item.expert || item;
+            
+            return {
+              id: expert.id || null,
+              originalId: expert.originalId || null,
+              name: expert.name || 'Unnamed',
+              position: expert.position || 'Counselor',
+              imageSrc: expert.imageSrc || 'https://via.placeholder.com/400x400?text=No+Image',
+              certifications: expert.certifications || '',
+              expertise: expert.expertise || 'General Counseling',
+              experience: expert.experience || 'Not specified',
+              uploadedAt: expert.uploadedAt || new Date().toISOString()
+            };
+          });
+          
+          setExperts(processedExperts);
+        } else {
+          throw new Error('Received invalid experts data format');
+        }
+      } catch (err) {
+        console.error('Error fetching experts:', err);
+        setError('Failed to load experts. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const experts = [
-    {
-      id: 1,
-      name: "Pratibha",
-      position: "Counselor",
-      imageSrc:
-        "https://mento.in/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-09-at-09.40.10_0c45eba4.jpg",
-      certifications:
-        "One to one counseling, group counseling, couple counseling all dimensions of cases",
-      expertise:
-        "Depression, Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
-      experience: "3-6 Years",
-    },
-    {
-      id: 2,
-      name: "Saniya",
-      position: "Counselor",
-      imageSrc: "https://mento.in/wp-content/uploads/2024/11/IMG_3241.jpg",
-      certifications:
-        "CBT Certification, Mindfulness Therapy, Trauma/PTSD Certification, Choice theory and reality therapy",
-      expertise:
-        "Anxiety Disorders, Depression, Trauma and PTSD, Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
-      experience: "1-3 Years",
-    },
-    {
-      id: 3,
-      name: "Pallavi Sengar",
-      position: "Clinical Psychologist",
-      imageSrc:
-        "https://mento.in/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-10-at-21.42.28_8251f87f.jpg",
-      certifications:
-        "RCI Registered, CBT Certification, Mindfulness Therapy, Trauma/PTSD Certification, Child counseling",
-      expertise:
-        "Anxiety Disorders, Depression, Trauma and PTSD, Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
-      experience: "1-3 Years",
-    },
-    {
-      id: 4,
-      name: "Chandan Raj",
-      position: "Counselor",
-      imageSrc:
-        "https://mento.in/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-10-at-21.44.20_21d439d0.jpg",
-      // certifications:
-      //   "                                                                           ",
-      expertise:
-        "Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
-      experience: "3-6 Years",
-    },
-    {
-      id: 5,
-      name: "Sandali Saruparia",
-      position: "Counselor",
-      imageSrc:
-        "https://mento.in/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-10-at-21.42.55_ed161cba.jpg",
-      certifications: "Mindfulness Therapy, Counseling and family therapy",
-      expertise:
-        "Depression, Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
-      experience: "1-3 Years",
-    },
-    {
-      id: 6,
-      name: "Arjita Jain",
-      position: "Counselor",
-      imageSrc:
-        "https://mento.in/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-10-at-21.44.46_2d061c1e-1.jpg",
-      certifications:
-        "CBT Certification, ACT certification, Hypnotherapy certificate of level 1",
-      expertise:
-        "Anxiety Disorders, Depression, Stress Management, Relationship Counseling",
-      experience: "1-3 Years",
-    },
-    {
-      id: 7,
-      name: "Aritri Ghosh",
-      position: "Counselor",
-      imageSrc:
-        "https://mento.in/wp-content/uploads/2024/12/Screenshot_20241210-1431002.png",
-      certifications:
-        "CBT Certification, Mindfulness Therapy, Trauma/PTSD Certification",
-      expertise:
-        "Anxiety Disorders, Depression, Trauma and PTSD, Stress Management, Relationship Counseling, Child and Adolescent Therapy (CBT)",
-      experience: "1-3 Years",
-    },
-  ];
-
+    fetchExperts();
+  }, []); // Removed getDataBS from dependency array as it's not changing
 
   // Mouse event handlers for drag scrolling
   const handleMouseDown = (e) => {
@@ -146,46 +121,47 @@ const Carousel = () => {
     setIsDragging(false);
   };
 
-  const duplicate_experts = [...experts, ...experts, ...experts, ...experts];
+  // Create duplicate experts to create an infinite scrolling effect
+  const duplicate_experts = experts.length > 0 ? [...experts, ...experts, ...experts, ...experts] : [];
+
+  if (loading) {
+    return (
+      <div className="expert-carousel" id="experts">
+        <center>
+          <h1 className="experts-title">Meet Our Experts</h1>
+          <div className="loading-spinner">Loading experts...</div>
+        </center>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="expert-carousel" id="experts">
+        <center>
+          <h1 className="experts-title">Meet Our Experts</h1>
+          <div className="error-message">{error}</div>
+        </center>
+      </div>
+    );
+  }
+
+  if (experts.length === 0) {
+    return (
+      <div className="expert-carousel" id="experts">
+        <center>
+          <h1 className="experts-title">Meet Our Experts</h1>
+          <p>No experts available at the moment. Please check back later.</p>
+        </center>
+      </div>
+    );
+  }
 
   return (
     <div className="expert-carousel" id='experts'>
       <center>
         <h1 className="experts-title">Meet Our Experts</h1>
       </center>
-      {/* <div className="ex-right">
-        <svg
-          className="svg-left-ex"
-          xmlns="http://www.w3.org/2000/svg"
-         fill="#020a17"
-          height="800px"
-          width="800px"
-          version="1.1"
-          id="Layer_1"
-          viewBox="0 0 330 330"
-        >
-          <path
-            id="XMLID_222_"
-            d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001  c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213  C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606  C255,161.018,253.42,157.202,250.606,154.389z"
-          />
-          
-        </svg>
-      </div> */}
-      {/* <div className="ex-left"><svg
-          className="svg-right-ex"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#020a17"
-          height="800px"
-          width="800px"
-          version="1.1"
-          id="Layer_1"
-          viewBox="0 0 330 330"
-        >
-          <path
-            id="XMLID_222_"
-            d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001  c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213  C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606  C255,161.018,253.42,157.202,250.606,154.389z"
-          />
-        </svg></div> */}
       <div
         className="slider-container"
         ref={sliderTrackRef}
@@ -198,53 +174,48 @@ const Carousel = () => {
         onTouchEnd={handleTouchEnd}
       >
         <div className="slider-track">
-          {duplicate_experts.map((expert) => (
-            <div className="slide" key={expert.id}>
+          {duplicate_experts.map((expert, index) => (
+            <div className="slide" key={`${expert.id}-${index}`}>
               <Link to={`/expert/${expert.id}`} className="card-link">
-             
-              <div className="card">
-                <div className="card-image">
-                  <img src={expert.imageSrc} alt={`${expert.name}`} />
-                </div>
-                <div className="card-content">
-                  <h2 className="card-title">{expert.name}</h2>
-                  <p className="card-position">{expert.position}</p>
+                <div className="card">
+                  <div className="card-image">
+                    <img src={expert.imageSrc} alt={`${expert.name}`} />
+                  </div>
+                  <div className="card-content">
+                    <h2 className="card-title">{expert.name}</h2>
+                    <p className="card-position">{expert.position}</p>
 
-                  {expert.certifications && (
-                    <div className="card-certifications">
-                      <span>Certifications:</span> {expert.certifications}
+                    {expert.certifications && expert.certifications.trim() !== '' && (
+                      <div className="card-certifications">
+                        <span>Certifications:</span> {expert.certifications}
+                      </div>
+                    )}
+
+                    <div className="card-expertise">
+                      <span>Areas of Expertise:</span> {expert.expertise}
                     </div>
-                  )}
 
-                  <div className="card-expertise">
-                    <span>Areas of Expertise:</span> {expert.expertise}
-                  </div>
-
-                  <div className="card-experience">
-                    <span>Years of Experience:</span> {expert.experience}
+                    <div className="card-experience">
+                      <span>Years of Experience:</span> {expert.experience}
+                    </div>
                   </div>
                 </div>
-              </div>
               </Link>
             </div>
           ))}
         </div>
-    
       </div>
       <div className="scroll-instruction">
-  <div className="scroll-arrows">
-    <span className="arrow-left"></span>
-    <span className="arrow-left"></span>
-
-
-  </div>
-  Scroll
-  <div className="scroll-arrows">
-    <span className="arrow-right"></span>
-    <span className="arrow-right"></span>
-
-  </div>
-</div>
+        <div className="scroll-arrows">
+          <span className="arrow-left"></span>
+          <span className="arrow-left"></span>
+        </div>
+        Scroll
+        <div className="scroll-arrows">
+          <span className="arrow-right"></span>
+          <span className="arrow-right"></span>
+        </div>
+      </div>
     </div>
   );
 };
