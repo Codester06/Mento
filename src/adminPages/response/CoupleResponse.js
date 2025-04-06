@@ -28,14 +28,17 @@ const CouplePanel = () => {
           id: consultation.id || null,
           name: consultation.name || "Unknown",
           age: consultation.age || "N/A",
+          timestamp: consultation.timestamp || consultation.createdAt || new Date().toISOString(),
 
           // Optional: Include other relevant fields if needed
           email: consultation.email || "",
           supportReason: consultation.supportReason || "",
           city: consultation.city || "",
         }));
-
-        setConsultations(processedConsultations);
+        const sortedConsultations = processedConsultations.sort((a, b) => 
+          new Date(b.timestamp) - new Date(a.timestamp)
+        );
+        setConsultations(sortedConsultations);
       } catch (error) {
         console.error("Error in fetching consultations:", error);
         setError(error.message || "Failed to fetch consultations");
@@ -69,7 +72,15 @@ const CouplePanel = () => {
       }
     }
   };
-
+ // Format date for display
+ const formatDateTime = (timestamp) => {
+  try {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  } catch (error) {
+    return "Unknown Date";
+  }
+};
   if (loading) {
     return <div className="loading-container">Loading consultations...</div>;
   }
@@ -110,6 +121,8 @@ const CouplePanel = () => {
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
                 <h3 className="client-name">{consultation.name}</h3>
+                <div className="timestamp">{formatDateTime(consultation.timestamp)}</div>
+
               </div>
               <div className="card-content">
                 <p>Email: {consultation.email}</p>

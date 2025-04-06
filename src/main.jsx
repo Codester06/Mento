@@ -14,7 +14,7 @@ import TermsUsage from "./pages/terms-of-usage";
 import CookiesPolicy from "./pages/cookies-policy";
 import AssessmentPage from "./pages/AssessmentToolPage";
 import "./index.css";
-import Test from "./pages/DepressionTestPage";
+import DepressionTestPage from "./pages/DepressionTestPage";
 import AdminBlog from "./adminPages/BlogAdmin";
 import BlogDetail from "./components/blogs/blogDetail";
 import CouplePage from "./components/FormsPages/Couple/CouplePage";
@@ -33,6 +33,7 @@ import ContactFormDetails from "./adminPages/response/detailResponse/contactPane
 import ContactFormPanel from "./adminPages/response/ContactPanel"
 import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
+import GeneralHealthTestPage from "./pages/generalHealthTest";
 
 
 const ProtectedRoute = ({ element, requiredRole = null }) => {
@@ -99,7 +100,8 @@ function Main() {
             <Route path="/terms-conditions" element={<TermsUsage />} />
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy />} />
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage />} />
-            <Route path="/Depression-Tool" element={<Test />} />
+            <Route path="/Depression-Tool" element={<DepressionTestPage />} />
+            <Route path="/General-Health-Tool" element={<GeneralHealthTestPage />} />
             <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
             {/* blogs */}
