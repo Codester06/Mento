@@ -34,6 +34,8 @@ const CouplesTherapyForm = () => {
     referralSource: "",
     paymentMethod: "",
     termsAgreed: false,
+    PaymentsAgreed: false,
+
   });
 
   // Profession options
@@ -219,12 +221,15 @@ const CouplesTherapyForm = () => {
         newErrors.medicalConditions = "Please select an option";
       if (!formData.referralSource)
         newErrors.referralSource = "Referral source is required";
+      if (!formData.termsAgreed)
+        newErrors.termsAgreed = "You must agree to the terms and conditions";
+      if (!formData.PaymentsAgreed)
+        newErrors.termsAgreed = "You must agree to the terms and conditions";
     }
 
     // Step 5 validation
     else if (currentStep === 5) {
-      if (!formData.termsAgreed)
-        newErrors.termsAgreed = "You must agree to the terms and conditions";
+     
 
       if (!formData.paymentMethod)
         newErrors.paymentMethod = "Payment method is required";
@@ -278,13 +283,15 @@ useEffect(() => {
       case 4:
         if (!formData.sessionDate) return false;
         if (!formData.sessionTime) return false;
+        if (!formData.termsAgreed) return false;
+        if (!formData.PaymentsAgreed) return false;
+
         if (!formData.medicalConditions) return false;
         if (!formData.referralSource) return false;
         return true;
         
       case 5:
         if (!formData.paymentMethod) return false;
-        if (!formData.termsAgreed) return false;
         return true;
         
       default:
@@ -294,7 +301,7 @@ useEffect(() => {
   
   // Only trigger auto-next for steps 1 to 5 when fields are complete
   // (step 6 is the confirmation page, so no need to auto-advance from there)
-  if (currentStep < 5 && autoNextEnabled && isStepComplete()) {
+  if (currentStep < 4 && autoNextEnabled && isStepComplete()) {
     const timer = setTimeout(() => {
       setCurrentStep((prev) => prev + 1);
     }, 300); // Small delay for better UX
@@ -681,19 +688,19 @@ const email_body = GenerateEmailHTML(email_content)
                 <span className="required-field">*</span>
               </p>
               <div
-                className={`radio-group-MNI ${
+                className={`radio-group-MNIM radio-group-row${
                   errors.previousTherapy ? "error-border" : ""
                 }`}
               >
                 {["Yes", "No"].map((option) => (
                   <div
                     key={option}
-                    className={`radio-option-MN ${
+                    className={`radio-option-MN  ${
                       formData.previousTherapy === option ? "selected" : ""
                     }`}
                     onClick={() => handleRadioChange("previousTherapy", option)}
                   >
-                    <div className="radio-circle-MN">
+                    <div className="radio-circle-MN ">
                       {formData.previousTherapy === option && (
                         <div className="radio-dot-MN"></div>
                       )}
@@ -711,7 +718,7 @@ const email_body = GenerateEmailHTML(email_content)
                 <span className="required-field">*</span>
               </p>
               <div
-                className={`radio-group-MNI ${
+                className={`radio-group-MNIM radio-group-row$ ${
                   errors.preferredLanguage ? "error-border" : ""
                 }`}
               >
@@ -761,11 +768,11 @@ const email_body = GenerateEmailHTML(email_content)
       case 4:
         return (
           <div className="form-step-MN form-step-4-MN">
-            <h2 className="form-title-MN">Session Information</h2>
+            <h2 className="form-title-MN">SUBMISSION</h2>
             <p className="form-subtitle-MN">
               Select your preferred date and time for the session.
             </p>
-
+            <div className="oneLineDetail">
             <div className="form-field-MN">
               <label>
                 When are you planning to have the session?{" "}
@@ -780,10 +787,6 @@ const email_body = GenerateEmailHTML(email_content)
               />
               {renderError("sessionDate")}
             </div>
-
-            <p className="form-subtitle-MN">
-              Let us know about your availability and other details.
-            </p>
 
             <div className="form-field-MN">
               <p className="form-label-MN">
@@ -813,6 +816,8 @@ const email_body = GenerateEmailHTML(email_content)
               </div>
               {renderError("sessionTime")}
             </div>
+            </div>
+
 
             <div className="form-field-MN">
               <p className="form-label-MN ">
@@ -868,6 +873,45 @@ const email_body = GenerateEmailHTML(email_content)
               </select>
               {renderError("referralSource")}
             </div>
+
+            <div className="form-field-MN terms-container-MN">
+              <label className="terms-label-MN">
+                <span className="terms-text-Pay">
+                  <input
+                    type="checkbox"
+                    name="PaymentsAgreed"
+                    checked={formData.PaymentsAgreed}
+                    onChange={handleChange}
+                    className={errors.PaymentsAgreed ? "error-input" : ""}
+                  />{" "}
+                  I am ready to invest in my mental health (session starting
+                  from ₹499/-)
+                </span>
+              </label>
+              {renderError("PaymentsAgreed")}
+            </div>
+
+            <div className="form-field-MN terms-container-MN">
+              <label className="terms-label-MN">
+                <span className="terms-text-MN">
+                  <input
+                    type="checkbox"
+                    name="termsAgreed"
+                    checked={formData.termsAgreed}
+                    onChange={handleChange}
+                    className={errors.termsAgreed ? "error-input" : ""}
+                  />{" "}
+                  I hereby give my informed consent for the release of written
+                  and/or verbal information related to my confidential file in
+                  case of threat to myself, or others. I agree to accept and
+                  follow the rules of time and regularity needed for the
+                  counseling. It is my understanding that the Counselor will
+                  maintain professional responsibility towards me.
+                </span>
+              </label>
+              {renderError("termsAgreed")}
+            </div>
+
           </div>
         );
 
@@ -920,26 +964,6 @@ const email_body = GenerateEmailHTML(email_content)
                 * Additional sessions may be recommended based on initial
                 consultation
               </p>
-            </div>
-            <div className="form-field-MN terms-container-MN">
-              <label className="terms-label-MN">
-                <span className="terms-text-MN">
-                  <input
-                    type="checkbox"
-                    name="termsAgreed"
-                    checked={formData.termsAgreed}
-                    onChange={handleChange}
-                    className={errors.termsAgreed ? "error-input" : ""}
-                  />{" "}
-                  I hereby give my informed consent for the release of written
-                  and/or verbal information related to my confidential file in
-                  case of threat to myself, or others. I agree to accept and
-                  follow the rules of time and regularity needed for the
-                  counseling. It is my understanding that the Counselor will
-                  maintain professional responsibility towards me.
-                </span>
-              </label>
-              {renderError("termsAgreed")}
             </div>
           </div>
         );
@@ -1035,7 +1059,7 @@ const email_body = GenerateEmailHTML(email_content)
           <StepIndicator
             number="4"
             subtitle="Step 4"
-            title="SESSION DETAILS"
+            title="SUBMISSION"
             active={currentStep === 4}
           />
           <StepIndicator
@@ -1062,7 +1086,7 @@ const email_body = GenerateEmailHTML(email_content)
         <form onSubmit={handleSubmit}>
           <div className="form-content-MN">{renderStep()}</div>
           <div className="form-buttons-MN">
-            {currentStep > 1 && currentStep < 6 && (
+            {currentStep > 1 && currentStep < 5 && (
               <button
                 type="button"
                 onClick={prevStep}
@@ -1071,7 +1095,7 @@ const email_body = GenerateEmailHTML(email_content)
                 Go Back
               </button>
             )}
-            {currentStep < 5 ? (
+            {currentStep < 4 ? (
               <button
                 type="button"
                 onClick={nextStep}
@@ -1079,7 +1103,21 @@ const email_body = GenerateEmailHTML(email_content)
               >
                 Next Step
               </button>
-            ) : currentStep === 5 ? (
+            ): currentStep === 4 ? (
+              <button
+                type="button"
+                onClick={(e) => {
+                  handleSubmit(e); // Call handleSubmit first
+                  if (Object.keys(errors).length === 0) {
+                    nextStep(); // Only proceed to next step if validation passes
+                  }
+                }}
+                className="confirm-button-MN"
+              >
+               Submit
+              </button>
+            )  : currentStep === 5 ? (
+              <>
               <button
                 type="button"
                 onClick={(e) => {
@@ -1092,6 +1130,24 @@ const email_body = GenerateEmailHTML(email_content)
               >
                 Confirm & Pay
               </button>
+              <button
+  type="button"
+  onClick={(e) => {
+    handleSubmit(e); // Call handleSubmit first
+    if (Object.keys(errors).length === 0) {
+      const phoneNumber = '15551234567'; // Replace with the target phone number in international format
+      const whatsappUrl = `https://wa.me/${phoneNumber}`;
+      window.open(whatsappUrl, '_blank'); // Open WhatsApp chat in a new tab
+      nextStep(); // Proceed to the next step if validation passes
+    }
+  }}
+  className="confirm-button-WP"
+>
+  Chat on WhatsApp (PAYMENT ISSUE)
+</button>
+
+              </>
+              
             ) : (
               <button
                 type="button"

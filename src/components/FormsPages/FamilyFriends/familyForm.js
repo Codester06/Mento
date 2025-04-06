@@ -4,6 +4,7 @@ import ReactDOMServer from 'react-dom/server'
 import { postData } from "../../../utils/awsService";
 import { EmailFormat, GenerateEmailHTML } from "../../mail/mailformat";
 import sendEmailAPI from "../../../utils/mail_service";
+
 const FamilyTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
@@ -33,6 +34,7 @@ const FamilyTherapyForm = () => {
     referralSource: "",
     paymentMethod: "",
     termsAgreed: false,
+    PaymentsAgreed: false,
   });
 
   // Profession options
@@ -152,11 +154,9 @@ const FamilyTherapyForm = () => {
         newErrors.relationshipType = "Relationship type is required";
       } else if (
         formData.relationshipType === "Other" &&
-        (!formData.otherRelationshipType ||
-          !formData.otherRelationshipType.trim())
+        (!formData.otherRelationshipType || !formData.otherRelationshipType.trim())
       ) {
-        newErrors.otherRelationshipType =
-          "Please specify your relationship with the participants";
+        newErrors.otherRelationshipType = "Please specify your relationship with the participants";
       }
     }
 
@@ -184,7 +184,6 @@ const FamilyTherapyForm = () => {
 
     // Step 3 validation
     else if (currentStep === 3) {
-      if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
       if (!formData.preferredLanguage) {
         newErrors.preferredLanguage = "Preferred language is required";
       } else if (
@@ -193,91 +192,88 @@ const FamilyTherapyForm = () => {
       ) {
         newErrors.otherLanguage = "Please specify your preferred language";
       }
+      if (!formData.sessionDate) 
+        newErrors.sessionDate = "Please select a date";
       if (!formData.sessionTime)
         newErrors.sessionTime = "Session time is required";
       if (!formData.medicalConditions)
         newErrors.medicalConditions = "Please select an option";
       if (!formData.referralSource)
         newErrors.referralSource = "Referral source is required";
+      if (!formData.termsAgreed)
+        newErrors.termsAgreed = "You must agree to the terms and conditions";
+      if (!formData.PaymentsAgreed)
+        newErrors.PaymentsAgreed = "You must agree to the payment terms";
     }
 
     // Step 4 validation
     else if (currentStep === 4) {
       if (!formData.paymentMethod)
         newErrors.paymentMethod = "Payment method is required";
-      if (!formData.termsAgreed)
-        newErrors.termsAgreed = "You must agree to the terms and conditions";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // Helper function to check if step is complete
+  const isStepComplete = () => {
+    switch (currentStep) {
+      case 1:
+        if (!formData.name || !formData.name.trim()) return false;
+        if (!formData.participantsNames || !formData.participantsNames.trim()) return false;
+        if (!formData.email || !formData.email.trim()) return false;
+        if (!/\S+@\S+\.\S+/.test(formData.email)) return false;
+        if (!formData.city || !formData.city.trim()) return false;
+        if (!formData.contactNo || !formData.contactNo.trim()) return false;
+        if (!formData.profession) return false;
+        if (!formData.relationshipType) return false;
+        if (
+          formData.relationshipType === "Other" &&
+          (!formData.otherRelationshipType || !formData.otherRelationshipType.trim())
+        ) return false;
+        return true;
+
+      case 2:
+        if (!formData.primaryConcern) return false;
+        if (
+          formData.primaryConcern === "Other" &&
+          (!formData.otherPrimaryConcern || !formData.otherPrimaryConcern.trim())
+        ) return false;
+        if (!formData.therapyGoals || formData.therapyGoals.length === 0) return false;
+        if (
+          formData.therapyGoals.includes("Other") &&
+          (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
+        ) return false;
+        if (!formData.previousTherapy) return false;
+        return true;
+
+      case 3:
+        if (!formData.preferredLanguage) return false;
+        if (
+          formData.preferredLanguage === "Other" &&
+          (!formData.otherLanguage || !formData.otherLanguage.trim())
+        ) return false;
+        if (!formData.sessionDate) return false;
+        if (!formData.sessionTime) return false;
+        if (!formData.medicalConditions) return false;
+        if (!formData.referralSource) return false;
+        if (!formData.termsAgreed) return false;
+        if (!formData.PaymentsAgreed) return false;
+        return true;
+
+      case 4:
+        if (!formData.paymentMethod) return false;
+        return true;
+
+      default:
+        return false;
+    }
+  };
+
   useEffect(() => {
-    // Helper function to check if step is complete without showing errors
-    const isStepComplete = () => {
-      // Logic to check if all required fields for current step are filled
-      // This is similar to validateStep but doesn't set any error messages
-      switch (currentStep) {
-        case 1:
-          if (!formData.name || !formData.name.trim()) return false;
-          if (!formData.partnerName || !formData.partnerName.trim())
-            return false;
-          if (!formData.email || !formData.email.trim()) return false;
-          if (!/\S+@\S+\.\S+/.test(formData.email)) return false;
-          if (!formData.city || !formData.city.trim()) return false;
-          if (!formData.contactNo || !formData.contactNo.trim()) return false;
-          if (!formData.profession) return false;
-          if (!formData.partnerProfession) return false;
-          if (!formData.relationshipStatus) return false;
-          if (
-            formData.relationshipStatus === "Other" &&
-            (!formData.otherRelationshipStatus ||
-              !formData.otherRelationshipStatus.trim())
-          )
-            return false;
-          return true;
-
-        case 2:
-          if (!formData.primaryConcern) return false;
-          if (formData.therapyGoals.length === 0) return false;
-          if (
-            formData.therapyGoals.includes("Other") &&
-            (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
-          )
-            return false;
-          return true;
-
-        case 3:
-          if (!formData.previousTherapy) return false;
-          if (!formData.preferredLanguage) return false;
-          if (
-            formData.preferredLanguage === "Other" &&
-            (!formData.otherLanguage || !formData.otherLanguage.trim())
-          )
-            return false;
-          return true;
-
-        case 4:
-          if (!formData.sessionDate) return false;
-          if (!formData.sessionTime) return false;
-          if (!formData.medicalConditions) return false;
-          if (!formData.referralSource) return false;
-          return true;
-
-        case 5:
-          if (!formData.paymentMethod) return false;
-          if (!formData.termsAgreed) return false;
-          return true;
-
-        default:
-          return false;
-      }
-    };
-
-    // Only trigger auto-next for steps 1 to 5 when fields are complete
-    // Step 6 is the final confirmation screen
-    if (currentStep < 5 && autoNextEnabled && isStepComplete()) {
+    // Only trigger auto-next for steps 1 and 2 when fields are complete
+    if (currentStep < 3 && autoNextEnabled && isStepComplete()) {
       const timer = setTimeout(() => {
         setCurrentStep((prev) => prev + 1);
       }, 300); // Small delay for better UX
@@ -323,8 +319,6 @@ const FamilyTherapyForm = () => {
 
     if (validateStep()) {
       try {
-        // await push(ref(database, "family_therapy_sessions"), formData);
-
         console.log("Form data submitted:", formData);
         const response = await postData("/family_friend", formData);
         const email_data = Object.assign(
@@ -707,7 +701,7 @@ const FamilyTherapyForm = () => {
       case 3:
         return (
           <div className="form-step-MN form-step-3-MN">
-            <h2 className="form-title-MN">Session Preferences</h2>
+            <h2 className="form-title-MN">SUBMISSION</h2>
             <p className="form-subtitle-MN">
               Please provide your preferences for the therapy session.
             </p>
@@ -862,6 +856,44 @@ const FamilyTherapyForm = () => {
               </select>
               {renderError("referralSource")}
             </div>
+
+            <div className="form-field-MN terms-container-MN">
+              <label className="terms-label-MN">
+                <span className="terms-text-Pay">
+                  <input
+                    type="checkbox"
+                    name="PaymentsAgreed"
+                    checked={formData.PaymentsAgreed}
+                    onChange={handleChange}
+                    className={errors.PaymentsAgreed ? "error-input" : ""}
+                  />{" "}
+                  I am ready to invest in my mental health (session starting
+                  from ₹499/-)
+                </span>
+              </label>
+              {renderError("PaymentsAgreed")}
+            </div>
+
+            <div className="form-field-MN terms-container-MN">
+              <label className="terms-label-MN">
+                <span className="terms-text-MN">
+                  <input
+                    type="checkbox"
+                    name="termsAgreed"
+                    checked={formData.termsAgreed}
+                    onChange={handleChange}
+                    className={errors.termsAgreed ? "error-input" : ""}
+                  />{" "}
+                  I hereby give my informed consent for the release of written
+                  and/or verbal information related to my confidential file in
+                  case of threat to myself, or others. I agree to accept and
+                  follow the rules of time and regularity needed for the
+                  counseling. It is my understanding that the Counselor will
+                  maintain professional responsibility towards me.
+                </span>
+              </label>
+              {renderError("termsAgreed")}
+            </div>
           </div>
         );
 
@@ -912,27 +944,6 @@ const FamilyTherapyForm = () => {
                 * Additional sessions may be recommended based on initial
                 consultation
               </p>
-            </div>
-
-            <div className="form-field-MN terms-container-MN">
-              <label className="terms-label-MN">
-                <span className="terms-text-MN">
-                  <input
-                    type="checkbox"
-                    name="termsAgreed"
-                    checked={formData.termsAgreed}
-                    onChange={handleChange}
-                    className={errors.termsAgreed ? "error-input" : ""}
-                  />{" "}
-                  I hereby give my informed consent for the release of written
-                  and/or verbal information related to my confidential file in
-                  case of threat to myself, or others. I agree to accept and
-                  follow the rules of time and regularity needed for the
-                  counseling. It is my understanding that the Counselor will
-                  maintain professional responsibility towards me.
-                </span>
-              </label>
-              {renderError("termsAgreed")}
             </div>
           </div>
         );
@@ -1017,13 +1028,13 @@ const FamilyTherapyForm = () => {
           <StepIndicator
             number="3"
             subtitle="Step 3"
-            title="SESSION PREFERENCES"
+            title="SUBMISSION"
             active={currentStep === 3}
           />
           <StepIndicator
             number="4"
             subtitle="Step 4"
-            title="PAYMENT INFO"
+            title="PAYMENT"
             active={currentStep === 4}
           />
           <StepIndicator
@@ -1044,7 +1055,7 @@ const FamilyTherapyForm = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-content-MN">{renderStep()}</div>
           <div className="form-buttons-MN">
-            {currentStep > 1 && currentStep < totalSteps && (
+            {currentStep > 1 && currentStep < 4 && (
               <button
                 type="button"
                 onClick={prevStep}
@@ -1053,13 +1064,26 @@ const FamilyTherapyForm = () => {
                 Go Back
               </button>
             )}
-            {currentStep < 4 ? (
+            {currentStep < 3 ? (
               <button
                 type="button"
                 onClick={nextStep}
                 className="next-button-MN"
               >
                 Next Step
+              </button>
+            ): currentStep === 3 ? (
+              <button
+                type="button"
+                onClick={(e) => {
+                  handleSubmit(e); // Call handleSubmit first
+                  if (Object.keys(errors).length === 0) {
+                    nextStep(); // Only proceed to next step if validation passes
+                  }
+                }}
+                className="confirm-button-MN"
+              >
+               Submit
               </button>
             ) : currentStep === 4 ? (
               <button
