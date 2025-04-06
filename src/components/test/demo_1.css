@@ -1,0 +1,105 @@
+.status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+  }
+  
+  .status-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  .status-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .status-card h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .payment-details {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    text-align: left;
+  }
+  
+  .payment-details p {
+    margin: 0.5rem 0;
+  }
+  
+  .action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .primary-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #5e35b1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .primary-button:hover {
+    background-color: #4527a0;
+  }
+  
+  .secondary-button {
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: #5e35b1;
+    border: 1px solid #5e35b1;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .secondary-button:hover {
+    background-color: #f0ebff;
+  }
+  
+  /* Status specific styling */
+  .status-card.success .status-icon {
+    color: #4caf50;
+  }
+  
+  .status-card.pending .status-icon {
+    color: #ff9800;
+  }
+  
+  .status-card.failed .status-icon {
+    color: #f44336;
+  }
+  
+  .status-card.error .status-icon {
+    color: #f44336;
+  }
+  
+  .error-message {
+    padding: 0.75rem;
+    margin: 1rem 0;
+    background-color: #ffebee;
+    color: #c62828;
+    border-radius: 4px;
+    border-left: 4px solid #c62828;
+    text-align: left;
+  }

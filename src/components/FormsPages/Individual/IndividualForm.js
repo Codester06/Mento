@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
+import axios from 'axios';
+
 // import { database } from "../../../utils/firebaseConfig";
 // import { ref, push } from "firebase/database";
 import ReactDOMServer from 'react-dom/server';
@@ -307,11 +309,28 @@ const validateStep = () => {
             email : dataToSubmit.email
             
             });
-            
+            console.log(dataToSubmit)
 
             const email_content = ReactDOMServer.renderToStaticMarkup(<EmailFormat {...email_data} />);
 
             const email_body = GenerateEmailHTML(email_content)
+
+            try {
+              const response = await axios.post("http://localhost:5000/pay", {
+                amount: process.env.REACT_APP_INDIVIDUAL_FORM_PRICE, // Example amount, replace with your logic
+                mobile: dataToSubmit.contactNo,
+                name: dataToSubmit.name,
+              });
+        
+              // Redirect user to PhonePe redirect URL
+              window.location.href = response.data.redirectUrl;
+            } catch (error) {
+              console.error("Payment initiation failed", error);
+              alert("Error: Payment initiation failed.");
+            }
+
+
+
           
     try {
       // Send email using Gmail service
@@ -359,7 +378,7 @@ const validateStep = () => {
     </div>
   );
 
-  // Render error message
+
   const renderError = (fieldName) => {
     if (errors[fieldName]) {
       return <p className="error-message-MN">{errors[fieldName]}</p>;
