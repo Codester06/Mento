@@ -7,6 +7,7 @@ const DepressionTestPanel = () => {
   const [depressionTests, setDepressionTests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortOrder, setSortOrder] = useState('newest'); // 'newest' or 'oldest'
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +31,14 @@ const DepressionTestPanel = () => {
           severity: getSeverityLabel(test.score || 0)
         }));
 
-        setDepressionTests(processedDepressionTests);
+        // Sort based on submission date
+        const sortedTests = processedDepressionTests.sort((a, b) => {
+          const dateA = new Date(a.submissionDate);
+          const dateB = new Date(b.submissionDate);
+          return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+        });
+
+        setDepressionTests(sortedTests);
       } catch (error) {
         setError(error.message || 'Failed to fetch depression tests');
         setDepressionTests([]);
@@ -43,7 +51,7 @@ const DepressionTestPanel = () => {
     const intervalId = setInterval(fetchDepressionTests, 30000);
     
     return () => clearInterval(intervalId);
-  }, []);
+  }, [sortOrder]);
 
   // Helper function to determine severity label based on score
   const getSeverityLabel = (score) => {
@@ -52,6 +60,15 @@ const DepressionTestPanel = () => {
     if (score <= 14) return 'Moderate';
     if (score <= 19) return 'Moderately Severe';
     return 'Severe';
+  };
+
+  const toggleSortOrder = () => {
+    setSortOrder(prevOrder => prevOrder === 'newest' ? 'oldest' : 'newest');
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   };
 
   if (loading) {
@@ -108,6 +125,12 @@ const DepressionTestPanel = () => {
 
       <h1 className="admin-title">Depression Test Submissions Admin Panel</h1>
       
+      <div className="controls-container">
+        <button onClick={toggleSortOrder} className="sort-btn">
+          {sortOrder === 'newest' ? 'Showing: Newest First' : 'Showing: Oldest First'}
+        </button>
+      </div>
+      
       {depressionTests.length === 0 ? (
         <div className="no-data-container">
           <p className="no-data">No depression test submissions found.</p>
@@ -124,7 +147,7 @@ const DepressionTestPanel = () => {
               </div>
               <div className="card-content">
                 <p>Email: {test.email}</p>
-                <p>Submission Date: {new Date(test.submissionDate).toLocaleDateString()}</p>
+                <p>Submission Date: {formatDate(test.submissionDate)}</p>
                 <p>Score: {test.score} - <span className="severity-label">{test.severity}</span></p>
               </div>
               <div className="card-actions">

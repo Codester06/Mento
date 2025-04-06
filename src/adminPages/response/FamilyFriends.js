@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getData, deleteData } from "../../utils/awsService";
 import { useNavigate } from "react-router-dom";
-import "./AdminPanel.css"; // We'll create this CSS file next
+import "./AdminPanel.css";
 
 const FriendsFamilyPanel = () => {
   const [consultations, setConsultations] = useState([]);
@@ -28,14 +28,20 @@ const FriendsFamilyPanel = () => {
           id: consultation.id || null,
           name: consultation.name || "Unknown",
           age: consultation.age || "N/A",
-
+          // Extract timestamp field
+          timestamp: consultation.timestamp || consultation.createdAt || new Date().toISOString(),
           // Optional: Include other relevant fields if needed
           email: consultation.email || "",
           supportReason: consultation.supportReason || "",
           city: consultation.city || "",
         }));
 
-        setConsultations(processedConsultations);
+        // Sort consultations by timestamp (newest first)
+        const sortedConsultations = processedConsultations.sort((a, b) => 
+          new Date(b.timestamp) - new Date(a.timestamp)
+        );
+
+        setConsultations(sortedConsultations);
       } catch (error) {
         // console.error('Error in fetching consultations:', error);
         setError(error.message || "Failed to fetch consultations");
@@ -50,6 +56,16 @@ const FriendsFamilyPanel = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  // Format date for display
+  const formatDateTime = (timestamp) => {
+    try {
+      const date = new Date(timestamp);
+      return date.toLocaleString();
+    } catch (error) {
+      return "Unknown Date";
+    }
+  };
 
   if (loading) {
     return <div className="loading-container">Loading consultations...</div>;
@@ -93,7 +109,7 @@ const FriendsFamilyPanel = () => {
         ← Back to Dashboard
       </button>
 
-      <h1 className="admin-title">Family friends Consultations Admin Panel</h1>
+      <h1 className="admin-title">Family Friends Consultations Admin Panel</h1>
 
       {consultations.length === 0 ? (
         <div className="no-data-container">
@@ -111,6 +127,7 @@ const FriendsFamilyPanel = () => {
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
                 <h3 className="client-name">{consultation.name}</h3>
+                <div className="timestamp">{formatDateTime(consultation.timestamp)}</div>
               </div>
               <div className="card-content">
                 <p>Email: {consultation.email}</p>

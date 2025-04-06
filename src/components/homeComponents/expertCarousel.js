@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './expertCarousel.css';
 import { Link } from 'react-router-dom';
-import "./expertCarousel.css";
 import { getDataBS } from '../../utils/awsService';
 
 const Carousel = () => {
@@ -20,14 +19,13 @@ const Carousel = () => {
         setLoading(true);
         
         // Using the getDataBS method
-        const responseData = await getDataBS('/expert_table'); // For debugging
+        const responseData = await getDataBS('/expert_table');
         
         // Extract experts data - adjusting to match the expected structure
-        // This checks for both possible data structures
         if (responseData && responseData.data) {
           let expertData;
           
-          // Check if data is nested under "data" key (like in IndividualResponse.js)
+          // Check if data is nested under "data" key
           if (responseData.data.data && Array.isArray(responseData.data.data)) {
             expertData = responseData.data.data;
           } 
@@ -43,10 +41,10 @@ const Carousel = () => {
           const processedExperts = expertData.map(item => {
             // Check if expert data is nested under "expert" key or directly in the item
             const expert = item.expert || item;
-            
+            console.log(expert.originalId)
             return {
               id: expert.id || null,
-              originalId: expert.originalId || null,
+              originalId: expert.originalId, // Ensure originalId is captured
               name: expert.name || 'Unnamed',
               position: expert.position || 'Counselor',
               imageSrc: expert.imageSrc || 'https://via.placeholder.com/400x400?text=No+Image',
@@ -57,7 +55,27 @@ const Carousel = () => {
             };
           });
           
-          setExperts(processedExperts);
+          // Sort experts by originalId if it exists, otherwise fallback to regular id
+          const sortedExperts = processedExperts.sort((a, b) => {
+            // Convert IDs to numbers if possible for proper numeric sorting
+            const aId = a.originalId ? Number(a.originalId) || a.originalId : null;
+            const bId = b.originalId ? Number(b.originalId) || b.originalId : null;
+            
+            // If both have numeric originalId, sort numerically
+            if (typeof aId === 'number' && typeof bId === 'number') {
+              return aId - bId;
+            }
+            
+            // If originalId is a string, sort alphabetically
+            if (a.originalId && b.originalId) {
+              return String(a.originalId).localeCompare(String(b.originalId));
+            }
+            
+            // Fallback to regular id if originalId is missing
+            return a.id && b.id ? String(a.id).localeCompare(String(b.id)) : 0;
+          });
+          
+          setExperts(sortedExperts);
         } else {
           throw new Error('Received invalid experts data format');
         }
@@ -70,7 +88,7 @@ const Carousel = () => {
     };
 
     fetchExperts();
-  }, []); // Removed getDataBS from dependency array as it's not changing
+  }, []);
 
   // Mouse event handlers for drag scrolling
   const handleMouseDown = (e) => {
