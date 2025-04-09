@@ -36,6 +36,8 @@ import DepressionTestDetails from "./adminPages/response/detailResponse/depressi
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 
 
+import PaymentForm from "./components/test/demo";
+
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasAccess, setHasAccess] = useState(false);
@@ -106,9 +108,7 @@ function Main() {
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
                {/* payment*/}
                
-               <Route path="/payment-status" element={<PaymentStatus />} /> {/* Logout route */}
-            <Route path="/payment-callback" element={<PaymentStatus />} /> {/* Logout route */}
-            
+             
             {/* blogs */}
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
