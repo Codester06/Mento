@@ -30,12 +30,12 @@ const ToolBanner = () => {
     },
     {
       id: 3,
-      Name: "ADHD Test",
+      Name: "Anxiety Disorder",
       image: image3,
       description:
         "Unravel the worries within—take our Anxiety Test and understand your stress better.",
-      isAvailable: false,
-      linkTest: "/ADHD-Tool"
+      isAvailable: true,
+      linkTest: "/Anxiety-Disorder-Tool"
     },
   ];
 

@@ -34,6 +34,8 @@ import ContactFormPanel from "./adminPages/response/ContactPanel"
 import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 import GeneralHealthTestPage from "./pages/generalHealthTest";
+import AnxietyTestPage from "./pages/AniextyTestPage";
+
 
 
 import PaymentForm from "./components/test/demo";
@@ -92,7 +94,7 @@ function Main() {
           {" "}
           {/* Main content wrapper */}
           <Routes>
-            <Route path="/" element={<PaymentForm/>} />
+            <Route path="/" element={<Home/>} />
             <Route path="/contact" element={<ContactForm />} />
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/about" element={<About />} />
@@ -104,11 +106,14 @@ function Main() {
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage />} />
             <Route path="/Depression-Tool" element={<DepressionTestPage />} />
             <Route path="/General-Health-Tool" element={<GeneralHealthTestPage />} />
+            <Route path="/Anxiety-Disorder-Tool" element={<AnxietyTestPage />} />
             <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
                {/* payment*/}
                
-             
+               {/* <Route path="/payment-status" element={<PaymentStatus />} /> Logout route */}
+            {/* <Route path="/payment-callback" element={<PaymentStatus />} /> Logout route */}
+            
             {/* blogs */}
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
