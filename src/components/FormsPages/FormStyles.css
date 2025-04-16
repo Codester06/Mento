@@ -288,6 +288,7 @@
 .back-button-MN, 
 .next-button-MN, 
 .confirm-button-MN,
+.confirm-button-WP,
 .dashboard-button-MN {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -317,7 +318,7 @@
   background: linear-gradient(to right, #edb94d, #b3dbb7);
 }
 
-.confirm-button-MN, .dashboard-button-MN {
+.confirm-button-MN,.confirm-button-WP, .dashboard-button-MN {
   background: linear-gradient(to right, #ffd980, #c9e8cc);
   color: #333;
   border: none;
@@ -325,7 +326,8 @@
   margin-top: 0;
 }
 
-.confirm-button-MN:hover, .dashboard-button-MN:hover {
+
+.confirm-button-MN:hover,.confirm-button-WP:hover, .dashboard-button-MN:hover {
   background: linear-gradient(to right, #edb94d, #b3dbb7);
 }
 
@@ -574,11 +576,18 @@ input:focus, select:focus, textarea:focus {
 
 .terms-text-MN :first-child {
   margin-top: 10px;
-  width: 150px;
+  width: 180px;
 }
 
-.radio-group-MNIM {
-  flex-direction: column;
+.terms-text-Pay{
+  display: flex;
+  align-items: flex-start;
+
+}
+
+.terms-text-Pay :last-child {
+  margin-top: 10px;
+  width: 50px;
 }
 
 /* Tablet Responsive Styles */
@@ -743,6 +752,7 @@ input:focus, select:focus, textarea:focus {
   .back-button-MN,
   .next-button-MN,
   .confirm-button-MN,
+  .confirm-button-WP
   .dashboard-button-MN {
     width: 100%;
     margin: 0;

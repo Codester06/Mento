@@ -16,23 +16,26 @@ const ToolBanner = () => {
       image: image1,
       description:
         "Gain insight into your emotions—take our Depression Test and start your journey to clarity.",
-      isAvailable: true
+      isAvailable: true, 
+      linkTest: "/Depression-Tool"
     },
     {
       id: 2,
-      Name: "Anxiety Test",
+      Name: "General Health Test",
       image: image2,
       description:
-        "Discover how focus and energy impact your daily life—take our ADHD Test for deeper insight",
-      isAvailable: false
+        "Understand how your mental well-being affects your daily life—take a valuable insights",
+      isAvailable: true,
+      linkTest: "/General-Health-Tool"
     },
     {
       id: 3,
-      Name: "ADHD Test",
+      Name: "Anxiety Disorder",
       image: image3,
       description:
         "Unravel the worries within—take our Anxiety Test and understand your stress better.",
-      isAvailable: false
+      isAvailable: true,
+      linkTest: "/Anxiety-Disorder-Tool"
     },
   ];
 
@@ -51,7 +54,7 @@ const ToolBanner = () => {
                   <div className={styles.chipImageContainer}>
                     <img
                       src={chip.image}
-                      alt={`LAY'S® Kettle Cooked ${chip.flavor}`}
+                      alt={`${chip.Name} illustration`}
                       className={styles.chipImage}
                     />
                     {!chip.isAvailable && (
@@ -67,7 +70,7 @@ const ToolBanner = () => {
                     {chip.isAvailable ? (
                       <button
                         className={styles.shopButton}
-                        onClick={() => navigate("/Depression-Tool")}
+                        onClick={() => navigate(chip.linkTest)}
                       >
                         Give Test
                       </button>

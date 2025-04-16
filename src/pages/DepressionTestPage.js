@@ -4,7 +4,6 @@ const DepressionTestPage =()=>{
     return (
         <>
         <div className="DP">
-
        <DepressionTest/>
         </div>
         </>

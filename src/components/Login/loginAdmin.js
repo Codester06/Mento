@@ -26,9 +26,9 @@ const loadUsersFromEnv = () => {
   
   const users = [
     {
-      username: process.env.REACT_APP_ADMIN_USERNAME || "admin",
-      password: process.env.REACT_APP_ADMIN_PASSWORD || "admin123",
-      role: process.env.REACT_APP_ADMIN_ROLE || "admin",
+      username: process.env.REACT_APP_ADMIN_USERNAME ,
+      password: process.env.REACT_APP_ADMIN_PASSWORD,
+      role: process.env.REACT_APP_ADMIN_ROLE,
       allowedRoutes: process.env.REACT_APP_ADMIN_ROUTES ? 
         process.env.REACT_APP_ADMIN_ROUTES.split(",") : 
         ["/admin/responses", "/admin/blog", "/admin/responses/:id", "/admin/login-activities","/admin/admin-dashboard"]

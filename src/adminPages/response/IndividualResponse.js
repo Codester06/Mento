@@ -28,14 +28,21 @@ const IndividualPanel = () => {
           id: consultation.id || null,
           name: consultation.name || "Unknown",
           age: consultation.age || "N/A",
+          timestamp:
+            consultation.timestamp ||
+            consultation.createdAt ||
+            new Date().toISOString(),
 
           // Optional: Include other relevant fields if needed
           email: consultation.email || "",
           supportReason: consultation.supportReason || "",
           city: consultation.city || "",
         }));
+        const sortedConsultations = processedConsultations.sort(
+          (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+        );
 
-        setConsultations(processedConsultations);
+        setConsultations(sortedConsultations);
       } catch (error) {
         console.error("Error in fetching consultations:", error);
         setError(error.message || "Failed to fetch consultations");
@@ -50,6 +57,17 @@ const IndividualPanel = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+
+   // Format date for display
+   const formatDateTime = (timestamp) => {
+    try {
+      const date = new Date(timestamp);
+      return date.toLocaleString();
+    } catch (error) {
+      return "Unknown Date";
+    }
+  };
 
   if (loading) {
     return <div className="loading-container">Loading consultations...</div>;
@@ -73,7 +91,7 @@ const IndividualPanel = () => {
       try {
         // This already works with the updated deleteData function
         await deleteData("/individual", id);
-  
+
         // Update the UI by removing the deleted consultation
         setConsultations((prevConsultations) =>
           prevConsultations.filter((consultation) => consultation.id !== id)
@@ -113,6 +131,7 @@ const IndividualPanel = () => {
             <div key={consultation.id} className="consultation-card">
               <div className="card-header">
                 <h3 className="client-name">{consultation.name}</h3>
+                <div className="timestamp">{formatDateTime(consultation.timestamp)}</div>
               </div>
               <div className="card-content">
                 <p>Age: {consultation.age}</p>

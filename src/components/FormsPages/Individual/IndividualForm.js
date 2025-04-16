@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
+import axios from 'axios';
+
 // import { database } from "../../../utils/firebaseConfig";
 // import { ref, push } from "firebase/database";
-import ReactDOMServer from 'react-dom/server';
-import { postData } from '../../../utils/awsService';
+import ReactDOMServer from "react-dom/server";
+import { postData } from "../../../utils/awsService";
 
-import { EmailFormat, GenerateEmailHTML } from '../../mail/mailformat';
+import { EmailFormat, GenerateEmailHTML } from "../../mail/mailformat";
 import sendEmailAPI from "../../../utils/mail_service";
 
 const IndividualForm = () => {
@@ -14,8 +16,7 @@ const IndividualForm = () => {
   const [errors, setErrors] = useState({});
   const [autoNextEnabled, setAutoNextEnabled] = useState(true);
   const [stepsAttempted, setStepsAttempted] = useState({});
-   
-  
+
   // Create useState for form data instead of useRef to trigger re-renders
   const [formData, setFormData] = useState({
     name: "",
@@ -38,9 +39,8 @@ const IndividualForm = () => {
     referralSource: "",
     paymentMethod: "",
     termsAgreed: false,
+    PaymentsAgreed: false,
   });
-
-
 
   // Profession options
   const professionOptions = [
@@ -84,13 +84,13 @@ const IndividualForm = () => {
   // Handle form field changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-  
+
     // Update state for form data
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
-  
+
     // Clear error for this field when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
@@ -127,86 +127,90 @@ const IndividualForm = () => {
   };
 
   // Validate current step
-// Modify the validateStep function to validate every time
-const validateStep = () => {
-  // Remove the condition that skips validation on first attempt
-  const newErrors = {};
+  // Modify the validateStep function to validate every time
+  const validateStep = () => {
+    // Remove the condition that skips validation on first attempt
+    const newErrors = {};
 
-  // Step 1 validation
-  if (currentStep === 1) {
-    if (!formData.name || !formData.name.trim())
-      newErrors.name = "Name is required";
-    if (!formData.email || !formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+    // Step 1 validation
+    if (currentStep === 1) {
+      if (!formData.name || !formData.name.trim())
+        newErrors.name = "Name is required";
+      if (!formData.email || !formData.email.trim()) {
+        newErrors.email = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        newErrors.email = "Email is invalid";
+      }
+      if (!formData.city || !formData.city.trim())
+        newErrors.city = "City is required";
+      if (!formData.contactNo || !formData.contactNo.trim())
+        newErrors.contactNo = "Contact number is required";
+      if (!formData.age) newErrors.age = "Age is required";
+      if (!formData.profession) newErrors.profession = "Profession is required";
     }
-    if (!formData.city || !formData.city.trim())
-      newErrors.city = "City is required";
-    if (!formData.contactNo || !formData.contactNo.trim())
-      newErrors.contactNo = "Contact number is required";
-    if (!formData.age) newErrors.age = "Age is required";
-    if (!formData.profession) newErrors.profession = "Profession is required";
-  }
 
-  // Rest of validation logic remains the same
-  // Step 2 validation
-  else if (currentStep === 2) {
-    if (!formData.supportReason) {
-      newErrors.supportReason = "Please select a reason";
-    } else if (
-      formData.supportReason === "Other" &&
-      (!formData.otherSupportReason || !formData.otherSupportReason.trim())
-    ) {
-      newErrors.otherSupportReason = "Please specify your reason";
+    // Rest of validation logic remains the same
+    // Step 2 validation
+    else if (currentStep === 2) {
+      if (!formData.supportReason) {
+        newErrors.supportReason = "Please select a reason";
+      } else if (
+        formData.supportReason === "Other" &&
+        (!formData.otherSupportReason || !formData.otherSupportReason.trim())
+      ) {
+        newErrors.otherSupportReason = "Please specify your reason";
+      }
     }
-  }
 
-  // Step 3 validation
-  else if (currentStep === 3) {
-    if (!formData.feelingsReason)
-      newErrors.feelingsReason = "Please select a reason";
-    if (!formData.previousConsultation)
-      newErrors.previousConsultation = "Please select an option";
-  }
-
-  // Step 4 validation
-  else if (currentStep === 4) {
-    if (!formData.preferredLanguage) {
-      newErrors.preferredLanguage = "Please select a language";
-    } else if (
-      formData.preferredLanguage === "Other" &&
-      (!formData.otherLanguage || !formData.otherLanguage.trim())
-    ) {
-      newErrors.otherLanguage = "Please specify your language";
+    // Step 3 validation
+    else if (currentStep === 3) {
+      if (!formData.feelingsReason)
+        newErrors.feelingsReason = "Please select a reason";
+      if (!formData.previousConsultation)
+        newErrors.previousConsultation = "Please select an option";
     }
-  }
 
-  // Step 5 validation
-  else if (currentStep === 5) {
-    if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
-    if (!formData.sessionTime) newErrors.sessionTime = "Please select a time";
-  }
+    // Step 4 validation
+    else if (currentStep === 4) {
+      if (!formData.preferredLanguage) {
+        newErrors.preferredLanguage = "Please select a language";
+      } else if (
+        formData.preferredLanguage === "Other" &&
+        (!formData.otherLanguage || !formData.otherLanguage.trim())
+      ) {
+        newErrors.otherLanguage = "Please specify your language";
+      }
+    }
 
-  // Step 6 validation
-  else if (currentStep === 6) {
-    if (!formData.counselorGenderPreference)
-      newErrors.counselorGenderPreference = "Please select an option";
-    if (!formData.medicalConditions)
-      newErrors.medicalConditions = "Please select an option";
-    if (!formData.referralSource)
-      newErrors.referralSource = "Please select an option";
-  }
+    // Step 5 validation
+    else if (currentStep === 5) {
+      if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
+      if (!formData.sessionTime) newErrors.sessionTime = "Please select a time";
+    }
 
-  // Step 7 validation
-  else if (currentStep === 7) {
-    if (!formData.paymentMethod) newErrors.paymentMethod = "Payment method is required";
-    if (!formData.termsAgreed) newErrors.termsAgreed = "You must agree to the terms";
-  }
+    // Step 6 validation
+    else if (currentStep === 6) {
+      if (!formData.counselorGenderPreference)
+        newErrors.counselorGenderPreference = "Please select an option";
+      if (!formData.medicalConditions)
+        newErrors.medicalConditions = "Please select an option";
+      if (!formData.referralSource)
+        newErrors.referralSource = "Please select an option";
+      if (!formData.termsAgreed)
+        newErrors.termsAgreed = "You must agree to the terms";
+      if (!formData.PaymentsAgreed)
+        newErrors.termsAgreed = "You must agree to the terms";
+    }
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
+    // Step 7 validation
+    else if (currentStep === 7) {
+      if (!formData.paymentMethod)
+        newErrors.paymentMethod = "Payment method is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   //Auto-next functionality using useEffect
   useEffect(() => {
@@ -216,35 +220,53 @@ const validateStep = () => {
       // This is similar to validateStep but doesn't set any error messages
       switch (currentStep) {
         case 1:
-          return formData.name && formData.email && /\S+@\S+\.\S+/.test(formData.email) &&
-                 formData.city && formData.contactNo && formData.age && formData.profession;
+          return (
+            formData.name &&
+            formData.email &&
+            /\S+@\S+\.\S+/.test(formData.email) &&
+            formData.city &&
+            formData.contactNo &&
+            formData.age &&
+            formData.profession
+          );
         case 2:
           if (!formData.supportReason) return false;
-          if (formData.supportReason === "Other" && !formData.otherSupportReason) return false;
+          if (
+            formData.supportReason === "Other" &&
+            !formData.otherSupportReason
+          )
+            return false;
           return true;
         case 3:
           return formData.feelingsReason && formData.previousConsultation;
         case 4:
           if (!formData.preferredLanguage) return false;
-          if (formData.preferredLanguage === "Other" && !formData.otherLanguage) return false;
+          if (formData.preferredLanguage === "Other" && !formData.otherLanguage)
+            return false;
           return true;
         case 5:
           return formData.sessionDate && formData.sessionTime;
         case 6:
-          return formData.counselorGenderPreference && formData.medicalConditions && formData.referralSource;
+          return (
+            formData.counselorGenderPreference &&
+            formData.medicalConditions &&
+            formData.referralSource &&
+            formData.termsAgreed &&
+            formData.PaymentsAgreed
+          );
         case 7:
           return formData.paymentMethod && formData.termsAgreed;
         default:
           return false;
       }
     };
-  
+
     // Only trigger auto-next for steps 1 to 6 when fields are complete
-    if (currentStep < 7 && autoNextEnabled && isStepComplete()) {
+    if (currentStep < 6 && autoNextEnabled && isStepComplete()) {
       const timer = setTimeout(() => {
         setCurrentStep((prev) => prev + 1);
       }, 300); // Small delay for better UX
-  
+
       return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
     }
   }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
@@ -252,11 +274,11 @@ const validateStep = () => {
   // Move to next step
   const nextStep = () => {
     // Mark current step as attempted
-    setStepsAttempted(prev => ({
+    setStepsAttempted((prev) => ({
       ...prev,
-      [currentStep]: true
+      [currentStep]: true,
     }));
-    
+
     // Always validate before moving to next step
     if (validateStep()) {
       if (currentStep < totalSteps) {
@@ -283,70 +305,84 @@ const validateStep = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateStep()) {
-        try {
-            // Add timestamp to the form data
-            const dataToSubmit = {
-                ...formData,
-                submittedAt: new Date().toISOString()
-            };
-            
-            // console.log("Submitting form data:", dataToSubmit);
-            
-            // Use postData to submit the form data
-            const response = await postData('/individual', dataToSubmit);
-            
-            console.log("Form data submitted successfully:", response);
-            
-            // Show success alert
-          
-            const email_data = Object.assign({},{
-            name : dataToSubmit.name,
-            sessionDate : dataToSubmit.sessionDate,
+      try {
+        // Add timestamp to the form data
+        const dataToSubmit = {
+          ...formData,
+          submittedAt: new Date().toISOString(),
+        };
+
+        // console.log("Submitting form data:", dataToSubmit);
+
+        // Use postData to submit the form data
+        const response = await postData("/individual", dataToSubmit);
+
+        console.log("Form data submitted successfully:", response);
+
+        // Show success alert
+
+        const email_data = Object.assign(
+          {},
+          {
+            name: dataToSubmit.name,
+            sessionDate: dataToSubmit.sessionDate,
             sessionTime: dataToSubmit.sessionTime,
-            subject : "Confirmation Mail For Your Session",
-            email : dataToSubmit.email
-            
-            });
-            
+            subject: "Confirmation Mail For Your Session",
+            email: dataToSubmit.email,
+          }
+        );
 
-            const email_content = ReactDOMServer.renderToStaticMarkup(<EmailFormat {...email_data} />);
+        const email_content = ReactDOMServer.renderToStaticMarkup(
+          <EmailFormat {...email_data} />
+        );
 
-            const email_body = GenerateEmailHTML(email_content)
-          
-    try {
-      // Send email using Gmail service
-      const sendEmailResponse = await sendEmailAPI("send_mail", email_data.email, email_data.subject, email_body);
-      
-      // Log success or error message based on response
-      console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
-  } catch (error) {
-      // Catch and log any unexpected errors during the email sending process
-      console.error("❌ Error sending email:", error.message);
+        const email_body = GenerateEmailHTML(email_content);
 
-  }
-           
-            
-            // Move to confirmation step after successful submission
-            nextStep();
+        try {
+          // Send email using Gmail service
+          const sendEmailResponse = await sendEmailAPI(
+            "send_mail",
+            email_data.email,
+            email_data.subject,
+            email_body
+          );
+
+          // Log success or error message based on response
+          console.log(
+            sendEmailResponse.success
+              ? "✅ Email sent successfully!"
+              : `❌ Error: ${sendEmailResponse.error}`
+          );
         } catch (error) {
-            console.error("Error saving consultation data:", error);
-            
-            // Show more detailed error message
-            let errorMessage = "Failed to schedule your consultation. ";
-            
-            // Check different error response formats (axios vs custom error)
-            if (error.response && error.response.data && error.response.data.message) {
-                errorMessage += error.response.data.message;
-            } else if (error.message) {
-                errorMessage += error.message;
-            } else {
-                errorMessage += "Please try again later.";
-            }
-            
-            alert(errorMessage);
+          // Catch and log any unexpected errors during the email sending process
+          console.error("❌ Error sending email:", error.message);
         }
+
+        // Move to confirmation step after successful submission
+        nextStep();
+      } catch (error) {
+        console.error("Error saving consultation data:", error);
+
+        // Show more detailed error message
+        let errorMessage = "Failed to schedule your consultation. ";
+
+        // Check different error response formats (axios vs custom error)
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          errorMessage += error.response.data.message;
+        } else if (error.message) {
+          errorMessage += error.message;
+        } else {
+          errorMessage += "Please try again later.";
+        }
+
+        alert(errorMessage);
+      }
     }
-};
+  };
 
   // Step indicator component
   const StepIndicator = ({ number, title, subtitle, active }) => (
@@ -359,7 +395,7 @@ const validateStep = () => {
     </div>
   );
 
-  // Render error message
+
   const renderError = (fieldName) => {
     if (errors[fieldName]) {
       return <p className="error-message-MN">{errors[fieldName]}</p>;
@@ -752,7 +788,7 @@ const validateStep = () => {
       case 6:
         return (
           <div className="form-step-MN form-step-6-MN">
-            <h2 className="form-title-MN">Additional Preferences</h2>
+            <h2 className="form-title-MN">SUBMISSION</h2>
             <p className="form-subtitle-MN">
               Tell us more about your preferences for the consultation.
             </p>
@@ -763,7 +799,7 @@ const validateStep = () => {
                 <span className="required-field">*</span>
               </p>
               <div
-                className={`radio-group-MNIM ${
+                className={`radio-group-MNIM radio-group-row ${
                   errors.counselorGenderPreference ? "error-border" : ""
                 }`}
               >
@@ -846,6 +882,44 @@ const validateStep = () => {
               </select>
               {renderError("referralSource")}
             </div>
+
+            <div className="form-field-MN terms-container-MN">
+              <label className="terms-label-MN">
+                <span className="terms-text-Pay">
+                  <input
+                    type="checkbox"
+                    name="PaymentsAgreed"
+                    checked={formData.PaymentsAgreed}
+                    onChange={handleChange}
+                    className={errors.PaymentsAgreed ? "error-input" : ""}
+                  />{" "}
+                  I am ready to invest in my mental health (session starting
+                  from ₹499/-)
+                </span>
+              </label>
+              {renderError("PaymentsAgreed")}
+            </div>
+
+            <div className="form-field-MN terms-container-MN">
+              <label className="terms-label-MN">
+                <span className="terms-text-MN">
+                  <input
+                    type="checkbox"
+                    name="termsAgreed"
+                    checked={formData.termsAgreed}
+                    onChange={handleChange}
+                    className={errors.termsAgreed ? "error-input" : ""}
+                  />{" "}
+                  I hereby give my informed consent for the release of written
+                  and/or verbal information related to my confidential file in
+                  case of threat to myself, or others. I agree to accept and
+                  follow the rules of time and regularity needed for the
+                  counseling. It is my understanding that the Counselor will
+                  maintain professional responsibility towards me.
+                </span>
+              </label>
+              {renderError("termsAgreed")}
+            </div>
           </div>
         );
       case 7:
@@ -896,27 +970,6 @@ const validateStep = () => {
                 * Additional sessions may be recommended based on initial
                 consultation
               </p>
-            </div>
-
-            <div className="form-field-MN terms-container-MN">
-              <label className="terms-label-MN">
-                <span className="terms-text-MN">
-                  <input
-                    type="checkbox"
-                    name="termsAgreed"
-                    checked={formData.termsAgreed}
-                    onChange={handleChange}
-                    className={errors.termsAgreed ? "error-input" : ""}
-                  />{" "}
-                  I hereby give my informed consent for the release of written
-                  and/or verbal information related to my confidential file in
-                  case of threat to myself, or others. I agree to accept and
-                  follow the rules of time and regularity needed for the
-                  counseling. It is my understanding that the Counselor will
-                  maintain professional responsibility towards me.
-                </span>
-              </label>
-              {renderError("termsAgreed")}
             </div>
           </div>
         );
@@ -1019,7 +1072,7 @@ const validateStep = () => {
           <StepIndicator
             number="6"
             subtitle="Step 6"
-            title="PREFERENCES"
+            title="SUBMISSION"
             active={currentStep === 6}
           />
           <StepIndicator
@@ -1044,12 +1097,12 @@ const validateStep = () => {
       </div>
 
       {/* Right content area */}
-     <div className="form-container-MN">
+      <div className="form-container-MN">
         <form onSubmit={handleSubmit}>
           <div className="form-content-MN">{renderStep()}</div>
 
           <div className="form-buttons-MN">
-            {currentStep > 1 && currentStep < 8 && (
+            {currentStep > 1 && currentStep < 6 && (
               <button
                 type="button"
                 onClick={prevStep}
@@ -1058,13 +1111,26 @@ const validateStep = () => {
                 Go Back
               </button>
             )}
-            {currentStep < 7 ? (
+            {currentStep < 5 ? (
               <button
                 type="button"
                 onClick={nextStep}
                 className="next-button-MN"
               >
                 Next Step
+              </button>
+            ): currentStep === 6 ? (
+              <button
+                type="button"
+                onClick={(e) => {
+                  handleSubmit(e); // Call handleSubmit first
+                  if (Object.keys(errors).length === 0) {
+                    nextStep(); // Only proceed to next step if validation passes
+                  }
+                }}
+                className="confirm-button-MN"
+              >
+                Submit
               </button>
             ) : currentStep === 7 ? (
               <button
