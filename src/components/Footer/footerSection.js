@@ -130,18 +130,20 @@ const Footer = () => {
           <div className="nav-section">
             <h3>Contact Us</h3>
             <div className="contact-info">
-  <p className="contact-ItemEmail">
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in" target="_blank" rel="noopener noreferrer">
-      Email: connect@mento.in
-    </a>
-  </p>
+              <p className="contact-ItemEmail">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Email: connect@mento.in
+                </a>
+              </p>
 
-  <p className="contact-ItemEmail">
-  <a href="tel:+919120719120">
-    Phone: +91 9120719120
-  </a>
-</p>
-</div>
+              <p className="contact-ItemEmail">
+                <a href="tel:+919120719120">Phone: +91 9120719120</a>
+              </p>
+            </div>
           </div>
           <div className="nav-section">
             <h3>Others</h3>

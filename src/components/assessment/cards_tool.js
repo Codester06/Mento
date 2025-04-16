@@ -16,8 +16,8 @@ const ToolBanner = () => {
       image: image1,
       description:
         "Gain insight into your emotions—take our Depression Test and start your journey to clarity.",
-      isAvailable: true, 
-      linkTest: "/Depression-Tool"
+      isAvailable: true,
+      linkTest: "/Depression-Tool",
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ const ToolBanner = () => {
       description:
         "Understand how your mental well-being affects your daily life—take a valuable insights",
       isAvailable: true,
-      linkTest: "/General-Health-Tool"
+      linkTest: "/General-Health-Tool",
     },
     {
       id: 3,
@@ -35,7 +35,7 @@ const ToolBanner = () => {
       description:
         "Unravel the worries within—take our Anxiety Test and understand your stress better.",
       isAvailable: true,
-      linkTest: "/Anxiety-Disorder-Tool"
+      linkTest: "/Anxiety-Disorder-Tool",
     },
   ];
 
@@ -65,7 +65,7 @@ const ToolBanner = () => {
                   </div>
                   <div className={styles.chipInfo}>
                     <div className={styles.chipName}>{chip.Name}</div>
-                    
+
                     <p className={styles.chipDescription}>{chip.description}</p>
                     {chip.isAvailable ? (
                       <button

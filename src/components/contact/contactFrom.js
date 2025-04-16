@@ -15,18 +15,18 @@ const ContactForm = () => {
       email: formRef.current.email.value,
       subject: formRef.current.subject.value,
       message: formRef.current.message.value,
-      submittedAt: new Date().toISOString() // Add timestamp to the form data
+      submittedAt: new Date().toISOString(), // Add timestamp to the form data
     };
 
     try {
       // Log the data being submitted (commented out for production)
       // console.log("Submitting contact form data:", formData);
-      
+
       // Post the data to the API
-       await postData('/contact_form', formData);
-      
+      await postData("/contact_form", formData);
+
       // console.log("Contact form submitted successfully:", response);
-      
+
       // Show success message
       alert("Message sent successfully! We'll get back to you soon.");
 
@@ -34,19 +34,23 @@ const ContactForm = () => {
       formRef.current.reset();
     } catch (error) {
       console.error("Error submitting contact form:", error);
-      
+
       // Create a more detailed error message
       let errorMessage = "Failed to send message. ";
-      
+
       // Check different error response formats
-      if (error.response && error.response.data && error.response.data.message) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         errorMessage += error.response.data.message;
       } else if (error.message) {
         errorMessage += error.message;
       } else {
         errorMessage += "Please try again later.";
       }
-      
+
       alert(errorMessage);
     } finally {
       setLoading(false);
@@ -89,9 +93,13 @@ const ContactForm = () => {
             </div>
             <div>
               <p>Mail us at</p>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in" target="_blank" rel="noopener noreferrer">
-      connect@mento.in
-    </a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                connect@mento.in
+              </a>
             </div>
           </div>
         </div>
@@ -102,26 +110,45 @@ const ContactForm = () => {
 
           <form ref={formRef} onSubmit={handleSubmit}>
             <div className="form-group">
-              <input type="text" name="fullName" placeholder="Full Name*" required />
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full Name*"
+                required
+              />
             </div>
 
             <div className="form-group">
-              <input type="email" name="email" placeholder="Email Address*" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address*"
+                required
+              />
             </div>
 
             <div className="form-group">
-              <input type="text" name="subject" placeholder="Subject*" required />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject*"
+                required
+              />
             </div>
 
             <div className="form-group">
               <p>Tell us more..</p>
-              <textarea name="message" placeholder="Type your message*" rows="6" required></textarea>
+              <textarea
+                name="message"
+                placeholder="Type your message*"
+                rows="6"
+                required
+              ></textarea>
             </div>
 
             <button type="submit" disabled={loading}>
               {loading ? "Sending..." : "Send Message"}
             </button>
-            
           </form>
         </div>
       </div>
