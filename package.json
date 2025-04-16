@@ -28,6 +28,7 @@
     "process": "^0.11.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-native-phonepe-pg": "^3.0.1",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
     "stream-browserify": "^3.0.0",
