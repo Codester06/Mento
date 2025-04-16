@@ -89,7 +89,9 @@ const ContactForm = () => {
             </div>
             <div>
               <p>Mail us at</p>
-              <a href="mailto:connectmento@gmail.com">connectmento@gmail.com</a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in" target="_blank" rel="noopener noreferrer">
+      connect@mento.in
+    </a>
             </div>
           </div>
         </div>

@@ -42,7 +42,7 @@ const BlogList = ({ refreshPosts }) => {
             // Add a date-based tag
             { text: getMonthName(new Date(post.createdAt)), color: 'light-blue' }
           ],
-          intro: post.content.substring(0, 150) + '...',  // Create a short intro from content
+          intro: post.content.substring(3, 150) + '...',  // Create a short intro from content
           date: new Date(post.createdAt).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',

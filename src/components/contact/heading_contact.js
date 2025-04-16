@@ -21,7 +21,9 @@ const ContactSection = () => {
             </svg>
           </div>
           <h3 className="contact-heading">EMAIL US AT</h3>
-          <p className="contact-primary">connectmento@gmail.com</p>
+          <p className="contact-primary"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in" target="_blank" rel="noopener noreferrer">
+   connect@mento.in
+    </a></p>
           <p className="contact-secondary">and we'll get back to you in 24 hours</p>
         </div>
         
@@ -47,7 +49,9 @@ const ContactSection = () => {
             </svg>
           </div>
           <h3 className="contact-heading">CALL US AT</h3>
-          <p className="contact-primary">+91 20 711 71501</p>
+          <p className="contact-primary"><a href="tel:+919120719120">
+ +91 9120719120
+  </a></p>
           <p className="contact-secondary">between 10 AM to 10 PM</p>
         </div>
       </div>
