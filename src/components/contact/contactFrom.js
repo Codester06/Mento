@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import "./contactFrom.css";
-import { handle_service } from "../test/service";
+import { handle_payment, handle_service } from "../../utils/services.js";
 
 const ContactForm = () => {
   const formRef = useRef();

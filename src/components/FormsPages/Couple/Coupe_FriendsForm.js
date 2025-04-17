@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 import { submitToAWS } from "../../../utils/payment_fetch";
-import { handle_service } from "../../test/service";
+import { handle_service } from "../../../utils/services";
 
 const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);

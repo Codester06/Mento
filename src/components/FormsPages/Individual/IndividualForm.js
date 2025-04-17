@@ -4,7 +4,7 @@ import "../FormStyles.css";
 import { submitToAWS } from "../../../utils/payment_fetch";
 
 
-import { handle_payment, handle_service } from "../../test/service";
+import { handle_payment, handle_service } from "../../../utils/services.js";
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
