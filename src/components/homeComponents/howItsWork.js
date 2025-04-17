@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import image1 from '../../assets/images/11.png';
-import image2 from '../../assets/images/12.png';
-import image3 from '../../assets/images/expertesInfo.png';
+import image1 from '../../assets/images/howItsWorks/11.png';
+import image2 from '../../assets/images/howItsWorks/12.png';
+import image3 from '../../assets/images/howItsWorks/expertesInfo.png';
 import './HowItWorks.css';
 
 const HowItWorks = () => {

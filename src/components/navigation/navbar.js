@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
+import logo from "../../assets/images/logos/mentologo.png"
 
 const Navbar = () => {
   const location = useLocation();
@@ -10,7 +11,7 @@ const Navbar = () => {
     <nav className="navContainer">
       <div className="navLogo">
         <Link to="/">
-        <img src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="mentologo" /></Link>
+        <img className="logo" src={logo} alt="mentologo" /></Link>
       </div>
 
       {/* Navigation Links */}

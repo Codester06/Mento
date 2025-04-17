@@ -36,7 +36,7 @@
     width: 30%;
     height: 280px;
     margin-right: 14rem;
-    background-image: url('/src/assets/images/Screenshot_2025-03-02_220639-removebg-preview.png');
+    background-image: url('../../assets/images/contact/contactIcon.png');
 
     scale: 1.2;
     background-size: contain;

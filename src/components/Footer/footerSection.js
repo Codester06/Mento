@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./footer.css";
+import logo from "../../assets/images/logos/mentologo.png"
 
 const Footer = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,7 +89,7 @@ const Footer = () => {
             <Link to="/">
               <img
                 className="footer_img"
-                src="https://mento.in/wp-content/uploads/2024/11/text.png"
+                src={logo}
                 alt="Mento Logo"
               />
             </Link>

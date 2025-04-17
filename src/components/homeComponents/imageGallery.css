@@ -37,15 +37,15 @@
 }
 
 .image-container:nth-child(1) img:hover {
-  content: url("https://mento.in/wp-content/uploads/2025/01/Individual-Hover.png");
+  content: url("../../assets/images/formButton/Individual-Hover.png");
 }
 
 .image-container:nth-child(2) img:hover {
-  content: url("https://mento.in/wp-content/uploads/2025/01/Couple-Hover-1.png");
+  content: url("../../assets/images/formButton/CoupleHover.png");
 }
 
 .image-container:nth-child(3) img:hover {
-  content: url("https://mento.in/wp-content/uploads/2025/01/Family-or-Friend-Hover-1.png");
+  content: url("../../assets/images/formButton/FamilyOrFriendHover.png");
 }
 
 @media (max-width: 768px) {

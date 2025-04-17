@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./contactFrom.css";
 import { handle_service } from "../../utils/services";
-
+import logoIcon from "../../assets/images/logos/mentoLogoIcon.png";
 const ContactForm = () => {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const ContactForm = () => {
             </div>
             <img
               className="ContactLogo"
-              src="https://mento.in/wp-content/uploads/2025/01/mentoLogoIcon.png"
+              src={logoIcon}
               height="350px"
               alt=""
             />
