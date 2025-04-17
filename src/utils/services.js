@@ -1,25 +1,26 @@
+import { sendEmailAPI } from "./mail_service.js";
+import { postData } from "./awsService.js";
+import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat.js";
 import ReactDOMServer from "react-dom/server";
-import { initiatePayment } from "../../utils/payment_fetch.js";
-import { sendemailapi } from "../../utils/mail_service.js";
-import { postData } from "../../utils/awsService.js";
-import { EmailFormat, GenerateEmailHTML } from "../mail/mailformat.js";
+import { initiatePayment } from "./payment_fetch.js";
 
-// Helper: Send email to user and admin
+// Helper: send user & admin email
 const sendFormEmail = async (emailData) => {
   const emailContent = ReactDOMServer.renderToStaticMarkup(
     <EmailFormat {...emailData} />
   );
+
   const emailBody = GenerateEmailHTML(emailContent);
 
   try {
-    const userResponse = await sendemailapi(
+    const userResponse = await sendEmailAPI(
       "send_mail",
       emailData.email,
       emailData.subject,
       emailBody
     );
 
-    const adminResponse = await sendemailapi(
+    const adminResponse = await sendEmailAPI(
       "send_mail",
       "connect@mento.in",
       emailData.subject,
@@ -31,6 +32,7 @@ const sendFormEmail = async (emailData) => {
         ? "User email sent!"
         : `User email failed: ${userResponse.error}`
     );
+
     console.log(
       adminResponse.success
         ? "Admin email sent!"
@@ -41,21 +43,20 @@ const sendFormEmail = async (emailData) => {
   }
 };
 
-// Helper: Handle payment
-const handle_payment = async (formData, form) => {
+// Exported: payment logic
+export const handle_payment = async (formData, form) => {
   if (["individual", "couple", "family"].includes(form)) {
     try {
       const paymentResponse = await initiatePayment(formData);
-      console.log("Payment Response:", paymentResponse);
-      // You can add redirect logic here if needed
+      console.log("Payment initiated:", paymentResponse);
+      // No email sent here (as per your latest instruction)
     } catch (err) {
       console.error("Payment Error:", err.message);
-      alert("Payment initiation failed. Please try again.");
     }
   }
 };
 
-// Exported: Master form handler
+// Main handler
 export const handle_service = async (formData, form) => {
   try {
     const submitted_date = new Date().toISOString().split("T")[0];
@@ -71,11 +72,11 @@ export const handle_service = async (formData, form) => {
     const endpoint = endpointMap[form];
     if (!endpoint) throw new Error("Invalid form type");
 
-    // 1. Save form data to DB
+    // Step 1: Save to database
     const response = await postData(endpoint, formData);
 
+    // Step 2: Send email and initiate payment (only if DB success)
     if (response?.success) {
-      // 2. Send confirmation emails
       const emailData = {
         name: formData.name || "User",
         sessionDate: formData.sessionDate || "",
@@ -83,9 +84,8 @@ export const handle_service = async (formData, form) => {
         subject: "Form has been submitted",
         email: formData.email,
       };
-      await sendFormEmail(emailData);
 
-      // 3. Trigger payment
+      await sendFormEmail(emailData);
       await handle_payment(formData, form);
     }
 

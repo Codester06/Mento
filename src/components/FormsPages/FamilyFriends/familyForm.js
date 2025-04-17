@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 import ReactDOMServer from 'react-dom/server'
-import { handle_service } from "../../utils/services.js";
+// import { handle_service } from "../../utils/services.js";
+import { handle_payment, handle_service } from "../../../utils/services.js";
+
+import { submitToAWS } from "../../../utils/payment_fetch.js";
 
 
 const FamilyTherapyForm = () => {
@@ -320,6 +323,17 @@ const FamilyTherapyForm = () => {
       setAutoNextEnabled(false); // Disable auto-next when going back
     }
   };
+  const handle_final_submit = async(e) => {
+    e.preventDefault();
+    try{
+      // handle_payment(formData,'individual');
+      submitToAWS(formData.name, 999,formData.contactNo).then(res => {
+    });}
+    catch(error){
+      console.error("Error in payment:", error);
+    }
+  
+  }
 
   // Submit form
   const handleSubmit = async (e) => {
@@ -1059,7 +1073,7 @@ const FamilyTherapyForm = () => {
               <button
                 type="button"
                 onClick={(e) => {
-                  handleSubmit(e); // Call handleSubmit first
+                  handle_final_submit(e); // Call handleSubmit first
                   if (Object.keys(errors).length === 0) {
                     nextStep(); // Only proceed to next step if validation passes
                   }

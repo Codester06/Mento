@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import axios from "axios";
-import { submitToAWS } from "../../../utils/demopayment";
-import { handle_payment, handle_service } from "../../test/service";
+
+import { submitToAWS } from "../../../utils/payment_fetch";
+
+
+import { handle_payment, handle_service } from "../../../utils/services.js";
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -274,7 +276,7 @@ const IndividualForm = () => {
     }));
 
     // Always validate before moving to next step
-    if (true) {
+    if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         setAutoNextEnabled(true);
@@ -298,17 +300,14 @@ const IndividualForm = () => {
  const handle_final_submit = async(e) => {
   e.preventDefault();
   try{
-    submitToAWS(formData.name, formData.amount, formData.contactNo).then(res => {
-      console.log("Payment initiated:", res);
-    } 
+    // handle_payment(formData,'individual');
+    submitToAWS(formData.name, 999,formData.contactNo).then(res => {
+  });}
+  catch(error){
+    console.error("Error in payment:", error);
+  }
 
-    ).catch(err => {
-      console.error("Payment initiation error:", err.message);
-    }
- 
-
-    );
-  }catch(error){}
+}
 
 
   const handleSubmit = async (e) => {
