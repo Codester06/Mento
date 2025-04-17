@@ -1,89 +1,89 @@
 import React, { useState, useEffect, useMemo, memo } from "react";
 import styles from "./depressionTest.module.css";
 import { postDataBS } from "../../utils/awsService";
-import { EmailFormat ,GenerateEmailHTML } from "../mail/mailformat";
+import { EmailFormat, GenerateEmailHTML } from "../mail/mailformat";
 // import { gmail_sendEmail } from "../../utils/mail_service";
-import ReactDOMServer from 'react-dom/server';
+import ReactDOMServer from "react-dom/server";
 const AnxietyDisorderTest = () => {
-    const quizData = [
-        {
-          question: "Feeling nervous, anxious, or on edge.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 1,
-        },
-        {
-          question: "Not being able to stop or control worrying",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 2,
-        },
-        {
-          question: "Worrying too much about different things",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 3,
-        },
-        {
-          question: "Trouble relaxing.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 4,
-        },
-        {
-          question: "Being so restless that it's hard to sit still.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 5,
-        },
-        {
-          question: "Becoming easily annoyed or irritable.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 6,
-        },
-        {
-          question: "Feeling afraid as if something awful might happen",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 7,
-        }
-      ];
+  const quizData = [
+    {
+      question: "Feeling nervous, anxious, or on edge.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 1,
+    },
+    {
+      question: "Not being able to stop or control worrying",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 2,
+    },
+    {
+      question: "Worrying too much about different things",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 3,
+    },
+    {
+      question: "Trouble relaxing.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 4,
+    },
+    {
+      question: "Being so restless that it's hard to sit still.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 5,
+    },
+    {
+      question: "Becoming easily annoyed or irritable.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 6,
+    },
+    {
+      question: "Feeling afraid as if something awful might happen",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 7,
+    },
+  ];
 
   // State management
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -101,7 +101,7 @@ const AnxietyDisorderTest = () => {
   const [submitError, setSubmitError] = useState(null);
 
   // Calculate total possible score
-  const maxPossibleScore = 21; // 7 questions with 3 points 
+  const maxPossibleScore = 21; // 7 questions with 3 points
 
   // Calculate user's score
   const calculateScore = () => {
@@ -126,11 +126,11 @@ const AnxietyDisorderTest = () => {
   // Get interpretation based on score
   const getInterpretation = () => {
     const score = calculateScore();
-    
+
     if (score >= 0 && score <= 4) {
       return {
         title: "Minimal Anxiety",
-        description: 
+        description:
           "Your results indicate minimal anxiety symptoms. This is within the normal range for most individuals.",
         colorClass: styles.excellent,
       };
@@ -169,7 +169,7 @@ const AnxietyDisorderTest = () => {
           "Unable to calculate a valid score. Please ensure all questions are answered.",
         colorClass: styles.neutral,
       };
-    };
+    }
   };
 
   // Handler for selecting an answer
@@ -270,31 +270,33 @@ const AnxietyDisorderTest = () => {
       // Send data to database using the postData utility
       const response = await postDataBS("/depressiontest", assessmentData);
       setFormSubmitted(true);
-      console.log(response)
-      const email_data = Object.assign({},{
-        name : assessmentData.fullName,
-        
-        subject : "Confirmation Mail For Your Session",
-        email : assessmentData.email
-        
-        });
+      console.log(response);
+      const email_data = Object.assign(
+        {},
+        {
+          name: assessmentData.fullName,
 
-        
+          subject: "Confirmation Mail For Your Session",
+          email: assessmentData.email,
+        }
+      );
 
-const email_content = ReactDOMServer.renderToStaticMarkup(<EmailFormat {...email_data} />);
+      const email_content = ReactDOMServer.renderToStaticMarkup(
+        <EmailFormat {...email_data} />
+      );
 
-const email_body = GenerateEmailHTML(email_content)
-      
-// try {
-//   // Send email using Gmail service
-//   const sendEmailResponse = await gmail_sendEmail("send_mail", email_data.email, email_data.subject, email_body);
+      const email_body = GenerateEmailHTML(email_content);
 
-//   // Log success or error message based on response
-//   console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
-// } catch (error) {
-//   // Catch and log any unexpected errors during the email sending process
-//   console.error("❌ Error sending email:", error.message);
-// }
+      // try {
+      //   // Send email using Gmail service
+      //   const sendEmailResponse = await gmail_sendEmail("send_mail", email_data.email, email_data.subject, email_body);
+
+      //   // Log success or error message based on response
+      //   console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
+      // } catch (error) {
+      //   // Catch and log any unexpected errors during the email sending process
+      //   console.error("❌ Error sending email:", error.message);
+      // }
     } catch (error) {
       console.error("Error submitting assessment data:", error);
       setSubmitError(
@@ -324,7 +326,7 @@ const email_body = GenerateEmailHTML(email_content)
         ? circumference - (percentage / 100) * circumference
         : circumference;
     }, [percentage, animateProgress]);
-  
+
     // Determine color based on PHQ-9 score ranges
     const getColorClass = () => {
       const score = calculateScore();
@@ -335,7 +337,7 @@ const email_body = GenerateEmailHTML(email_content)
       if (score >= 20 && score <= 27) return styles.severeColor;
       return styles.neutralColor; // Fallback for invalid scores
     };
-  
+
     return (
       <div className={styles.circularProgress}>
         {/* Background circle */}
@@ -383,16 +385,19 @@ const email_body = GenerateEmailHTML(email_content)
         <div className={styles.bannerContent}>
           <div className={styles.bannerHeader}>
             <h1 className={styles.SelfBannerTitle}>
-              Anxiety Disorder Self Assessment 
+              Anxiety Disorder Self Assessment
             </h1>
             <p className={styles.SelfBannerTitle}>
-            A confidential screening tool to help evaluate your anxiety symptoms.
+              A confidential screening tool to help evaluate your anxiety
+              symptoms.
             </p>
           </div>
 
           <div className={styles.bannerInfo}>
             <p className={styles.bannerDisclaimer}>
-            This assessment is based on the Generalized Anxiety Disorder (GAD-7) test. It is a screening tool designed to help identify anxiety symptoms that may warrant professional attention
+              This assessment is based on the Generalized Anxiety Disorder
+              (GAD-7) test. It is a screening tool designed to help identify
+              anxiety symptoms that may warrant professional attention
             </p>
           </div>
         </div>
@@ -461,7 +466,6 @@ const email_body = GenerateEmailHTML(email_content)
                 <button
                   onClick={handleNextQuestion}
                   className={styles.buttonNext}
-                  
                 >
                   Complete
                 </button>
@@ -507,7 +511,10 @@ const email_body = GenerateEmailHTML(email_content)
                 </div>
                 <div className={styles.disclaimer}>
                   <p>
-                  This is a clinical tool for assessing anxiety symptoms. However, results should be discussed with a qualified healthcare professional for accurate interpretation based on your full health history and current condition.
+                    This is a clinical tool for assessing anxiety symptoms.
+                    However, results should be discussed with a qualified
+                    healthcare professional for accurate interpretation based on
+                    your full health history and current condition.
                   </p>
                 </div>
               </div>
@@ -520,7 +527,8 @@ const email_body = GenerateEmailHTML(email_content)
                   <div className={styles.checkiconMN}>✓</div>
                   <h2 className={styles.formtitleMN}>Thank You!</h2>
                   <p className="form-subtitle-MN">
-                  Your mental wellness matters. You're not alone in facing anxiety—support is available.
+                    Your mental wellness matters. You're not alone in facing
+                    anxiety—support is available.
                   </p>
                   <p className="form-subtitle-MN">
                     Your Detailed Report Has Been Successfully Sent To Your

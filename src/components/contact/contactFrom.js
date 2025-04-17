@@ -15,7 +15,7 @@ const ContactForm = () => {
       email: formRef.current.email.value,
       subject: formRef.current.subject.value,
       message: formRef.current.message.value,
-      submittedAt: new Date().toISOString() // Add timestamp to the form data
+      submittedAt: new Date().toISOString(), // Add timestamp to the form data
     };
 
     try { 
@@ -63,7 +63,13 @@ const ContactForm = () => {
             </div>
             <div>
               <p>Mail us at</p>
-              <a href="mailto:connectmento@gmail.com">connectmento@gmail.com</a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                connect@mento.in
+              </a>
             </div>
           </div>
         </div>
@@ -74,26 +80,45 @@ const ContactForm = () => {
 
           <form ref={formRef} onSubmit={handleSubmit}>
             <div className="form-group">
-              <input type="text" name="fullName" placeholder="Full Name*" required />
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full Name*"
+                required
+              />
             </div>
 
             <div className="form-group">
-              <input type="email" name="email" placeholder="Email Address*" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address*"
+                required
+              />
             </div>
 
             <div className="form-group">
-              <input type="text" name="subject" placeholder="Subject*" required />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject*"
+                required
+              />
             </div>
 
             <div className="form-group">
               <p>Tell us more..</p>
-              <textarea name="message" placeholder="Type your message*" rows="6" required></textarea>
+              <textarea
+                name="message"
+                placeholder="Type your message*"
+                rows="6"
+                required
+              ></textarea>
             </div>
 
             <button type="submit" disabled={loading}>
               {loading ? "Sending..." : "Send Message"}
             </button>
-            
           </form>
         </div>
       </div>

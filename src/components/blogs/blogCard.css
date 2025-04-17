@@ -8,7 +8,7 @@
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   margin-bottom: 20px;
 }
 
@@ -25,8 +25,10 @@
 .article-image {
   position: relative;
   text-align: center;
+  height: 300px;
   padding: 30px;
   background-color: white;
+  overflow: hidden;
 }
 
 .article-image img {
@@ -47,12 +49,12 @@
   font-size: 18px;
   font-weight: 700;
   margin: 5px 0;
-  color: #2D3748;
+  color: #2d3748;
   letter-spacing: 0.5px;
 }
 
 .highlighted-text {
-  color: #3182CE;
+  color: #3182ce;
 }
 
 .article-details {
@@ -75,39 +77,39 @@
 }
 
 .tag-blue {
-  background-color: #EBF4FF;
-  color: #3182CE;
+  background-color: #ebf4ff;
+  color: #3182ce;
 }
 
 .tag-light-blue {
-  background-color: #E6F0FB;
-  color: #4299E1;
+  background-color: #e6f0fb;
+  color: #4299e1;
 }
 
 .tag-pink {
-  background-color: #FEE7EF;
-  color: #F56565;
+  background-color: #fee7ef;
+  color: #f56565;
 }
 
 .tag-green {
-  background-color: #E6F6EC;
-  color: #38A169;
+  background-color: #e6f6ec;
+  color: #38a169;
 }
 
 .tag-purple {
-  background-color: #EDE9FE;
-  color: #6B46C1;
+  background-color: #ede9fe;
+  color: #6b46c1;
 }
 
 .tag-red {
-  background-color: #FEE2E2;
-  color: #DC2626;
+  background-color: #fee2e2;
+  color: #dc2626;
 }
 
 .article-title {
   font-size: 28px;
   font-weight: 700;
-  color: #2D3748;
+  color: #2d3748;
   margin-bottom: 15px;
   line-height: 1.2;
 }
@@ -115,7 +117,7 @@
 .article-intro {
   font-size: 16px;
   line-height: 1.6;
-  color: #4A5568;
+  color: #4a5568;
   margin-bottom: 20px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -127,7 +129,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #4A5568;
+  color: #4a5568;
   font-size: 14px;
 }
 
@@ -136,18 +138,17 @@
   .article-content {
     flex-direction: row;
   }
-  
+
   .article-image {
     width: 100%;
   }
-  
+
   .article-details {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-
 }
 
 /* Enhanced Mobile Styles */
@@ -156,29 +157,30 @@
     border-radius: 15px;
     margin-bottom: 15px;
   }
-  
+
   .article-content {
     flex-direction: column;
   }
-  
+
   .article-image {
     width: 100%; /* Make the image container full width */
     height: auto; /* Allow height to adjust automatically */
     padding: 15px;
   }
-  
+
   .article-image img {
     border-radius: 10px;
     width: 100%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
   }
-  
+
   .article-image-title {
     position: relative;
     bottom: 0;
     padding: 10px 0;
   }
-  
+
   .article-image-title h3 {
     font-size: 16px;
-  }}
+  }
+}

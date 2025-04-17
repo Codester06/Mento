@@ -39,6 +39,10 @@ import paymentStatusPage from "./pages/payment_status_page"; // Import the new P
 
 
 
+import PaymentForm from "./components/test/demo";
+
+import PhoneyPayStatusPage from "./components/test/demo_payment_status";
+
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasAccess, setHasAccess] = useState(false);
@@ -93,7 +97,7 @@ function Main() {
           {" "}
           {/* Main content wrapper */}
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<PaymentForm/>} />
             <Route path="/contact" element={<ContactForm />} />
             <Route path="/mental-wellness" element={<MentalWellness />} />
             <Route path="/about" element={<About />} />
@@ -110,7 +114,7 @@ function Main() {
             <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
                
-              
+               <Route path="/payment-status" element={<PhoneyPayStatusPage />} /> Logout route
             {/* <Route path="/payment-callback" element={<PaymentStatus />} /> Logout route */}
             
             {/* blogs */}

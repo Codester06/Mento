@@ -154,9 +154,11 @@ const FamilyTherapyForm = () => {
         newErrors.relationshipType = "Relationship type is required";
       } else if (
         formData.relationshipType === "Other" &&
-        (!formData.otherRelationshipType || !formData.otherRelationshipType.trim())
+        (!formData.otherRelationshipType ||
+          !formData.otherRelationshipType.trim())
       ) {
-        newErrors.otherRelationshipType = "Please specify your relationship with the participants";
+        newErrors.otherRelationshipType =
+          "Please specify your relationship with the participants";
       }
     }
 
@@ -192,8 +194,7 @@ const FamilyTherapyForm = () => {
       ) {
         newErrors.otherLanguage = "Please specify your preferred language";
       }
-      if (!formData.sessionDate) 
-        newErrors.sessionDate = "Please select a date";
+      if (!formData.sessionDate) newErrors.sessionDate = "Please select a date";
       if (!formData.sessionTime)
         newErrors.sessionTime = "Session time is required";
       if (!formData.medicalConditions)
@@ -221,7 +222,8 @@ const FamilyTherapyForm = () => {
     switch (currentStep) {
       case 1:
         if (!formData.name || !formData.name.trim()) return false;
-        if (!formData.participantsNames || !formData.participantsNames.trim()) return false;
+        if (!formData.participantsNames || !formData.participantsNames.trim())
+          return false;
         if (!formData.email || !formData.email.trim()) return false;
         if (!/\S+@\S+\.\S+/.test(formData.email)) return false;
         if (!formData.city || !formData.city.trim()) return false;
@@ -230,21 +232,27 @@ const FamilyTherapyForm = () => {
         if (!formData.relationshipType) return false;
         if (
           formData.relationshipType === "Other" &&
-          (!formData.otherRelationshipType || !formData.otherRelationshipType.trim())
-        ) return false;
+          (!formData.otherRelationshipType ||
+            !formData.otherRelationshipType.trim())
+        )
+          return false;
         return true;
 
       case 2:
         if (!formData.primaryConcern) return false;
         if (
           formData.primaryConcern === "Other" &&
-          (!formData.otherPrimaryConcern || !formData.otherPrimaryConcern.trim())
-        ) return false;
-        if (!formData.therapyGoals || formData.therapyGoals.length === 0) return false;
+          (!formData.otherPrimaryConcern ||
+            !formData.otherPrimaryConcern.trim())
+        )
+          return false;
+        if (!formData.therapyGoals || formData.therapyGoals.length === 0)
+          return false;
         if (
           formData.therapyGoals.includes("Other") &&
           (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
-        ) return false;
+        )
+          return false;
         if (!formData.previousTherapy) return false;
         return true;
 
@@ -253,7 +261,8 @@ const FamilyTherapyForm = () => {
         if (
           formData.preferredLanguage === "Other" &&
           (!formData.otherLanguage || !formData.otherLanguage.trim())
-        ) return false;
+        )
+          return false;
         if (!formData.sessionDate) return false;
         if (!formData.sessionTime) return false;
         if (!formData.medicalConditions) return false;
@@ -1045,7 +1054,7 @@ const FamilyTherapyForm = () => {
               >
                 Next Step
               </button>
-            ): currentStep === 3 ? (
+            ) : currentStep === 3 ? (
               <button
                 type="button"
                 onClick={(e) => {
@@ -1056,7 +1065,7 @@ const FamilyTherapyForm = () => {
                 }}
                 className="confirm-button-MN"
               >
-               Submit
+                Submit
               </button>
             ) : currentStep === 4 ? (
               <button

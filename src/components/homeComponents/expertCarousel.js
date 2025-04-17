@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
-import './expertCarousel.css';
-import { Link } from 'react-router-dom';
-import { getDataBS } from '../../utils/awsService';
+import React, { useRef, useState, useEffect } from "react";
+import "./expertCarousel.css";
+import { Link } from "react-router-dom";
+import { getDataBS } from "../../utils/awsService";
 
 const Carousel = () => {
   const sliderTrackRef = useRef(null);
@@ -17,71 +17,76 @@ const Carousel = () => {
     const fetchExperts = async () => {
       try {
         setLoading(true);
-        
+
         // Using the getDataBS method
-        const responseData = await getDataBS('/expert_table');
-        
+        const responseData = await getDataBS("/expert_table");
+
         // Extract experts data - adjusting to match the expected structure
         if (responseData && responseData.data) {
           let expertData;
-          
+
           // Check if data is nested under "data" key
           if (responseData.data.data && Array.isArray(responseData.data.data)) {
             expertData = responseData.data.data;
-          } 
+          }
           // Check if data is directly under the "data" key
           else if (Array.isArray(responseData.data)) {
             expertData = responseData.data;
+          } else {
+            throw new Error("Unexpected data format");
           }
-          else {
-            throw new Error('Unexpected data format');
-          }
-          
+
           // Transform and normalize data
-          const processedExperts = expertData.map(item => {
+          const processedExperts = expertData.map((item) => {
             // Check if expert data is nested under "expert" key or directly in the item
             const expert = item.expert || item;
-            console.log(expert.originalId)
+            console.log(expert.originalId);
             return {
               id: expert.id || null,
               originalId: expert.originalId, // Ensure originalId is captured
-              name: expert.name || 'Unnamed',
-              position: expert.position || 'Counselor',
-              imageSrc: expert.imageSrc || 'https://via.placeholder.com/400x400?text=No+Image',
-              certifications: expert.certifications || '',
-              expertise: expert.expertise || 'General Counseling',
-              experience: expert.experience || 'Not specified',
-              uploadedAt: expert.uploadedAt || new Date().toISOString()
+              name: expert.name || "Unnamed",
+              position: expert.position || "Counselor",
+              imageSrc:
+                expert.imageSrc ||
+                "https://via.placeholder.com/400x400?text=No+Image",
+              certifications: expert.certifications || "",
+              expertise: expert.expertise || "General Counseling",
+              experience: expert.experience || "Not specified",
+              uploadedAt: expert.uploadedAt || new Date().toISOString(),
             };
           });
-          
+
           // Sort experts by originalId if it exists, otherwise fallback to regular id
           const sortedExperts = processedExperts.sort((a, b) => {
             // Convert IDs to numbers if possible for proper numeric sorting
-            const aId = a.originalId ? Number(a.originalId) || a.originalId : null;
-            const bId = b.originalId ? Number(b.originalId) || b.originalId : null;
-            
+            const aId = a.originalId
+              ? Number(a.originalId) || a.originalId
+              : null;
+            const bId = b.originalId
+              ? Number(b.originalId) || b.originalId
+              : null;
+
             // If both have numeric originalId, sort numerically
-            if (typeof aId === 'number' && typeof bId === 'number') {
+            if (typeof aId === "number" && typeof bId === "number") {
               return aId - bId;
             }
-            
+
             // If originalId is a string, sort alphabetically
             if (a.originalId && b.originalId) {
               return String(a.originalId).localeCompare(String(b.originalId));
             }
-            
+
             // Fallback to regular id if originalId is missing
             return a.id && b.id ? String(a.id).localeCompare(String(b.id)) : 0;
           });
-          
+
           setExperts(sortedExperts);
         } else {
-          throw new Error('Received invalid experts data format');
+          throw new Error("Received invalid experts data format");
         }
       } catch (err) {
-        console.error('Error fetching experts:', err);
-        setError('Failed to load experts. Please try again later.');
+        console.error("Error fetching experts:", err);
+        setError("Failed to load experts. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -176,7 +181,7 @@ const Carousel = () => {
   }
 
   return (
-    <div className="expert-carousel" id='experts'>
+    <div className="expert-carousel" id="experts">
       <center>
         <h1 className="experts-title">Meet Our Experts</h1>
       </center>
@@ -199,15 +204,17 @@ const Carousel = () => {
                   <div className="card-image">
                     <img src={expert.imageSrc} alt={`${expert.name}`} />
                   </div>
+
                   <div className="card-content">
                     <h2 className="card-title">{expert.name}</h2>
                     <p className="card-position">{expert.position}</p>
 
-                    {expert.certifications && expert.certifications.trim() !== '' && (
-                      <div className="card-certifications">
-                        <span>Certifications:</span> {expert.certifications}
-                      </div>
-                    )}
+                    {expert.certifications &&
+                      expert.certifications.trim() !== "" && (
+                        <div className="card-certifications">
+                          <span>Certifications:</span> {expert.certifications}
+                        </div>
+                      )}
 
                     <div className="card-expertise">
                       <span>Areas of Expertise:</span> {expert.expertise}
@@ -228,7 +235,7 @@ const Carousel = () => {
           <span className="arrow-left"></span>
           <span className="arrow-left"></span>
         </div>
-        Scroll
+        Swipe
         <div className="scroll-arrows">
           <span className="arrow-right"></span>
           <span className="arrow-right"></span>

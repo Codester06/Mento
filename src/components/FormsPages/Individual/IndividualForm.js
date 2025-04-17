@@ -364,7 +364,6 @@ const IndividualForm = () => {
     </div>
   );
 
-
   const renderError = (fieldName) => {
     if (errors[fieldName]) {
       return <p className="error-message-MN">{errors[fieldName]}</p>;
@@ -1088,7 +1087,7 @@ const IndividualForm = () => {
               >
                 Next Step
               </button>
-            ): currentStep === 6 ? (
+            ) : currentStep === 6 ? (
               <button
                 type="button"
                 onClick={(e) => {

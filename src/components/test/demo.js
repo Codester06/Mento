@@ -1,137 +1,27 @@
-import React, { useState } from 'react';
-import './demo.css'; // Import your CSS file for styling
+// paymentService.js
 
-const PaymentForm = () => {
-  const [formData, setFormData] = useState({
-    amount: '',
-    mobile: '',
-    name: ''
+export const initiatePayment = async (formData) => {
+  const { name, mobile, amount } = formData;
+
+  if (!name.trim()) throw new Error("Please enter your name");
+  if (!mobile.trim()) throw new Error("Please enter your mobile number");
+  if (!/^\d{10}$/.test(mobile)) throw new Error("Enter a valid 10-digit mobile number");
+  if (!amount.trim()) throw new Error("Please enter an amount");
+  if (isNaN(amount) || Number(amount) <= 0) throw new Error("Enter a valid amount greater than 0");
+
+  const response = await fetch("https://mento.in/wp-json/custom/v1/initiate-payment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, mobile, amount }),
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  // API Gateway endpoint URL
-  const API_ENDPOINT = 'https://9blcigs1f3.execute-api.ap-south-1.amazonaws.com/prod';
+  const data = await response.json();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
+  if (!response.ok || !data.redirectUrl) {
+    throw new Error(data.message || "Failed to initiate payment.");
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    
-    try {
-      // Validate form
-      if (!formData.amount || !formData.mobile || !formData.name) {
-        throw new Error('Please fill all fields');
-      }
-      
-      if (isNaN(formData.amount) || Number(formData.amount) <= 0) {
-        throw new Error('Please enter a valid amount');
-      }
-      
-      if (!/^\d{10}$/.test(formData.mobile)) {
-        throw new Error('Please enter a valid 10-digit mobile number');
-      }
-      
-      // Make API call to your Lambda function
-      const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Payment initiation failed');
-      }
-      
-      // Redirect to PhonePe payment page
-      if (data.redirectUrl) {
-        window.location.href = data.redirectUrl;
-      } else {
-        throw new Error('No redirect URL received');
-      }
-      
-    } catch (err) {
-      setError(err.message || 'Something went wrong');
-      console.error('Payment error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="payment-container">
-      <h2>PhonePe Payment</h2>
-      
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit} className="payment-form">
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter your name"
-            disabled={loading}
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="mobile">Mobile Number</label>
-          <input
-            type="tel"
-            id="mobile"
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleChange}
-            placeholder="10-digit mobile number"
-            maxLength="10"
-            disabled={loading}
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="amount">Amount (₹)</label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            placeholder="Enter amount"
-            min="1"
-            disabled={loading}
-          />
-        </div>
-        
-        <button 
-          type="submit" 
-          className="submit-button"
-          disabled={loading}
-        >
-          {loading ? 'Processing...' : 'Pay Now'}
-        </button>
-      </form>
-    </div>
-  );
+  return data.redirectUrl;
 };
-
-export default PaymentForm;

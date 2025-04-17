@@ -585,7 +585,7 @@ const email_body = GenerateEmailHTML(email_content)
           <div className={styles.bannerInfo}>
             <p className={styles.bannerDisclaimer}>
               This assessment is based on the Beck Depression Inventory (BDI).
-              It is not a diagnostic tool, but can help identify symptoms that
+              It is a diagnostic tool, which can help you identify symptoms that
               may warrant professional attention.
             </p>
           </div>
