@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import ReactDOMServer from "react-dom/server";
-import { postData } from "../../../utils/awsService";
-import { EmailFormat, GenerateEmailHTML } from "../../mail/mailformat";
-import sendEmailAPI from "../../../utils/mail_service";
+import ReactDOMServer from 'react-dom/server'
+import { handle_service } from "../../test/service";
+
 
 const FamilyTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -327,52 +326,14 @@ const FamilyTherapyForm = () => {
     e.preventDefault();
 
     if (validateStep()) {
-      try {
-        console.log("Form data submitted:", formData);
-        const response = await postData("/family_friend", formData);
-        const email_data = Object.assign(
-          {},
-          {
-            name: formData.name,
-            sessionDate: formData.sessionDate,
-            sessionTime: formData.sessionTime,
-            subject: "Confirmation Mail For Your Session",
-            email: formData.email,
-          }
-        );
+      try { 
 
-        const email_content = ReactDOMServer.renderToStaticMarkup(
-          <EmailFormat {...email_data} />
-        );
-
-        const email_body = GenerateEmailHTML(email_content);
-
-        try {
-          // Send email using Gmail service
-          const sendEmailResponse = await sendEmailAPI(
-            "send_mail",
-            email_data.email,
-            email_data.subject,
-            email_body
-          );
-
-          console.log(
-            sendEmailResponse.success
-              ? "✅ Email sent successfully!"
-              : `❌ Error: ${sendEmailResponse.error}`
-          );
-        } catch (error) {
-          // Catch and log any unexpected errors during the email sending process
-          console.error("❌ Error sending email:", error.message);
-        }
-        console.log("Form data submitted:", response);
-        // Show success alert and proceed to thank you page
-
-        nextStep();
-      } catch (error) {
-        console.error("Error saving therapy session data:", error);
-        alert("Failed to schedule your session. Please try again.");
+        handle_service(formData, "family_friend");
       }
+      catch (error) {
+        console.error("Error submitting form:", error);
+      }
+
     }
   };
 

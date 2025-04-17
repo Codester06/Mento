@@ -35,6 +35,7 @@ import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 import AnxietyTestPage from "./pages/AniextyTestPage";
+import paymentStatusPage from "./pages/payment_status_page"; // Import the new PaymentStatus component
 
 
 
@@ -104,6 +105,7 @@ function Main() {
             <Route path="/expert/:id" element={<ExpertDetail />} />
             <Route path="*" element={<NotFound />} /> {/* 404 Route */}
             <Route path="/terms-conditions" element={<TermsUsage />} />
+            <Route path="/payment-status" element={<paymentStatusPage />} /> {/* Payment Status Route */}
             <Route path="/cookies-privacy-policy" element={<CookiesPolicy />} />
             <Route path="/Self-Assessment-Tool" element={<AssessmentPage />} />
             <Route path="/Depression-Tool" element={<DepressionTestPage />} />
@@ -111,7 +113,6 @@ function Main() {
             <Route path="/Anxiety-Disorder-Tool" element={<AnxietyTestPage />} />
             <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
-               {/* payment*/}
                
                <Route path="/payment-status" element={<PhoneyPayStatusPage />} /> Logout route
             {/* <Route path="/payment-callback" element={<PaymentStatus />} /> Logout route */}

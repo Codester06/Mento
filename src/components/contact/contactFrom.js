@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import "./contactFrom.css";
-import { postData } from "../../utils/awsService";
+import { handle_service } from "../test/service";
 
 const ContactForm = () => {
   const formRef = useRef();
@@ -18,42 +18,12 @@ const ContactForm = () => {
       submittedAt: new Date().toISOString(), // Add timestamp to the form data
     };
 
-    try {
-      // Log the data being submitted (commented out for production)
-      // console.log("Submitting contact form data:", formData);
+    try { 
 
-      // Post the data to the API
-      await postData("/contact_form", formData);
-
-      // console.log("Contact form submitted successfully:", response);
-
-      // Show success message
-      alert("Message sent successfully! We'll get back to you soon.");
-
-      // Reset form fields
-      formRef.current.reset();
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
-
-      // Create a more detailed error message
-      let errorMessage = "Failed to send message. ";
-
-      // Check different error response formats
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        errorMessage += error.response.data.message;
-      } else if (error.message) {
-        errorMessage += error.message;
-      } else {
-        errorMessage += "Please try again later.";
-      }
-
-      alert(errorMessage);
-    } finally {
-      setLoading(false);
+      handle_service(formData, "contact_form");
+    }
+    catch (error) {
+      console.error("Error submitting form:", error);
     }
   };
 
