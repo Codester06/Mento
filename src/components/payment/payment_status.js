@@ -108,7 +108,7 @@ export default function PaymentStatusPage() {
         <div className="row"><span>Date & Time:</span><span>{transactionDetails.timestamp}</span></div>
       </div>
 
-      <button onClick={() => window.location.href = '/'}>
+      <button className="button-payment" onClick={() => window.location.href = '/'}>
         {status === 'success' ? 'Back to Home' : status === 'failed' ? 'Try Again' : 'Check Status'}
       </button>
     </div>

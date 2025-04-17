@@ -107,7 +107,7 @@
 }
 
 .article-title {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   color: #2d3748;
   margin-bottom: 15px;
@@ -115,7 +115,7 @@
 }
 
 .article-intro {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   color: #4a5568;
   margin-bottom: 20px;
@@ -153,6 +153,14 @@
 
 /* Enhanced Mobile Styles */
 @media (max-width: 767px) {
+
+.article-title {
+  font-size: 18px;
+ 
+}
+.article-intro {
+  font-size: 14px;
+}
   .article-card {
     border-radius: 15px;
     margin-bottom: 15px;

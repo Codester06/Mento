@@ -1,8 +1,8 @@
 import ReactDOMServer from "react-dom/server";
-import { initiatePayment } from "../../utils/payment_fetch.js";
-import { sendemailapi } from "../../utils/mail_service.js";
-import { postData } from "../../utils/awsService.js";
-import { EmailFormat, GenerateEmailHTML } from "../mail/mailformat.js";
+import { initiatePayment } from "../utils/payment_service";
+import { sendEmailAPI } from "../utils/mail_service";
+import { postData } from "../utils/awsService";
+import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat";
 
 // Helper: Send email to user and admin
 const sendFormEmail = async (emailData) => {
@@ -12,14 +12,14 @@ const sendFormEmail = async (emailData) => {
   const emailBody = GenerateEmailHTML(emailContent);
 
   try {
-    const userResponse = await sendemailapi(
+    const userResponse = await sendEmailAPI(
       "send_mail",
       emailData.email,
       emailData.subject,
       emailBody
     );
 
-    const adminResponse = await sendemailapi(
+    const adminResponse = await sendEmailAPI(
       "send_mail",
       "connect@mento.in",
       emailData.subject,

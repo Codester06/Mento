@@ -87,7 +87,7 @@
   font-weight: normal;
 }
 
-button {
+.button-payment {
   background-color: #5f259f;
   color: white;
   border: none;

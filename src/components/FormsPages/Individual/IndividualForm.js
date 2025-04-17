@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 import axios from "axios";
 import { submitToAWS } from "../../../utils/demopayment";
-import { handle_payment, handle_service } from "../../test/service";
+import { handle_payment, handle_service } from "../../../utils/services";
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -295,20 +295,18 @@ const IndividualForm = () => {
       setAutoNextEnabled(false); // Disable auto-next when going back
     }
   };
- const handle_final_submit = async(e) => {
-  e.preventDefault();
-  try{
-    submitToAWS(formData.name, formData.amount, formData.contactNo).then(res => {
-      console.log("Payment initiated:", res);
-    } 
-
-    ).catch(err => {
-      console.error("Payment initiation error:", err.message);
+  const handle_final_submit = async (e) => {
+    e.preventDefault();
+    try {
+      submitToAWS(formData.name, formData.amount, formData.contactNo).then(res => {
+        console.log("Payment initiated:", res);
+      }).catch(err => {
+        console.error("Payment initiation error:", err.message);
+      });
+    } catch (error) {
+      console.error("Error in payment submission:", error);
     }
- 
-
-    );
-  }catch(error){}
+  };
 
 
   const handleSubmit = async (e) => {
@@ -1080,7 +1078,7 @@ const IndividualForm = () => {
                 Go Back
               </button>
             )}
-            {currentStep < 5 ? (
+            {currentStep < 6 ? (
               <button
                 type="button"
                 onClick={nextStep}
@@ -1114,7 +1112,7 @@ const IndividualForm = () => {
               >
                 Confirm & Pay
               </button>
-            ) : (
+            ) : currentStep === 8 ?(
               <button
                 type="button"
                 onClick={() => (window.location.href = "/")}
@@ -1122,12 +1120,12 @@ const IndividualForm = () => {
               >
                 Go to Home
               </button>
-            )}
+            ) : null}
           </div>
         </form>
       </div>
     </div>
   );
-};}
+};
 
 export default IndividualForm;
