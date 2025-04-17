@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import { GenerateEmailHTML , EmailFormat } from "../../mail/mailformat";
 
 import ReactDOMServer from 'react-dom/server'
-import { postData } from "../../../utils/awsService";
-import { handle_service } from "../../test/service";
+import { handle_service } from "../../../utils/services";
 
 const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
