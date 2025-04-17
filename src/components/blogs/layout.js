@@ -2,14 +2,13 @@ import React from "react";
 import "./layout.css"; // Import the CSS file
 import BlogList from "./blogList";
 
-const BlogLayout=()=> {
+const BlogLayout = () => {
   return (
     <div className="Blog_container">
-
       {/* Main Content */}
       <div className="content">
         <main className="main">
-       <BlogList/>
+          <BlogList />
         </main>
 
         {/* Sidebar */}
@@ -21,6 +20,6 @@ const BlogLayout=()=> {
       </div>
     </div>
   );
-}
+};
 
 export default BlogLayout;

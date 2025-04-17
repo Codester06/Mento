@@ -15,7 +15,7 @@ const Footer = () => {
     const storedRole = localStorage.getItem("userRole");
     const storedUsername = localStorage.getItem("username");
     const storedRoutes = localStorage.getItem("allowedRoutes");
-    
+
     setIsLoggedIn(loginStatus === "true");
     setUserRole(storedRole || "");
     setUsername(storedUsername || "");
@@ -28,11 +28,15 @@ const Footer = () => {
 
     // Add custom event listener for login state changes
     window.addEventListener("loginStateChange", updateUserState);
-    
+
     // Add storage event listener to catch changes from other tabs/windows
     window.addEventListener("storage", (event) => {
-      if (event.key === "isLoggedIn" || event.key === "userRole" || 
-          event.key === "username" || event.key === "allowedRoutes") {
+      if (
+        event.key === "isLoggedIn" ||
+        event.key === "userRole" ||
+        event.key === "username" ||
+        event.key === "allowedRoutes"
+      ) {
         updateUserState();
       }
     });
@@ -51,15 +55,15 @@ const Footer = () => {
     localStorage.removeItem("userRole");
     localStorage.removeItem("username");
     localStorage.removeItem("allowedRoutes");
-    
+
     setIsLoggedIn(false);
     setUserRole("");
     setUsername("");
     setAllowedRoutes([]);
-    
+
     // Dispatch custom event for other components to react
     window.dispatchEvent(new Event("loginStateChange"));
-    
+
     // Redirect to home page
     navigate("/");
   };
@@ -81,41 +85,76 @@ const Footer = () => {
       <div className="containerFooter">
         <div className="top-section">
           <div className="logo">
-            <Link to="/"> 
-            <img className="footer_img" src="https://mento.in/wp-content/uploads/2024/11/text.png" alt="Mento Logo" /></Link>
+            <Link to="/">
+              <img
+                className="footer_img"
+                src="https://mento.in/wp-content/uploads/2024/11/text.png"
+                alt="Mento Logo"
+              />
+            </Link>
           </div>
         </div>
-    
+
         <div className="nav-links">
           <div className="nav-section">
             <h3>Services</h3>
             <ul>
-              <li><a href="/counseling">Home</a></li>
-              <li><a href="/therapy">About us</a></li>
-              <li><a href="/contact">Connect to us</a></li>
-              <li><a href="/mental-wellness">Get a Therapy</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/about">About us</a>
+              </li>
+              <li>
+                <a href="/contact">Connect to us</a>
+              </li>
+              <li>
+                <a href="/mental-wellness">Get a Therapy</a>
+              </li>
             </ul>
           </div>
           <div className="nav-section">
             <h3>Resources</h3>
             <ul>
-              <li><a href="/blogs">Blogs</a></li>
-              <li><a href="/tools">Self-Help Tools</a></li>
-              <li><a href="/faqs">FAQs</a></li>
+              <li>
+                <a href="/blogs">Blogs</a>
+              </li>
+              <li>
+                <a href="/Self-Assessment-Tool">Self-Help Tools</a>
+              </li>
+              <li>
+                <a href="/faqs">FAQs</a>
+              </li>
             </ul>
           </div>
           <div className="nav-section">
             <h3>Contact Us</h3>
             <div className="contact-info">
-              <p>contact@mento.com</p>
+              <p className="contact-ItemEmail">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=connect@mento.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Email: connect@mento.in
+                </a>
+              </p>
+
+              <p className="contact-ItemEmail">
+                <a href="tel:+919120719120">Phone: +91 9120719120</a>
+              </p>
             </div>
           </div>
           <div className="nav-section">
             <h3>Others</h3>
             <ul>
-              <li><a href="/about">Our Story</a></li>
-              <li><a href="#experts">Our Team</a></li>
-              
+              <li>
+                <a href="/about">Our Story</a>
+              </li>
+              <li>
+                <a href="/">Our Team</a>
+              </li>
+
               {/* Admin links based on user role and permissions */}
               {isLoggedIn && (
                 <>
@@ -125,15 +164,16 @@ const Footer = () => {
                   {isRouteAllowed("/admin/blog-management") && (
                     <li><a href="/admin/blog-management">Manage Blogs</a></li>
                   )} */}
-                   <li><a href="/admin/admin-dashboard">Admin Dashboard</a></li>
+                  <li>
+                    <a href="/admin/admin-dashboard">Admin Dashboard</a>
+                  </li>
                   <li className="user-info">
-                    <span>Logged in as: {username} ({userRole})</span>
+                    <span>
+                      Logged in as: {username} ({userRole})
+                    </span>
                   </li>
                   <li>
-                    <button 
-                      onClick={handleLogout} 
-                      className="logout-button"
-                    >
+                    <button onClick={handleLogout} className="logout-button">
                       Logout
                     </button>
                   </li>

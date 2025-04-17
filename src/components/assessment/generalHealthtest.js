@@ -1,100 +1,104 @@
 import React, { useState, useEffect, useMemo, memo } from "react";
 import styles from "./depressionTest.module.css";
 import { postDataBS } from "../../utils/awsService";
-import { EmailFormat ,GenerateEmailHTML } from "../mail/mailformat";
+import { EmailFormat, GenerateEmailHTML } from "../mail/mailformat";
 // import { gmail_sendEmail } from "../../utils/mail_service";
-import ReactDOMServer from 'react-dom/server';
+import ReactDOMServer from "react-dom/server";
 const GeneralHealthTest = () => {
-    const quizData = [
-        {
-          question: "Little interest or pleasure in doing things.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 1,
-        },
-        {
-          question: "Feeling down, depressed, or hopeless.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 2,
-        },
-        {
-          question: "Trouble falling or staying asleep, or sleeping too much.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 3,
-        },
-        {
-          question: "Feeling tired or having little energy.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 4,
-        },
-        {
-          question: "Feeling bad about yourself – or that you are a failure or have let yourself or your family down.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 5,
-        },
-        {
-          question: "Trouble concentrating on things, such as reading the newspaper or watching television.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 6,
-        },
-        {
-          question: "Moving or speaking so slowly that other people could have noticed. Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 7,
-        },
-        {
-          question: "Thoughts that you would be better off dead, or of hurting yourself in some way.",
-          options: [
-            { text: "Not at all", score: 0 },
-            { text: "Several days", score: 1 },
-            { text: "More than half the days", score: 2 },
-            { text: "Nearly everyday", score: 3 },
-          ],
-          answer: null,
-          index: 8,
-        }
-      ];
+  const quizData = [
+    {
+      question: "Little interest or pleasure in doing things.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 1,
+    },
+    {
+      question: "Feeling down, depressed, or hopeless.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 2,
+    },
+    {
+      question: "Trouble falling or staying asleep, or sleeping too much.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 3,
+    },
+    {
+      question: "Feeling tired or having little energy.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 4,
+    },
+    {
+      question:
+        "Feeling bad about yourself – or that you are a failure or have let yourself or your family down.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 5,
+    },
+    {
+      question:
+        "Trouble concentrating on things, such as reading the newspaper or watching television.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 6,
+    },
+    {
+      question:
+        "Moving or speaking so slowly that other people could have noticed. Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 7,
+    },
+    {
+      question:
+        "Thoughts that you would be better off dead, or of hurting yourself in some way.",
+      options: [
+        { text: "Not at all", score: 0 },
+        { text: "Several days", score: 1 },
+        { text: "More than half the days", score: 2 },
+        { text: "Nearly everyday", score: 3 },
+      ],
+      answer: null,
+      index: 8,
+    },
+  ];
 
   // State management
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -112,7 +116,7 @@ const GeneralHealthTest = () => {
   const [submitError, setSubmitError] = useState(null);
 
   // Calculate total possible score
-  const maxPossibleScore = 24; // 8 questions with 3 points 
+  const maxPossibleScore = 24; // 8 questions with 3 points
 
   // Calculate user's score
   const calculateScore = () => {
@@ -137,11 +141,11 @@ const GeneralHealthTest = () => {
   // Get interpretation based on score
   const getInterpretation = () => {
     const score = calculateScore();
-    
+
     if (score >= 0 && score <= 4) {
       return {
         title: "Excellent Health",
-        description: 
+        description:
           "Your results indicate excellent overall health with minimal concerns.",
         colorClass: styles.excellent,
       };
@@ -281,31 +285,33 @@ const GeneralHealthTest = () => {
       // Send data to database using the postData utility
       const response = await postDataBS("/depressiontest", assessmentData);
       setFormSubmitted(true);
-      console.log(response)
-      const email_data = Object.assign({},{
-        name : assessmentData.fullName,
-        
-        subject : "Confirmation Mail For Your Session",
-        email : assessmentData.email
-        
-        });
+      console.log(response);
+      const email_data = Object.assign(
+        {},
+        {
+          name: assessmentData.fullName,
 
-        
+          subject: "Confirmation Mail For Your Session",
+          email: assessmentData.email,
+        }
+      );
 
-const email_content = ReactDOMServer.renderToStaticMarkup(<EmailFormat {...email_data} />);
+      const email_content = ReactDOMServer.renderToStaticMarkup(
+        <EmailFormat {...email_data} />
+      );
 
-const email_body = GenerateEmailHTML(email_content)
-      
-// try {
-//   // Send email using Gmail service
-//   const sendEmailResponse = await gmail_sendEmail("send_mail", email_data.email, email_data.subject, email_body);
+      const email_body = GenerateEmailHTML(email_content);
 
-//   // Log success or error message based on response
-//   console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
-// } catch (error) {
-//   // Catch and log any unexpected errors during the email sending process
-//   console.error("❌ Error sending email:", error.message);
-// }
+      // try {
+      //   // Send email using Gmail service
+      //   const sendEmailResponse = await gmail_sendEmail("send_mail", email_data.email, email_data.subject, email_body);
+
+      //   // Log success or error message based on response
+      //   console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
+      // } catch (error) {
+      //   // Catch and log any unexpected errors during the email sending process
+      //   console.error("❌ Error sending email:", error.message);
+      // }
     } catch (error) {
       console.error("Error submitting assessment data:", error);
       setSubmitError(
@@ -335,7 +341,7 @@ const email_body = GenerateEmailHTML(email_content)
         ? circumference - (percentage / 100) * circumference
         : circumference;
     }, [percentage, animateProgress]);
-  
+
     // Determine color based on PHQ-9 score ranges
     const getColorClass = () => {
       const score = calculateScore();
@@ -346,7 +352,7 @@ const email_body = GenerateEmailHTML(email_content)
       if (score >= 20 && score <= 27) return styles.severeColor;
       return styles.neutralColor; // Fallback for invalid scores
     };
-  
+
     return (
       <div className={styles.circularProgress}>
         {/* Background circle */}
@@ -394,7 +400,7 @@ const email_body = GenerateEmailHTML(email_content)
         <div className={styles.bannerContent}>
           <div className={styles.bannerHeader}>
             <h1 className={styles.SelfBannerTitle}>
-              General Health  Self Assessment
+              General Health Self Assessment
             </h1>
             <p className={styles.SelfBannerTitle}>
               A confidential screening tool to help evaluate your mental
@@ -404,9 +410,9 @@ const email_body = GenerateEmailHTML(email_content)
 
           <div className={styles.bannerInfo}>
             <p className={styles.bannerDisclaimer}>
-              This assessment is based on the General Health test.
-              It is a diagnostic tool, help identify symptoms that
-              may warrant professional attention.
+              This assessment is based on the General Health test. It is a
+              diagnostic tool, help identify symptoms that may warrant
+              professional attention.
             </p>
           </div>
         </div>
@@ -475,7 +481,6 @@ const email_body = GenerateEmailHTML(email_content)
                 <button
                   onClick={handleNextQuestion}
                   className={styles.buttonNext}
-                  
                 >
                   Complete
                 </button>
@@ -521,7 +526,10 @@ const email_body = GenerateEmailHTML(email_content)
                 </div>
                 <div className={styles.disclaimer}>
                   <p>
-                  This is a clinical health assessment tool. However, results should be reviewed with a qualified healthcare professional who can provide proper context, and interpretation advice based on your complete health history and current condition.
+                    This is a clinical health assessment tool. However, results
+                    should be reviewed with a qualified healthcare professional
+                    who can provide proper context, and interpretation advice
+                    based on your complete health history and current condition.
                   </p>
                 </div>
               </div>

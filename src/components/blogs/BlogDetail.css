@@ -81,11 +81,15 @@
 .featured-image {
   margin-bottom: 2rem;
   overflow: hidden;
-  padding:0 100px ;
+  padding:50px ;
+  display: flex;
+  justify-content: center;
+
 } 
 
 .featured-image img {
-  width: 100%;
+  width: 50%;
+  height: 50%;
   border-radius: 10px;
   height: auto;
   display: block;

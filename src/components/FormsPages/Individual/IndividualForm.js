@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import axios from 'axios';
+import axios from "axios";
 
 // import { database } from "../../../utils/firebaseConfig";
 // import { ref, push } from "firebase/database";
@@ -394,7 +394,6 @@ const IndividualForm = () => {
       </div>
     </div>
   );
-
 
   const renderError = (fieldName) => {
     if (errors[fieldName]) {
@@ -1119,7 +1118,7 @@ const IndividualForm = () => {
               >
                 Next Step
               </button>
-            ): currentStep === 6 ? (
+            ) : currentStep === 6 ? (
               <button
                 type="button"
                 onClick={(e) => {
