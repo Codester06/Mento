@@ -1,5 +1,6 @@
+
 // Function to send email via your Lambda API
-async function sendEmailAPI(resource, to, subject, html) {
+export const sendEmailAPI = async (resource, to, subject, html) => {
   const apiUrl = `${process.env.REACT_APP_EMAIL_AWS_API}/${resource}`;
 
   const requestBody = {
@@ -30,6 +31,4 @@ async function sendEmailAPI(resource, to, subject, html) {
   } catch (error) {
     console.error("🚨 Error sending email:", error);
   }
-}
-
-export default sendEmailAPI;
+};

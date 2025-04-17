@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 import { GenerateEmailHTML , EmailFormat } from "../../mail/mailformat";
-import sendEmailAPI from "../../../utils/mail_service";
+
 import ReactDOMServer from 'react-dom/server'
 import { postData } from "../../../utils/awsService";
+import { handle_service } from "../../test/service";
 
 const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -346,48 +347,12 @@ useEffect(() => {
     e.preventDefault();
 
     if (validateStep()) {
-      try {
-        // await push(ref(database, "couples_therapy_sessions"), formData);
+      try { 
 
-        console.log("Form data submitted:", formData);
-        const response = await postData("/couple", formData);
-        console.log("Form data submitted:", response);
-        const email_data = Object.assign({},{
-          name : formData.name,
-          sessionDate : formData.sessionDate,
-          sessionTime: formData.sessionTime,
-          subject : "Confirmation Mail For Your Session",
-          email : formData.email
-          
-          });
-          
-
-const email_content = ReactDOMServer.renderToStaticMarkup(<EmailFormat {...email_data} />);
-
-const email_body = GenerateEmailHTML(email_content)
-        
-  try {
-    // Send email using Gmail service
-    const sendEmailResponse = await sendEmailAPI("send_mail", email_data.email, email_data.subject, email_body);
-
-    // Log success or error message based on response
-    console.log(sendEmailResponse.success ? "✅ Email sent successfully!" : `❌ Error: ${sendEmailResponse.error}`);
-    alert(
-      "mail has been send "
-    );
-  } catch (error) {
-    // Catch and log any unexpected errors during the email sending process
-    console.error("❌ Error sending email:", error.message);    
-        alert("mail not sent. Please try again.");
-
-}
-
-
-
-        // Show success alert
-      
-      } catch (error) {
-        console.error("Error saving therapy session data:", error);
+        handle_service(formData, "couple");
+      }
+      catch (error) {
+        console.error("Error submitting form:", error);
       }
     }
   };

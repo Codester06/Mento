@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './demo_1.css'; // Import your CSS file for styling
+import './payment_status.css'; // Import your CSS file for styling
 
 const PaymentStatus = () => {
   const [status, setStatus] = useState('loading');
@@ -17,7 +17,7 @@ const PaymentStatus = () => {
       try {
         // Get transaction ID from URL parameters
         const urlParams = new URLSearchParams(location.search);
-        const merchantTransactionId = urlParams.get('transactionId') || localStorage.getItem('transactionId');
+        const merchantTransactionId = urlParams.get('txnId') || localStorage.getItem('transactionId');
         
         if (!merchantTransactionId) {
           setError('Transaction ID not found');

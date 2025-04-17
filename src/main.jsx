@@ -35,6 +35,7 @@ import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 import AnxietyTestPage from "./pages/AniextyTestPage";
+import PaymentStatus from "./components/payment/payment_status";
 
 
 
@@ -109,7 +110,7 @@ function Main() {
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
                {/* payment*/}
                
-               {/* <Route path="/payment-status" element={<PaymentStatus />} /> Logout route */}
+               <Route path="/payment-status" element={<PaymentStatus />} /> Logout route
             {/* <Route path="/payment-callback" element={<PaymentStatus />} /> Logout route */}
             
             {/* blogs */}

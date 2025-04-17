@@ -9,6 +9,7 @@ import { postData } from "../../../utils/awsService";
 
 import { EmailFormat, GenerateEmailHTML } from "../../mail/mailformat";
 import sendEmailAPI from "../../../utils/mail_service";
+import { handle_payment, handle_service } from "../../test/service";
 
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -280,7 +281,7 @@ const IndividualForm = () => {
     }));
 
     // Always validate before moving to next step
-    if (validateStep()) {
+    if (true) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         setAutoNextEnabled(true);
@@ -301,6 +302,18 @@ const IndividualForm = () => {
       setAutoNextEnabled(false); // Disable auto-next when going back
     }
   };
+ const handle_final_submit = async(e) => {
+  e.preventDefault();
+  try{
+    handle_payment(formData,'individual');
+
+  }
+  catch(error){
+    console.error("Error in payment:", error);
+  }
+
+}
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -310,56 +323,17 @@ const IndividualForm = () => {
         const dataToSubmit = {
           ...formData,
           submittedAt: new Date().toISOString(),
+          paymentstatus: "Pending",
         };
 
-        // console.log("Submitting form data:", dataToSubmit);
-
-        // Use postData to submit the form data
-        const response = await postData("/individual", dataToSubmit);
-
-        console.log("Form data submitted successfully:", response);
-
-        // Show success alert
-
-        const email_data = Object.assign(
-          {},
-          {
-            name: dataToSubmit.name,
-            sessionDate: dataToSubmit.sessionDate,
-            sessionTime: dataToSubmit.sessionTime,
-            subject: "Confirmation Mail For Your Session",
-            email: dataToSubmit.email,
-          }
-        );
-
-        const email_content = ReactDOMServer.renderToStaticMarkup(
-          <EmailFormat {...email_data} />
-        );
-
-        const email_body = GenerateEmailHTML(email_content);
-
-        try {
-          // Send email using Gmail service
-          const sendEmailResponse = await sendEmailAPI(
-            "send_mail",
-            email_data.email,
-            email_data.subject,
-            email_body
-          );
-
-          // Log success or error message based on response
-          console.log(
-            sendEmailResponse.success
-              ? "✅ Email sent successfully!"
-              : `❌ Error: ${sendEmailResponse.error}`
-          );
-        } catch (error) {
-          // Catch and log any unexpected errors during the email sending process
-          console.error("❌ Error sending email:", error.message);
-        }
+        handle_service(formData, "individual").then(res => {
+          console.log("Form submitted:", res);
+        });
 
         // Move to confirmation step after successful submission
         nextStep();
+       
+
       } catch (error) {
         console.error("Error saving consultation data:", error);
 
@@ -1136,7 +1110,7 @@ const IndividualForm = () => {
               <button
                 type="button"
                 onClick={(e) => {
-                  handleSubmit(e); // Call handleSubmit first
+                  handle_final_submit(e); // Call handleSubmit first
                   if (Object.keys(errors).length === 0) {
                     nextStep(); // Only proceed to next step if validation passes
                   }
