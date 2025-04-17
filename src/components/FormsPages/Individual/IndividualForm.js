@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import axios from 'axios';
 
-// import { database } from "../../../utils/firebaseConfig";
-// import { ref, push } from "firebase/database";
-import ReactDOMServer from "react-dom/server";
-import { postData } from "../../../utils/awsService";
+import { submitToAWS } from "../../../utils/payment_fetch";
 
-import { EmailFormat, GenerateEmailHTML } from "../../mail/mailformat";
-import sendEmailAPI from "../../../utils/mail_service";
+
 import { handle_payment, handle_service } from "../../test/service";
 
 const IndividualForm = () => {
@@ -281,7 +276,7 @@ const IndividualForm = () => {
     }));
 
     // Always validate before moving to next step
-    if (true) {
+    if (validateStep()) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         setAutoNextEnabled(true);
@@ -305,9 +300,9 @@ const IndividualForm = () => {
  const handle_final_submit = async(e) => {
   e.preventDefault();
   try{
-    handle_payment(formData,'individual');
-
-  }
+    // handle_payment(formData,'individual');
+    submitToAWS(formData.name, 999,formData.contactNo).then(res => {
+  });}
   catch(error){
     console.error("Error in payment:", error);
   }
