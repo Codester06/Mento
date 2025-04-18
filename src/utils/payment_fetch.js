@@ -2,7 +2,6 @@
 import React, { createContext, useState, useContext, Children } from 'react';
 
 import axios from "axios";
-import { MyContext } from '../components/context/context';
 
 // A provider component that wraps your application
 
@@ -39,7 +38,7 @@ export const initiatePayment = async (formData) => {
 
 
 // ✅ Accept updateValue as a parameter
-export const submitToAWS = async (formData, updateValue) => {
+export const submitToAWS = async (formData) => {
   const send_data = {
     name: formData.name,
     email: formData.email,
