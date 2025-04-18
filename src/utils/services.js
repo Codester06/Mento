@@ -3,13 +3,15 @@ import { postData } from "./awsService.js";
 import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat.js";
 import ReactDOMServer from "react-dom/server";
 import { initiatePayment } from "./payment_fetch.js";
-import { initiatePayment } from "../utils/payment_service";
-import { sendEmailAPI } from "../utils/mail_service";
-import { postData } from "../utils/awsService";
-import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat";
+import { Context } from "../main.jsx";
+import { useContext } from "react";
+import { set } from "mongoose";
+
 
 // Helper: send user & admin email
 const sendFormEmail = async (emailData) => {
+  if (!emailData || !emailData.email) {
+    console.error("Invalid email data:", emailData);}
   const emailContent = ReactDOMServer.renderToStaticMarkup(
     <EmailFormat {...emailData} />
   );
@@ -48,6 +50,8 @@ const sendFormEmail = async (emailData) => {
 };
 
 // Exported: payment logic
+
+
 export const handle_payment = async (formData, form) => {
   if (["individual", "couple", "family"].includes(form)) {
     try {
@@ -60,8 +64,9 @@ export const handle_payment = async (formData, form) => {
   }
 };
 
-// Main handler
+let response = null;
 export const handle_service = async (formData, form) => {
+  // const [data , setData] = useContext(Context);
   try {
     const submitted_date = new Date().toISOString().split("T")[0];
     formData.submitted_date = submitted_date;
@@ -77,7 +82,11 @@ export const handle_service = async (formData, form) => {
     if (!endpoint) throw new Error("Invalid form type");
 
     // Step 1: Save to database
-    const response = await postData(endpoint, formData);
+    response = await postData(endpoint, formData);
+    console.log("Database response:", response.data.id);
+
+    // setData(response.data)
+    console.log("Data saved to DB:", response.data.id);
 
     // Step 2: Send email and initiate payment (only if DB success)
     if (response?.success) {
@@ -90,6 +99,7 @@ export const handle_service = async (formData, form) => {
       };
 
       await sendFormEmail(emailData);
+      console.log("Email sent successfully!");
       await handle_payment(formData, form);
     }
 

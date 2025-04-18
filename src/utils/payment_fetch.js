@@ -1,10 +1,18 @@
 // paymentService.js
+import React, { createContext, useState, useContext, Children } from 'react';
+
 import axios from "axios";
+import { MyContext } from '../components/context/context';
+
+// A provider component that wraps your application
+
+
 export const initiatePayment = async (formData) => {
+  
+
    const name = formData.name;
    const mobile = formData.contactNo;
     const amount = 1;
-  
   
     const response = await fetch("https://mento.in/wp-json/custom/v1/initiate-payment", {
       method: "POST",
@@ -29,8 +37,26 @@ export const initiatePayment = async (formData) => {
 
 
 
-export const submitToAWS = async (name, amount, number) => {
-  const data = { name, amount, number };
+
+// ✅ Accept updateValue as a parameter
+export const submitToAWS = async (formData, updateValue) => {
+  const send_data = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.contactNo,
+  };
+
+  const data = {
+    name: "pradeep",
+    amount: 100,
+    phone: "1233211231"
+  };
+
+  const show_Data = {
+    email: formData.email,
+    Sessiontime: formData.session_time,
+    session_date: formData.session_date,
+  };
 
   try {
     const response = await axios.post(
@@ -43,11 +69,11 @@ export const submitToAWS = async (name, amount, number) => {
       }
     );
 
+    updateValue(response.data); // ✅ Safe to use now
     if (response.data.success) {
-      console.log("AWS API success:", response.data);
-    const  redirecturl = response.data.phonepe_redirectUrl || "/success";
-      window.location.href = redirecturl;
-      console.log("Redirecting to:", redirecturl);
+      console.log("success:", response.data);
+      const redirecturl = response.data.phonepe_redirectUrl || "/success";
+      
     } else {
       alert("Something went wrong!");
     }
@@ -56,3 +82,4 @@ export const submitToAWS = async (name, amount, number) => {
     alert("API call failed. Please try again.");
   }
 };
+

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/navigation/navbar";
 import Blogs from "./pages/blog";
 import Home from "./pages/home";
@@ -35,8 +35,8 @@ import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 import AnxietyTestPage from "./pages/AniextyTestPage";
-import paymentStatusPage from "./pages/payment_status_page"; // Import the new PaymentStatus component
-
+import ThankYouStep from "./components/payment/thankyyoupage";
+import { DataConnect } from "firebase/data-connect";
 
 
 // import PaymentForm from "./components/test/demo";
@@ -87,8 +87,11 @@ const ProtectedRoute = ({ element, requiredRole = null }) => {
 
   return element;
 };
-
+export const Context = React.createContext();
+ 
 function Main() {
+  const [data, setData] = useState(null);
+
   return (
     <BrowserRouter>
       <div id="root">
@@ -96,6 +99,8 @@ function Main() {
         <div className="main-content">
           {" "}
           {/* Main content wrapper */}
+          <Context.Provider value={{ data, setData }}>
+
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/contact" element={<ContactForm />} />
@@ -112,8 +117,9 @@ function Main() {
             <Route path="/Anxiety-Disorder-Tool" element={<AnxietyTestPage />} />
             <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
+
                
-               {/* <Route path="/payment-status" element={<PhoneyPayStatusPage />} /> Logout route */}
+               <Route path="/payment-status" element={<ThankYouStep />} /> Logout route
             {/* <Route path="/payment-callback" element={<PaymentStatus />} /> Logout route */}
             
             {/* blogs */}
@@ -177,6 +183,7 @@ function Main() {
               element={<ProtectedRoute element={<ContactFormDetails />} />}
             />
           </Routes>
+           </Context.Provider >
         </div>
         <Footer />
       </div>

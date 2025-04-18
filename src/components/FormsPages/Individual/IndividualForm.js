@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import axios from "axios";
-import { submitToAWS } from "../../../utils/demopayment";
-import { handle_payment, handle_service } from "../../../utils/services";
-
+import { submitToAWS } from "../../../utils/payment_fetch";
+import ThankYouStep from "../../payment/thankyyoupage";
+import { handle_service } from "../../../utils/services";
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 8;
@@ -298,8 +297,10 @@ const IndividualForm = () => {
   const handle_final_submit = async (e) => {
     e.preventDefault();
     try {
-      submitToAWS(formData.name, formData.amount, formData.contactNo).then(res => {
+      submitToAWS(formData).then(res => {
         console.log("Payment initiated:", res);
+        if (res.success) {
+            ThankYouStep(formData);}
       }).catch(err => {
         console.error("Payment initiation error:", err.message);
       });
@@ -314,11 +315,10 @@ const IndividualForm = () => {
     if (validateStep()) {
       try {
         // Add timestamp to the form data
-        const dataToSubmit = {
-          ...formData,
-          submittedAt: new Date().toISOString(),
-          paymentstatus: "Pending",
-        };
+       
+       formData.submittedAt = new Date().toISOString();
+       formData.paymentstatus = "Pending";
+      
 
         handle_service(formData, "individual").then(res => {
           console.log("Form submitted:", res);
@@ -1105,7 +1105,7 @@ const IndividualForm = () => {
                 onClick={(e) => {
                   handle_final_submit(e); // Call handleSubmit first
                   if (Object.keys(errors).length === 0) {
-                    nextStep(); // Only proceed to next step if validation passes
+                     // Only proceed to next step if validation passes
                   }
                 }}
                 className="confirm-button-MN"

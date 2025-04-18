@@ -1,4 +1,4 @@
-import PaymentStatus from "../components/payment/payment_status";
+import PaymentStatus from "../components/payment/thankyyoupage";
 
 const paymentStatusPage = () => {   
     return (
