@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, Children } from 'react';
 
 import axios from "axios";
+import { form } from 'framer-motion/client';
 
 // A provider component that wraps your application
 
@@ -45,11 +46,7 @@ export const submitToAWS = async (formData) => {
     phone: formData.contactNo,
   };
 
-  const data = {
-    name: "pradeep",
-    amount: 100,
-    phone: "1233211231"
-  };
+  formData.amount = 1000;
 
   const show_Data = {
     email: formData.email,
@@ -60,7 +57,7 @@ export const submitToAWS = async (formData) => {
   try {
     const response = await axios.post(
       "https://qv8ma5t1gk.execute-api.ap-south-1.amazonaws.com/dev/pay",
-      data,
+      formData,
       {
         headers: {
           "Content-Type": "application/json"
@@ -68,11 +65,10 @@ export const submitToAWS = async (formData) => {
       }
     );
 
-    updateValue(response.data); // ✅ Safe to use now
     if (response.data.success) {
       console.log("success:", response.data);
       const redirecturl = response.data.phonepe_redirectUrl || "/success";
-      
+      window.location.href = redirecturl;
     } else {
       alert("Something went wrong!");
     }

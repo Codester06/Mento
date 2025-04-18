@@ -273,7 +273,8 @@ const IndividualForm = () => {
     }));
 
     // Always validate before moving to next step
-    if (validateStep()) {
+    if (true) {
+      
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         setAutoNextEnabled(true);

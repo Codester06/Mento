@@ -4,8 +4,8 @@ const EmailFormat = ({
   recipientName, 
   sessionDate, 
   sessionTime, 
-  rescheduleLink = "https://example.com/reschedule",
-  companyName = "Wellness Center",
+  rescheduleLink = "https://wa.me/+918770253611",
+  companyName = "Mento",
   companyLogo = "/api/placeholder/200/60" // Placeholder for logo
 }) => {
   return (
@@ -434,5 +434,241 @@ const GenerateEmailHTML = (email_content) => {
 };
 
 
+const Email_mail_format = ({recipientName, 
+  sessionDate, 
+  sessionTime, 
+  rescheduleLink = "https://wa.me/+918770253611",
+  companyName = "Mento",
+  transactionId,
+  amount,
+  paymentDate,
+  companyLogo = "/api/placeholder/200/60"}) => {
+ 
+  return (
+    <div style={{ 
+      fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif', 
+      maxWidth: '650px', 
+      margin: '0 auto', 
+      padding: '0', 
+      backgroundColor: '#ffffff', 
+      color: '#333333',
+      borderRadius: '12px',
+      overflow: 'hidden',
+      boxShadow: '0 5px 20px rgba(0, 0, 0, 0.1)'
+    }}>
+      {/* Header with gradient */}
+      <div style={{ 
+        background: 'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)',
+        padding: '30px 20px',
+        textAlign: 'center',
+        color: 'white'
+      }}>
+        <img 
+          src={companyLogo} 
+          alt={companyName} 
+          style={{ 
+            maxHeight: '60px', 
+            marginBottom: '15px' 
+          }} 
+        />
+        <h1 style={{ 
+          fontSize: '28px', 
+          margin: '10px 0',
+          fontWeight: '600',
+          letterSpacing: '0.5px'
+        }}>
+          Payment Confirmed Successfully!
+        </h1>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '15px'
+        }}>
+          <span style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.3)',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px'
+          }}>
+            💳
+          </span>
+        </div>
+      </div>
+      
+      {/* Content area */}
+      <div style={{ padding: '35px 40px' }}>
+        <p style={{ fontSize: '17px', lineHeight: '1.6' }}>
+          Hello <span style={{ fontWeight: '600', color: '#00b09b' }}>{recipientName}</span>,
+        </p>
+        
+        <p style={{ fontSize: '16px', lineHeight: '1.6' }}>
+          Thank you for your payment. We're happy to confirm that your transaction was successful. Below are your payment details:
+        </p>
+        
+        {/* Payment details card */}
+        <div style={{ 
+          backgroundColor: '#f0fdf4', 
+          padding: '25px', 
+          borderRadius: '12px',
+          margin: '25px 0',
+          boxShadow: '0 3px 10px rgba(0, 176, 155, 0.08)',
+          borderLeft: '5px solid #00b09b'
+        }}>
+          <h3 style={{ 
+            margin: '0 0 20px 0', 
+            color: '#00b09b',
+            fontSize: '18px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <span style={{ fontSize: '22px' }}>🧾</span> Payment Summary
+          </h3>
+          
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontWeight: '600', minWidth: '120px' }}>Transaction ID:</span>
+              <span style={{
+                backgroundColor: 'white',
+                padding: '8px 15px',
+                borderRadius: '6px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                flexGrow: 1
+              }}>{transactionId}</span>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontWeight: '600', minWidth: '120px' }}>Amount Paid:</span>
+              <span style={{
+                backgroundColor: 'white',
+                padding: '8px 15px',
+                borderRadius: '6px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                flexGrow: 1
+              }}>₹{amount}</span>
+            </div>
+    
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontWeight: '600', minWidth: '120px' }}>Date:</span>
+              <span style={{
+                backgroundColor: 'white',
+                padding: '8px 15px',
+                borderRadius: '6px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                flexGrow: 1
+              }}>{paymentDate}</span>
+            </div>
+          </div>
+        </div>
+    
+        {/* What next section */}
+        <div style={{ margin: '30px 0' }}>
+          <h3 style={{ 
+            color: '#00b09b',
+            fontSize: '18px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <span style={{ fontSize: '22px' }}>📌</span> What Happens Next?
+          </h3>
+    
+          <ul style={{
+            marginTop: '15px',
+            paddingLeft: '20px',
+            lineHeight: '1.6'
+          }}>
+            <li>Your slot or session is now secured.</li>
+            <li>You’ll receive a confirmation email and reminders ahead of time.</li>
+            <li>We’ll notify you if any updates occur regarding your booking.</li>
+          </ul>
+        </div>
+    
+        {/* Help section */}
+        <div style={{
+          backgroundColor: '#fff5f5',
+          padding: '25px',
+          borderRadius: '12px',
+          margin: '30px 0',
+          borderLeft: '5px solid #ff6b6b'
+        }}>
+          <h3 style={{ 
+            margin: '0 0 15px 0', 
+            color: '#ff6b6b',
+            fontSize: '18px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <span style={{ fontSize: '22px' }}>❓</span> Need Assistance?
+          </h3>
+          
+          <p style={{ margin: '0 0 15px 0', lineHeight: '1.6' }}>
+            If you have questions about your payment or appointment, contact us:
+          </p>
+          
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '18px' }}>📧</span>
+              <a href="mailto:support@company.com" style={{ 
+                color: '#ff6b6b', 
+                textDecoration: 'none',
+                fontWeight: '500' 
+              }}>support@company.com</a>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '18px' }}>📞</span>
+              <a href="tel:+15551234567" style={{ 
+                color: '#ff6b6b', 
+                textDecoration: 'none',
+                fontWeight: '500'
+              }}>(555) 123-4567</a>
+            </div>
+          </div>
+        </div>
+    
+        {/* CTA Button */}
+        <div style={{ 
+          textAlign: 'center', 
+          margin: '35px 0' 
+        }}>
+          <a 
+            href={rescheduleLink} 
+            style={{ 
+              background: 'linear-gradient(90deg, #00b09b 0%, #96c93d 100%)',
+              color: 'white',
+              padding: '14px 28px',
+              borderRadius: '50px',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '16px',
+              display: 'inline-block',
+              boxShadow: '0 4px 12px rgba(0, 176, 155, 0.3)',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            View My Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+    
+  )}
 
- export { EmailFormat, GenerateEmailHTML };
+
+
+ export { EmailFormat, GenerateEmailHTML ,Email_mail_format};

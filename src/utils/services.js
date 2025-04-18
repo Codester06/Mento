@@ -1,23 +1,27 @@
 import { sendEmailAPI } from "./mail_service.js";
 import { postData } from "./awsService.js";
-import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat.js";
+import { EmailFormat, GenerateEmailHTML ,Email_mail_format} from "../components/mail/mailformat.js";
 import ReactDOMServer from "react-dom/server";
 import { initiatePayment } from "./payment_fetch.js";
-import { Context } from "../main.jsx";
-import { useContext } from "react";
-import { set } from "mongoose";
+
 
 
 // Helper: send user & admin email
-const sendFormEmail = async (emailData) => {
+const sendFormEmail = async (emailData, mail ) => {
   if (!emailData || !emailData.email) {
     console.error("Invalid email data:", emailData);}
-  const emailContent = ReactDOMServer.renderToStaticMarkup(
-    <EmailFormat {...emailData} />
-  );
+
+    const emailContent = ReactDOMServer.renderToStaticMarkup(
+      mail === "payment" ? (
+        <Email_mail_format {...emailData} />
+      ) : mail === "form" ? (
+        <EmailFormat {...emailData} />  
+      ) : null
+    );
+    
 
   const emailBody = GenerateEmailHTML(emailContent);
-
+  const responses ={}
   try {
     const userResponse = await sendEmailAPI(
       "send_mail",
@@ -32,18 +36,10 @@ const sendFormEmail = async (emailData) => {
       emailData.subject,
       emailBody
     );
+    responses.userResponse = userResponse;
+    responses.adminResponse = adminResponse;  
+    return responses;
 
-    console.log(
-      userResponse.success
-        ? "User email sent!"
-        : `User email failed: ${userResponse.error}`
-    );
-
-    console.log(
-      adminResponse.success
-        ? "Admin email sent!"
-        : `Admin email failed: ${adminResponse.error}`
-    );
   } catch (error) {
     console.error("Error sending email:", error.message);
   }
@@ -64,7 +60,7 @@ export const handle_payment = async (formData, form) => {
   }
 };
 
-let response = null;
+export let response_data = null;
 export const handle_service = async (formData, form) => {
   // const [data , setData] = useContext(Context);
   try {
@@ -82,23 +78,25 @@ export const handle_service = async (formData, form) => {
     if (!endpoint) throw new Error("Invalid form type");
 
     // Step 1: Save to database
-    response = await postData(endpoint, formData);
+   const  response = await postData(endpoint, formData);
     console.log("Database response:", response.data.id);
 
     // setData(response.data)
     console.log("Data saved to DB:", response.data.id);
-
+      console.log("Form data:", response.status);
+      
     // Step 2: Send email and initiate payment (only if DB success)
-    if (response?.success) {
+    if (response.status === 200) {
       const emailData = {
         name: formData.name || "User",
         sessionDate: formData.sessionDate || "",
         sessionTime: formData.sessionTime || "",
-        subject: "Form has been submitted",
+        subject: "Thank You For Submitting the form",
         email: formData.email,
       };
-
-      await sendFormEmail(emailData);
+      
+      const mail_response = await sendFormEmail(emailData);
+      console.log("Email response:", mail_response.success);
       console.log("Email sent successfully!");
       await handle_payment(formData, form);
     }
@@ -109,3 +107,5 @@ export const handle_service = async (formData, form) => {
     return { success: false, error: error.message };
   }
 };
+
+

@@ -36,7 +36,6 @@ import DepressionTestDetails from "./adminPages/response/detailResponse/depressi
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 import AnxietyTestPage from "./pages/AniextyTestPage";
 import ThankYouStep from "./components/payment/thankyyoupage";
-import { DataConnect } from "firebase/data-connect";
 
 
 // import PaymentForm from "./components/test/demo";
