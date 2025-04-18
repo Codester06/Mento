@@ -3,6 +3,7 @@ import "../FormStyles.css";
 import { submitToAWS } from "../../../utils/payment_fetch";
 import ThankYouStep from "../../payment/thankyyoupage";
 import { handle_service } from "../../../utils/services";
+import whatsappIcon from "../../../assets/images/socialIcons/wpLogo.png";
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 8;
@@ -14,6 +15,7 @@ const IndividualForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    gender: "",
     city: "",
     contactNo: "",
     guardianContactNo: "",
@@ -30,9 +32,9 @@ const IndividualForm = () => {
     counselorGenderPreference: "",
     medicalConditions: "",
     referralSource: "",
-    paymentMethod: "",
     termsAgreed: false,
     PaymentsAgreed: false,
+    sessionDuration: "",
   });
 
   // Profession options
@@ -139,6 +141,7 @@ const IndividualForm = () => {
       if (!formData.contactNo || !formData.contactNo.trim())
         newErrors.contactNo = "Contact number is required";
       if (!formData.age) newErrors.age = "Age is required";
+      if (!formData.gender) newErrors.gender = "Gender is required";
       if (!formData.profession) newErrors.profession = "Profession is required";
     }
 
@@ -197,8 +200,9 @@ const IndividualForm = () => {
 
     // Step 7 validation
     else if (currentStep === 7) {
-      if (!formData.paymentMethod)
-        newErrors.paymentMethod = "Payment method is required";
+      if (!formData.sessionDuration) {
+        newErrors.sessionDuration = "Please select a session duration";
+      }
     }
 
     setErrors(newErrors);
@@ -220,6 +224,7 @@ const IndividualForm = () => {
             formData.city &&
             formData.contactNo &&
             formData.age &&
+            formData.gender &&
             formData.profession
           );
         case 2:
@@ -248,7 +253,7 @@ const IndividualForm = () => {
             formData.PaymentsAgreed
           );
         case 7:
-          return formData.paymentMethod && formData.termsAgreed;
+          return formData.sessionDuration !== "";
         default:
           return false;
       }
@@ -297,37 +302,36 @@ const IndividualForm = () => {
   const handle_final_submit = async (e) => {
     e.preventDefault();
     try {
-      submitToAWS(formData).then(res => {
-        console.log("Payment initiated:", res);
-        if (res.success) {
-            ThankYouStep(formData);}
-      }).catch(err => {
-        console.error("Payment initiation error:", err.message);
-      });
+      submitToAWS(formData)
+        .then((res) => {
+          console.log("Payment initiated:", res);
+          if (res.success) {
+            ThankYouStep(formData);
+          }
+        })
+        .catch((err) => {
+          console.error("Payment initiation error:", err.message);
+        });
     } catch (error) {
       console.error("Error in payment submission:", error);
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateStep()) {
       try {
         // Add timestamp to the form data
-       
-       formData.submittedAt = new Date().toISOString();
-       formData.paymentstatus = "Pending";
-      
 
-        handle_service(formData, "individual").then(res => {
+        formData.submittedAt = new Date().toISOString();
+        formData.paymentstatus = "Pending";
+
+        handle_service(formData, "individual").then((res) => {
           console.log("Form submitted:", res);
         });
 
         // Move to confirmation step after successful submission
         nextStep();
-       
-
       } catch (error) {
         console.error("Error saving consultation data:", error);
 
@@ -444,6 +448,21 @@ const IndividualForm = () => {
                   className={errors.age ? "error-input" : ""}
                 />
                 {renderError("age")}
+              </div>
+
+              <div className="form-field-MN fieldWidthAge">
+                <label>
+                  Gender <span className="required-field">*</span>
+                </label>
+                <input
+                  type="string"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  placeholder="e.g. Male"
+                  className={errors.gender ? "error-input" : ""}
+                />
+                {renderError("gender")}
               </div>
             </div>
 
@@ -889,57 +908,69 @@ const IndividualForm = () => {
             </div>
           </div>
         );
-      case 7:
-        return (
-          <div className="form-step-MN form-step-7-MN">
-            <h2 className="form-title-MN">Payment Information</h2>
-            <p className="form-subtitle-MN">
-              Select your preferred payment method.
-            </p>
+     // In the renderStep function, replace case 7 with this updated code:
+case 7:
+  return (
+    <div className="form-step-MN form-step-7-MN">
+      <h2 className="form-title-MN">Session Selection</h2>
+      <p className="form-subtitle-MN">
+        Choose your preferred session duration.
+      </p>
 
-            <div className="form-field-MN">
-              <label className="form-label-MN" htmlFor="paymentMethod">
-                Choose a payment method:{" "}
-                <span className="required-field">*</span>
-              </label>
-
-              <select
-                id="paymentMethod"
-                name="paymentMethod"
-                className={`dropdown-select-MN ${
-                  errors.paymentMethod ? "error-border" : ""
-                }`}
-                value={formData.paymentMethod}
-                onChange={(e) =>
-                  handleRadioChange("paymentMethod", e.target.value)
-                }
-              >
-                <option value="" disabled>
-                  Select payment method
-                </option>
-                <option value="Credit/Debit Card">Credit/Debit Card</option>
-                <option value="UPI">UPI</option>
-                <option value="Net Banking">Net Banking</option>
-                <option value="Mobile Wallet">Mobile Wallet</option>
-                <option value="Insurance">Insurance</option>
-              </select>
-
-              {renderError("paymentMethod")}
+      <div className="form-field-MN">
+        <p className="form-label-MN"> 
+          Choose your session duration:{" "}
+          <span className="required-field">*</span>
+        </p>
+        <div
+          className={`radio-group-MNIM ${
+            errors.sessionDuration ? "error-border" : ""
+          }`}
+        >
+          {[
+     { value: "500.00", label: "40 minute session", price: "₹500.00" },
+     { value: "800.00", label: "1 hour session", price: "₹800.00" },
+          ].map((option) => (
+            <div
+              key={option.value}
+              className={`radio-option-MN ${
+                formData.sessionDuration === option.value
+                  ? "selected"
+                  : ""
+              }`}
+              onClick={() =>
+                handleRadioChange("sessionDuration", option.value)
+              }
+            >
+              <div className="radio-circle-MN">
+                {formData.sessionDuration === option.value && (
+                  <div className="radio-dot-MN"></div>
+                )}
+              </div>
+              <span>{option.label}</span>
             </div>
+          ))}
+        </div>
+        {renderError("sessionDuration")}
+      </div>
 
-            <div className="pricing-info-MN">
-              <h3>Consultation Fee</h3>
-              <p className="fee-MN">₹999.00</p>
-              <p className="fee-description-MN">
-                One-hour online consultation session
-              </p>
-              <p className="note-MN">
-                * Additional sessions may be recommended based on initial
-                consultation
-              </p>
-            </div>
-          </div>
-        );
+      <div className="pricing-info-MN">
+        <h3>Consultation Fee</h3>
+        <p className="fee-MN">
+          {formData.sessionDuration === "500.00" ? "₹500.00" : "₹800.00"}
+        </p>
+        <p className="fee-description-MN">
+          {formData.sessionDuration === "500.00"
+            ? "40-minute online consultation session"
+            : "One-hour online consultation session"}
+        </p>
+        <p className="note-MN">
+          * Additional sessions may be recommended based on initial
+          consultation
+        </p>
+      </div>
+    </div>
+  );
       case 8:
         return (
           <div className="form-step-MN form-step-8-MN">
@@ -1095,24 +1126,53 @@ const IndividualForm = () => {
                     nextStep(); // Only proceed to next step if validation passes
                   }
                 }}
-                className="confirm-button-MN"
+                className="confirm-button-final"
               >
                 Submit
               </button>
             ) : currentStep === 7 ? (
-              <button
-                type="button"
-                onClick={(e) => {
-                  handle_final_submit(e); // Call handleSubmit first
-                  if (Object.keys(errors).length === 0) {
-                     // Only proceed to next step if validation passes
+              <>
+                <button
+                  type="button"
+                  onClick={() =>
+                    window.open("https://wa.me/+919120719120", "_blank")
                   }
-                }}
-                className="confirm-button-MN"
-              >
-                Confirm & Pay
-              </button>
-            ) : currentStep === 8 ?(
+                  className="confirm-button-MN support-button hover-scale"
+                >
+                  <div
+                    className="button-content"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      src={whatsappIcon}
+                      alt="WhatsApp"
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        marginRight: "8px",
+                      }}
+                    />
+                    <span>Need Support?</span>
+                  </div>
+                </button>
+                <button
+      type="button"
+      onClick={(e) => {
+        if (validateStep()) { // Validate before proceeding
+          handle_final_submit(e);
+          nextStep();
+        }
+      }}
+      className="confirm-button-MN"
+    >
+      Confirm & Pay
+    </button>
+              </>
+            ) : currentStep === 8 ? (
               <button
                 type="button"
                 onClick={() => (window.location.href = "/")}

@@ -287,10 +287,10 @@
 
 .back-button-MN, 
 .next-button-MN, 
-.confirm-button-MN,
+.confirm-button-MN,.confirm-button-final,
 .confirm-button-WP,
 .dashboard-button-MN {
-  padding: 0.75rem 1.5rem;
+  padding: 0.95rem 1.5rem;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -318,7 +318,7 @@
   background: linear-gradient(to right, #edb94d, #b3dbb7);
 }
 
-.confirm-button-MN,.confirm-button-WP, .dashboard-button-MN {
+.confirm-button-MN,.confirm-button-WP, .dashboard-button-MN ,.confirm-button-final{
   background: linear-gradient(to right, #ffd980, #c9e8cc);
   color: #333;
   border: none;
@@ -326,8 +326,26 @@
   margin-top: 0;
 }
 
+.support-button,.confirm-button-MN{
+  margin-left: 0;
+}
 
-.confirm-button-MN:hover,.confirm-button-WP:hover, .dashboard-button-MN:hover {
+.button-content {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover .button-content {
+  transform: scale(1.1);
+}
+
+.support-button{
+  padding: 0.85rem 1.1rem;
+}
+.whatsapp-icon:hover,.support-button:hover {
+  transform: scale(1);
+}
+
+.confirm-button-MN:hover,.confirm-button-WP:hover, .dashboard-button-MN:hover,.confirm-button-final{
   background: linear-gradient(to right, #edb94d, #b3dbb7);
 }
 
@@ -752,6 +770,7 @@ input:focus, select:focus, textarea:focus {
   .back-button-MN,
   .next-button-MN,
   .confirm-button-MN,
+  .confirm-button-final,
   .confirm-button-WP
   .dashboard-button-MN {
     width: 100%;
