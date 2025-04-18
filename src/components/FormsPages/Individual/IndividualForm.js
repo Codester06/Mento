@@ -1127,6 +1127,6 @@ const IndividualForm = () => {
       </div>
     </div>
   );
-};}
+};
 
 export default IndividualForm;
