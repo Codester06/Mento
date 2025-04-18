@@ -2,8 +2,8 @@
 .ContainerMainFrom {
   width: 100%;
   padding: 50px 20px;
-  margin-top: 15rem;
-  background: linear-gradient(to bottom, #E4F8E8, #f8eee6bf, #E4F8E8);
+  background: linear-gradient(to bottom, #aafff1fa, #e6f7f8bf, rgba(251, 242, 220, 0.504));
+  
   box-sizing: border-box;
 }
 

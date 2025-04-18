@@ -38,6 +38,6 @@
   
   /* Add space between components */
   .banner-container + * {
-      margin-top: 1rem;
+      margin-top: 0rem;
   }
 }

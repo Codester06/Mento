@@ -8,9 +8,6 @@ const Contact = () => {
     return(<>
     <div className="banner-container">
       <BannerCu/>
-      <div className="contact-section-container">
-        <ContactSection />
-      </div>
     </div>
     <div className="contact-form-container">
       <ContactForm /></div>
