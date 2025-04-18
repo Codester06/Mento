@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, memo } from "react";
 import styles from "./depressionTest.module.css";
 import { postDataBS } from "../../utils/awsService";
 import { EmailFormat ,GenerateEmailHTML } from "../mail/mailformat";
+import {handle_service} from "../../utils/services"
 // import { gmail_sendEmail } from "../../utils/mail_service";
 import ReactDOMServer from 'react-dom/server';
 const DepressionTest = () => {

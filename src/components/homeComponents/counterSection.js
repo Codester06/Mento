@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "./counterSection.css"
+import satisfiedIcon from "../../assets/images/counterIcons/satisfied.png"
+import psychologyIcon from "../../assets/images/counterIcons/psychology.png"
+import expertsIcon from "../../assets/images/counterIcons/experts.png"
+
 
 
 const CounterSection = () => {
@@ -21,17 +25,17 @@ const CounterSection = () => {
 
   const counterData = [
     {
-      icon: "https://mento.in/wp-content/uploads/2025/01/satisfied.png",
+      icon: satisfiedIcon,
       count: satisfiedCustomers,
       title: "Satisfied Customers"
     },
     {
-      icon: "https://mento.in/wp-content/uploads/2025/01/psychology.png",
+      icon: psychologyIcon,
       count: sessionsScheduled,
       title: "Sessions Scheduled"
     },
     {
-      icon: "https://mento.in/wp-content/uploads/2025/01/experts-1.png",
+      icon: expertsIcon,
       count: expertsAvailable,
       title: "Experts Available"
     }

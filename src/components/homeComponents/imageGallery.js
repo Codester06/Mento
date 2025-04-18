@@ -1,20 +1,23 @@
 import "./imageGallery.css";
 import { Link } from "react-router-dom";
+import imageFamily from "../../assets/images/formButton/FamilyOrFriend.png"
+import imageCouple from "../../assets/images/formButton/Couple.png"
+import imageIndividual from "../../assets/images/formButton/Individual.png"
 
 const ImageGallery = () => {
   const images = [
     {
-      src: "https://mento.in/wp-content/uploads/2025/01/Individual-1.png",
+      src: imageIndividual,
       alt: "Individual",
       link: "/individual_therapy"
     },
     {
-      src: "https://mento.in/wp-content/uploads/2025/01/Couple-1.png",
+      src:imageCouple,
       alt: "Couple",
       link: "/couple_therapy"
     },
     {
-      src: "https://mento.in/wp-content/uploads/2025/01/Family-or-Friend.png",
+      src: imageFamily,
       alt: "Family or Friend",
       link: "/familyFriends_therapy"
     }

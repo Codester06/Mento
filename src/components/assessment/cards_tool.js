@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./cards_tool.module.css";
-import image1 from "../../assets/images/Ilustração com uma pessoa sorrindo na multidão _ Vetor Grátis.jpg";
-import image2 from "../../assets/images/Premium Photo _ Minimalist flat vector style beautiful illustration of a woman reading a book novel story.jpg";
-import image3 from "../../assets/images/e02a9279-3e29-4d8b-a762-21501e475260.jpg";
+import image1 from "../../assets/images/tool/depressionTest.jpg";
+import image2 from "../../assets/images/tool/healthTest.jpg";
+import image3 from "../../assets/images/tool/anxiety.jpg";
 
 import { useNavigate } from "react-router-dom";
 
