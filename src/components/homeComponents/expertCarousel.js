@@ -46,10 +46,9 @@ const Carousel = () => {
               originalId: expert.originalId, // Ensure originalId is captured
               name: expert.name || "Unnamed",
               position: expert.position || "Counselor",
-              // imageSrc:
-              //   expert.imageSrc ||
-              //   "https://via.placeholder.com/400x400?text=No+Image",
-              imageSrc:`https://lh3.googleusercontent.com/d/${expert.imageSrc}=s800-w800?authuser=0`,
+              imageSrc:
+                expert.imageSrc ||
+                "https://via.placeholder.com/400x400?text=No+Image",
               certifications: expert.certifications || "",
               expertise: expert.expertise || "General Counseling",
               experience: expert.experience || "Not specified",
