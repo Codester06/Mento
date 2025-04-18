@@ -3,6 +3,10 @@ import { postData } from "./awsService.js";
 import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat.js";
 import ReactDOMServer from "react-dom/server";
 import { initiatePayment } from "./payment_fetch.js";
+import { initiatePayment } from "../utils/payment_service";
+import { sendEmailAPI } from "../utils/mail_service";
+import { postData } from "../utils/awsService";
+import { EmailFormat, GenerateEmailHTML } from "../components/mail/mailformat";
 
 // Helper: send user & admin email
 const sendFormEmail = async (emailData) => {

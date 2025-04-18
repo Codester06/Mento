@@ -35,11 +35,13 @@ import DepressionTestPanel from "./adminPages/response/depressiontestPanel";
 import DepressionTestDetails from "./adminPages/response/detailResponse/depressiondetail";
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 import AnxietyTestPage from "./pages/AniextyTestPage";
-import paymentStatusPage from "./components/payment/payment_status"; // Importing the Payment Status Page
+import paymentStatusPage from "./pages/payment_status_page"; // Import the new PaymentStatus component
 
 
-import PaymentForm from "./components/test/demo";
 
+// import PaymentForm from "./components/test/demo";
+
+// import PhoneyPayStatusPage from "./components/test/demo_payment_status";
 
 const ProtectedRoute = ({ element, requiredRole = null }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -111,7 +113,7 @@ function Main() {
             <Route path="/login-mento" element={<Login />} /> {/* Login route */}
             <Route path="/logout" element={<Logout />} /> {/* Logout route */}
                
-               <Route path="/payment-status" element={<paymentStatusPage />} /> Logout route
+               {/* <Route path="/payment-status" element={<PhoneyPayStatusPage />} /> Logout route */}
             {/* <Route path="/payment-callback" element={<PaymentStatus />} /> Logout route */}
             
             {/* blogs */}
