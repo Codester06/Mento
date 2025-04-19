@@ -2,7 +2,7 @@ import React from "react";
 import "../FormsPages/FormStyles.css";
 import { useLocation } from "react-router-dom";
 import { details } from "framer-motion/client";
-import sendFormEmail from "../../utils/services.js";
+import {sendFormEmail} from "../../utils/services.js";
 const ThankYouStep = () => {
   const location = useLocation();
 

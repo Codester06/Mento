@@ -7,7 +7,7 @@ import { initiatePayment } from "./payment_fetch.js";
 
 
 // Helper: send user & admin email
-const sendFormEmail = async (emailData, mail ) => {
+export const sendFormEmail = async (emailData, mail ) => {
   if (!emailData || !emailData.email) {
     console.error("Invalid email data:", emailData);}
 
