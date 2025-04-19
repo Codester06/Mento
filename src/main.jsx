@@ -36,6 +36,10 @@ import DepressionTestDetails from "./adminPages/response/detailResponse/depressi
 import GeneralHealthTestPage from "./pages/generalHealthTest";
 import AnxietyTestPage from "./pages/AniextyTestPage";
 import ThankYouStep from "./components/payment/thankyyoupage";
+import GeneralHealthTestPanel from "./adminPages/response/generalHealthTest";
+import AnxietyTestPanel from "./adminPages/response/anxietyTest";
+import AnxietyTestDetails from "./adminPages/response/detailResponse/anxietyTestDetail";
+import GeneralHealthTestDetails from "./adminPages/response/detailResponse/generalHealthdetail";
 
 
 // import PaymentForm from "./components/test/demo";
@@ -153,6 +157,14 @@ function Main() {
               path="/admin/responses/depression-test/:id"
               element={<ProtectedRoute element={<DepressionTestDetails />} />}
             />
+             <Route
+              path="/admin/responses/anxiety-test/:id"
+              element={<ProtectedRoute element={<AnxietyTestDetails />} />}
+            />
+             <Route
+              path="/admin/responses/generalHealthTest/:id"
+              element={<ProtectedRoute element={<GeneralHealthTestDetails />} />}
+            />
             <Route
               path="/admin/responses/family-friends-responses/:id"
               element={<ProtectedRoute element={<FamilyFriendsDetails />} />}
@@ -168,6 +180,14 @@ function Main() {
               <Route
               path="/admin/responses/depression-test"
               element={<ProtectedRoute element={<DepressionTestPanel />} />}
+            />
+              <Route
+              path="/admin/responses/GeneralHealthTest"
+              element={<ProtectedRoute element={<GeneralHealthTestPanel />} />}
+            />
+              <Route
+              path="/admin/responses/AnxietyTest"
+              element={<ProtectedRoute element={<AnxietyTestPanel />} />}
             />
             <Route
               path="/admin/responses/family-friends-responses"

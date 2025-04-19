@@ -113,7 +113,8 @@ const Dashboard = () => {
           
             <div className="card-footer">
               <Link 
-                to="/anxiety-test" 
+                to="/admin/responses/AnxietyTest" 
+
                 className="view-button"
               >
                 View
@@ -125,12 +126,12 @@ const Dashboard = () => {
           <div className="cardDasboard">
             <div className="card-header">
               <div className="card-icon">📊</div>
-              <h3 className="card-title">General Test</h3>
+              <h3 className="card-title">General Health Test</h3>
             </div>
           
             <div className="card-footer">
               <Link 
-                to="/general-test" 
+                to="/admin/responses/GeneralHealthTest" 
                 className="view-button"
               >
                 View

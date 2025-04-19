@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
 import { submitToAWS } from "../../../utils/payment_fetch";
 import { handle_service } from "../../../utils/services";
+import ThankYouStep from "../../payment/thankyyoupage";
+import whatsappIcon from "../../../assets/images/socialIcons/wpLogo.png";
+
 
 const CouplesTherapyForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -30,10 +33,9 @@ const CouplesTherapyForm = () => {
     sessionTime: "",
     medicalConditions: "",
     referralSource: "",
-    paymentMethod: "",
     termsAgreed: false,
     PaymentsAgreed: false,
-
+    sessionDuration: "",
   });
 
   // Profession options
@@ -147,6 +149,7 @@ const CouplesTherapyForm = () => {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
+  
   // Validate current step
   const validateStep = () => {
     const newErrors = {};
@@ -227,86 +230,83 @@ const CouplesTherapyForm = () => {
 
     // Step 5 validation
     else if (currentStep === 5) {
-     
-
-      if (!formData.paymentMethod)
-        newErrors.paymentMethod = "Payment method is required";
+      if (!formData.sessionDuration) {
+        newErrors.sessionDuration = "Please select a session duration";
+      }
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  // Auto-next functionality using useEffect
-  // Auto-next functionality using useEffect
-useEffect(() => {
-  // Helper function to check if step is complete without showing errors
-  const isStepComplete = () => {
-    // Logic to check if all required fields for current step are filled
-    // This is similar to validateStep but doesn't set any error messages
-    switch (currentStep) {
-      case 1:
-        if (!formData.name || !formData.name.trim()) return false;
-        if (!formData.partnerName || !formData.partnerName.trim()) return false;
-        if (!formData.email || !formData.email.trim()) return false;
-        if (!/\S+@\S+\.\S+/.test(formData.email)) return false;
-        if (!formData.city || !formData.city.trim()) return false;
-        if (!formData.contactNo || !formData.contactNo.trim()) return false;
-        if (!formData.profession) return false;
-        if (!formData.partnerProfession) return false;
-        if (!formData.relationshipStatus) return false;
-        if (
-          formData.relationshipStatus === "Other" &&
-          (!formData.otherRelationshipStatus || !formData.otherRelationshipStatus.trim())
-        ) return false;
-        return true;
-        
-      case 2:
-        if (!formData.primaryConcern) return false;
-        if (formData.therapyGoals.length === 0) return false;
-        if (
-          formData.therapyGoals.includes("Other") &&
-          (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
-        ) return false;
-        return true;
-        
-      case 3:
-        if (!formData.previousTherapy) return false;
-        if (!formData.preferredLanguage) return false;
-        if (
-          formData.preferredLanguage === "Other" &&
-          (!formData.otherLanguage || !formData.otherLanguage.trim())
-        ) return false;
-        return true;
-        
-      case 4:
-        if (!formData.sessionDate) return false;
-        if (!formData.sessionTime) return false;
-        if (!formData.termsAgreed) return false;
-        if (!formData.PaymentsAgreed) return false;
-
-        if (!formData.medicalConditions) return false;
-        if (!formData.referralSource) return false;
-        return true;
-        
-      case 5:
-        if (!formData.paymentMethod) return false;
-        return true;
-        
-      default:
-        return false;
-    }
-  };
   
-  // Only trigger auto-next for steps 1 to 5 when fields are complete
-  // (step 6 is the confirmation page, so no need to auto-advance from there)
-  if (currentStep < 4 && autoNextEnabled && isStepComplete()) {
-    const timer = setTimeout(() => {
-      setCurrentStep((prev) => prev + 1);
-    }, 300); // Small delay for better UX
+  // Auto-next functionality using useEffect
+  useEffect(() => {
+    // Helper function to check if step is complete without showing errors
+    const isStepComplete = () => {
+      // Logic to check if all required fields for current step are filled
+      // This is similar to validateStep but doesn't set any error messages
+      switch (currentStep) {
+        case 1:
+          if (!formData.name || !formData.name.trim()) return false;
+          if (!formData.partnerName || !formData.partnerName.trim()) return false;
+          if (!formData.email || !formData.email.trim()) return false;
+          if (!/\S+@\S+\.\S+/.test(formData.email)) return false;
+          if (!formData.city || !formData.city.trim()) return false;
+          if (!formData.contactNo || !formData.contactNo.trim()) return false;
+          if (!formData.profession) return false;
+          if (!formData.partnerProfession) return false;
+          if (!formData.relationshipStatus) return false;
+          if (
+            formData.relationshipStatus === "Other" &&
+            (!formData.otherRelationshipStatus || !formData.otherRelationshipStatus.trim())
+          ) return false;
+          return true;
+          
+        case 2:
+          if (!formData.primaryConcern) return false;
+          if (formData.therapyGoals.length === 0) return false;
+          if (
+            formData.therapyGoals.includes("Other") &&
+            (!formData.otherTherapyGoal || !formData.otherTherapyGoal.trim())
+          ) return false;
+          return true;
+          
+        case 3:
+          if (!formData.previousTherapy) return false;
+          if (!formData.preferredLanguage) return false;
+          if (
+            formData.preferredLanguage === "Other" &&
+            (!formData.otherLanguage || !formData.otherLanguage.trim())
+          ) return false;
+          return true;
+          
+        case 4:
+          if (!formData.sessionDate) return false;
+          if (!formData.sessionTime) return false;
+          if (!formData.termsAgreed) return false;
+          if (!formData.PaymentsAgreed) return false;
+          if (!formData.medicalConditions) return false;
+          if (!formData.referralSource) return false;
+          return true;
+          
+        case 5:
+          return formData.sessionDuration !== "";
+          
+        default:
+          return false;
+      }
+    };
     
-    return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
-  }
-}, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes // Trigger when formData, currentStep, or autoNextEnabled changes
+    // Only trigger auto-next for steps 1 to 5 when fields are complete
+    // (step 6 is the confirmation page, so no need to auto-advance from there)
+    if (currentStep < 4 && autoNextEnabled && isStepComplete()) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 300); // Small delay for better UX
+      
+      return () => clearTimeout(timer); // Cleanup timer on unmount or when dependencies change
+    }
+  }, [formData, currentStep, autoNextEnabled]); // Trigger when formData, currentStep, or autoNextEnabled changes
 
   // Move to next step
   const nextStep = () => {
@@ -339,32 +339,62 @@ useEffect(() => {
     }
   };
 
-   const handle_final_submit = async(e) => {
+  const handle_final_submit = async (e) => {
     e.preventDefault();
-    try{
-      // handle_payment(formData,'individual');
-      submitToAWS(formData.name, 999,formData.contactNo).then(res => {
-    });}
-    catch(error){
-      console.error("Error in payment:", error);
-    }
-  
-  }
-  // Submit form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (validateStep()) {
-      try { 
-
-        handle_service(formData, "couple");
-      }
-      catch (error) {
-        console.error("Error submitting form:", error);
-      }
+    try {
+      submitToAWS(formData)
+        .then((res) => {
+          console.log("Payment initiated:", res);
+          if (res.success) {
+            ThankYouStep(formData);
+          }
+        })
+        .catch((err) => {
+          console.error("Payment initiation error:", err.message);
+        });
+    } catch (error) {
+      console.error("Error in payment submission:", error);
     }
   };
 
+  // Submit form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateStep()) {
+      try {
+        // Add timestamp to the form data
+        formData.submittedAt = new Date().toISOString();
+        formData.paymentstatus = "Pending";
+        handle_service(formData, "couple").then((res) => {
+          console.log("Form submitted:", res);
+        });
+
+        // Move to confirmation step after successful submission
+        nextStep();
+      } catch (error) {
+        console.error("Error saving consultation data:", error);
+
+        // Show more detailed error message
+        let errorMessage = "Failed to schedule your consultation. ";
+
+        // Check different error response formats (axios vs custom error)
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          errorMessage += error.response.data.message;
+        } else if (error.message) {
+          errorMessage += error.message;
+        } else {
+          errorMessage += "Please try again later.";
+        }
+
+        alert(errorMessage);
+      }
+    }
+  };
+  
   // Step indicator component
   const StepIndicator = ({ number, title, subtitle, active }) => (
     <div className={`step-indicator-MN ${active ? "active" : ""}`}>
@@ -383,7 +413,6 @@ useEffect(() => {
     }
     return null;
   };
-
   // Render different form steps
   const renderStep = () => {
     switch (currentStep) {
@@ -891,47 +920,66 @@ useEffect(() => {
       // Step 5: Payment Information
       case 5:
         return (
-          <div className="form-step-MN form-step-5-MN">
-            <h2 className="form-title-MN">Payment Information</h2>
+          <div className="form-step-MN form-step-7-MN">
+            <h2 className="form-title-MN">Session Selection</h2>
             <p className="form-subtitle-MN">
-              Select your preferred payment method.
+              Choose your preferred session duration.
             </p>
 
             <div className="form-field-MN">
-              <label className="form-label-MN" htmlFor="paymentMethod">
-                Choose a payment method:{" "}
+              <p className="form-label-MN">
+                Choose your session duration:{" "}
                 <span className="required-field">*</span>
-              </label>
-
-              <select
-                id="paymentMethod"
-                name="paymentMethod"
-                className={`dropdown-select-MN ${
-                  errors.paymentMethod ? "error-border" : ""
+              </p>
+              <div
+                className={`radio-group-MNIM ${
+                  errors.sessionDuration ? "error-border" : ""
                 }`}
-                value={formData.paymentMethod}
-                onChange={(e) =>
-                  handleRadioChange("paymentMethod", e.target.value)
-                }
               >
-                <option value="" disabled>
-                  Select payment method
-                </option>
-                <option value="Credit/Debit Card">Credit/Debit Card</option>
-                <option value="UPI">UPI</option>
-                <option value="Net Banking">Net Banking</option>
-                <option value="Mobile Wallet">Mobile Wallet</option>
-                <option value="Insurance">Insurance</option>
-              </select>
-
-              {renderError("paymentMethod")}
+                {[
+                  {
+                    value: "500.00",
+                    label: "40 minute session",
+                    price: "₹500.00",
+                  },
+                  {
+                    value: "800.00",
+                    label: "1 hour session",
+                    price: "₹800.00",
+                  },
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={`radio-option-MN ${
+                      formData.sessionDuration === option.value
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      handleRadioChange("sessionDuration", option.value)
+                    }
+                  >
+                    <div className="radio-circle-MN">
+                      {formData.sessionDuration === option.value && (
+                        <div className="radio-dot-MN"></div>
+                      )}
+                    </div>
+                    <span>{option.label}</span>
+                  </div>
+                ))}
+              </div>
+              {renderError("sessionDuration")}
             </div>
 
             <div className="pricing-info-MN">
               <h3>Consultation Fee</h3>
-              <p className="fee-MN">₹1499.00</p>
+              <p className="fee-MN">
+                {formData.sessionDuration === "500.00" ? "₹500.00" : "₹800.00"}
+              </p>
               <p className="fee-description-MN">
-                One-hour online couples therapy session
+                {formData.sessionDuration === "500.00"
+                  ? "40-minute online consultation session"
+                  : "One-hour online consultation session"}
               </p>
               <p className="note-MN">
                 * Additional sessions may be recommended based on initial
@@ -1085,40 +1133,52 @@ useEffect(() => {
                     nextStep(); // Only proceed to next step if validation passes
                   }
                 }}
-                className="confirm-button-MN"
+            className="confirm-button-final"
               >
                Submit
               </button>
             )  : currentStep === 5 ? (
               <>
-              <button
-                type="button"
-                onClick={(e) => {
-                  handle_final_submit(e); // Call handleSubmit first
-                  if (Object.keys(errors).length === 0) {
-                    nextStep(); // Only proceed to next step if validation passes
+                <button
+                  type="button"
+                  onClick={() =>
+                    window.open("https://wa.me/+919120719120", "_blank")
                   }
-                }}
-                className="confirm-button-MN"
-              >
-                Confirm & Pay
-              </button>
-              <button
-  type="button"
-  onClick={(e) => {
-    handleSubmit(e); // Call handleSubmit first
-    if (Object.keys(errors).length === 0) {
-      const phoneNumber = '15551234567'; // Replace with the target phone number in international format
-      const whatsappUrl = `https://wa.me/${phoneNumber}`;
-      window.open(whatsappUrl, '_blank'); // Open WhatsApp chat in a new tab
-      nextStep(); // Proceed to the next step if validation passes
-    }
-  }}
-  className="confirm-button-WP"
->
-  Chat on WhatsApp (PAYMENT ISSUE)
-</button>
-
+                  className="confirm-button-MN support-button hover-scale"
+                >
+                  <div
+                    className="button-content"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      src={whatsappIcon}
+                      alt="WhatsApp"
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        marginRight: "8px",
+                      }}
+                    />
+                    <span>Need Support?</span>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    if (validateStep()) {
+                      // Validate before proceeding
+                      handle_final_submit(e);
+                      nextStep();
+                    }
+                  }}
+                  className="confirm-button-MN"
+                >
+                  Confirm & Pay
+                </button>
               </>
               
             ) : (

@@ -10,7 +10,7 @@ const SocialMediaLayout = () => {
   // Social media URLs
   const socialLinks = {
     instagram: "https://www.instagram.com/mento.in/",
-    whatsapp: "https://wa.me/1234567890",
+    whatsapp: "https://wa.me/+919120719120",
     linkedin: "https://www.linkedin.com/company/connectmento/",
     facebook: "https://www.facebook.com/profile.php?id=61566015786803&rdid=oI04F87TMbtHmXL5&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1EjHzVoh32%2F#"
   };

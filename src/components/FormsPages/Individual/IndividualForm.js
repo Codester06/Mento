@@ -279,7 +279,6 @@ const IndividualForm = () => {
 
     // Always validate before moving to next step
     if (true) {
-      
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         setAutoNextEnabled(true);
@@ -909,69 +908,77 @@ const IndividualForm = () => {
             </div>
           </div>
         );
-     // In the renderStep function, replace case 7 with this updated code:
-case 7:
-  return (
-    <div className="form-step-MN form-step-7-MN">
-      <h2 className="form-title-MN">Session Selection</h2>
-      <p className="form-subtitle-MN">
-        Choose your preferred session duration.
-      </p>
+      // In the renderStep function, replace case 7 with this updated code:
+      case 7:
+        return (
+          <div className="form-step-MN form-step-7-MN">
+            <h2 className="form-title-MN">Session Selection</h2>
+            <p className="form-subtitle-MN">
+              Choose your preferred session duration.
+            </p>
 
-      <div className="form-field-MN">
-        <p className="form-label-MN"> 
-          Choose your session duration:{" "}
-          <span className="required-field">*</span>
-        </p>
-        <div
-          className={`radio-group-MNIM ${
-            errors.sessionDuration ? "error-border" : ""
-          }`}
-        >
-          {[
-     { value: "500.00", label: "40 minute session", price: "₹500.00" },
-     { value: "800.00", label: "1 hour session", price: "₹800.00" },
-          ].map((option) => (
-            <div
-              key={option.value}
-              className={`radio-option-MN ${
-                formData.sessionDuration === option.value
-                  ? "selected"
-                  : ""
-              }`}
-              onClick={() =>
-                handleRadioChange("sessionDuration", option.value)
-              }
-            >
-              <div className="radio-circle-MN">
-                {formData.sessionDuration === option.value && (
-                  <div className="radio-dot-MN"></div>
-                )}
+            <div className="form-field-MN">
+              <p className="form-label-MN">
+                Choose your session duration:{" "}
+                <span className="required-field">*</span>
+              </p>
+              <div
+                className={`radio-group-MNIM ${
+                  errors.sessionDuration ? "error-border" : ""
+                }`}
+              >
+                {[
+                  {
+                    value: "500.00",
+                    label: "40 minute session",
+                    price: "₹500.00",
+                  },
+                  {
+                    value: "800.00",
+                    label: "1 hour session",
+                    price: "₹800.00",
+                  },
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={`radio-option-MN ${
+                      formData.sessionDuration === option.value
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      handleRadioChange("sessionDuration", option.value)
+                    }
+                  >
+                    <div className="radio-circle-MN">
+                      {formData.sessionDuration === option.value && (
+                        <div className="radio-dot-MN"></div>
+                      )}
+                    </div>
+                    <span>{option.label}</span>
+                  </div>
+                ))}
               </div>
-              <span>{option.label}</span>
+              {renderError("sessionDuration")}
             </div>
-          ))}
-        </div>
-        {renderError("sessionDuration")}
-      </div>
 
-      <div className="pricing-info-MN">
-        <h3>Consultation Fee</h3>
-        <p className="fee-MN">
-          {formData.sessionDuration === "500.00" ? "₹500.00" : "₹800.00"}
-        </p>
-        <p className="fee-description-MN">
-          {formData.sessionDuration === "500.00"
-            ? "40-minute online consultation session"
-            : "One-hour online consultation session"}
-        </p>
-        <p className="note-MN">
-          * Additional sessions may be recommended based on initial
-          consultation
-        </p>
-      </div>
-    </div>
-  );
+            <div className="pricing-info-MN">
+              <h3>Consultation Fee</h3>
+              <p className="fee-MN">
+                {formData.sessionDuration === "500.00" ? "₹500.00" : "₹800.00"}
+              </p>
+              <p className="fee-description-MN">
+                {formData.sessionDuration === "500.00"
+                  ? "40-minute online consultation session"
+                  : "One-hour online consultation session"}
+              </p>
+              <p className="note-MN">
+                * Additional sessions may be recommended based on initial
+                consultation
+              </p>
+            </div>
+          </div>
+        );
       case 8:
         return (
           <div className="form-step-MN form-step-8-MN">
@@ -1161,17 +1168,18 @@ case 7:
                   </div>
                 </button>
                 <button
-      type="button"
-      onClick={(e) => {
-        if (validateStep()) { // Validate before proceeding
-          handle_final_submit(e);
-          nextStep();
-        }
-      }}
-      className="confirm-button-MN"
-    >
-      Confirm & Pay
-    </button>
+                  type="button"
+                  onClick={(e) => {
+                    if (validateStep()) {
+                      // Validate before proceeding
+                      handle_final_submit(e);
+                      nextStep();
+                    }
+                  }}
+                  className="confirm-button-MN"
+                >
+                  Confirm & Pay
+                </button>
               </>
             ) : currentStep === 8 ? (
               <button
