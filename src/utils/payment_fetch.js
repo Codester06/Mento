@@ -45,7 +45,7 @@ export const submitToAWS = async (formData) => {
     email: formData.email,
     phone: formData.contactNo,
   };
-
+  
   formData.amount = 1000;
 
   const show_Data = {
@@ -68,7 +68,7 @@ export const submitToAWS = async (formData) => {
     if (response.data.success) {
       console.log("success:", response.data);
       const redirecturl = response.data.phonepe_redirectUrl || "/success";
-      window.location.href = redirecturl;
+      // window.location.href = redirecturl;
     } else {
       alert("Something went wrong!");
     }

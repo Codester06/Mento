@@ -4,6 +4,7 @@ import { submitToAWS } from "../../../utils/payment_fetch";
 import ThankYouStep from "../../payment/thankyyoupage";
 import { handle_service } from "../../../utils/services";
 import whatsappIcon from "../../../assets/images/socialIcons/wpLogo.png";
+import { form } from "framer-motion/client";
 const IndividualForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 8;
@@ -308,6 +309,8 @@ const IndividualForm = () => {
           if (res.success) {
             ThankYouStep(formData);
           }
+          
+        alert(formData)
         })
         .catch((err) => {
           console.error("Payment initiation error:", err.message);
@@ -325,7 +328,7 @@ const IndividualForm = () => {
 
         formData.submittedAt = new Date().toISOString();
         formData.paymentstatus = "Pending";
-
+        console.log(formData);
         handle_service(formData, "individual").then((res) => {
           console.log("Form submitted:", res);
         });
