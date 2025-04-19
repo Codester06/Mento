@@ -45,12 +45,8 @@ export const submitToAWS = async (formData) => {
   };
   // Convert sessionDuration string to a number
   formData.amount = parseFloat(formData.sessionDuration);
-
-  const show_Data = {
-    email: formData.email,
-    Sessiontime: formData.session_time,
-    session_date: formData.session_date,
-  };
+  console.log("sessionDuration", formData);
+ 
 
   try {
     const response = await axios.post(
@@ -66,7 +62,7 @@ export const submitToAWS = async (formData) => {
     if (response.data.success) {
       console.log("success:", response.data);
       const redirecturl = response.data.phonepe_redirectUrl || "/success";
-      // window.location.href = redirecturl;
+      window.location.href = redirecturl;
     } else {
       alert("Something went wrong!");
     }
