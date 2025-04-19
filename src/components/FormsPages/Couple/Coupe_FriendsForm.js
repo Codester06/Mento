@@ -342,16 +342,20 @@ const CouplesTherapyForm = () => {
   const handle_final_submit = async (e) => {
     e.preventDefault();
     try {
-      submitToAWS(formData)
-        .then((res) => {
-          console.log("Payment initiated:", res);
-          if (res.success) {
-            ThankYouStep(formData);
-          }
-        })
-        .catch((err) => {
-          console.error("Payment initiation error:", err.message);
-        });
+      if (formData.sessionDuration) {
+        submitToAWS(formData)
+          .then((res) => {
+            console.log("Payment initiated:", res);
+            if (res.success) {
+              ThankYouStep(formData);
+            }
+          })
+          .catch((err) => {
+            console.error("Payment initiation error:", err.message);
+          });
+      } else {
+        alert("Please select a session duration before proceeding to payment.");
+      }
     } catch (error) {
       console.error("Error in payment submission:", error);
     }
