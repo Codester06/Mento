@@ -113,7 +113,7 @@ function Main() {
 
   return (
     <BrowserRouter>
-    <RightClickDisabledWrapper>
+    {/* <RightClickDisabledWrapper> */}
       <div id="root">
         <Navbar />
         <div className="main-content">
@@ -223,7 +223,7 @@ function Main() {
         </div>
         <Footer />
       </div>
-      </RightClickDisabledWrapper>
+      {/* </RightClickDisabledWrapper> */}
     </BrowserRouter>
   );
 }
