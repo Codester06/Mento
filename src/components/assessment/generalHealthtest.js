@@ -283,7 +283,7 @@ const GeneralHealthTest = () => {
       const assessmentData = prepareAssessmentData();
 
       // Send data to database using the postData utility
-      const response = await postDataBS("/depressiontest", assessmentData);
+      const response = await postDataBS("/generalhealthtest", assessmentData);
       setFormSubmitted(true);
       console.log(response);
       const email_data = Object.assign(
