@@ -434,7 +434,7 @@ const GenerateEmailHTML = (email_content) => {
 };
 
 
-const Email_mail_format = ({recipientName, 
+const Emailmailformat = ({recipientName, 
   sessionDate, 
   sessionTime, 
   rescheduleLink = "https://wa.me/+918770253611",
@@ -669,6 +669,200 @@ const Email_mail_format = ({recipientName,
     
   )}
 
-
-
- export { EmailFormat, GenerateEmailHTML ,Email_mail_format};
+const Darshmain = (data, rescheduleLink = "https://wa.me/+918770253611",
+  companyName = "Mento", companyLogo = "/api/placeholder/200/60") => {
+  
+  
+    return (
+      <div style={{ 
+        fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif', 
+        maxWidth: '600px', 
+        margin: '0 auto', 
+        padding: '0', 
+        backgroundColor: '#ffffff', 
+        color: '#333333',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+      }}>
+        {/* Header with gradient */}
+        <div style={{ 
+          background: 'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)',
+          padding: '20px',
+          textAlign: 'center',
+          color: 'white'
+        }}>
+          <img 
+            src={companyLogo} 
+            alt={companyName} 
+            style={{ 
+              maxHeight: '50px', 
+              marginBottom: '10px' 
+            }} 
+          />
+          <h1 style={{ 
+            fontSize: '24px', 
+            margin: '5px 0',
+            fontWeight: '600'
+          }}>
+            New Form Submission
+          </h1>
+        </div>
+        
+        {/* Content area */}
+        <div style={{ padding: '25px' }}>
+          <p style={{ fontSize: '16px', lineHeight: '1.5', marginTop: '0' }}>
+            A new consultation form has been submitted. Here are the key details:
+          </p>
+          
+          {/* Submission Details Card */}
+          <div style={{ 
+            backgroundColor: '#f0fdf4', 
+            padding: '20px', 
+            borderRadius: '8px',
+            margin: '20px 0',
+            boxShadow: '0 2px 5px rgba(0, 176, 155, 0.1)',
+            borderLeft: '4px solid #00b09b'
+          }}>
+            <h3 style={{ 
+              margin: '0 0 15px 0', 
+              color: '#00b09b',
+              fontSize: '18px'
+            }}>
+              Submission Details
+            </h3>
+            
+            <table style={{
+              width: '100%',
+              borderCollapse: 'collapse'
+            }}>
+              <tbody>
+                <tr>
+                  <td style={{ 
+                    padding: '10px', 
+                    fontWeight: '600',
+                    width: '30%', 
+                    verticalAlign: 'top' 
+                  }}>
+                    Name:
+                  </td>
+                  <td style={{ 
+                    padding: '10px',
+                    backgroundColor: 'white',
+                    borderRadius: '4px'
+                  }}>
+                    {data.name}
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td style={{ 
+                    padding: '10px', 
+                    fontWeight: '600',
+                    verticalAlign: 'top' 
+                  }}>
+                    Contact Number:
+                  </td>
+                  <td style={{ 
+                    padding: '10px',
+                    backgroundColor: 'white',
+                    borderRadius: '4px'
+                  }}>
+                    {data.contactNo}
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td style={{ 
+                    padding: '10px', 
+                    fontWeight: '600',
+                    verticalAlign: 'top' 
+                  }}>
+                    Email:
+                  </td>
+                  <td style={{ 
+                    padding: '10px',
+                    backgroundColor: 'white',
+                    borderRadius: '4px',
+                    wordBreak: 'break-all'
+                  }}>
+                    {data.email}
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td style={{ 
+                    padding: '10px', 
+                    fontWeight: '600',
+                    verticalAlign: 'top' 
+                  }}>
+                    Submitted At:
+                  </td>
+                  <td style={{ 
+                    padding: '10px',
+                    backgroundColor: 'white',
+                    borderRadius: '4px'
+                  }}>
+                    {data.SubmissionTime}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Action Buttons */}
+          <div style={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '15px',
+            margin: '25px 0'
+          }}>
+            <a 
+              href={`mailto:${data.email}?subject=Regarding%20Your%20${companyName}%20Consultation%20Request`} 
+              style={{ 
+                background: '#00b09b',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '4px',
+                textDecoration: 'none',
+                fontWeight: '500',
+                fontSize: '15px'
+              }}
+            >
+              Contact User
+            </a>
+            
+  
+          </div>
+          
+          <div style={{
+            backgroundColor: '#f5f5f5',
+            padding: '15px',
+            borderRadius: '6px',
+            fontSize: '14px',
+            marginTop: '20px'
+          }}>
+            <p style={{ margin: '0', lineHeight: '1.5' }}>
+              To access the full submission details and take necessary actions, please log in to your admin dashboard.
+            </p>
+          </div>
+          
+          {/* Footer */}
+          <div style={{ 
+            borderTop: '1px solid #e1e1e1',
+            paddingTop: '20px',
+            marginTop: '25px',
+            textAlign: 'center',
+            color: '#666666',
+            fontSize: '13px'
+          }}>
+            <p style={{ margin: '0 0 10px 0' }}>
+              This is an automated notification. Please do not reply to this email.
+            </p>
+          
+          </div>
+        </div>
+      </div>
+    );
+  };
+ export { EmailFormat, GenerateEmailHTML ,Emailmailformat,Darshmain};

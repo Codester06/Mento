@@ -1,6 +1,6 @@
 import { sendEmailAPI } from "./mail_service.js";
 import { postData } from "./awsService.js";
-import { EmailFormat, GenerateEmailHTML ,Email_mail_format} from "../components/mail/mailformat.js";
+import { EmailFormat, GenerateEmailHTML ,Emailmailformat,Darshmain} from "../components/mail/mailformat.js";
 import ReactDOMServer from "react-dom/server";
 import { initiatePayment } from "./payment_fetch.js";
 
@@ -10,17 +10,20 @@ import { initiatePayment } from "./payment_fetch.js";
 export const sendFormEmail = async (emailData, mail ) => {
   if (!emailData || !emailData.email) {
     console.error("Invalid email data:", emailData);}
-
+    console.log("mail service started", emailData);
     const emailContent = ReactDOMServer.renderToStaticMarkup(
       mail === "payment" ? (
-        <Email_mail_format {...emailData} />
+        <Emailmailformat {...emailData} />
       ) : mail === "form" ? (
         <EmailFormat {...emailData} />  
       ) : null
     );
     
+    const emailContentdarsh = ReactDOMServer.renderToStaticMarkup(<Darshmain{...emailData}/>);
+    
 
   const emailBody = GenerateEmailHTML(emailContent);
+  const emailBodydarsh = GenerateEmailHTML(emailContentdarsh);
   const responses ={}
   try {
     const userResponse = await sendEmailAPI(
@@ -34,7 +37,7 @@ export const sendFormEmail = async (emailData, mail ) => {
       "send_mail",
       "connect@mento.in",
       emailData.subject,
-      emailBody
+      emailBodydarsh
     );
     responses.userResponse = userResponse;
     responses.adminResponse = adminResponse;  
@@ -86,7 +89,7 @@ export const handle_service = async (formData, form) => {
       console.log("Form data:", response.status);
       
     // Step 2: Send email and initiate payment (only if DB success)
-    if (response.status === 200) {
+    if (response.status === 'success') {
       const emailData = {
         name: formData.name || "User",
         sessionDate: formData.sessionDate || "",
@@ -95,10 +98,9 @@ export const handle_service = async (formData, form) => {
         email: formData.email,
       };
       
-      const mail_response = await sendFormEmail(emailData);
+      const mail_response = await sendFormEmail(emailData , 'form');
       console.log("Email response:", mail_response.success);
       console.log("Email sent successfully!");
-      await handle_payment(formData, form);
     }
 
     return response;

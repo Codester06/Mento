@@ -62,7 +62,7 @@ export const submitToAWS = async (formData) => {
     if (response.data.success) {
       console.log("success:", response.data);
       const redirecturl = response.data.phonepe_redirectUrl || "/success";
-      window.location.href = redirecturl;
+      // window.location.href = redirecturl;
     } else {
       alert("Something went wrong!");
     }
@@ -88,7 +88,7 @@ export const prod_aws_payment = async (formData) => {
 
   try {
     const response = await axios.post(
-      "https://qv8ma5t1gk.execute-api.ap-south-1.amazonaws.com/dev/pay",
+      "https://9blcigs1f3.execute-api.ap-south-1.amazonaws.com/prod/pay",
       formData,
       {
         headers: {
@@ -96,11 +96,14 @@ export const prod_aws_payment = async (formData) => {
         }
       }
     );
+    
 
     if (response.data.success) {
       console.log("success:", response.data);
-      const redirecturl = response.data.phonepe_redirectUrl || "/success";
-      window.location.href = redirecturl;
+      const redirectUrlFromPhonePe = response.data.redirectUrl;
+      console.log("Redirect URL from PhonePe:", redirectUrlFromPhonePe);
+      
+      window.location.href = redirectUrlFromPhonePe;
     } else {
       alert("Something went wrong!");
     }

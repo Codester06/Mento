@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../FormStyles.css";
-import { submitToAWS } from "../../../utils/payment_fetch";
+import { prod_aws_payment, submitToAWS } from "../../../utils/payment_fetch";
 import ThankYouStep from "../../payment/thankyyoupage";
 import { handle_service } from "../../../utils/services";
 import whatsappIcon from "../../../assets/images/socialIcons/wpLogo.png";
@@ -279,7 +279,7 @@ const IndividualForm = () => {
     }));
 
     // Always validate before moving to next step
-    if (validateStep()) {
+    if (true) {
       if (currentStep < totalSteps) {
         setCurrentStep(currentStep + 1);
         setAutoNextEnabled(true);
@@ -305,6 +305,7 @@ const IndividualForm = () => {
     try {
       if (formData.sessionDuration) {
         submitToAWS(formData)
+        // prod_aws_payment(formData)
           .then((res) => {
             console.log("Payment initiated:", res);
             if (res.success) {
