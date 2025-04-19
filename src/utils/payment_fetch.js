@@ -72,3 +72,40 @@ export const submitToAWS = async (formData) => {
   }
 };
 
+
+
+// ✅ Accept updateValue as a parameter
+export const prod_aws_payment = async (formData) => {
+  const send_data = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.contactNo,
+  };
+  // Convert sessionDuration string to a number
+  formData.amount = parseFloat(formData.sessionDuration);
+  console.log("sessionDuration", formData);
+ 
+
+  try {
+    const response = await axios.post(
+      "https://qv8ma5t1gk.execute-api.ap-south-1.amazonaws.com/dev/pay",
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    if (response.data.success) {
+      console.log("success:", response.data);
+      const redirecturl = response.data.phonepe_redirectUrl || "/success";
+      window.location.href = redirecturl;
+    } else {
+      alert("Something went wrong!");
+    }
+  } catch (error) {
+    console.error("AWS API Error:", error.message);
+    alert("API call failed. Please try again.");
+  }
+};
