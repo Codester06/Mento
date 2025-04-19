@@ -16,7 +16,7 @@ const GeneralHealthTestPanel = () => {
         setLoading(true);
         setError(null);
 
-        const responseData = await getDataBS('/depressiontest');
+        const responseData = await getDataBS('/generalhealthtest');
 
         // Extract generalHealth test data
         let generalHealthTestData = responseData.data['data'];

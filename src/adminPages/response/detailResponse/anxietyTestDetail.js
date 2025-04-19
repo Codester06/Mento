@@ -16,7 +16,7 @@ const AnxietyTestDetails = () => {
         setLoading(true);
         setError(null);
 
-        const responseData = await getDataBS('/depressiontest');
+        const responseData = await getDataBS('/anxietytest');
 
         // Find the specific anxiety test by ID
         const anxietyTestData = responseData.data['data'].find(

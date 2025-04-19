@@ -16,7 +16,7 @@ const AnxietyTestPanel = () => {
         setLoading(true);
         setError(null);
 
-        const responseData = await getDataBS('/depressiontest');
+        const responseData = await getDataBS('/anxietytest');
 
         // Extract anxiety test data
         let anxietyTestData = responseData.data['data'];

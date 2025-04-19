@@ -16,7 +16,7 @@ const GeneralHealthTestDetails = () => {
         setLoading(true);
         setError(null);
 
-        const responseData = await getDataBS('/depressiontest');
+        const responseData = await getDataBS('/generalhealthtest');
 
         // Find the specific generalHealth test by ID
         const generalHealthTestData = responseData.data['data'].find(
