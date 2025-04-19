@@ -42,6 +42,22 @@ import AnxietyTestDetails from "./adminPages/response/detailResponse/anxietyTest
 import GeneralHealthTestDetails from "./adminPages/response/detailResponse/generalHealthdetail";
 
 
+const RightClickDisabledWrapper = ({ children }) => {
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    document.addEventListener("contextmenu", handleContextMenu);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
+  return <>{children}</>;
+};
+
+
 // import PaymentForm from "./components/test/demo";
 
 // import PhoneyPayStatusPage from "./components/test/demo_payment_status";
@@ -97,6 +113,7 @@ function Main() {
 
   return (
     <BrowserRouter>
+    <RightClickDisabledWrapper>
       <div id="root">
         <Navbar />
         <div className="main-content">
@@ -206,6 +223,7 @@ function Main() {
         </div>
         <Footer />
       </div>
+      </RightClickDisabledWrapper>
     </BrowserRouter>
   );
 }
